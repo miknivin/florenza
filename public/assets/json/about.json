@@ -1,0 +1,86 @@
+{
+  "intro": {
+    "title": "We’re a full service creative and digital agency, working globally with leargest brands.",
+    "description": "Think of the world's most iconica and successful brands easily findable, impactful. Interactional and exceptional designs. Our story takes beginning in 2013",
+    "btn_text": "Trends & Technology",
+    "award_logo": "about/award.png",
+    "intro_video": "video/video.mp4",
+    "from": "1990"
+  },
+  "story": {
+    "title": "Our story",
+    "sub_title": "Digital Studio",
+    "description": "Your brand is the most important asset in your company let our team of professionals help you with a good strategy took the runway next with an edgy collection featuring dyed denim pieces. The collection included patchwork denim, a trend that has recently exploded in younger generations. Playing on aspects of sustainability, the pieces appeared to be upcycled to establish dimension and flair. This take on grunge and streetwear took sustainable fashion to an entirely new level. ur specialized team of researchers, strategists, designers, developers, and project managers work with streamlined processes to break through organizational roadblocks. We translate research into solutions, crafting thoughtful and unified brands.",
+    "story_image_1": "story/1.jpg",
+    "story_image_2": "story/2.jpg",
+    "story_image_3": "story/3.jpg",
+    "story_image_4": "story/4.jpg",
+    "from": "1990"
+  },
+  "counter": [
+    {
+      "name": "Project completed",
+      "value": "25",
+      "suffix": "k"
+    },
+    {
+      "name": "Happy customers",
+      "value": "8",
+      "suffix": "k"
+    },
+    {
+      "name": "Years experiences",
+      "value": "15",
+      "suffix": ""
+    },
+    {
+      "name": "Awards achievement",
+      "value": "98",
+      "suffix": ""
+    }
+  ],
+  "brand": {
+    "title": "We are happy to work with global largest brands",
+    "sub_title": "Internation Brands",
+    "logo": [
+      "brand/1.png",
+      "brand/2.png",
+      "brand/3.png",
+      "brand/4.png",
+      "brand/5.png",
+      "brand/6.png",
+      "brand/1.png",
+      "brand/2.png",
+      "brand/3.png",
+      "brand/4.png",
+      "brand/5.png",
+      "brand/6.png"
+    ]
+  },
+  "testimonial": {
+    "test_video": "testimonial.mp4",
+    "test_content": [
+      {
+        "id": "1201",
+        "title": "Amazing digital service",
+        "description": "We were there right at the beginning just when the concept for search engine optimisation taking office and the full of internet. So wewe’ve grown to employ than 50 talented specialists with diverse experiences and broad skill sets of huge markers.",
+        "author": "Habibur Rahman",
+        "role": "CEO, Agency"
+      },
+      {
+        "id": "1202",
+        "title": "Amazing digital service",
+        "description": "Our team of content and digital marketing specialists will deliver real results for your business, combining creative ideas with our decade of experience. We offer both self-service and concierge digital marketing programs that are proven effective.",
+        "author": "Halim",
+        "role": "HR, Agency"
+      },
+      {
+        "id": "1203",
+        "title": "Amazing digital service",
+        "description": "We work with all businesses in all industries and create a custom digital marketing plan to fit any budget. Whether you choose one service or bundle several services, your satisfaction is our top priority.",
+        "author": "Mizanur Rahaman",
+        "role": "CTO, Agency"
+      }
+    ]
+  }
+}

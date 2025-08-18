@@ -1,0 +1,50 @@
+{
+  "hero_advertising": [
+    {
+      "id": "101",
+      "title": "Express your natural beauty",
+      "description": "View the full case study of our recent featured and awesome global branding agency that powers",
+      "sub_title": "Starts from",
+      "img": "woocomerce/exclusive/wocomerce-1.jpg",
+      "price": "65.89"
+    },
+    {
+      "id": "103",
+      "title": "Express your natural beauty",
+      "description": "View the full case study of our recent featured and awesome global branding agency that powers",
+      "sub_title": "Starts from",
+      "img": "woocomerce/exclusive/ex3.jpg",
+      "price": "65.89"
+    }
+  ],
+  "body_advertising": [
+    {
+      "id": "401",
+      "title": "Coat & Jacket Collection",
+      "sub_title": "Exclusive",
+      "section": "1",
+      "img": "woocomerce/exclusive/ex1.jpg"
+    },
+    {
+      "id": "402",
+      "title": "Exclusive brand Collection",
+      "sub_title": "Exclusive",
+      "section": "1",
+      "img": "woocomerce/exclusive/ex2.jpg"
+    },
+    {
+      "id": "403",
+      "title": "Exclusive brand Collection",
+      "sub_title": "Exclusive",
+      "section": "2",
+      "img": "woocomerce/exclusive/ex3.jpg"
+    },
+    {
+      "id": "404",
+      "title": "Exclusive brand Collection",
+      "sub_title": "Exclusive",
+      "section": "2",
+      "img": "woocomerce/exclusive/ex4.jpg"
+    }
+  ]
+}

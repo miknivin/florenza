@@ -1,0 +1,98 @@
+{
+  "filter": {
+    "category": {
+      "name": "All category",
+      "type": "category",
+      "value": [
+        "Woman",
+        "Man",
+        "Jewellery",
+        "Sports & Health",
+        "Beauty",
+        "Furniture",
+        "Home",
+        "Technology",
+        "Accessories",
+        "Foods"
+      ]
+    },
+
+    "color": {
+      "name": "Color",
+      "type": "color",
+      "value": [
+        {
+          "name": "Blue",
+          "color": "#0000FF"
+        },
+        {
+          "name": "Gray",
+          "color": "#808080"
+        },
+        {
+          "name": "Skyblue",
+          "color": "#87CEEB"
+        },
+        {
+          "name": "Red",
+          "color": "#FF0000"
+        },
+        {
+          "name": "Yellow",
+          "color": "#FFFF00"
+        },
+        {
+          "name": "Pink",
+          "color": "#FFC0CB"
+        },
+        {
+          "name": "Purple",
+          "color": "#A020F0"
+        },
+        {
+          "name": "Deep Purple",
+          "color": "#3a243b"
+        }
+      ]
+    },
+    "price": {
+      "name": "Price",
+      "type": "price",
+      "value": {
+        "start": "0",
+        "end": "980"
+      }
+    },
+    "brand": {
+      "name": "Brand",
+      "type": "brand",
+      "value": ["Chanel", "Gucci", "Prada"]
+    },
+    "rating": {
+      "name": "Rating",
+      "type": "rating"
+    },
+    "sort_by": {
+      "name": "Sort By",
+      "type": "sort",
+      "value": [
+        {
+          "name": "Sort by rating",
+          "key": "rating"
+        },
+        {
+          "name": "Sort by latest",
+          "key": "latest"
+        },
+        {
+          "name": "Sort by price: low to high",
+          "key": "low"
+        },
+        {
+          "name": "Sort by price: high to low",
+          "key": "high"
+        }
+      ]
+    }
+  }
+}

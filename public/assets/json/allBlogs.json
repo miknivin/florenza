@@ -1,0 +1,46 @@
+{
+  "blogs": [
+    {
+      "id": "301",
+      "title": "Ways of lying to yourself about your new relationship",
+      "category": "UI Design",
+      "date": "15 March 2019",
+      "img": "blog/1.jpg"
+    },
+    {
+      "id": "302",
+      "title": "How to manage a talented and successful de sign team",
+      "category": "UI Design",
+      "date": "02 May 2019",
+      "img": "blog/2.jpg"
+    },
+    {
+      "id": "303",
+      "title": "How to bring fold to your startup company with Axtra",
+      "category": "UI Design",
+      "date": "15 March 2019",
+      "img": "blog/3.jpg"
+    },
+    {
+      "id": "304",
+      "title": "Ways of lying to yourself about your new relationship",
+      "category": "UI Design",
+      "date": "15 March 2019",
+      "img": "blog/4.jpg"
+    },
+    {
+      "id": "305",
+      "title": "How to manage a talented and successful de sign team",
+      "category": "UI Design",
+      "date": "02 May 2019",
+      "img": "blog/5.jpg"
+    },
+    {
+      "id": "306",
+      "title": "How to bring fold to your startup company with Axtra",
+      "category": "UI Design",
+      "date": "02 May 2019",
+      "img": "blog/6.jpg"
+    }
+  ]
+}
