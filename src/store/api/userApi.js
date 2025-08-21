@@ -24,7 +24,7 @@ export const userApi = createApi({
           const user = response.user || response.data;
           if (user) {
             return {
-              id: user.id || "", // Handle backend _id
+              id: user._id || "", // Handle backend _id
               name: user.name,
               email: user.email,
               phone: user.phone || "",
@@ -60,34 +60,48 @@ export const userApi = createApi({
       extraOptions: { refetchOnMountOrArgChange: true }, // Force refetch on mount
     }),
     updateProfile: builder.mutation({
-      query(body) {
-        return {
-          url: "/update",
-          method: "PATCH",
-          body,
-          headers: {
-            "Content-Type": "application/json",
-          },
-        };
-      },
+      query: ({ id, body }) => ({
+        url: `user/${id}`,
+        method: "PUT",
+        body,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }),
       transformResponse: (response) => {
         if (response.success) {
-          const user = response.user || response.data;
+          const user = response.data;
           if (user) {
             return {
               id: user.id,
               name: user.name,
               email: user.email,
+              phone: user.phone || "",
             };
           }
         }
-        throw new Error(response.error || "Failed to update profile");
+        throw new Error(response.message || "Failed to update profile");
       },
       transformErrorResponse: (response) => {
         return {
           status: response.status,
-          message: response.data?.error || "Failed to update profile",
+          message: response.data?.message || "Failed to update profile",
         };
+      },
+      async onQueryStarted({ id, body }, { dispatch, queryFulfilled }) {
+        try {
+          const { data } = await queryFulfilled;
+          dispatch(
+            setUser({
+              id: data.id,
+              name: data.name,
+              email: data.email,
+              phone: data.phone || "",
+            })
+          );
+        } catch (error) {
+          console.error("updateProfile error:", error);
+        }
       },
       invalidatesTags: ["User"],
     }),

@@ -102,7 +102,11 @@ export default function ProductModal({ setModalShow, product }) {
   };
 
   const removeFromWishlist = (data) => {
-    const itemInWishlist = allWishList.find((item) => item.id === data.id);
+    let itemInWishlist;
+    if (allWishList && allWishList.length > 0) {
+      itemInWishlist = allWishList.find((item) => item.id === data.id);
+    }
+
     if (itemInWishlist) {
       const updatedWishlist = allWishList.filter((item) => item.id !== data.id);
       dispatch(setAllWishList(updatedWishlist));

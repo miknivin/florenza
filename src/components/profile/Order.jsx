@@ -103,11 +103,15 @@ export default function Order() {
 
       <div>
         {isLoading ? (
-          <p>Loading orders...</p>
+          <div className="d-flex justify-content-center align-items-center">
+            <div class="spinner-border" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+          </div>
         ) : error ? (
           <p>Error loading orders: {error?.data?.message || "Unknown error"}</p>
         ) : tableData.length ? (
-          <div className="table_content">
+          <div style={{ overflowX: "auto" }} className="table_content">
             <table className="table table-bordered" {...getTableProps()}>
               <thead>
                 {headerGroups.map((headerGroup, i) => (

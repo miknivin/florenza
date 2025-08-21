@@ -14,7 +14,6 @@ import {
 import { Preloader } from "..";
 
 export default function CheckoutContent() {
-  const [formData, setFormData] = useState({});
   const [paymentMethod, setPaymentMethod] = useState(null);
   const [isWebhookLoading, setIsWebhookLoading] = useState(false);
   const router = useRouter();
@@ -57,11 +56,18 @@ export default function CheckoutContent() {
 
     try {
       // Trigger form submission and validation
-      await formRef.current.submitForm();
-
-      // If form submission is successful, formData will be updated via updateFormData
-      if (Object.keys(formData).length === 0) {
-        toast.error("Please fill in all required address fields", {
+      const { isValid, formData } = await formRef.current.submitForm();
+      console.log("isValid:", isValid, "formData:", formData);
+      if (!isValid) {
+        toast.error("Please fill in all required address fields correctly", {
+          position: "top-center",
+          autoClose: 2000,
+        });
+        return;
+      }
+      if (!formData || Object.keys(formData).length === 0) {
+        console.error("Form data is empty after submission", { formData });
+        toast.error("Form data could not be processed. Please try again.", {
           position: "top-center",
           autoClose: 2000,
         });
@@ -72,9 +78,9 @@ export default function CheckoutContent() {
         (total, item) => total + item.price * item.quantity,
         0
       );
-      const taxAmount = 0; // Set tax to 0 as per request
-      const shippingAmount = 0; // Set shipping to 0 as per request
-      const totalAmount = itemsPrice; // Total is just itemsPrice
+      const taxAmount = 0;
+      const shippingAmount = 0;
+      const totalAmount = itemsPrice;
 
       const shippingInfo = {
         email: formData.email,
@@ -112,8 +118,8 @@ export default function CheckoutContent() {
           handler: async (response) => {
             try {
               setIsWebhookLoading(true);
-              console.log(response.orderId, "order Id");
-              console.log(razorpayOrderId, "order id-2");
+              console.log(response.razorpay_order_id, "Razorpay Order ID");
+              console.log(razorpayOrderId, "Generated Order ID");
 
               const webhookResponse = await razorpayWebhook({
                 razorpay_order_id: response.razorpay_order_id,
@@ -134,9 +140,10 @@ export default function CheckoutContent() {
                   position: "top-center",
                   autoClose: 1000,
                 });
-                router.push(
-                  `/order-success?orderId=${webhookResponse.orderId}`
-                );
+                router.push({
+                  pathname: "/profile",
+                  query: { tab: "order" },
+                });
               }
             } catch (err) {
               console.error("Webhook error:", err);
@@ -181,7 +188,10 @@ export default function CheckoutContent() {
           position: "top-center",
           autoClose: 1000,
         });
-        router.push("/profile");
+        router.push({
+          pathname: "/profile",
+          query: { tab: "order" },
+        });
       }
     } catch (err) {
       console.error("Order creation failed:", err);
@@ -193,10 +203,6 @@ export default function CheckoutContent() {
         }
       );
     }
-  };
-
-  const updateFormData = (data) => {
-    setFormData(data);
   };
 
   return (
@@ -216,7 +222,7 @@ export default function CheckoutContent() {
             setPaymentMethod={setPaymentMethod}
             isLoading={isLoading}
           />
-          <Address reference={formRef} updateFormData={updateFormData} />
+          <Address reference={formRef} />
         </div>
       </div>
     </>

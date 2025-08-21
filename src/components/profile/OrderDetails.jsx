@@ -100,35 +100,36 @@ export default function OrderDetails() {
 
   return (
     <div style={{ minHeight: "90vh" }}>
-      <div className="w-100">
-        <Link
-          className="tf-btn rounded-circle mb-2 btn-fill animate-hover-btn rounded-0 justify-content-center p-2"
-          href={"/my-account-orders"}
-        >
-          <FontAwesomeIcon icon={faArrowLeft} />
-        </Link>
-      </div>
       {orderDetails && (
-        <div className="wd-form-order">
-          <div className="order-head">
-            <figure className="img-product">
-              {orderDetails.orderItems?.[0]?.image && (
-                <Image
-                  alt="product"
-                  src={orderDetails.orderItems[0].image}
-                  width="720"
-                  height="1005"
-                />
-              )}
-            </figure>
-            <div className="content">
-              <div className="badge">{orderDetails.orderStatus}</div>
-              <h6 className="mt-8 fw-5">
-                Order #{orderDetails?._id?.slice(-6)}
-              </h6>
-              <p>Payment method: {orderDetails?.paymentMethod}</p>
+        <div className="wd-form-order mt-5">
+          <div className="d-flex justify-content-between">
+            <div className="order-head">
+              <figure className="img-product">
+                {orderDetails.orderItems?.[0]?.image && (
+                  <Image
+                    alt="product"
+                    src={orderDetails.orderItems[0].image}
+                    width="720"
+                    height="1005"
+                  />
+                )}
+              </figure>
+              <div className="content-order">
+                <div className="badge">{orderDetails.orderStatus}</div>
+                <h6 className="mt-8 fw-5">
+                  Order #{orderDetails?._id?.slice(-6)}
+                </h6>
+                <p>Payment method: {orderDetails?.paymentMethod}</p>
+              </div>
+            </div>
+            <div>
+               <Link href="/profile?tab=order" className="btn btn-dark d-flex align-items-center gap-2">
+                  <FontAwesomeIcon icon={faArrowLeft}  />
+                  <span className="d-none d-sm-inline">Go Back</span>
+              </Link>
             </div>
           </div>
+
           <div className="tf-grid-layout md-col-2 gap-15">
             <div className="item">
               <div className="text-2 text_black-2">Start Time</div>
@@ -181,7 +182,7 @@ export default function OrderDetails() {
                         <div className="timeline-badge success" />
                         <div className="timeline-box">
                           <a className="timeline-panel" href="#">
-                            <div className="text-2 fw-6">
+                            <div className="text-2 text-dark fw-6">
                               Product Processing
                             </div>
                           </a>
@@ -199,7 +200,7 @@ export default function OrderDetails() {
                         <div className="timeline-badge success" />
                         <div className="timeline-box">
                           <a className="timeline-panel" href="#">
-                            <div className="text-2 fw-6">Product Shipped</div>
+                            <div className="text-2 text-dark fw-6">Product Shipped</div>
                             <span>{formatDate(orderDetails.updatedAt)}</span>
                           </a>
                         </div>
@@ -210,7 +211,7 @@ export default function OrderDetails() {
                         <div className="timeline-badge success" />
                         <div className="timeline-box">
                           <a className="timeline-panel" href="#">
-                            <div className="text-2 fw-6">Product Delivered</div>
+                            <div className="text-2 text-dark fw-6">Product Delivered</div>
                             <span>{formatDate(orderDetails.deliveredAt)}</span>
                           </a>
                         </div>
@@ -234,7 +235,7 @@ export default function OrderDetails() {
                         height="1005"
                       />
                     </figure>
-                    <div className="content">
+                    <div className="content-orders">
                       <div className="text-2 fw-6">{item.name}</div>
                       <div className="mt_4">
                         <span className="fw-6">Price: </span>

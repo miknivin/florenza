@@ -1029,3 +1029,73 @@ img {
   display: block;
   background: var(--text-2);
 }
+
+.fw-6 {
+  font-weight: 600 !important;
+}
+
+.text-2 {
+  line-height: 24px;
+}
+
+/* *************************** */
+
+/* styles.css or relevant CSS file */
+
+/* Ensure the horizontal navigation is scrollable */
+.woocomerce__account-horizontal-nav {
+  overflow-x: auto;
+  white-space: nowrap; /* Prevent wrapping of nav items */
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on touch devices */
+}
+
+/* Style the horizontal navigation menu */
+.woocomerce__account-menus-horizontal {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: "no-wrap";
+  gap: 8px; /* Space between nav items */
+  padding: 10px 0;
+}
+
+/* Style individual nav items */
+.woocomerce__account-menus-horizontal .nav-item {
+  flex: 0 0 auto; /* Prevent items from shrinking */
+}
+
+/* Style nav links */
+.woocomerce__account-menus-horizontal .nav-link {
+  padding: 8px 10px;
+  font-size: 16px;
+  color: #333; /* Adjust color as needed */
+}
+
+/* Active nav link style */
+.woocomerce__account-menus-horizontal .nav-link.active {
+  border-bottom: 2px solid black; /* Bootstrap primary color for active tab */
+  color: var(--black);
+  font-weight: 600;
+}
+
+/* Hide scrollbar for aesthetics (optional) */
+.woocomerce__account-horizontal-nav::-webkit-scrollbar {
+  display: none; /* Hide scrollbar in WebKit browsers */
+}
+.woocomerce__account-horizontal-nav {
+  -ms-overflow-style: none; /* Hide scrollbar in IE/Edge */
+  scrollbar-width: none; /* Hide scrollbar in Firefox */
+}
+
+/* Ensure content area takes full width in tablet view */
+@media (min-width: 768px) {
+  .woocomerce__account-right {
+    width: 100%;
+  }
+}
+
+.error {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+  display: block;
+}
