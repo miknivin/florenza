@@ -2,6 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 const Banner1 = ({ banner }) => {
+  console.log(banner);
+
   return (
     <>
       <section className="woocomerce__exclusive woocomerce-padding">
@@ -23,7 +25,7 @@ const Banner1 = ({ banner }) => {
                   {el.sub_title}{" "}
                 </span>
                 <h2 className="woocomerce__exclusive-title title-anim">
-                  {el.title}
+                  Exclusive combo
                 </h2>
                 <div className="woocomerce__exclusive-btnwraper wc_btn_wrapper">
                   <Link

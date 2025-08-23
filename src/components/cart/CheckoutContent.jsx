@@ -24,6 +24,7 @@ export default function CheckoutContent() {
   const [razorpayCheckoutSession, { isLoading: sessionLoading }] =
     useRazorpayCheckoutSessionMutation();
   const [razorpayWebhook] = useRazorpayWebhookMutation();
+  const { isAuthenticated } = useSelector((state) => state.user);
 
   // Load Razorpay script dynamically
   useEffect(() => {
@@ -37,6 +38,15 @@ export default function CheckoutContent() {
   }, []);
 
   const handleOrderSubmission = async () => {
+    if (!isAuthenticated) {
+      toast.error("You need to log in to place an order.", {
+        position: "top-center",
+        autoClose: 2000,
+      });
+      router.push("/sign-in");
+      return;
+    }
+
     if (!formRef.current || typeof formRef.current.submitForm !== "function") {
       console.error("Form reference or submitForm method not available");
       toast.error("Form submission error. Please try again.", {
