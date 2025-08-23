@@ -16,21 +16,20 @@ const Footer = () => {
               width={138}
               height={46}
               style={{ height: "auto" }}
-              src="/assets/imgs/logo/footer-logo-white.png"
+              src="/assets/imgs/logo/footer-logo.png"
               alt="logo-img"
             />
             <p className="woocomerce__footer-dis">
-              175122 Halk Spark, New York, <br /> USA - 67452
+              JJ Perfumes International<br/>
+Sdf 16 Ground Floor Cochin Special <br/>Economic Zone Kakkanad -Cochin <br />682037
             </p>
             <a
               className="woocomerce__footer-mail"
-              href="mailTo:info@example.com"
+              href="mailTo:info@florenzaitaliya.com"
             >
-              info@example.com
+         info@florenzaitaliya.com
             </a>
-            <a className="woocomerce__footer-phone" href="callTo:25487567744">
-              +2 574 - 328 - 301
-            </a>
+            <a href="tel:+918848101280">+91 8848101280</a> | <a href="tel:+917012909452">+91 70129 09452</a>
           </div>
           <div className="woocomerce__footer-category category1">
             <span className="woocomerce__footer-title">Category</span>
@@ -53,42 +52,37 @@ const Footer = () => {
             </ul>
           </div>
           <div className="woocomerce__footer-category">
-            <span className="woocomerce__footer-title">Information</span>
+            <span className="woocomerce__footer-title">Quick Links</span>
             <ul className="woocomerce__footer-list">
               <li>
-                <Link href="#">Company</Link>
+                <Link href="#">Home</Link>
               </li>
               <li>
-                <Link href="#">Career</Link>
+                <Link href="/about">About us</Link>
               </li>
               <li>
-                <Link href="#">Brand Partner</Link>
-              </li>
-              <li>
-                <Link href="#">Products</Link>
-              </li>
-              <li>
-                <Link href="#">Newsletter</Link>
-              </li>
-            </ul>
-          </div>
-          <div className="woocomerce__footer-category">
-            <span className="woocomerce__footer-title">Help</span>
-            <ul className="woocomerce__footer-list">
-              <li>
-                <Link href="#">Dealer & Agent</Link>
+                <Link href="/contact">Get in touch</Link>
               </li>
               <li>
                 <Link href="/faq">FAQ</Link>
               </li>
+            </ul>
+          </div>
+          <div className="woocomerce__footer-category">
+            <span className="woocomerce__footer-title">Informations</span>
+            <ul className="woocomerce__footer-list">
               <li>
-                <Link href="#">Refund Policy</Link>
+                <Link href="/privacy-policy">Privacy Policy</Link>
+              </li>
+              
+              <li>
+                <Link href="/refund-policy">Refund Policy</Link>
               </li>
               <li>
-                <Link href="#">Delivery</Link>
+                <Link href="/shipping-policy">Shipping policy</Link>
               </li>
               <li>
-                <Link href="#">Order Tanking</Link>
+                <Link href="/terms-and-conditions">Terms & Conditions</Link>
               </li>
             </ul>
           </div>

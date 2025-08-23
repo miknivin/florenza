@@ -121,7 +121,7 @@ const Header = ({ option }) => {
       >
         <div className="woocomerce__header-inner shopfull">
           <div className="woocomerce__header-center">
-            <div className="woocomerce__header-logo">
+            {/* <div className="woocomerce__header-logo">
               <Link href={"/"}>
                 <Image
                   priority
@@ -132,7 +132,7 @@ const Header = ({ option }) => {
                   alt="Logo"
                 />
               </Link>
-            </div>
+            </div> */}
           </div>
           <div className="woocomerce__header-left">
             <div className="header__nav-2">

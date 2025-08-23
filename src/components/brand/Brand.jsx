@@ -6,7 +6,7 @@ const Brand = ({ brand }) => {
   return (
     <>
       <div className="woocomerce__brand woocomerce-padding">
-        <div className="woocomerce__brand-wrapper">
+        {/* <div className="woocomerce__brand-wrapper">
           <div className="swiper woocomerce-brand-active">
             <Swiper
               modules={[Autoplay]}
@@ -51,7 +51,7 @@ const Brand = ({ brand }) => {
                 ))}
             </Swiper>
           </div>
-        </div>
+        </div> */}
       </div>
     </>
   );

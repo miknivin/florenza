@@ -1,20 +1,20 @@
 {
   "intro": {
-    "title": "We’re a full service creative and digital agency, working globally with leargest brands.",
-    "description": "Think of the world's most iconica and successful brands easily findable, impactful. Interactional and exceptional designs. Our story takes beginning in 2013",
-    "btn_text": "Trends & Technology",
+    "title": "Florenza is where scent becomes emotion. Each perfume is crafted to captivate the senses, awaken memories, and leave an unforgettable presence.",
+    "description": "We see our customers as storytellers, not just wearers. Each Florenza fragrance captures identity, memory, and emotion empowering you to leave an unforgettable signature wherever your journey leads",
+    "btn_text": "Identity & Lifestyle",
     "award_logo": "about/award.png",
     "intro_video": "video/video.mp4",
     "from": "1990"
   },
   "story": {
     "title": "Our story",
-    "sub_title": "Digital Studio",
-    "description": "Your brand is the most important asset in your company let our team of professionals help you with a good strategy took the runway next with an edgy collection featuring dyed denim pieces. The collection included patchwork denim, a trend that has recently exploded in younger generations. Playing on aspects of sustainability, the pieces appeared to be upcycled to establish dimension and flair. This take on grunge and streetwear took sustainable fashion to an entirely new level. ur specialized team of researchers, strategists, designers, developers, and project managers work with streamlined processes to break through organizational roadblocks. We translate research into solutions, crafting thoughtful and unified brands.",
-    "story_image_1": "story/1.jpg",
-    "story_image_2": "story/2.jpg",
-    "story_image_3": "story/3.jpg",
-    "story_image_4": "story/4.jpg",
+    "sub_title": "Every drop tells the story of its creation",
+    "description": "Every Florenza fragrance begins as a dream, blending rare essences, fine craftsmanship and boundless passion. We see perfume as more than aroma; it is wearable art, an intimate expression of self. Top notes spark curiosity. Heart notes unveil emotion. Base notes leave a lasting memory. From first breath to final whisper, each creation becomes a timeless part of your story.Fragrance is the art that remains when words fall silent",
+    "story_image_1": "story/img2.webp",
+    "story_image_2": "story/img 1.webp",
+    "story_image_3": "story/img5.webp",
+    "story_image_4": "story/img4.webp",
     "from": "1990"
   },
   "counter": [

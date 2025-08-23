@@ -32,10 +32,7 @@ const Hero = ({ advertising }) => {
             }}
             effect={"fade"}
             fadeEffect={true}
-            pagination={{
-              el: ".swiper-pagination",
-              type: "fraction",
-            }}
+            // pagination removed
             navigation={{
               nextEl: ".woocomerce__hero-next",
               prevEl: ".woocomerce__hero-prev",
@@ -50,7 +47,7 @@ const Hero = ({ advertising }) => {
                       backgroundImage: `url(/assets/imgs/${el.img})`,
                     }}
                   >
-                    <span className="woocomerce__hero-rectangle"></span>
+                    {/* <span className="woocomerce__hero-rectangle"></span>
                     <div className="woocomerce__hero-content">
                       <h1 className="woocomerce__hero-htitle">
                         {el.title.split(" ", 1)} <br />{" "}
@@ -68,14 +65,13 @@ const Hero = ({ advertising }) => {
                         ${el.price}
                       </strong>
                       <p className="woocomerce__hero-dis">{el.description}</p>
-                    </div>
+                    </div> */}
                   </div>
                 </SwiperSlide>
               );
             })}
           </Swiper>
-          {/* If we need pagination  */}
-          <div className="swiper-pagination"></div>
+          
 
           {/* If we need navigation buttons  */}
           <div style={{ cursor: "pointer" }} className="woocomerce__hero-prev">

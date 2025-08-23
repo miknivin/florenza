@@ -147,7 +147,7 @@ const Index = () => {
               /> */}
               <Banner2 banner={banner2Add} />
               <AllWithFilter allData={allData} />
-              <Category categories={categories} />
+              {/* <Category categories={categories} /> */}
               <VideoBanner />
               <Testimonial review={review} />
               <Brand brand={brand} />

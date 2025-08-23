@@ -310,12 +310,13 @@ const Canvas = ({ ofCanvasArea }) => {
               <h3>Get in touch</h3>
               <ul>
                 <li>
-                  <a href="tel:02094980547">+(02) - 094 980 547</a>
+             <a href="tel:+918848101280">+91 8848101280</a> | <a href="tel:+917012909452">+91 70129 09452</a>
                 </li>
                 <li>
-                  <a href="mailto:info@extradesign.com">info@extradesign.com</a>
+                  <a href="mailto:info@florenzaitaliya.com">info@florenzaitaliya.com</a>
                 </li>
-                <li>230 Norman Street New York, QC (USA) H8R 1A1</li>
+                <li>JJ Perfumes International
+Sdf 16 Ground Floor Cochin Special Economic Zone Kakkanad -Cochin</li>
               </ul>
             </div>
             <Image

@@ -32,22 +32,22 @@ const Testimonial = ({ review }) => {
                 review.map((el) => (
                   <SwiperSlide key={el.id}>
                     <div className="woocomerce__testimonial-item">
-                      <div className="woocomerce__testimonial-thumb">
+                      {/* <div className="woocomerce__testimonial-thumb">
                         <Image
                           width={47}
                           height={37}
                           src="/assets/imgs/woocomerce/products/quote.png"
                           alt="quote"
                         />
-                      </div>
+                      </div> */}
                       <div className="woocomerce__testimonial-content">
                         <p className="woocomerce__testimonial-dis">{el.text}</p>
-                        <h2 className="woocomerce__testimonial-name">
+                        {/* <h2 className="woocomerce__testimonial-name">
                           {el.name}
-                        </h2>
-                        <span className="woocomerce__testimonial-post">
+                        </h2> */}
+                        {/* <span className="woocomerce__testimonial-post">
                           {el.post}
-                        </span>
+                        </span> */}
                       </div>
                     </div>
                   </SwiperSlide>
