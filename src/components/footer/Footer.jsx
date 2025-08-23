@@ -20,16 +20,20 @@ const Footer = () => {
               alt="logo-img"
             />
             <p className="woocomerce__footer-dis">
-              JJ Perfumes International<br/>
-Sdf 16 Ground Floor Cochin Special <br/>Economic Zone Kakkanad -Cochin <br />682037
+              JJ Perfumes International
+              <br />
+              Sdf 16 Ground Floor Cochin Special <br />
+              Economic Zone Kakkanad
+              <br /> -Cochin 682037
             </p>
             <a
               className="woocomerce__footer-mail"
               href="mailTo:info@florenzaitaliya.com"
             >
-         info@florenzaitaliya.com
+              info@florenzaitaliya.com
             </a>
-            <a href="tel:+918848101280">+91 8848101280</a> | <a href="tel:+917012909452">+91 70129 09452</a>
+            <a href="tel:+918848101280">+91 8848101280</a> |{" "}
+            <a href="tel:+917012909452">+91 70129 09452</a>
           </div>
           <div className="woocomerce__footer-category category1">
             <span className="woocomerce__footer-title">Category</span>
@@ -40,7 +44,7 @@ Sdf 16 Ground Floor Cochin Special <br/>Economic Zone Kakkanad -Cochin <br />682
               <li>
                 <Link href={"category/man"}>Man</Link>
               </li>
-              <li>
+              {/* <li>
                 <Link href={"category/kids & baby"}>Kids & Baby</Link>
               </li>
               <li>
@@ -48,7 +52,7 @@ Sdf 16 Ground Floor Cochin Special <br/>Economic Zone Kakkanad -Cochin <br />682
               </li>
               <li>
                 <Link href={"category/beauty"}>Beauty</Link>
-              </li>
+              </li> */}
             </ul>
           </div>
           <div className="woocomerce__footer-category">
@@ -63,9 +67,9 @@ Sdf 16 Ground Floor Cochin Special <br/>Economic Zone Kakkanad -Cochin <br />682
               <li>
                 <Link href="/contact">Get in touch</Link>
               </li>
-              <li>
+              {/* <li>
                 <Link href="/faq">FAQ</Link>
-              </li>
+              </li> */}
             </ul>
           </div>
           <div className="woocomerce__footer-category">
@@ -74,7 +78,7 @@ Sdf 16 Ground Floor Cochin Special <br/>Economic Zone Kakkanad -Cochin <br />682
               <li>
                 <Link href="/privacy-policy">Privacy Policy</Link>
               </li>
-              
+
               <li>
                 <Link href="/refund-policy">Refund Policy</Link>
               </li>
@@ -107,11 +111,7 @@ Sdf 16 Ground Floor Cochin Special <br/>Economic Zone Kakkanad -Cochin <br />682
         </div>
         <div className="woocomerce__footer-bottom">
           <p className="woocomerce__footer-copytext">
-            © 2022 - 2025 | Alrights reserved <br />
-            by{" "}
-            <a href="https://wealcoder.com/" target="_blank">
-              Wealcoder
-            </a>
+            © 2025 | Alrights reserved <br />
           </p>
           <ul className="woocomerce__footer-social">
             <li>

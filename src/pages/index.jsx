@@ -149,7 +149,7 @@ const Index = () => {
               <AllWithFilter allData={allData} />
               {/* <Category categories={categories} /> */}
               <VideoBanner />
-              <Testimonial review={review} />
+              {/* <Testimonial review={review} /> */}
               <Brand brand={brand} />
               <Instagram instagram={instagram} />
               <Footer />

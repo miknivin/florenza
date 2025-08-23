@@ -25,7 +25,7 @@ const Banner1 = ({ banner }) => {
                   {el.sub_title}{" "}
                 </span>
                 <h2 className="woocomerce__exclusive-title title-anim">
-                  Exclusive combo
+                  {banner[0].title}
                 </h2>
                 <div className="woocomerce__exclusive-btnwraper wc_btn_wrapper">
                   <Link

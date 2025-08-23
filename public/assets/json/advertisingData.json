@@ -28,21 +28,21 @@
   "body_advertising": [
     {
       "id": "401",
-      "title": "Coat & Jacket Collection",
+      "title": "Secret Combo",
       "sub_title": "Exclusive",
       "section": "1",
       "img": "woocomerce/exclusive/img4.jpeg"
     },
     {
       "id": "402",
-      "title": "Exclusive brand Collection",
+      "title": "Blooms Combo",
       "sub_title": "Exclusive",
       "section": "1",
       "img": "woocomerce/exclusive/img5.jpeg"
     },
     {
       "id": "403",
-      "title": "Exclusive brand Collection",
+      "title": "Cool Combo",
       "sub_title": "Exclusive",
       "section": "2",
       "img": "woocomerce/exclusive/img4.webp"

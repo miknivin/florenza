@@ -7,7 +7,7 @@ const Instagram = ({ instagram }) => {
       <section className="woocomerce__instagram woocomerce-padding">
         <span className="woocomerce__instagram-subtitle">Follow Us</span>
         <h2 className="woocomerce__instagram-title">
-          <Link href="#">@axtra.beauty</Link>
+          <Link href="#">@@florenza_italiya</Link>
         </h2>
 
         <div className="woocomerce__instagram-wrapper">
