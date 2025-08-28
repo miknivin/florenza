@@ -1,7 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import logoWhite2 from "../../../public/assets/imgs/logo/site-logo-white-2.png";
+import logoWhite2 from "../../../public/assets/imgs/logo/florenza_logo.png";
+// import logoWhite2 from "../../../public/assets/imgs/logo/site-logo-white-2.png";
 import Shape11 from "../../../public/assets/imgs/shape/11.png";
 import Shape12 from "../../../public/assets/imgs/shape/12.png";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
@@ -68,7 +69,7 @@ const Canvas = ({ ofCanvasArea }) => {
               <Link href="/">
                 <Image
                   priority
-                  style={{ width: "auto", height: "auto" }}
+                  style={{ width: "128px", height: "auto" }}
                   src={logoWhite2}
                   alt="Offcanvas Logo"
                 />
@@ -77,27 +78,17 @@ const Canvas = ({ ofCanvasArea }) => {
             <div className="offcanvas__social">
               <h3 className="social-title">Follow Us</h3>
               <ul>
+               
                 <li>
-                  <a href="#">Dribbble</a>
+                  <a href="https://www.instagram.com/florenza_italiya?utm_source=ig_web_button_share_sheet&igsh=MXZ5eDBpaGZ6ejBmZQ==">Instagram</a>
                 </li>
                 <li>
-                  <a href="#">Behance</a>
+                  <a href="https://www.facebook.com/p/Florenza-Italiya-61555166902132/">Facebook</a>
                 </li>
-                <li>
-                  <a href="#">Instagram</a>
-                </li>
-                <li>
-                  <a href="#">Facebook</a>
-                </li>
-                <li>
-                  <a href="#">Twitter</a>
-                </li>
-                <li>
-                  <a href="#">YouTube</a>
-                </li>
+               
               </ul>
             </div>
-            <div className="offcanvas__links">
+            {/* <div className="offcanvas__links">
               <ul>
                 <li>
                   <Link href="/about">About</Link>
@@ -112,7 +103,7 @@ const Canvas = ({ ofCanvasArea }) => {
                   <Link href="/blog">blog</Link>
                 </li>
               </ul>
-            </div>
+            </div> */}
           </div>
           <div className="offcanvas__mid">
             <div className="offcanvas__menu-wrapper">
@@ -125,16 +116,16 @@ const Canvas = ({ ofCanvasArea }) => {
                   </li>
                   <li>
                     <div className="header_title d-flex">
-                      <Link href={"#"}>Shop</Link>
-                      <div className="accordian-btn">
+                      <Link href={"/about"}>About</Link>
+                      {/* <div className="accordian-btn">
                         {accordion === 2 ? (
                           <a onClick={() => openData(0)}>-</a>
                         ) : (
                           <a onClick={() => openData(2)}>+</a>
                         )}
-                      </div>
+                      </div> */}
                     </div>
-                    <ul
+                    {/* <ul
                       className="sub_title"
                       style={
                         accordion === 2 ? { display: "" } : { display: "none" }
@@ -146,20 +137,20 @@ const Canvas = ({ ofCanvasArea }) => {
                       <li>
                         <Link href={"/shop/side-bar"}>Side Bar</Link>
                       </li>
-                    </ul>
+                    </ul> */}
                   </li>
                   <li>
                     <div className="header_title d-flex">
-                      <Link href={"/shop/full"}>Product</Link>
-                      <div className="accordian-btn">
+                      <Link href={"/shop/full"}>Products</Link>
+                      {/* <div className="accordian-btn">
                         {accordion === 3 ? (
                           <a onClick={() => openData(0)}>-</a>
                         ) : (
                           <a onClick={() => openData(3)}>+</a>
                         )}
-                      </div>
+                      </div> */}
                     </div>
-                    <ul
+                    {/* <ul
                       className="sub_title"
                       style={
                         accordion === 3 ? { display: "" } : { display: "none" }
@@ -171,20 +162,20 @@ const Canvas = ({ ofCanvasArea }) => {
                       <li>
                         <Link href={"/category"}>Product Category</Link>
                       </li>
-                    </ul>
+                    </ul> */}
                   </li>
                   <li>
                     <div className="header_title d-flex">
-                      <Link href={"#"}>PAGES</Link>
-                      <div className="accordian-btn">
+                      <Link href={"/contact"}>Contact</Link>
+                      {/* <div className="accordian-btn">
                         {accordion === 4 ? (
                           <a onClick={() => openData(0)}>-</a>
                         ) : (
                           <a onClick={() => openData(4)}>+</a>
                         )}
-                      </div>
+                      </div> */}
                     </div>
-                    <ul
+                    {/* <ul
                       className="sub_title"
                       style={
                         accordion === 4 ? { display: "" } : { display: "none" }
@@ -291,20 +282,20 @@ const Canvas = ({ ofCanvasArea }) => {
                           </li>
                         </ul>
                       </li>
-                    </ul>
+                    </ul> */}
                   </li>
-                  <li>
+                  {/* <li>
                     <div className="header_title">
                       <Link href={"/contact"}>CONTACT</Link>
                     </div>
-                  </li>
+                  </li> */}
                 </ul>
               </nav>
             </div>
           </div>
           <div className="offcanvas__right">
             <div className="offcanvas__search">
-              <OffCanvasSearch allData={allData} />
+              {/* <OffCanvasSearch allData={allData} /> */}
             </div>
             <div className="offcanvas__contact">
               <h3>Get in touch</h3>

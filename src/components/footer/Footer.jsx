@@ -146,14 +146,14 @@ const Footer = () => {
                 alt="payment"
               />
             </li>
-            <li>
+            {/* <li>
               <Image
                 width={40}
                 height={30}
                 src="/assets/imgs/woocomerce/payment/payment-2.png"
                 alt="payment"
               />
-            </li>
+            </li> */}
             <li>
               <Image
                 width={40}

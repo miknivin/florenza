@@ -434,7 +434,8 @@
       background-repeat: no-repeat;
       background-size: cover;
       height: 100vh;
-      padding: 0 50px;
+      padding: 0 0px;
+      //padding was 0 50px
       padding-top: 322px;
       position: relative;
 
@@ -470,7 +471,7 @@
       }
 
       @media #{$sm} {
-        padding: 190px 10px 150px;
+        padding: 190px 10px 50px;
         height: unset;
         background-size: cover;
         background-position: center center;

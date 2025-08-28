@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRef, useState } from "react";
 import { toast } from "react-toastify";
 import { useRegisterMutation } from "@/store/api/authApi";
+import GoogleSignInButton from "./GoogleSigninButton";
 
 const SignUpForm = ({
   className,
@@ -66,7 +67,7 @@ const SignUpForm = ({
   };
 
   return (
-    <div className={`woocomerce__signin sec-plr-50 ${className || ""}`}>
+    <div className={`woocomerce__signin  ${className || ""}`}>
       <div className="woocomerce__signin-wrapper">
         {isHeading && (
           <div className="woocomerce__signin-titlewrap">
@@ -132,7 +133,7 @@ const SignUpForm = ({
               </button>
             </div>
           </div>
-          <div className="woocomerce__signin-btnwrap signupbtn">
+          <div className="woocomerce__signin-btnwrap signupbtn d-flex flex-column gap-3">
             <button
               type="submit"
               className="woocomerce__checkout-submitbtn"
@@ -140,6 +141,7 @@ const SignUpForm = ({
             >
               {isLoading ? "Registering..." : "Sign up"}
             </button>
+            <GoogleSignInButton onHide={onHide} />
           </div>
         </form>
         <div className="woocomerce__signin-formfooter">

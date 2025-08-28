@@ -27,11 +27,11 @@ const Hero = ({ advertising }) => {
             modules={[Autoplay, EffectFade, Pagination, Navigation]}
             loop={true}
             speed={2000}
-            autoplay={{
-              delay: 2000,
-            }}
+            // autoplay={{
+            //   delay: 2000,
+            // }}
             effect={"fade"}
-            fadeEffect={true}
+            fadeEffect={false}
             // pagination removed
             navigation={{
               nextEl: ".woocomerce__hero-next",
@@ -44,10 +44,14 @@ const Hero = ({ advertising }) => {
                   <div className="woocomerce__hero-item">
                     <Image
                       src={`/assets/imgs/${el.img}`}
-                      alt={el.title || 'Hero Image'}
+                      alt={el.title || "Hero Image"}
                       width={1200}
                       height={600}
-                      style={{ width: '100%', height: 'auto', objectFit: 'cover' }}
+                      style={{
+                        width: "100%",
+                        height: "auto",
+                        objectFit: "cover",
+                      }}
                       priority
                     />
                   </div>
@@ -55,7 +59,6 @@ const Hero = ({ advertising }) => {
               );
             })}
           </Swiper>
-          
 
           {/* If we need navigation buttons  */}
           <div style={{ cursor: "pointer" }} className="woocomerce__hero-prev">

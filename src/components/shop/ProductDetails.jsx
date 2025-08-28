@@ -432,7 +432,8 @@ export default function ProductDetails({ id }) {
                       >
                         <i
                           className={
-                            activeWishList.includes(product._id)
+                            activeWishList &&
+                            activeWishList?.includes(product._id)
                               ? "fa-solid fa-heart"
                               : "fa-regular fa-heart"
                           }

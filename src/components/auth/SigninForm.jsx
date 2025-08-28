@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRef, useState } from "react";
 import { toast } from "react-toastify";
 import { useLoginMutation } from "@/store/api/authApi";
+import GoogleSignInButton from "./GoogleSigninButton";
 
 const SignInForm = ({
   className,
@@ -29,18 +30,6 @@ const SignInForm = ({
     }
   };
 
-  const handleGoogleSignIn = () => {
-    toast.info("Google Sign-In not implemented yet", {
-      position: "top-center",
-      autoClose: 1000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      theme: "light",
-    });
-    // Implement Google Sign-In with your preferred library (e.g., @react-oauth/google)
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -60,7 +49,7 @@ const SignInForm = ({
         theme: "light",
       });
       if (isModal && onHide) {
-        onHide(); 
+        onHide();
       }
     } catch (error) {
       console.error("Login error:", error);
@@ -77,7 +66,7 @@ const SignInForm = ({
   };
 
   return (
-    <div className={`woocomerce__signin sec-plr-50 ${className || ""}`}>
+    <div className={`woocomerce__signin  ${className || ""}`}>
       <div className="woocomerce__signin-wrapper">
         {isHeading && (
           <div className="woocomerce__signin-titlewrap">
@@ -155,21 +144,7 @@ const SignInForm = ({
             </h6>
             <hr />
           </div>
-          {/* <button
-            type="button"
-            className="google-btn btn"
-            onClick={handleGoogleSignIn}
-          >
-            <div className="google-icon">
-              <Image
-                width={24}
-                height={24}
-                src="/assets/imgs/shape/google-logo.png"
-                alt="Google"
-              />
-            </div>
-            Sign in with Google
-          </button> */}
+          <GoogleSignInButton onHide={onHide} />
         </form>
         <div className="woocomerce__signin-formfooter">
           <p>
