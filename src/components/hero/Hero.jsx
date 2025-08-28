@@ -27,11 +27,11 @@ const Hero = ({ advertising }) => {
             modules={[Autoplay, EffectFade, Pagination, Navigation]}
             loop={true}
             speed={2000}
-            // autoplay={{
-            //   delay: 2000,
-            // }}
+            autoplay={{
+              delay: 2000,
+            }}
             effect={"fade"}
-            fadeEffect={false}
+            fadeEffect={true}
             // pagination removed
             navigation={{
               nextEl: ".woocomerce__hero-next",
