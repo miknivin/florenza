@@ -39,10 +39,10 @@ const Footer = () => {
             <span className="woocomerce__footer-title">Products</span>
             <ul className="woocomerce__footer-list">
               <li>
-                <Link href={"/shop/68aec7caf045b00bcb36693d"}>Rumba</Link>
+                <Link href={"/shop/68b02956db84a40a8a443151"}>Oud white</Link>
               </li>
               <li>
-                <Link href={"/shop/68b02956db84a40a8a443151"}>Oud white</Link>
+                <Link href={"/shop/68aec7caf045b00bcb36693d"}>Rumba</Link>
               </li>
               <li>
                 <Link href={"/shop/68aec5d2f045b00bcb366913"}>Cool water</Link>
