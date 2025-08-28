@@ -42,7 +42,7 @@ const About = () => {
           <AboutHero intro={intro} />
           <AboutStory story={story} />
           <AboutCounter counter={counter} />
-          <Brand2 brand={brand} />
+          {/* <Brand2 brand={brand} /> */}
           <AboutTestimonial testimonial={testimonial} />
           <CTA />
         </ProductLayout>

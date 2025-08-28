@@ -1,3 +1,21 @@
+/* Responsive video for testimonial section */
+.testimonial__video {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.testimonial__video video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  display: block;
+}
 .offcanvas__menu {
   padding-top: 142px;
 }
@@ -1098,4 +1116,8 @@ img {
   font-size: 12px;
   margin-top: 5px;
   display: block;
+}
+.woocomerce__hero-item {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
 }

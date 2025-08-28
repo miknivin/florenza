@@ -155,7 +155,7 @@ const SignInForm = ({
             </h6>
             <hr />
           </div>
-          <button
+          {/* <button
             type="button"
             className="google-btn btn"
             onClick={handleGoogleSignIn}
@@ -169,7 +169,7 @@ const SignInForm = ({
               />
             </div>
             Sign in with Google
-          </button>
+          </button> */}
         </form>
         <div className="woocomerce__signin-formfooter">
           <p>

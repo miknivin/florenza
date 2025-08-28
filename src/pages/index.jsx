@@ -128,7 +128,7 @@ const Index = () => {
           <CursorAnimation cursor1={cursor1} cursor2={cursor2} />
           {/* <Switcher cursor1={cursor1} cursor2={cursor2} /> */}
           <ScrollTop />
-          <div id="smooth-wrapper" className="woocomerce__main">
+          <div id="smooth-wrapper" className="woocomerce__main"  >
             <div id="smooth-content">
               <Header />
               <Hero advertising={heroAdd} />

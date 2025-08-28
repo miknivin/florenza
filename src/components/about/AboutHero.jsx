@@ -55,7 +55,7 @@ const AboutHero = ({ intro }) => {
                     <div className="hero__about-text title-anim">
                       <p>{intro.description}</p>
                     </div>
-                    <div className="hero__about-award">
+                    {/* <div className="hero__about-award">
                       <Image
                         priority
                         width={126}
@@ -63,7 +63,7 @@ const AboutHero = ({ intro }) => {
                         src={`/assets/imgs/${intro.award_logo}`}
                         alt="Best Studio Award"
                       />
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>

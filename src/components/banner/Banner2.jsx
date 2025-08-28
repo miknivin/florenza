@@ -6,7 +6,7 @@ const Banner2 = ({ banner }) => {
   return (
     <>
       {banner && banner.length && (
-        <section className="woocomerce__exclusive woocomerce-padding">
+        <section className="woocomerce__exclusive woocomerce-padding" >
           <div className="woocomerce__exclusive-wrapper">
             <div className="woocomerce__exclusive-item item2">
               <div className="woocomerce__exclusive-img">

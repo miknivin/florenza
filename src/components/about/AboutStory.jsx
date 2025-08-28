@@ -8,9 +8,9 @@ const AboutStory = ({ story }) => {
           <div className="container g-0 line pt-140">
             <span className="line-3"></span>
             <div className="sec-title-wrapper">
-              <div className="from-text">
+              {/* <div className="from-text">
                 from <span>{story.from}</span>
-              </div>
+              </div> */}
 
               <div className="row">
                 <div className="col-xxl-5 col-xl-5 col-lg-5 col-md-5">

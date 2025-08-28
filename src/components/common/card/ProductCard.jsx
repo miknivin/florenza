@@ -187,12 +187,13 @@ const ProductCard = ({ el }) => {
                 : ""}
             </span>
           </div>
-          <div className="dropdown">
+          <div className="dropdown" >
             <button
               className="dropdown-toggle text-decoration-underline"
               type="button"
               onClick={toggleDropdown}
               aria-expanded={isDropdownOpen}
+                style={{ color: '#fff' }}
             >
               {selectedVariant?.size || "Select Size"}
             </button>
@@ -209,6 +210,7 @@ const ProductCard = ({ el }) => {
                       onClick={() => handleVariantChange(variant)}
                     >
                       {variant.size}
+                      
                     </button>
                   </li>
                 ))

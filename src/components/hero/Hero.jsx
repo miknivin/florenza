@@ -41,31 +41,15 @@ const Hero = ({ advertising }) => {
             {advertising.map((el) => {
               return (
                 <SwiperSlide key={el.id}>
-                  <div
-                    className="woocomerce__hero-item"
-                    style={{
-                      backgroundImage: `url(/assets/imgs/${el.img})`,
-                    }}
-                  >
-                    {/* <span className="woocomerce__hero-rectangle"></span>
-                    <div className="woocomerce__hero-content">
-                      <h1 className="woocomerce__hero-htitle">
-                        {el.title.split(" ", 1)} <br />{" "}
-                        <span>{el.title.split(" ").slice(1, 3).join(" ")}</span>{" "}
-                        <br />{" "}
-                        {el.title
-                          .split(" ")
-                          .splice(3, el.title.split(" ").length - 1)
-                          .join(" ")}
-                      </h1>
-                      <span className="woocomerce__hero-subtitle">
-                        {el.sub_title}
-                      </span>
-                      <strong className="woocomerce__hero-price">
-                        ${el.price}
-                      </strong>
-                      <p className="woocomerce__hero-dis">{el.description}</p>
-                    </div> */}
+                  <div className="woocomerce__hero-item">
+                    <Image
+                      src={`/assets/imgs/${el.img}`}
+                      alt={el.title || 'Hero Image'}
+                      width={1200}
+                      height={600}
+                      style={{ width: '100%', height: 'auto', objectFit: 'cover' }}
+                      priority
+                    />
                   </div>
                 </SwiperSlide>
               );

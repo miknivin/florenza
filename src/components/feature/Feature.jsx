@@ -5,7 +5,7 @@ import ProductSwiper from "../common/ProductSwiper";
 const Feature = ({ featured, headerTitle, routeName }) => {
   return (
     <>
-      <div className="woocomerce__feature woocomerce-padding wc_feature_products">
+      <div className="woocomerce__feature woocomerce-padding wc_feature_products" >
         <div className="woocomerce__feature-top">
           <p className="woocomerce__feature-title">{headerTitle}</p>
           <div className="woocomerce__feature-rightwrapper">

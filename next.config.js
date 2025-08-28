@@ -2,7 +2,11 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["kids-bags.s3.eu-north-1.amazonaws.com"],
+    domains: ["kids-bags.s3.eu-north-1.amazonaws.com",
+      'scontent.cdninstagram.com', 'instagram.com'
+   
+  ],
+    
   },
 };
 

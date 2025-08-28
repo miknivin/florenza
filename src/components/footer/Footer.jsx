@@ -16,7 +16,7 @@ const Footer = () => {
               width={138}
               height={46}
               style={{ height: "auto" }}
-              src="/assets/imgs/logo/footer-logo.png"
+              src="/assets/imgs/logo/florenza_logo.png"
               alt="logo-img"
             />
             <p className="woocomerce__footer-dis">
@@ -33,26 +33,24 @@ const Footer = () => {
               info@florenzaitaliya.com
             </a>
             <a href="tel:+918848101280">+91 8848101280</a> |{" "}
-            <a href="tel:+917012909452">+91 70129 09452</a>
+            <a href="tel:+917012909452">+91 7012909452</a>
           </div>
           <div className="woocomerce__footer-category category1">
-            <span className="woocomerce__footer-title">Category</span>
+            <span className="woocomerce__footer-title">Products</span>
             <ul className="woocomerce__footer-list">
               <li>
-                <Link href={"category/woman"}>Woman</Link>
+                <Link href={"/shop/68aec7caf045b00bcb36693d"}>Rumba</Link>
               </li>
               <li>
-                <Link href={"category/man"}>Man</Link>
+                <Link href={"/shop/68b02956db84a40a8a443151"}>Oud white</Link>
               </li>
-              {/* <li>
-                <Link href={"category/kids & baby"}>Kids & Baby</Link>
-              </li>
-              <li>
-                <Link href={"category/jewellery"}>Jewellery</Link>
+               <li>
+                <Link href={"/shop/68b02aa6db84a40a8a443195"}>One</Link>
               </li>
               <li>
-                <Link href={"category/beauty"}>Beauty</Link>
-              </li> */}
+                <Link href={"/shop/68aec5d2f045b00bcb366913"}>Cool water</Link>
+              </li>
+             
             </ul>
           </div>
           <div className="woocomerce__footer-category">
@@ -115,25 +113,25 @@ const Footer = () => {
           </p>
           <ul className="woocomerce__footer-social">
             <li>
-              <a href="#">
+              <a href="https://www.facebook.com/p/Florenza-Italiya-61555166902132/">
                 <i className="fa-brands fa-facebook-f"></i>
               </a>
             </li>
-            <li>
+            {/* <li>
               <a href="#">
                 <i className="fa-brands fa-twitter"></i>
               </a>
-            </li>
+            </li> */}
             <li>
-              <a href="#">
+              <a href="https://www.instagram.com/florenza_italiya?utm_source=ig_web_button_share_sheet&igsh=MXZ5eDBpaGZ6ejBmZQ==">
                 <i className="fa-brands fa-instagram"></i>
               </a>
             </li>
-            <li>
+            {/* <li>
               <a href="#">
                 <i className="fa-brands fa-linkedin"></i>
               </a>
-            </li>
+            </li> */}
           </ul>
           <ul className="woocomerce__footer-payment">
             <li>

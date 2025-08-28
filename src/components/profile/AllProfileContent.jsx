@@ -8,6 +8,7 @@ import Link from "next/link";
 import Order from "./Order";
 import ProfileInfo from "./ProfileInfo";
 import WishList from "./WishList";
+import { useLogoutMutation } from "@/store/api/authApi";
 
 export default function AllProfileContent({ initialTab = "profile" }) {
   const router = useRouter();
@@ -18,6 +19,17 @@ export default function AllProfileContent({ initialTab = "profile" }) {
   useEffect(() => {
     setActiveTab(tab || "profile");
   }, [tab]);
+  
+    const [logout, { isLoading }] = useLogoutMutation();
+    const handleLogout = async () => {
+    try {
+      await logout().unwrap();
+      // Optionally clear client-side auth state here
+      router.push("/"); // Redirect to login or home
+    } catch (error) {
+      // Handle error (show message, etc.)
+    }
+  };
 
   const handleTabChange = (key) => {
     if (key && key !== "logout") {
@@ -78,11 +90,11 @@ export default function AllProfileContent({ initialTab = "profile" }) {
                       Order
                     </Nav.Link>
                   </Nav.Item>
-                  <Nav.Item>
-                    <Link href="/logout" passHref legacyBehavior>
-                      <Nav.Link eventKey="logout">Sign out</Nav.Link>
-                    </Link>
-                  </Nav.Item>
+                 <Nav.Item>
+    <Nav.Link eventKey="logout" as="button" onClick={handleLogout} disabled={isLoading}>
+      Sign out
+    </Nav.Link>
+  </Nav.Item>
                 </Nav>
               </div>
 
@@ -120,10 +132,10 @@ export default function AllProfileContent({ initialTab = "profile" }) {
                     </Nav.Link>
                   </Nav.Item>
                   <Nav.Item>
-                    <Link href="/logout" passHref legacyBehavior>
-                      <Nav.Link eventKey="logout">Sign out</Nav.Link>
-                    </Link>
-                  </Nav.Item>
+    <Nav.Link eventKey="logout" as="button" onClick={handleLogout} disabled={isLoading}>
+      Sign out
+    </Nav.Link>
+  </Nav.Item>
                 </Nav>
               </div>
             </div>

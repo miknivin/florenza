@@ -5,6 +5,7 @@ import { useGetProductsQuery } from "@/store/api/productApi";
 
 const AllWithFilter = () => {
   const [latest, setLatest] = useState([]);
+  const [visibleCount, setVisibleCount] = useState(4);
   const [isActive, setIsActive] = useState(1);
 
   // Use the getProducts query from productApi
@@ -17,15 +18,10 @@ const AllWithFilter = () => {
   // Handle the fetched data
   useEffect(() => {
     if (data && data.filteredProducts && data.filteredProducts.length) {
-      if (data.filteredProducts.length > 8) {
-        let last = data.filteredProducts.slice(
-          data.filteredProducts.length - 8,
-          data.filteredProducts.length
-        );
-        setLatest(last);
-      } else {
-        setLatest(data.filteredProducts);
-      }
+      // Sort by createdAt ascending (oldest first)
+      const sorted = [...data.filteredProducts].sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+      setLatest(sorted);
+      setVisibleCount(4);
     }
   }, [data]);
 
@@ -49,14 +45,11 @@ const AllWithFilter = () => {
         );
       }
     }
-
-    if (result.length > 8) {
-      let last = result.slice(result.length - 8, result.length);
-      setLatest(last);
-    } else {
-      setLatest(result);
-    }
-    setIsActive(value);
+  // Sort filtered results by createdAt ascending
+  const sorted = [...result].sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+  setLatest(sorted);
+  setVisibleCount(4);
+  setIsActive(value);
   };
 
   // Handle loading and error states
@@ -64,7 +57,7 @@ const AllWithFilter = () => {
   if (error) return <div>Error fetching products: {error.message}</div>;
 
   return (
-    <div className="woocomerce__feature woocomerce-padding wc_feature_products">
+  <div className="woocomerce__feature woocomerce-padding wc_feature_products" >
       <div className="woocomerce__feature-top">
         <p className="woocomerce__feature-title">(C) You may missed</p>
         {/* <div className="woocomerce__feature-rightwrapper rightwrapper2">
@@ -126,11 +119,21 @@ const AllWithFilter = () => {
       <div>
         <div className="woocomerce__feature-wrapper filteringwrapper">
           {latest && latest.length ? (
-            latest.map((el) => <ProductCard key={el._id} el={el} />)
+            latest.slice(0, visibleCount).map((el) => <ProductCard key={el._id} el={el} />)
           ) : (
             <p>No products available</p>
           )}
         </div>
+        {latest.length > visibleCount && (
+          <div style={{ textAlign: 'center', marginTop: '20px' }}>
+            <button
+              style={{ background: '#000', color: '#fff', border: 'none', padding: '10px 24px', borderRadius: '4px', cursor: 'pointer' }}
+              onClick={() => setVisibleCount((prev) => prev + 4)}
+            >
+              Load More
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

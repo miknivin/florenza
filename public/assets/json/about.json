@@ -25,12 +25,12 @@
     },
     {
       "name": "Happy customers",
-      "value": "8",
-      "suffix": "k"
+      "value": "1",
+      "suffix": "M"
     },
     {
       "name": "Years experiences",
-      "value": "15",
+      "value": "3",
       "suffix": ""
     },
     {
@@ -58,28 +58,28 @@
     ]
   },
   "testimonial": {
-    "test_video": "testimonial.mp4",
+    "test_video": "florenza 2_2.mp4",
     "test_content": [
       {
         "id": "1201",
-        "title": "Amazing digital service",
-        "description": "We were there right at the beginning just when the concept for search engine optimisation taking office and the full of internet. So wewe’ve grown to employ than 50 talented specialists with diverse experiences and broad skill sets of huge markers.",
-        "author": "Habibur Rahman",
-        "role": "CEO, Agency"
+        "title": "Amazing scent, lasts long",
+"description": "Florenza is a good choice for fragrance lovers.\nTheir wide selection of perfumes ensures there's something for everyone.\nThe staff is knowledgeable and friendly, providing excellent recommendations based on your preferences",
+        "author": "Mathew",
+        "role": "Customer"
       },
       {
         "id": "1202",
-        "title": "Amazing digital service",
-        "description": "Our team of content and digital marketing specialists will deliver real results for your business, combining creative ideas with our decade of experience. We offer both self-service and concierge digital marketing programs that are proven effective.",
-        "author": "Halim",
-        "role": "HR, Agency"
+        "title": "Amazing scent, lasts long",
+        "description": "Best fragrance perfume I've experienced. Heard many positive reviews, and got many flavours that lasts for many hours,Very good smell & long lasting ,I bought florenza rumba and florenza one. Both lasts almost 7-8 hours. I feel like it's worthy",
+        "author": "Rosh",
+        "role": "Customer"
       },
       {
         "id": "1203",
-        "title": "Amazing digital service",
-        "description": "We work with all businesses in all industries and create a custom digital marketing plan to fit any budget. Whether you choose one service or bundle several services, your satisfaction is our top priority.",
-        "author": "Mizanur Rahaman",
-        "role": "CTO, Agency"
+        "title": "Amazing scent, lasts long",
+        "description": "I was using blue for men since 2017. Accidentally I experience the smell of rumba perfume at family weeding, manjeri it last whole day and the guy who taught me how the perfume should spray and everything related. For him only I bought one, but now im addicted to the smell. . it's like strong floral woody perfume family. I would suggest this and will buy one more soon ",
+        "author": "Thomas",
+        "role": "Customer"
       }
     ]
   }

@@ -1,7 +1,7 @@
 .woocomerce {
   &__main {
     font-family: $PlusJakarta;
-    background-color: #f9f3ee;
+    background-color: #000;
   }
 
   &__offcanvas {
@@ -791,7 +791,7 @@
       font-weight: 700;
       font-size: 18px;
       line-height: 14px;
-      color: var(--black-2);
+      color: var(--white-2);
     }
 
     &-wrapper {
@@ -975,7 +975,7 @@
       font-weight: 500;
       font-size: 24px;
       line-height: 30px;
-      color: var(--black-2);
+      color: var(--white-2);
       transition: all 0.3s;
 
       @media #{$lg} {
@@ -988,7 +988,7 @@
       font-weight: 400;
       font-size: 16px;
       line-height: 16px;
-      color: var(--black-2);
+      color: var(--white-2);
       padding-right: 12px;
     }
 
@@ -997,7 +997,7 @@
       font-weight: 400;
       font-size: 16px;
       line-height: 16px;
-      color: #555555;
+      color: #fff1f1;
       text-decoration: line-through;
     }
 
@@ -1478,7 +1478,7 @@
       font-weight: 500;
       font-size: 18px;
       line-height: 1.5;
-      color: var(--black);
+      color: var(--white);
       display: block;
       text-align: center;
     }
@@ -1495,7 +1495,7 @@
       }
 
       a {
-        color: var(--black);
+        color: var(--white);
 
         &:hover {
           color: var(--gray-16);
