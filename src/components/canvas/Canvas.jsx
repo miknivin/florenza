@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import logoWhite2 from "../../../public/assets/imgs/logo/florenza_logo.png";
+// import logoWhite2 from "../../../public/assets/imgs/logo/florenza_logo.png";
 // import logoWhite2 from "../../../public/assets/imgs/logo/site-logo-white-2.png";
 import Shape11 from "../../../public/assets/imgs/shape/11.png";
 import Shape12 from "../../../public/assets/imgs/shape/12.png";
@@ -69,8 +69,10 @@ const Canvas = ({ ofCanvasArea }) => {
               <Link href="/">
                 <Image
                   priority
+                  width={138}
+                  height={46}
                   style={{ width: "128px", height: "auto" }}
-                  src={logoWhite2}
+                  src="/assets/imgs/logo/florenza_logo.png"
                   alt="Offcanvas Logo"
                 />
               </Link>
@@ -78,14 +80,16 @@ const Canvas = ({ ofCanvasArea }) => {
             <div className="offcanvas__social">
               <h3 className="social-title">Follow Us</h3>
               <ul>
-               
                 <li>
-                  <a href="https://www.instagram.com/florenza_italiya?utm_source=ig_web_button_share_sheet&igsh=MXZ5eDBpaGZ6ejBmZQ==">Instagram</a>
+                  <a href="https://www.instagram.com/florenza_italiya?utm_source=ig_web_button_share_sheet&igsh=MXZ5eDBpaGZ6ejBmZQ==">
+                    Instagram
+                  </a>
                 </li>
                 <li>
-                  <a href="https://www.facebook.com/p/Florenza-Italiya-61555166902132/">Facebook</a>
+                  <a href="https://www.facebook.com/p/Florenza-Italiya-61555166902132/">
+                    Facebook
+                  </a>
                 </li>
-               
               </ul>
             </div>
             {/* <div className="offcanvas__links">
@@ -301,13 +305,18 @@ const Canvas = ({ ofCanvasArea }) => {
               <h3>Get in touch</h3>
               <ul>
                 <li>
-             <a href="tel:+918848101280">+91 8848101280</a> | <a href="tel:+917012909452">+91 70129 09452</a>
+                  <a href="tel:+918848101280">+91 8848101280</a> | <br/>{" "}
+                  <a href="tel:+917012909452">+91 70129 09452</a>
                 </li>
                 <li>
-                  <a href="mailto:info@florenzaitaliya.com">info@florenzaitaliya.com</a>
+                  <a href="mailto:info@florenzaitaliya.com">
+                    info@florenzaitaliya.com
+                  </a>
                 </li>
-                <li>JJ Perfumes International
-Sdf 16 Ground Floor Cochin Special Economic Zone Kakkanad -Cochin</li>
+                <li>
+                  JJ Perfumes International Sdf 16 Ground Floor Cochin Special
+                  Economic Zone Kakkanad -Cochin
+                </li>
               </ul>
             </div>
             <Image
