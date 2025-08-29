@@ -16,15 +16,14 @@ const Footer = () => {
               width={138}
               height={46}
               style={{ height: "auto" }}
-              src="/assets/imgs/logo/florenza_logo.png"
+              src="/assets/imgs/logo/logo.png"
               alt="logo-img"
             />
             <p className="woocomerce__footer-dis">
               JJ Perfumes International
               <br />
-              Sdf 16 Ground Floor Cochin Special <br />
-              Economic Zone Kakkanad
-              <br /> -Cochin 682037
+              Sdf 16 Ground Floor,
+              <br /> Cochin Special Economic Zone Kakkanad -Cochin 682037
             </p>
             <a
               className="woocomerce__footer-mail"

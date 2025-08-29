@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-// import logoWhite2 from "../../../public/assets/imgs/logo/florenza_logo.png";
+// import logoWhite2 from "../../../public/assets/imgs/logo/logo.png";
 // import logoWhite2 from "../../../public/assets/imgs/logo/site-logo-white-2.png";
 import Shape11 from "../../../public/assets/imgs/shape/11.png";
 import Shape12 from "../../../public/assets/imgs/shape/12.png";
@@ -72,7 +72,7 @@ const Canvas = ({ ofCanvasArea }) => {
                   width={138}
                   height={46}
                   style={{ width: "128px", height: "auto" }}
-                  src="/assets/imgs/logo/florenza_logo.png"
+                  src="/assets/imgs/logo/logo.png"
                   alt="Offcanvas Logo"
                 />
               </Link>
@@ -305,7 +305,7 @@ const Canvas = ({ ofCanvasArea }) => {
               <h3>Get in touch</h3>
               <ul>
                 <li>
-                  <a href="tel:+918848101280">+91 8848101280</a> | <br/>{" "}
+                  <a href="tel:+918848101280">+91 8848101280</a> | <br />{" "}
                   <a href="tel:+917012909452">+91 70129 09452</a>
                 </li>
                 <li>
