@@ -5,6 +5,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import Payment from "@/components/checkout/Payment";
 import Address from "@/components/checkout/Address";
+import Modal from "../common/modal/ReusableModal";
+import SignInForm from "@/components/auth/SigninForm";
+import SignUpForm from "@/components/auth/SignupForm";
 import { setOrderProduct, clearCart } from "@/store/features/cartSlice";
 import {
   useCreateNewOrderMutation,
@@ -16,7 +19,17 @@ import { Preloader } from "..";
 export default function CheckoutContent() {
   const [paymentMethod, setPaymentMethod] = useState(null);
   const [isWebhookLoading, setIsWebhookLoading] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [isSignUp, setIsSignUp] = useState(false);
   const router = useRouter();
+
+  const handleOpenSignUpModal = () => {
+    setIsSignUp(true);
+  };
+
+  const handleOpenSignInModal = () => {
+    setIsSignUp(false);
+  };
   const dispatch = useDispatch();
   const { cartData, totalCost } = useSelector((state) => state.cart);
   const formRef = useRef();
@@ -43,7 +56,7 @@ export default function CheckoutContent() {
         position: "top-center",
         autoClose: 2000,
       });
-      router.push("/sign-in");
+      setShowModal(true);
       return;
     }
 
@@ -217,6 +230,29 @@ export default function CheckoutContent() {
 
   return (
     <>
+      <Modal
+        show={showModal}
+        onHide={() => setShowModal(false)}
+        title={isSignUp ? "Sign Up" : "Sign In"}
+        size="md"
+      >
+        {isSignUp ? (
+          <SignUpForm
+            className="m-0"
+            isHeading={false}
+            isModal={true}
+            onOpenSignInModal={handleOpenSignInModal}
+          />
+        ) : (
+          <SignInForm
+            className="m-0"
+            isHeading={false}
+            isModal={true}
+            onHide={() => setShowModal(false)}
+            onOpenSignUpModal={handleOpenSignUpModal}
+          />
+        )}
+      </Modal>
       {(isLoading || sessionLoading || isWebhookLoading) && <Preloader />}
       <div
         className="woocomerce__cart checkout-page"
