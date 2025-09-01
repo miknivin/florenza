@@ -31,7 +31,7 @@ export default function Order() {
         timeZone: "Asia/Kolkata",
       }), // Format for IST
       isToday:
-        new Date(order.createdAt).toDateString() === new Date().toDateString(), // Check if created today (August 15, 2025)
+        new Date(order.createdAt).toDateString() === new Date().toDateString(), // Check if created today
     }));
   }, [orders]);
 
@@ -76,7 +76,7 @@ export default function Order() {
         Header: "Actions",
         id: "actions", // Unique ID for the column
         Cell: ({ row }) => (
-          <button
+              <button
             style={{ width: "fitContent" }}
             className="woocomerce__cart-couponbtn"
             onClick={() => router.push(`/order/${row.original.id}`)}
@@ -95,23 +95,25 @@ export default function Order() {
 
   return (
     <div className="tab-pane fade show">
-      <div className="woocomerce__account-rtitlewrap">
+      <div className="woocomerce__account-rtitlewrap" >
         <span className="woocomerce__account-rtitle">
           Your Orders: {tableData?.length}
+          
         </span>
       </div>
 
       <div>
         {isLoading ? (
           <div className="d-flex justify-content-center align-items-center">
-            <div class="spinner-border" role="status">
-              <span class="visually-hidden">Loading...</span>
+            <div className="spinner-border" role="status">
+              <span className="visually-hidden">Loading...</span>
             </div>
           </div>
         ) : error ? (
           <p>Error loading orders: {error?.data?.message || "Unknown error"}</p>
         ) : tableData.length ? (
-          <div style={{ overflowX: "auto" }} className="table_content">
+          <div style={{ overflowX: "auto", maxWidth: "100vw",
+              WebkitOverflowScrolling: "touch", whiteSpace: "nowrap" }} className="table_content">
             <table className="table table-bordered" {...getTableProps()}>
               <thead>
                 {headerGroups.map((headerGroup, i) => (

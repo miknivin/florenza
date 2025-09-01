@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { useSearchParams } from "next/navigation";
+import { useRouter } from "next/router"; // Use useRouter for Pages Router
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
@@ -9,13 +9,19 @@ import { useOrderDetailsQuery } from "@/store/api/orderApi";
 import { Preloader } from "..";
 
 export default function OrderDetails() {
-  const searchParams = useSearchParams();
-  const orderId = searchParams.get("orderId");
+  const router = useRouter();
+  const { orderId } = router.query; // Extract orderId from dynamic route
   const { data, isLoading, error } = useOrderDetailsQuery(orderId, {
     skip: !orderId,
   });
   const [orderDetails, setOrderDetails] = useState(null);
   const [activeTab, setActiveTab] = useState("Order History");
+
+  // Debug logs
+  useEffect(() => {
+    console.log("Order ID:", orderId);
+    console.log("API Data:", data);
+  }, [orderId, data]);
 
   const formatDate = (dateString) => {
     if (!dateString) return "N/A";
@@ -97,6 +103,9 @@ export default function OrderDetails() {
 
   if (isLoading) return <Preloader />;
   if (error) return <div>Error: {error.message}</div>;
+  if (!orderDetails && !isLoading) {
+    return <div>No order details found for Order #{orderId}</div>;
+  }
 
   return (
     <div style={{ minHeight: "90vh" }}>
@@ -109,8 +118,8 @@ export default function OrderDetails() {
                   <Image
                     alt="product"
                     src={orderDetails.orderItems[0].image}
-                    width="720"
-                    height="1005"
+                    width={720}
+                    height={1005}
                   />
                 )}
               </figure>
@@ -123,9 +132,12 @@ export default function OrderDetails() {
               </div>
             </div>
             <div>
-               <Link href="/profile?tab=order" className="btn btn-dark d-flex align-items-center gap-2">
-                  <FontAwesomeIcon icon={faArrowLeft}  />
-                  <span className="d-none d-sm-inline">Go Back</span>
+              <Link
+                href="/profile?tab=order"
+                className="btn btn-dark d-flex align-items-center gap-2"
+              >
+                <FontAwesomeIcon icon={faArrowLeft} />
+                <span className="d-none d-sm-inline">Go Back</span>
               </Link>
             </div>
           </div>
@@ -200,7 +212,9 @@ export default function OrderDetails() {
                         <div className="timeline-badge success" />
                         <div className="timeline-box">
                           <a className="timeline-panel" href="#">
-                            <div className="text-2 text-dark fw-6">Product Shipped</div>
+                            <div className="text-2 text-dark fw-6">
+                              Product Shipped
+                            </div>
                             <span>{formatDate(orderDetails.updatedAt)}</span>
                           </a>
                         </div>
@@ -211,7 +225,9 @@ export default function OrderDetails() {
                         <div className="timeline-badge success" />
                         <div className="timeline-box">
                           <a className="timeline-panel" href="#">
-                            <div className="text-2 text-dark fw-6">Product Delivered</div>
+                            <div className="text-2 text-dark fw-6">
+                              Product Delivered
+                            </div>
                             <span>{formatDate(orderDetails.deliveredAt)}</span>
                           </a>
                         </div>
@@ -231,8 +247,8 @@ export default function OrderDetails() {
                       <Image
                         alt="product"
                         src={item.image}
-                        width="720"
-                        height="1005"
+                        width={720}
+                        height={1005}
                       />
                     </figure>
                     <div className="content-orders">
@@ -245,7 +261,7 @@ export default function OrderDetails() {
                       </div>
                       <div className="mt_4">
                         <span className="fw-6">Variant: </span>
-                        {item.variant}
+                        {item.variant || "N/A"} {/* Fallback for undefined variant */}
                       </div>
                       {item.sku && (
                         <div className="mt_4">

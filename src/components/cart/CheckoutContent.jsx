@@ -51,6 +51,15 @@ export default function CheckoutContent() {
   }, []);
 
   const handleOrderSubmission = async () => {
+    // Check if cart is empty
+    if (!cartData || cartData.length === 0) {
+      toast.error("Your cart is empty. Please add items before placing an order.", {
+        position: "top-center",
+        autoClose: 2000,
+      });
+      return;
+    }
+
     if (!isAuthenticated) {
       toast.error("You need to log in to place an order.", {
         position: "top-center",
