@@ -1,0 +1,58 @@
+{
+  "hero_advertising": [
+    {
+      "id": "101",
+      "title": "Express your natural beauty",
+      "description": "View the full case study of our recent featured and awesome global branding agency that powers",
+      "sub_title": "Starts from",
+      "img": "woocomerce/exclusive/img1.webp",
+      "price": "65.89"
+    },
+    {
+      "id": "103",
+      "title": "Express your natural beauty",
+      "description": "View the full case study of our recent featured and awesome global branding agency that powers",
+      "sub_title": "Starts from",
+      "img": "woocomerce/exclusive/img2.webp",
+      "price": "65.89"
+    },
+    {
+      "id": "102",
+      "title": "Express your natural beauty",
+      "description": "View the full case study of our recent featured and awesome global branding agency that powers",
+      "sub_title": "Starts from",
+      "img": "woocomerce/exclusive/img3.webp",
+      "price": "65.89"
+    }
+  ],
+  "body_advertising": [
+    {
+      "id": "401",
+      "title": "Secret Combo",
+      "sub_title": "Exclusive",
+      "section": "1",
+      "img": "woocomerce/exclusive/img4.jpeg"
+    },
+    {
+      "id": "402",
+      "title": "Blooms Combo",
+      "sub_title": "Exclusive",
+      "section": "1",
+      "img": "woocomerce/exclusive/img5.jpeg"
+    },
+    {
+      "id": "403",
+      "title": "Cool Combo",
+      "sub_title": "Exclusive",
+      "section": "2",
+      "img": "woocomerce/exclusive/img4.webp"
+    },
+    {
+      "id": "404",
+      "title": "Exclusive brand Collection",
+      "sub_title": "Exclusive",
+      "section": "2",
+      "img": "woocomerce/exclusive/ex4.jpg"
+    }
+  ]
+}
