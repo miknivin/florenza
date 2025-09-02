@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { Accordion } from "react-bootstrap";
-import ProductCard from "../common/card/ProductCard";
+import ProductCard2 from "../common/card/ProductCard2";
 import CategoryFilter from "./filter/type1/CategoryFilter";
 import PriceFilter from "./filter/type1/PriceFilter";
 import CategoryFilter2 from "./filter/type2/CategoryFilter2";
@@ -172,7 +172,7 @@ const FullWidth = () => {
             ) : error ? (
               <p>Error loading products</p>
             ) : showData && showData.length ? (
-              showData.map((el) => <ProductCard el={el} key={el._id} />)
+              showData.map((el) => <ProductCard2 el={el} key={el._id} />)
             ) : (
               <p>No Product Found</p>
             )}

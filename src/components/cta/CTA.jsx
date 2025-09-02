@@ -9,9 +9,9 @@ const CTA = () => {
           <div className="row">
             <div className="col-xxl-12">
               <div className="cta__content">
-                <p className="cta__sub-title">Work with us</p>
+                <p className="cta__sub-title">Elegant & Alluring </p>
                 <h2 className="cta__title title-anim">
-                  We would love to hear more about your project
+                We are captivated by the art of fragrance
                 </h2>
                 <div className="btn_wrapper">
                   <Link

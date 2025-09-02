@@ -35,7 +35,7 @@ const Footer = () => {
             <a href="tel:+917012909452">+91 7012909452</a>
           </div>
           <div className="woocomerce__footer-category category1">
-            <span className="woocomerce__footer-title">Products</span>
+            <span className="woocomerce__footer-title">Top Products</span>
             <ul className="woocomerce__footer-list">
               <li>
                 <Link href={"/shop/68b02956db84a40a8a443151"}>Oud white</Link>
