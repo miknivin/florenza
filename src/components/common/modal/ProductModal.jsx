@@ -6,12 +6,17 @@ import Modal from "react-bootstrap/Modal";
 import { toast } from "react-toastify";
 import { addToCart, setAllWishList } from "@/store/features/cartSlice";
 
-export default function ProductModal({ setModalShow, product }) {
+export default function ProductModal({ setModalShow, product, selectedVariant: initialVariant }) {
   const dispatch = useDispatch();
   const { cartData, allWishList } = useSelector((state) => state.cart);
   const [count, setCount] = useState(1);
-  const [selectedVariant, setSelectedVariant] = useState(null);
+  const [selectedVariant, setSelectedVariant] = useState(initialVariant);
   const [warning, setWarning] = useState(false);
+
+  // Debug logging
+  console.log("ProductModal - Product:", product);
+  console.log("ProductModal - Initial variant:", initialVariant);
+  console.log("ProductModal - Selected variant:", selectedVariant);
 
   // Map product data to match desired cart data structure
   const mappedProduct = {
@@ -31,12 +36,34 @@ export default function ProductModal({ setModalShow, product }) {
   useEffect(() => {
     setCount(1);
     setWarning(false);
-    if (mappedProduct.variants.length > 0) {
+    if (mappedProduct.variants.length > 0 && !selectedVariant) {
       setSelectedVariant(mappedProduct.variants[0]);
-    } else {
-      setSelectedVariant(null);
     }
-  }, [product]);
+  }, [product, selectedVariant]);
+
+  // Determine images to display
+  const hasVariantImages =
+    selectedVariant?.imageUrl?.length > 0 || selectedVariant?.imageUrl;
+  const mainImage = hasVariantImages
+    ? selectedVariant?.imageUrl?.length > 0
+      ? selectedVariant.imageUrl[0]
+      : selectedVariant.imageUrl
+    : product.images?.length > 0
+    ? product.images[0]?.url
+    : "/assets/imgs/placeholder.jpg";
+  const hoverImage = hasVariantImages
+    ? selectedVariant?.imageUrl?.length > 1
+      ? selectedVariant.imageUrl[1]
+      : selectedVariant?.imageUrl?.length > 0
+      ? selectedVariant.imageUrl[0]
+      : selectedVariant.imageUrl
+    : product.images?.length > 1
+    ? product.images[1]?.url
+    : mainImage;
+
+  console.log("ProductModal - Has variant images:", hasVariantImages); // Debug log
+  console.log("ProductModal - Main image:", mainImage); // Debug log
+  console.log("ProductModal - Hover image:", hoverImage); // Debug log
 
   const handleAddToCart = () => {
     if (!selectedVariant) {
@@ -60,13 +87,15 @@ export default function ProductModal({ setModalShow, product }) {
       price: selectedVariant.discountPrice || selectedVariant.price,
       quantity: count,
       img: {
-        url: mappedProduct.img.url,
-        alt: mappedProduct.img.alt,
-        _id: mappedProduct.img._id,
+        url: mainImage, // Use variant image if available
+        alt: selectedVariant?.imageUrl?.length > 0 ? `Variant Image` : mappedProduct.img.alt,
+        _id: selectedVariant?.imageUrl?.length > 0 ? null : mappedProduct.img._id,
       },
       sku: mappedProduct.sku,
       variant: selectedVariant.size,
     };
+
+    console.log("ProductModal - Cart item:", cartItem); // Debug log
 
     // Check if item already exists in cart
     const existingItem = cartData.find(
@@ -142,8 +171,12 @@ export default function ProductModal({ setModalShow, product }) {
                     objectFit: "cover",
                   }}
                   className="image-box__item"
-                  src={mappedProduct.img.url}
-                  alt={mappedProduct.img.alt || "Product Thumbnail"}
+                  src={hoverImage}
+                  alt={hasVariantImages ? "Variant Thumbnail" : (mappedProduct.img.alt || "Product Thumbnail")}
+                  onError={(e) => {
+                    console.error("ProductModal - Image load error (hover):", hoverImage); // Debug log
+                    e.currentTarget.src = "/assets/imgs/placeholder.jpg";
+                  }}
                 />
                 <Image
                   priority
@@ -155,8 +188,12 @@ export default function ProductModal({ setModalShow, product }) {
                     objectFit: "cover",
                   }}
                   className="woocomerce__feature-mainImg"
-                  src={mappedProduct.img.url}
-                  alt={mappedProduct.img.alt || "Product Image"}
+                  src={mainImage}
+                  alt={hasVariantImages ? "Variant Image" : (mappedProduct.img.alt || "Product Image")}
+                  onError={(e) => {
+                    console.error("ProductModal - Image load error (main):", mainImage); // Debug log
+                    e.currentTarget.src = "/assets/imgs/placeholder.jpg";
+                  }}
                 />
               </div>
             </div>

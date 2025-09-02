@@ -16,6 +16,10 @@ const ProductCard = ({ el }) => {
   const allWishList = useSelector((state) => state.cart.allWishList);
   const activeWishList = useSelector((state) => state.cart.activeWishList);
 
+  // Debug logging
+  console.log("Product data:", el);
+  console.log("Selected variant:", selectedVariant);
+
   const warningTost = (data) => {
     toast.warn(data, {
       position: "top-center",
@@ -43,23 +47,39 @@ const ProductCard = ({ el }) => {
   };
 
   const addWishList = (data) => {
+    // Determine images for wishlist
+    const hasVariantImages =
+      selectedVariant?.imageUrl?.length > 0 || selectedVariant?.imageUrl;
+    const img = hasVariantImages
+      ? selectedVariant?.imageUrl?.length > 0
+        ? selectedVariant.imageUrl[0]
+        : selectedVariant.imageUrl
+      : el.images?.length > 0
+      ? el.images[0]?.url
+      : "/assets/imgs/placeholder.jpg";
+    const hover_img = hasVariantImages
+      ? selectedVariant?.imageUrl?.length > 1
+        ? selectedVariant.imageUrl[1]
+        : selectedVariant?.imageUrl?.length > 0
+        ? selectedVariant.imageUrls[0]
+        : selectedVariant.imageUrl
+      : el.images?.length > 1
+      ? el.images[1]?.url
+      : img;
+
     const customDetails = {
       parent_id: data._id,
       title: data.name,
-      img:
-        data.images.length > 0
-          ? data?.images[0]?.url
-          : "/assets/imgs/placeholder.jpg",
-      hover_img:
-        data.images.length > 1
-          ? data?.images[1]?.url
-          : "/assets/imgs/placeholder.jpg",
+      img,
+      hover_img,
       price: selectedVariant?.price || 0,
       dis_price: selectedVariant?.discountPrice || selectedVariant?.price || 0,
       color: null,
       pro_code: data.sku,
       size: selectedVariant?.size || null,
     };
+
+    console.log("Wishlist item:", customDetails); // Debug log
 
     if (allWishList && allWishList.length) {
       let result = allWishList.find(
@@ -86,11 +106,36 @@ const ProductCard = ({ el }) => {
   const handleVariantChange = (variant) => {
     setSelectedVariant(variant);
     setIsDropdownOpen(false); // Close dropdown after selecting a variant
+    console.log("Changed to variant:", variant); // Debug log
   };
 
   const toggleDropdown = () => {
     setIsDropdownOpen((prev) => !prev);
   };
+
+  // Determine images to display
+  const hasVariantImages =
+    selectedVariant?.imageUrl?.length > 0 || selectedVariant?.imageUrl;
+  const mainImage = hasVariantImages
+    ? selectedVariant?.imageUrl?.length > 0
+      ? selectedVariant.imageUrl[0]
+      : selectedVariant.imageUrl
+    : el.images?.length > 0
+    ? el.images[0]?.url
+    : "/assets/imgs/placeholder.jpg";
+  const hoverImage = hasVariantImages
+    ? selectedVariant?.imageUrl?.length > 1
+      ? selectedVariant.imageUrl[1]
+      : selectedVariant?.imageUrl?.length > 0
+      ? selectedVariant.imageUrl[0]
+      : selectedVariant.imageUrl
+    : el.images?.length > 1
+    ? el.images[1]?.url
+    : mainImage;
+
+  console.log("Has variant images:", hasVariantImages); // Debug log
+  console.log("Main image:", mainImage); // Debug log
+  console.log("Hover image:", hoverImage); // Debug log
 
   return (
     <div className="woocomerce__feature-product">
@@ -103,12 +148,12 @@ const ProductCard = ({ el }) => {
               height={560}
               style={{ width: "100%", height: "auto" }}
               className="image-box__item"
-              src={
-                el.images.length > 1
-                  ? el.images[1]?.url
-                  : "/assets/imgs/placeholder.jpg"
-              }
+              src={hoverImage}
               alt="Product Thumbnail"
+              onError={(e) => {
+                console.error("Image load error (hover):", hoverImage); // Debug log
+                e.currentTarget.src = "/assets/imgs/placeholder.jpg";
+              }}
             />
             <Image
               priority
@@ -116,12 +161,12 @@ const ProductCard = ({ el }) => {
               height={560}
               style={{ width: "100%", height: "auto" }}
               className="woocomerce__feature-mainImg"
-              src={
-                el.images.length > 0
-                  ? el.images[0]?.url
-                  : "/assets/imgs/placeholder.jpg"
-              }
+              src={mainImage}
               alt="Product Image"
+              onError={(e) => {
+                console.error("Image load error (main):", mainImage); // Debug log
+                e.currentTarget.src = "/assets/imgs/placeholder.jpg";
+              }}
             />
           </div>
         </Link>
@@ -187,13 +232,13 @@ const ProductCard = ({ el }) => {
                 : ""}
             </span>
           </div>
-          <div className="dropdown" >
+          <div className="dropdown">
             <button
               className="dropdown-toggle text-decoration-underline"
               type="button"
               onClick={toggleDropdown}
               aria-expanded={isDropdownOpen}
-                style={{ color: '#fff' }}
+              style={{ color: "#fff" }}
             >
               {selectedVariant?.size || "Select Size"}
             </button>
@@ -210,7 +255,6 @@ const ProductCard = ({ el }) => {
                       onClick={() => handleVariantChange(variant)}
                     >
                       {variant.size}
-                      
                     </button>
                   </li>
                 ))

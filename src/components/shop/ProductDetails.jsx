@@ -36,11 +36,7 @@ export default function ProductDetails({ id }) {
   }, [product, selectedVariant]);
 
   if (isLoading) {
-    return (
-      <>
-        <Preloader />
-      </>
-    );
+    return <Preloader />;
   }
   if (error || !product) {
     return (
@@ -102,16 +98,20 @@ export default function ProductDetails({ id }) {
   };
 
   const addToCartHandler = () => {
+    if (!selectedVariant) {
+      warningTost("Please select a variant");
+      return;
+    }
     const fullData = {
       id: product._id,
       name: product.name,
-      price:
-        selectedVariant?.discountPrice ||
-        selectedVariant?.price ||
-        product.dis_price ||
-        product.price,
+      price: selectedVariant?.discountPrice || selectedVariant?.price,
       quantity: count,
-      img: product.images[0],
+      img: {
+        url: selectedVariant?.imageUrl?.[0] || product.images[0]?.url || "/assets/imgs/placeholder.jpg",
+        alt: selectedVariant?.imageUrl ? "Variant Image" : product.images[0]?.alt || "Product Image",
+        _id: selectedVariant?.imageUrl ? null : product.images[0]?._id,
+      },
       sku: product.sku,
       variant: selectedVariant?.size,
     };
@@ -130,11 +130,10 @@ export default function ProductDetails({ id }) {
     const customDetails = {
       parent_id: product._id,
       title: product.name,
-      img: product.images[0],
-      hover_img: product.images[1],
+      img: selectedVariant?.imageUrl?.[0] || product.images[0]?.url || "/assets/imgs/placeholder.jpg",
       price: selectedVariant?.price || product.price,
       dis_price: selectedVariant?.discountPrice || product.dis_price,
-      sku: product.pro_code,
+      sku: product.sku,
       variant: selectedVariant?.size,
     };
     const existingWishListItem = allWishList.find(
@@ -159,16 +158,39 @@ export default function ProductDetails({ id }) {
             <div className="woocomerce__single-wrapper">
               <div className="woocomerce__single-left">
                 <div className="woocomerce__single-productview product_imgs">
-                  {product.images.map((el, i) => (
-                    <Image
-                      key={i + "details"}
-                      width={520}
-                      height={685}
-                      style={{ height: "auto" }}
-                      src={el.url || ""}
-                      alt="single-1"
-                    />
-                  ))}
+                  {selectedVariant?.imageUrl?.length > 0 ? (
+                    selectedVariant.imageUrl.map((img, index) => (
+                      <Image
+                        key={index}
+                        priority
+                        width={520}
+                        height={685}
+                        style={{ height: "auto", width: "100%" }}
+                        src={img}
+                        alt={`Variant Image ${index + 1}`}
+                        onError={(e) => {
+                          console.error("ProductDetails - Image load error:", img);
+                          e.currentTarget.src = "/assets/imgs/placeholder.jpg";
+                        }}
+                      />
+                    ))
+                  ) : (
+                    product.images.map((img, index) => (
+                      <Image
+                        key={index}
+                        priority
+                        width={520}
+                        height={685}
+                        style={{ height: "auto", width: "100%" }}
+                        src={img.url}
+                        alt={img.alt || `Product Image ${index + 1}`}
+                        onError={(e) => {
+                          console.error("ProductDetails - Image load error:", img.url);
+                          e.currentTarget.src = "/assets/imgs/placeholder.jpg";
+                        }}
+                      />
+                    ))
+                  )}
                 </div>
                 <div className="woocomerce__single-productMore fade_bottom">
                   <ul className="nav nav-tabs" id="myTab" role="tablist">
@@ -306,7 +328,7 @@ export default function ProductDetails({ id }) {
                       )) || ""}
                     </ul>
                   </div>
-                  <div className="woocomerce__single-varitions">
+                  <div className="woocomerce__single-variations">
                     <Accordion className="accordion" id="accordionExample">
                       <Accordion.Item eventKey="0" className="accordion-item">
                         <Accordion.Header
@@ -329,8 +351,8 @@ export default function ProductDetails({ id }) {
                                 key={i + "variant"}
                                 className={`cursor-pointer ${
                                   selectedVariant?.size === variant.size
-                                    ? "font-bold"
-                                    : ""
+                                    ? "bg-black text-white"
+                                    : "text-gray-600"
                                 }`}
                                 onClick={() => setSelectedVariant(variant)}
                               >
@@ -367,7 +389,6 @@ export default function ProductDetails({ id }) {
                             </li>
                             <li className="d-flex flex-column align-items-start justify-content-start">
                               <b className="woocomerce__single-features">
-                                {" "}
                                 Heart
                               </b>
                               <p className="woocomerce__single-features mt-2 pt-0">
