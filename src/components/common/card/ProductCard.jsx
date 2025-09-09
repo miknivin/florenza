@@ -52,8 +52,8 @@ const ProductCard = ({ el }) => {
       selectedVariant?.imageUrl?.length > 0 || selectedVariant?.imageUrl;
     const img = hasVariantImages
       ? selectedVariant?.imageUrl?.length > 0
-        ? selectedVariant.imageUrl[0]
-        : selectedVariant.imageUrl
+        ? selectedVariant?.imageUrl[0]
+        : selectedVariant?.imageUrl
       : el.images?.length > 0
       ? el.images[0]?.url
       : "/assets/imgs/placeholder.jpg";
@@ -61,8 +61,8 @@ const ProductCard = ({ el }) => {
       ? selectedVariant?.imageUrl?.length > 1
         ? selectedVariant.imageUrl[1]
         : selectedVariant?.imageUrl?.length > 0
-        ? selectedVariant.imageUrls[0]
-        : selectedVariant.imageUrl
+        ? selectedVariant?.imageUrl[0]
+        : selectedVariant?.imageUrl
       : el.images?.length > 1
       ? el.images[1]?.url
       : img;
@@ -82,14 +82,28 @@ const ProductCard = ({ el }) => {
     console.log("Wishlist item:", customDetails); // Debug log
 
     if (allWishList && allWishList.length) {
-      let result = allWishList.find(
+      const existingItem = allWishList.find(
         (el) =>
           el.parent_id === customDetails.parent_id &&
           el.size === customDetails.size
       );
-      if (result) {
-        warningTost("Already added");
+      if (existingItem) {
+        // Remove item from wishlist
+        const updatedWishList = allWishList.filter(
+          (item) =>
+            !(
+              item.parent_id === customDetails.parent_id &&
+              item.size === customDetails.size
+            )
+        );
+        const updatedActiveWishList = activeWishList.filter(
+          (id) => id !== customDetails.parent_id
+        );
+        dispatch(setAllWishList(updatedWishList));
+        dispatch(setActiveWishList(updatedActiveWishList));
+        successTost("Removed from wishlist");
       } else {
+        // Add item to wishlist
         dispatch(setAllWishList([...allWishList, customDetails]));
         dispatch(
           setActiveWishList([...activeWishList, customDetails.parent_id])
@@ -97,6 +111,7 @@ const ProductCard = ({ el }) => {
         successTost("Successfully added to wishlist");
       }
     } else {
+      // Initialize wishlist with the item
       dispatch(setAllWishList([customDetails]));
       dispatch(setActiveWishList([customDetails.parent_id]));
       successTost("Successfully added to wishlist");
@@ -184,7 +199,7 @@ const ProductCard = ({ el }) => {
             />
             <p>Quick Select</p>
           </div>
-          <p
+          <button
             className="woocomerce__feature-heart pointer_cursor"
             onClick={() => addWishList(el)}
           >
@@ -198,7 +213,7 @@ const ProductCard = ({ el }) => {
                 color: activeWishList?.includes(el._id) ? "red" : "",
               }}
             ></i>
-          </p>
+          </button>
         </div>
       </div>
       <div className="woocomerce__feature-content">

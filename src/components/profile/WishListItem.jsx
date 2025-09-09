@@ -1,8 +1,8 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import ProductModal from "../common/modal/ProductModal";
 import { useState } from "react";
+import WishlistProductModal from "../common/modal/WishListProductModal";
 
 export default function WishListItem({ el, removeWishlist }) {
   const [modalShow, setModalShow] = useState(false);
@@ -62,10 +62,10 @@ export default function WishListItem({ el, removeWishlist }) {
           <h3 className="wishlist__title">
             <Link href={`/shop/${el.id}`}>{el.title}</Link>
           </h3>
-          <p className="wishlist__price">£{el.dis_price ?? el.price}</p>
+          <p className="wishlist__price">₹{el.dis_price ?? el.price}</p>
         </div>
         {modalShow ? (
-          <ProductModal product={el} setModalShow={setModalShow} />
+          <WishlistProductModal wishlistItem={el} setModalShow={setModalShow} />
         ) : (
           ""
         )}

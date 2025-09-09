@@ -77,12 +77,7 @@ export default function CartContent({
               className="counter__decrement decrement2 pointer_cursor"
               onClick={() => updateCount(el, "minus")}
             >
-              <Image
-                width={10}
-                height={1}
-                src="/assets/imgs/woocomerce/cart-minus.png"
-                alt="minus-icon"
-              />
+              <i className="fa-solid fa-minus" />
             </p>
             <input
               className="counter__input"
@@ -96,12 +91,7 @@ export default function CartContent({
               className="counter__increment increment2 pointer_cursor"
               onClick={() => updateCount(el, "plus")}
             >
-              <Image
-                width={10}
-                height={10}
-                src="/assets/imgs/woocomerce/cart-plus.png"
-                alt="plus-icon"
-              />
+              <i style={{ fontSize: "15px" }} className="fa-solid fa-plus" />
             </p>
           </div>
         </div>
