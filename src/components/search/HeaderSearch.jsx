@@ -1,3 +1,4 @@
+"use client";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 import { useGetProductsQuery } from "@/store/api/productApi"; // Adjust path if needed
