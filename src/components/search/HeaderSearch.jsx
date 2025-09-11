@@ -25,7 +25,6 @@ export default function HeaderSearch() {
   // Debug API response and loading state
   useEffect(() => {
     console.log("API State:", { data, isLoading, isFetching, isError, error });
-    console.log("Search Value:", searchValue);
     if (data?.filteredProducts) {
       console.log("Filtered Products:", data.filteredProducts);
       setSearchSlug(data.filteredProducts);
@@ -132,7 +131,7 @@ export default function HeaderSearch() {
                 </div>
               ))
             ) : searchValue ? (
-              <p>No results found for "{searchValue}"</p>
+             <p>No results found for &apos;{searchValue}&apos;</p>
             ) : (
               <p>Enter a product name to search</p>
             )}
