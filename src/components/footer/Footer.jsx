@@ -32,6 +32,7 @@ const Footer = () => {
               info@florenzaitaliya.com
             </a>
             <a href="tel:+918848101280">+91 8848101280</a> |{" "}
+            <br />
             <a href="tel:+917012909452">+91 7012909452</a>
           </div>
           <div className="woocomerce__footer-category category1">

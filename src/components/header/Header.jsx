@@ -28,6 +28,7 @@ const Header = ({ option }) => {
   const ofCanvasArea = useRef();
   const menuAnim = useRef();
   const router = useRouter(); // Initialize router for navigation
+  const pathname = router.pathname || window.location.pathname; // Get current route
 
   const handleOpenSignInModal = () => {
     setIsSignUp(false);
@@ -113,35 +114,35 @@ const Header = ({ option }) => {
   return (
     <>
       <header
-        className={`${
-          option === "black"
+        className={`${option === "black"
             ? "woocomerce__header"
             : "woocomerce__header absolute-header"
-        }`}
+          }`}
       >
         <div className="woocomerce__header-inner shopfull">
           <div className="woocomerce__header-center">
-            {/* <div className="woocomerce__header-logo">
-              <Link href={"/"}>
-                <Image
-                  priority
-                  width={option === "black" ? 136 : 94}
-                  height={option === "black" ? 45 : 31}
-                  style={{ height: "auto" }}
-                  src={option === "black" ? LogoBlack : Logo}
-                  alt="Logo"
-                />
-              </Link>
-            </div> */}
+            {pathname !== "/" && ( // Hide logo on homepage
+              <div className="woocomerce__header-logo">
+                <Link href={"/"}>
+                  <Image
+                    priority
+                    width={option === "black" ? 150 : 100}
+                    height={option === "black" ? 80 : 60}
+                    style={{ height: "auto", maxWidth: option === "black" ? "150px" : "100px" }}
+                    src={option === "black" ? LogoBlack : Logo}
+                    alt="Logo"
+                  />
+                </Link>
+              </div>
+            )}
           </div>
           <div className="woocomerce__header-left">
             <div className="header__nav-2">
               <ul
-                className={`${
-                  option === "black"
+                className={`${option === "black"
                     ? "main-menu-3 menu-anim woocomerce-menu"
                     : "main-menu-3 menu-anim"
-                }`}
+                  }`}
                 ref={menuAnim}
               >
                 <li>
@@ -160,11 +161,10 @@ const Header = ({ option }) => {
             </div>
           </div>
           <div
-            className={`${
-              option === "black"
+            className={`${option === "black"
                 ? "woocomerce__header-right"
                 : "woocomerce__header-right home"
-            }`}
+              }`}
           >
             <div className="woocomerce__header-cart">
               <div className="woocomerce__header-cartwrapper">
@@ -176,10 +176,9 @@ const Header = ({ option }) => {
               </div>
               <div className="woocomerce__header-user">
                 <i
-                  className={`fa-regular fa-user ${
-                    option === "black" ? `text-black` : `text-white`
-                  }`}
-                  onClick={handleUserIconClick} // Updated to use new handler
+                  className={`fa-regular fa-user ${option === "black" ? `text-black` : `text-white`
+                    }`}
+                  onClick={handleUserIconClick}
                   style={{ cursor: "pointer" }}
                 ></i>
               </div>
