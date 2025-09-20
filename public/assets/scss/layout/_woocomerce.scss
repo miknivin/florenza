@@ -38,10 +38,10 @@
 
     &-logo {
       img {
-        max-width: 100px;
+        max-width: 100%;
         // update v0.3
         @media #{$sm} {
-          max-width: 50px;
+          max-width: 100%;
         }
       }
     }
@@ -1217,10 +1217,42 @@
         padding: 30px;
       }
 
-      &.align-left {
-        align-items: flex-start;
-        justify-content: flex-end;
+     &.align-left {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;   /* left */
+    justify-content: flex-end;
+    text-align: left;
+
+    /* guard: remove any auto-centering margins on desktop */
+    @media (min-width: 768px) {
+      > * { margin-left: 0 !important; margin-right: 0 !important; }
+      .woocomerce__exclusive-btnwraper { display: flex; justify-content: flex-start; }
+    }
+
+    /* MOBILE ONLY: center everything */
+    @media #{$sm} {
+      align-items: center !important;
+      justify-content: center !important;
+      text-align: center !important;
+
+      .woocomerce__exclusive-subtitle,
+      .woocomerce__exclusive-title,
+      .woocomerce__exclusive-btnwraper,
+      p {
+        margin-left: auto;
+        margin-right: auto;
       }
+
+      .woocomerce__exclusive-btnwraper {
+        display: flex;
+        justify-content: center;
+      }
+      .woocomerce__exclusive-btn {
+        display: inline-flex; /* avoid full-width anchor */
+      }
+    }
+  }
     }
 &-img {
       width: 100%;

@@ -67,7 +67,7 @@ export default function Order() {
           <div>
             {row.original.createdAt}
             {row.original.isToday && (
-              <span className="badge bg-success ms-2">Today</span>
+              <span className="badge bg-success ms-2" >Today</span>
             )}
           </div>
         ),
@@ -78,7 +78,7 @@ export default function Order() {
         Cell: ({ row }) => (
               <button
             style={{ width: "fitContent" }}
-            className="woocomerce__cart-couponbtn"
+            className="woocomerce__cart-couponbtn me-3 "
             onClick={() => router.push(`/order/${row.original.id}`)}
             title="View Order"
           >
@@ -135,7 +135,7 @@ export default function Order() {
                   return (
                     <tr {...row.getRowProps()} key={`row-${i}`}>
                       {row.cells.map((cell, j) => (
-                        <td {...cell.getCellProps()} key={`cell-${i}-${j}`}>
+                        <td style={{whiteSpace:"break-spaces"}} {...cell.getCellProps()} key={`cell-${i}-${j}`}>
                           {cell.render("Cell")}
                         </td>
                       ))}

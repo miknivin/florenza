@@ -153,10 +153,10 @@ const AllWithFilter = () => {
           <div style={{ textAlign: "center", marginTop: "20px" }}>
             <button
               style={{
-                background: "#000",
-                color: "#fff",
+                background: "#ffffffff",
+                color: "#000000ff",
                 border: "none",
-                padding: "10px 24px",
+                padding: "8px 21px",
                 borderRadius: "4px",
                 cursor: "pointer",
               }}
