@@ -61,7 +61,7 @@ const Hero = ({ advertising }) => {
           </Swiper>
 
           {/* If we need navigation buttons  */}
-          <div style={{ cursor: "pointer" }} className="woocomerce__hero-prev">
+          {/* <div style={{ cursor: "pointer" }} className="woocomerce__hero-prev">
             <Image
               priority
               width={24}
@@ -78,7 +78,7 @@ const Hero = ({ advertising }) => {
               src={HeroRight}
               alt="shape"
             />
-          </div>
+          </div> */}
         </div>
       </div>
     </>

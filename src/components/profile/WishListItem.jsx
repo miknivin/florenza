@@ -45,18 +45,39 @@ export default function WishListItem({ el, removeWishlist }) {
           </div>
         </div>
         <div className="woocomerce__feature-hover position-static d-block d-md-none">
-          <div
-            className="woocomerce__feature-carttext pointer_cursor mx-auto "
-            onClick={() => setModalShow(true)}
-          >
-            <Image
-              width={25}
-              height={22}
-              src="/assets/imgs/woocomerce/cart.png"
-              alt="cart"
-            />
-            <p>Add to cart</p>
-          </div>
+         <div
+    className="woocomerce__feature-carttext pointer_cursor mx-auto"
+    onClick={() => setModalShow(true)}
+    style={{
+      display: 'flex',
+      gap: '10px',
+      padding: '19px 0',
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginLeft: '-60px',
+    }}
+  >
+    <Image
+      width={25}
+      height={22}
+      src="/assets/imgs/woocomerce/cart.png"
+      alt="cart"
+    />
+    <p
+      style={{
+        fontFamily: '$PlusJakarta', // Replace 'YourFontFamily' with the actual value of $font_primary
+        fontWeight: 500,
+        fontSize: '16px',
+        lineHeight: '16px',
+        textAlign: 'center',
+        textTransform: 'uppercase',
+        color: 'var(--white)',
+        transition: 'color 0.5s', // Specify the property to transition (e.g., color)
+      }}
+    >
+      Add to cart
+    </p>
+  </div>
         </div>
         <div className="wishlist__content">
           <h3 className="wishlist__title">

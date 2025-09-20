@@ -41,7 +41,7 @@
         max-width: 100px;
         // update v0.3
         @media #{$sm} {
-          max-width: 80px;
+          max-width: 50px;
         }
       }
     }
@@ -795,7 +795,7 @@
       color: var(--white-2);
     }
 
-    &-wrapper {
+   &-wrapper {
       display: grid;
       grid-gap: 70px 20px;
       grid-template-columns: repeat(4, 1fr);
@@ -809,13 +809,24 @@
       }
 
       @media #{$sm} {
-        grid-gap: 40px;
+        grid-gap: 20px;
+        grid-template-columns: 1fr 1fr;
+      }
+
+      /* Single column for very small screens (e.g., iPhone SE and below) */
+      @media (max-width: 375px) {
         grid-template-columns: 1fr;
+        grid-gap: 10px;
       }
     }
 
     &-product {
       position: relative;
+
+      @media #{$sm} {
+        border-radius: 5px 5px 0 0; /* Top-only border radius */
+        overflow: visible;
+      }
 
       &:hover {
         .woocomerce__feature-hover {
@@ -828,10 +839,8 @@
       }
     }
 
-    // update v0.3
     &-hover {
       background: var(--black-2);
-      // padding: 19px 0;
       position: absolute;
       left: 0;
       right: 0;
@@ -839,6 +848,8 @@
       z-index: 3;
       transform: translateY(100px);
       transition: 1s;
+      border-radius: 0;
+      padding: 10px 0;
 
       @media #{$lg} {
         transform: unset;
@@ -850,19 +861,37 @@
 
       @media #{$sm} {
         transform: unset;
+        border-radius: 0 0 0 0; /* Reset, will inherit top radius from parent */
+        padding: 8px 0;
+      }
+
+      @media (max-width: 375px) {
+        padding: 6px 0;
       }
     }
+    
 
-    // update v0.3
     &-carttext {
       display: flex;
-      gap: 10px;
-      padding: 19px 0;
+      gap: 8px;
+      padding: 0 10px;
       justify-content: center;
       align-items: center;
       margin-left: -60px;
 
-      // update v0.3
+      @media #{$sm} {
+        margin-left: 0;
+        gap: 6px;
+        padding: 0 8px;
+        justify-content: flex-start;
+        width: 100%;
+      }
+
+      @media (max-width: 375px) {
+        gap: 4px;
+        padding: 0 6px;
+      }
+
       p {
         font-family: $font_primary;
         font-weight: 500;
@@ -872,6 +901,36 @@
         text-transform: uppercase;
         color: var(--white);
         transition: 0.5s;
+        white-space: nowrap;
+
+        @media #{$sm} {
+          font-size: 10px;
+        }
+
+        @media (max-width: 375px) {
+          font-size: 6px;
+        }
+
+        &:hover {
+          color: var(--gray-15);
+        }
+      }
+      
+
+      /* Style for icons */
+      img,
+      i {
+        font-size: 18px;
+        color: var(--white);
+        transition: all 0.3s;
+
+        @media #{$sm} {
+          font-size: 14px;
+        }
+
+        @media (max-width: 375px) {
+          font-size: 12px;
+        }
 
         &:hover {
           color: var(--gray-15);
@@ -880,7 +939,7 @@
     }
 
     &-heart {
-      width: 60px;
+      width: 40px;
       height: calc(100% - 2px);
       display: flex;
       align-items: center;
@@ -891,6 +950,10 @@
       right: 0;
       margin: 1px;
 
+      @media (max-width: 375px) {
+        width: 25px;
+      }
+
       &:hover i {
         color: red;
       }
@@ -899,6 +962,10 @@
         font-size: 20px;
         color: var(--black-2);
         transition: all 0.3s;
+
+        @media (max-width: 375px) {
+          font-size: 14px;
+        }
       }
     }
 
@@ -926,7 +993,8 @@
         }
 
         @media #{$sm} {
-          height: 360px;
+          height: auto;
+          min-height: 200px;
         }
 
         img {
@@ -934,6 +1002,11 @@
           height: 100%;
           object-fit: cover;
         }
+          @media #{$sm} {
+            object-fit: contain;
+            height: auto;
+            border-radius: 5px 5px 0 0; /* Top-only border radius for image */
+          }
       }
     }
 
@@ -972,14 +1045,23 @@
       margin-bottom: 10px;
     }
 
+
     &-producttitle {
       font-weight: 500;
-      font-size: 24px;
+      font-size: 24px; /* Desktop size remains 24px */
       line-height: 30px;
       color: var(--white-2);
       transition: all 0.3s;
+      overflow: hidden; /* Prevent overflow */
+      text-overflow: ellipsis; /* Truncate with ellipsis */
+      white-space: nowrap; /* Prevent wrapping */
+      margin: 10px 0; /* Added margin for spacing */
 
-      
+      @media #{$sm} {
+        font-size: 14px; /* Reduced size for mobile */
+        line-height: 18px; /* Adjusted line height for mobile */
+        max-width: 100%; /* Ensure it fits within the card */
+      }
 
       @media #{$lg} {
         font-size: 22px;
@@ -1140,8 +1222,7 @@
         justify-content: flex-end;
       }
     }
-
-    &-img {
+&-img {
       width: 100%;
       height: 600px;
       overflow: hidden;
@@ -1157,6 +1238,7 @@
 
       @media #{$sm} {
         height: 400px;
+        border-radius: 5px 5px 0 0; /* Top-only border radius for container */
       }
 
       img {
@@ -1166,6 +1248,11 @@
         left: 0;
         bottom: 0;
         object-fit: cover;
+
+        @media #{$sm} {
+          border-radius: 5px 5px 0 0; /* Top-only border radius for image */
+        }
+        
       }
     }
 

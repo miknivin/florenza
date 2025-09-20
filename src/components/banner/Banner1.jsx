@@ -30,7 +30,7 @@ const Banner1 = ({ banner }) => {
                 <div className="woocomerce__exclusive-btnwraper wc_btn_wrapper">
                   <Link
                     className="woocomerce__exclusive-btn"
-                    href={"/shop/full"}
+                    href={"shop/68cbd9783fde9bb106ceec57"}
                   >
                     Shop Now
                   </Link>

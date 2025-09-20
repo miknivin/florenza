@@ -368,46 +368,49 @@ export default function ProductDetails({ id }) {
                             )) || <li>No variants available</li>}
                           </ul>
                         </Accordion.Body>
-                      </Accordion.Item>
-                      <Accordion.Item eventKey="1" className="accordion-item">
-                        <Accordion.Header
-                          className="accordion-header"
-                          id="headingTwo"
-                        >
-                          <div className="woocomerce__single-stitle">
-                            Fragrance Notes
-                          </div>
-                        </Accordion.Header>
-                        <Accordion.Body className="accordion-body p-0 pb-2">
-                          <ul className="d-flex flex-column justify-content-center align-items-start">
-                            <li className="d-flex flex-column align-items-start justify-content-start">
-                              <b className="woocomerce__single-features">Top</b>
-                              <p className="woocomerce__single-features mt-2 pt-0">
-                                {product.fragranceNotes?.top?.join(", ") ||
-                                  "N/A"}
-                              </p>
-                            </li>
-                            <li className="d-flex flex-column align-items-start justify-content-start">
-                              <b className="woocomerce__single-features">
-                                Heart
-                              </b>
-                              <p className="woocomerce__single-features mt-2 pt-0">
-                                {product.fragranceNotes?.heart?.join(", ") ||
-                                  "N/A"}
-                              </p>
-                            </li>
-                            <li className="d-flex flex-column align-items-start justify-content-start">
-                              <b className="woocomerce__single-features">
-                                Base
-                              </b>
-                              <p className="woocomerce__single-features mt-2 pt-0">
-                                {product.fragranceNotes?.base?.join(", ") ||
-                                  "N/A"}
-                              </p>
-                            </li>
-                          </ul>
-                        </Accordion.Body>
-                      </Accordion.Item>
+                       </Accordion.Item>
+                      {product.fragranceNotes && (product.fragranceNotes.top?.length > 0 || 
+                        product.fragranceNotes.heart?.length > 0 || 
+                        product.fragranceNotes.base?.length > 0) && (
+                        <Accordion.Item eventKey="1" className="accordion-item">
+                          <Accordion.Header
+                            className="accordion-header"
+                            id="headingTwo"
+                          >
+                            <div className="woocomerce__single-stitle">
+                              Fragrance Notes
+                            </div>
+                          </Accordion.Header>
+                          <Accordion.Body className="accordion-body p-0 pb-2">
+                            <ul className="d-flex flex-column justify-content-center align-items-start">
+                              {product.fragranceNotes.top?.length > 0 && (
+                                <li className="d-flex flex-column align-items-start justify-content-start">
+                                  <b className="woocomerce__single-features">Top</b>
+                                  <p className="woocomerce__single-features mt-2 pt-0">
+                                    {product.fragranceNotes.top.join(", ")}
+                                  </p>
+                                </li>
+                              )}
+                              {product.fragranceNotes.heart?.length > 0 && (
+                                <li className="d-flex flex-column align-items-start justify-content-start">
+                                  <b className="woocomerce__single-features">Heart</b>
+                                  <p className="woocomerce__single-features mt-2 pt-0">
+                                    {product.fragranceNotes.heart.join(", ")}
+                                  </p>
+                                </li>
+                              )}
+                              {product.fragranceNotes.base?.length > 0 && (
+                                <li className="d-flex flex-column align-items-start justify-content-start">
+                                  <b className="woocomerce__single-features">Base</b>
+                                  <p className="woocomerce__single-features mt-2 pt-0">
+                                    {product.fragranceNotes.base.join(", ")}
+                                  </p>
+                                </li>
+                              )}
+                            </ul>
+                          </Accordion.Body>
+                        </Accordion.Item>
+                      )}
                     </Accordion>
                     <p className="woocomerce__single-sku">SKU: {product.sku}</p>
                   </div>
