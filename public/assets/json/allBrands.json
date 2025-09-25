@@ -1,0 +1,68 @@
+{
+  "brands": [
+    {
+      "id": "601",
+      "logo": "woocomerce/brand/b1.png"
+    },
+    {
+      "id": "602",
+      "logo": "woocomerce/brand/b2.png"
+    },
+    {
+      "id": "603",
+      "logo": "woocomerce/brand/b3.png"
+    },
+    {
+      "id": "604",
+      "logo": "woocomerce/brand/b4.png"
+    },
+    {
+      "id": "605",
+      "logo": "woocomerce/brand/b5.png"
+    },
+    {
+      "id": "606",
+      "logo": "woocomerce/brand/b5.png"
+    },
+    {
+      "id": "607",
+      "logo": "woocomerce/brand/b2.png"
+    },
+    {
+      "id": "608",
+      "logo": "woocomerce/brand/b3.png"
+    },
+    {
+      "id": "616",
+      "logo": "woocomerce/brand/b4.png"
+    },
+    {
+      "id": "609",
+      "logo": "woocomerce/brand/b5.png"
+    },
+    {
+      "id": "610",
+      "logo": "woocomerce/brand/b5.png"
+    },
+    {
+      "id": "611",
+      "logo": "woocomerce/brand/b2.png"
+    },
+    {
+      "id": "612",
+      "logo": "woocomerce/brand/b3.png"
+    },
+    {
+      "id": "613",
+      "logo": "woocomerce/brand/b4.png"
+    },
+    {
+      "id": "614",
+      "logo": "woocomerce/brand/b5.png"
+    },
+    {
+      "id": "615",
+      "logo": "woocomerce/brand/b5.png"
+    }
+  ]
+}

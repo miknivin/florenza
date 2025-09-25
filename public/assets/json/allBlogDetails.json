@@ -1,0 +1,37 @@
+{
+  "details": {
+    "id": "301",
+    "title": "Donate your design for newest designers to try better",
+    "description": "",
+    "category": "UI Design",
+    "date": "25 Jan 2019",
+    "author_img": "blog/detail/author.png",
+    "author": "Codexpand",
+    "view": "3",
+    "tag": ["latest", "recent"],
+    "img": "blog/detail/1.jpg",
+    "related": [
+      {
+        "id": "303",
+        "title": "How to bring fold to your startup company with Axtra",
+        "category": "UI Design",
+        "date": "15 March 2019",
+        "img": "blog/3.jpg"
+      },
+      {
+        "id": "304",
+        "title": "Ways of lying to yourself about your new relationship",
+        "category": "UI Design",
+        "date": "15 March 2019",
+        "img": "blog/4.jpg"
+      },
+      {
+        "id": "305",
+        "title": "How to manage a talented and successful de sign team",
+        "category": "UI Design",
+        "date": "02 May 2019",
+        "img": "blog/5.jpg"
+      }
+    ]
+  }
+}

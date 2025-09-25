@@ -1,0 +1,31 @@
+.full_table {
+  .table_content {
+    max-height: 600px;
+    max-width: 100vw;
+    overflow-y: scroll;
+    table {
+      width: 100%;
+      height: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+    }
+    th {
+      padding: 15px;
+      color: white;
+    }
+
+    td {
+      padding: 15px;
+      color: black;
+    }
+    th {
+      text-align: left;
+    }
+    thead th {
+      background-color: #121212;
+    }
+    tbody td {
+      position: relative;
+    }
+  }
+}

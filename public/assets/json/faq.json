@@ -1,0 +1,33 @@
+{
+  "faq": {
+    "title": "FAQ",
+    "sub_title": "Frequently asked question (FAQ) pages to find answars.",
+    "items": [
+      {
+        "id": "1301",
+        "title": "Design should enrich our day",
+        "description": "People know what an FAQ is, so make that your page title. Don’t overcomplicate things by calling it “Good to Know” or “More Info”. Sometimes people put the frequently asked questions section on their Contact page, but you can create your own page and put it right in your website navigation menu or website footer so it’s easy to find. Getting a straight, quick answer to your question is a relief. So keep answers to a short paragraph if you can, less than 100 words. Answer the entire question in the FAQ without linking away to another page"
+      },
+      {
+        "id": "1302",
+        "title": "Bring their individual experience and creative",
+        "description": "People know what an FAQ is, so make that your page title. Don’t overcomplicate things by calling it “Good to Know” or “More Info”. Sometimes people put the frequently asked questions section on their Contact page, but you can create your own page and put it right in your website navigation menu or website footer so it’s easy to find. Getting a straight, quick answer to your question is a relief. So keep answers to a short paragraph if you can, less than 100 words. Answer the entire question in the FAQ without linking away to another page"
+      },
+      {
+        "id": "1303",
+        "title": "Human centred design to challenges",
+        "description": "People know what an FAQ is, so make that your page title. Don’t overcomplicate things by calling it “Good to Know” or “More Info”. Sometimes people put the frequently asked questions section on their Contact page, but you can create your own page and put it right in your website navigation menu or website footer so it’s easy to find. Getting a straight, quick answer to your question is a relief. So keep answers to a short paragraph if you can, less than 100 words. Answer the entire question in the FAQ without linking away to another page"
+      },
+      {
+        "id": "1304",
+        "title": "Design should enrich our day",
+        "description": "People know what an FAQ is, so make that your page title. Don’t overcomplicate things by calling it “Good to Know” or “More Info”. Sometimes people put the frequently asked questions section on their Contact page, but you can create your own page and put it right in your website navigation menu or website footer so it’s easy to find. Getting a straight, quick answer to your question is a relief. So keep answers to a short paragraph if you can, less than 100 words. Answer the entire question in the FAQ without linking away to another page"
+      },
+      {
+        "id": "1305",
+        "title": "Developing core web applications",
+        "description": "People know what an FAQ is, so make that your page title. Don’t overcomplicate things by calling it “Good to Know” or “More Info”. Sometimes people put the frequently asked questions section on their Contact page, but you can create your own page and put it right in your website navigation menu or website footer so it’s easy to find. Getting a straight, quick answer to your question is a relief. So keep answers to a short paragraph if you can, less than 100 words. Answer the entire question in the FAQ without linking away to another page"
+      }
+    ]
+  }
+}

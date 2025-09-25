@@ -1,0 +1,1666 @@
+{
+  "categories": [
+    {
+      "id": "501",
+      "name": "Man",
+      "img": "woocomerce/products/p17.png",
+      "advertisement": "woocomerce/category/Banner-1.png",
+      "first_child": [
+        {
+          "id": "50101",
+          "name": "All Shirt",
+          "second_child": [
+            {
+              "id": "5010101",
+              "name": "Active wear"
+            },
+            {
+              "id": "5010102",
+              "name": "Blazers & Suits"
+            },
+            {
+              "id": "5010104",
+              "name": "Coats & Jackets"
+            },
+            {
+              "id": "5010105",
+              "name": "Dresses"
+            },
+
+            {
+              "id": "5010107",
+              "name": "Jeans & Denim"
+            },
+            {
+              "id": "5010108",
+              "name": "Jumpsuits & Rompers"
+            },
+            {
+              "id": "5010109",
+              "name": "Lingerie & Hosiery"
+            },
+
+            {
+              "id": "5010111",
+              "name": "Lounge wear"
+            },
+            {
+              "id": "5010112",
+              "name": "Tops"
+            },
+            {
+              "id": "5010113",
+              "name": "Pants & Leggings"
+            },
+
+            {
+              "id": "5010115",
+              "name": "Skirts"
+            },
+            {
+              "id": "5010116",
+              "name": "Sleepwear & Robes"
+            },
+
+            {
+              "id": "5010118",
+              "name": "Hoodies"
+            }
+          ]
+        },
+        {
+          "id": "50102",
+          "name": "Money Bag",
+          "second_child": [
+            {
+              "id": "5010201",
+              "name": "Backpacks"
+            },
+
+            {
+              "id": "5010203",
+              "name": "Clutches & Pouches"
+            },
+            {
+              "id": "5010204",
+              "name": "Crossbody Bags"
+            },
+
+            {
+              "id": "5010206",
+              "name": "Shoulder Bags"
+            },
+            {
+              "id": "5010207",
+              "name": "Straw Bags"
+            },
+
+            {
+              "id": "5010209",
+              "name": "Wallets & Card Cases"
+            },
+            {
+              "id": "5010210",
+              "name": "Luggage & Travel"
+            }
+          ]
+        },
+        {
+          "id": "50103",
+          "name": "Accessories",
+          "second_child": [
+            {
+              "id": "5010301",
+              "name": "Belts"
+            },
+
+            {
+              "id": "5010303",
+              "name": "Hats"
+            },
+            {
+              "id": "5010304",
+              "name": "Scarves"
+            },
+            {
+              "id": "5010305",
+              "name": "Wraps"
+            },
+
+            {
+              "id": "5010307",
+              "name": "Sunglasses"
+            },
+            {
+              "id": "5010308",
+              "name": "Lingerie & Hosiery"
+            }
+          ]
+        },
+        {
+          "id": "50104",
+          "name": "Others",
+          "second_child": [
+            {
+              "id": "5010401",
+              "name": "Sneakers & Athletic"
+            },
+
+            {
+              "id": "5010403",
+              "name": "Heels"
+            },
+
+            {
+              "id": "5010405",
+              "name": "Booties"
+            },
+            {
+              "id": "5010406",
+              "name": "Boots"
+            },
+
+            {
+              "id": "5010408",
+              "name": "Comfort"
+            },
+            {
+              "id": "5010409",
+              "name": "Dress Shoes"
+            },
+            {
+              "id": "5010410",
+              "name": "Espadrilles"
+            },
+
+            {
+              "id": "5010412",
+              "name": "Oxfords & Loafers"
+            },
+
+            {
+              "id": "5010414",
+              "name": "Slippers"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "502",
+      "name": "Woman",
+      "img": "woocomerce/products/p18.png",
+      "advertisement": "woocomerce/category/Banner-2.png",
+      "first_child": [
+        {
+          "id": "50201",
+          "name": "Tops",
+          "second_child": [
+            {
+              "id": "5020102",
+              "name": "Blazers & Suits"
+            },
+            {
+              "id": "5020103",
+              "name": "Separates"
+            },
+            {
+              "id": "5020104",
+              "name": "Coats & Jackets"
+            },
+
+            {
+              "id": "5020106",
+              "name": "Swimsuits"
+            },
+            {
+              "id": "5020107",
+              "name": "Jeans & Denim"
+            },
+
+            {
+              "id": "5020109",
+              "name": "Lingerie & Hosiery"
+            },
+            {
+              "id": "5020110",
+              "name": "Shape wear"
+            },
+
+            {
+              "id": "5020112",
+              "name": "Tops"
+            },
+            {
+              "id": "5020113",
+              "name": "Pants & Leggings"
+            },
+
+            {
+              "id": "5020115",
+              "name": "Skirts"
+            },
+            {
+              "id": "5020116",
+              "name": "Sleepwear & Robes"
+            },
+
+            {
+              "id": "5020118",
+              "name": "Hoodies"
+            }
+          ]
+        },
+        {
+          "id": "50202",
+          "name": "Handbags",
+          "second_child": [
+            {
+              "id": "5020201",
+              "name": "Backpacks"
+            },
+
+            {
+              "id": "5020203",
+              "name": "Clutches & Pouches"
+            },
+            {
+              "id": "5020204",
+              "name": "Crossbody Bags"
+            },
+
+            {
+              "id": "5020206",
+              "name": "Shoulder Bags"
+            },
+            {
+              "id": "5020207",
+              "name": "Straw Bags"
+            },
+            {
+              "id": "5020210",
+              "name": "Luggage & Travel"
+            }
+          ]
+        },
+        {
+          "id": "50203",
+          "name": "Accessories",
+          "second_child": [
+            {
+              "id": "5020302",
+              "name": "Hair Accessories"
+            },
+            {
+              "id": "5020303",
+              "name": "Hats"
+            },
+
+            {
+              "id": "5020305",
+              "name": "Wraps"
+            },
+
+            {
+              "id": "5020307",
+              "name": "Sunglasses"
+            },
+
+            {
+              "id": "5020309",
+              "name": "Eye wear"
+            }
+          ]
+        },
+        {
+          "id": "50204",
+          "name": "Others",
+          "second_child": [
+            {
+              "id": "5020402",
+              "name": "Sandals"
+            },
+
+            {
+              "id": "5020404",
+              "name": "Flats"
+            },
+
+            {
+              "id": "5020406",
+              "name": "Boots"
+            },
+
+            {
+              "id": "5020408",
+              "name": "Comfort"
+            },
+            {
+              "id": "5020409",
+              "name": "Dress Shoes"
+            },
+
+            {
+              "id": "5020411",
+              "name": "Mules & Slides"
+            },
+
+            {
+              "id": "5020413",
+              "name": "Running Shoes"
+            },
+            {
+              "id": "5020414",
+              "name": "Slippers"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "503",
+      "name": "Kids & Baby",
+      "img": "woocomerce/products/p19.png",
+      "advertisement": "woocomerce/category/Banner-3.png",
+      "first_child": [
+        {
+          "id": "50301",
+          "name": "Foot wear",
+          "second_child": [
+            {
+              "id": "5030101",
+              "name": "Active wear"
+            },
+
+            {
+              "id": "5030103",
+              "name": "Separates"
+            },
+
+            {
+              "id": "5030105",
+              "name": "Dresses"
+            },
+            {
+              "id": "5030106",
+              "name": "Swimsuits"
+            },
+
+            {
+              "id": "5030108",
+              "name": "Jumpsuits & Rompers"
+            },
+
+            {
+              "id": "5030110",
+              "name": "Shape wear"
+            },
+            {
+              "id": "5030111",
+              "name": "Lounge wear"
+            },
+
+            {
+              "id": "5030113",
+              "name": "Pants & Leggings"
+            },
+            {
+              "id": "5030114",
+              "name": "Shorts"
+            },
+
+            {
+              "id": "5030116",
+              "name": "Sleepwear & Robes"
+            },
+
+            {
+              "id": "5030118",
+              "name": "Hoodies"
+            }
+          ]
+        },
+        {
+          "id": "50302",
+          "name": "Games",
+          "second_child": [
+            {
+              "id": "5030201",
+              "name": "Backpacks"
+            },
+
+            {
+              "id": "5030203",
+              "name": "Clutches & Pouches"
+            },
+            {
+              "id": "5030204",
+              "name": "Crossbody Bags"
+            },
+
+            {
+              "id": "5030206",
+              "name": "Shoulder Bags"
+            },
+
+            {
+              "id": "5030208",
+              "name": "Tote Bags"
+            },
+
+            {
+              "id": "5030210",
+              "name": "Luggage & Travel"
+            }
+          ]
+        },
+        {
+          "id": "50303",
+          "name": "Accessories",
+          "second_child": [
+            {
+              "id": "5030301",
+              "name": "Belts"
+            },
+
+            {
+              "id": "5030303",
+              "name": "Hats"
+            },
+
+            {
+              "id": "5030305",
+              "name": "Wraps"
+            },
+
+            {
+              "id": "5030307",
+              "name": "Sunglasses"
+            },
+
+            {
+              "id": "5030309",
+              "name": "Eye wear"
+            }
+          ]
+        },
+        {
+          "id": "50304",
+          "name": "Others",
+          "second_child": [
+            {
+              "id": "5030402",
+              "name": "Sandals"
+            },
+
+            {
+              "id": "5030404",
+              "name": "Flats"
+            },
+
+            {
+              "id": "5030406",
+              "name": "Boots"
+            },
+            {
+              "id": "5030407",
+              "name": "Clogs"
+            },
+
+            {
+              "id": "5030409",
+              "name": "Dress Shoes"
+            },
+            {
+              "id": "5030410",
+              "name": "Espadrilles"
+            },
+
+            {
+              "id": "5030412",
+              "name": "Oxfords & Loafers"
+            },
+
+            {
+              "id": "5030414",
+              "name": "Slippers"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "504",
+      "name": "Sports & Health",
+      "img": "woocomerce/products/p20.png",
+      "advertisement": "woocomerce/category/Banner-4.png",
+      "first_child": [
+        {
+          "id": "50401",
+          "name": "Sports",
+          "second_child": [
+            {
+              "id": "5040102",
+              "name": "Blazers & Suits"
+            },
+
+            {
+              "id": "5040104",
+              "name": "Coats & Jackets"
+            },
+
+            {
+              "id": "5040106",
+              "name": "Swimsuits"
+            },
+
+            {
+              "id": "5040108",
+              "name": "Jumpsuits & Rompers"
+            },
+            {
+              "id": "5040109",
+              "name": "Lingerie & Hosiery"
+            },
+
+            {
+              "id": "5040111",
+              "name": "Lounge wear"
+            },
+
+            {
+              "id": "5040113",
+              "name": "Pants & Leggings"
+            },
+            {
+              "id": "5040114",
+              "name": "Shorts"
+            },
+
+            {
+              "id": "5040116",
+              "name": "Sleepwear & Robes"
+            },
+
+            {
+              "id": "5040118",
+              "name": "Hoodies"
+            }
+          ]
+        },
+        {
+          "id": "50402",
+          "name": "Health",
+          "second_child": [
+            {
+              "id": "5040201",
+              "name": "Backpacks"
+            },
+
+            {
+              "id": "5040203",
+              "name": "Clutches & Pouches"
+            },
+
+            {
+              "id": "5040205",
+              "name": "Designer Bags"
+            },
+            {
+              "id": "5040206",
+              "name": "Shoulder Bags"
+            },
+
+            {
+              "id": "5040208",
+              "name": "Tote Bags"
+            },
+            {
+              "id": "5040209",
+              "name": "Wallets & Card Cases"
+            }
+          ]
+        },
+        {
+          "id": "50403",
+          "name": "Accessories",
+          "second_child": [
+            {
+              "id": "5040302",
+              "name": "Hair Accessories"
+            },
+
+            {
+              "id": "5040304",
+              "name": "Scarves"
+            },
+
+            {
+              "id": "5040307",
+              "name": "Sunglasses"
+            },
+
+            {
+              "id": "5040309",
+              "name": "Eye wear"
+            }
+          ]
+        },
+        {
+          "id": "50404",
+          "name": "Others",
+          "second_child": [
+            {
+              "id": "5040401",
+              "name": "Sneakers & Athletic"
+            },
+
+            {
+              "id": "5040403",
+              "name": "Heels"
+            },
+
+            {
+              "id": "5040405",
+              "name": "Booties"
+            },
+
+            {
+              "id": "5040407",
+              "name": "Clogs"
+            },
+
+            {
+              "id": "5040409",
+              "name": "Dress Shoes"
+            },
+
+            {
+              "id": "5040411",
+              "name": "Mules & Slides"
+            },
+
+            {
+              "id": "5040413",
+              "name": "Running Shoes"
+            },
+            {
+              "id": "5040414",
+              "name": "Slippers"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "505",
+      "name": "Beauty",
+      "img": "woocomerce/products/p21.png",
+      "advertisement": "woocomerce/category/Banner-5.png",
+      "first_child": [
+        {
+          "id": "50501",
+          "name": "Cosmetics",
+          "second_child": [
+            {
+              "id": "5050101",
+              "name": "Active wear"
+            },
+
+            {
+              "id": "5050103",
+              "name": "Separates"
+            },
+            {
+              "id": "5050104",
+              "name": "Coats & Jackets"
+            },
+
+            {
+              "id": "5050106",
+              "name": "Swimsuits"
+            },
+            {
+              "id": "5050107",
+              "name": "Jeans & Denim"
+            },
+
+            {
+              "id": "5050109",
+              "name": "Lingerie & Hosiery"
+            },
+            {
+              "id": "5050110",
+              "name": "Shape wear"
+            },
+
+            {
+              "id": "5050112",
+              "name": "Tops"
+            },
+
+            {
+              "id": "5050114",
+              "name": "Shorts"
+            },
+
+            {
+              "id": "5050116",
+              "name": "Sleepwear & Robes"
+            },
+
+            {
+              "id": "5050118",
+              "name": "Hoodies"
+            }
+          ]
+        },
+        {
+          "id": "50502",
+          "name": "Shampoo",
+          "second_child": [
+            {
+              "id": "5050201",
+              "name": "Backpacks"
+            },
+
+            {
+              "id": "5050203",
+              "name": "Clutches & Pouches"
+            },
+
+            {
+              "id": "5050205",
+              "name": "Designer Bags"
+            },
+            {
+              "id": "5050208",
+              "name": "Tote Bags"
+            },
+
+            {
+              "id": "5050210",
+              "name": "Luggage & Travel"
+            }
+          ]
+        },
+        {
+          "id": "50503",
+          "name": "Accessories",
+          "second_child": [
+            {
+              "id": "5050301",
+              "name": "Belts"
+            },
+
+            {
+              "id": "5050303",
+              "name": "Hats"
+            },
+
+            {
+              "id": "5050305",
+              "name": "Wraps"
+            },
+
+            {
+              "id": "5050307",
+              "name": "Sunglasses"
+            },
+
+            {
+              "id": "5050309",
+              "name": "Eye wear"
+            }
+          ]
+        },
+        {
+          "id": "50504",
+          "name": "Others",
+          "second_child": [
+            {
+              "id": "5050401",
+              "name": "Sneakers & Athletic"
+            },
+
+            {
+              "id": "5050403",
+              "name": "Heels"
+            },
+            {
+              "id": "5050406",
+              "name": "Boots"
+            },
+
+            {
+              "id": "5050408",
+              "name": "Comfort"
+            },
+
+            {
+              "id": "5050410",
+              "name": "Espadrilles"
+            },
+
+            {
+              "id": "5050412",
+              "name": "Oxfords & Loafers"
+            },
+
+            {
+              "id": "5050414",
+              "name": "Slippers"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "506",
+      "name": "Jewellery",
+      "img": "woocomerce/products/p22.png",
+      "advertisement": "woocomerce/category/Banner-6.png",
+      "first_child": [
+        {
+          "id": "50601",
+          "name": "Earring",
+          "second_child": [
+            {
+              "id": "5060101",
+              "name": "Active wear"
+            },
+
+            {
+              "id": "5060103",
+              "name": "Separates"
+            },
+
+            {
+              "id": "5060105",
+              "name": "Dresses"
+            },
+
+            {
+              "id": "5060107",
+              "name": "Jeans & Denim"
+            },
+
+            {
+              "id": "5060109",
+              "name": "Lingerie & Hosiery"
+            },
+
+            {
+              "id": "5060111",
+              "name": "Lounge wear"
+            },
+
+            {
+              "id": "5060113",
+              "name": "Pants & Leggings"
+            },
+
+            {
+              "id": "5060115",
+              "name": "Skirts"
+            },
+
+            {
+              "id": "5060118",
+              "name": "Hoodies"
+            }
+          ]
+        },
+        {
+          "id": "50602",
+          "name": "Anklet",
+          "second_child": [
+            {
+              "id": "5060201",
+              "name": "Backpacks"
+            },
+
+            {
+              "id": "5060203",
+              "name": "Clutches & Pouches"
+            },
+
+            {
+              "id": "5060205",
+              "name": "Designer Bags"
+            },
+
+            {
+              "id": "5060207",
+              "name": "Straw Bags"
+            },
+
+            {
+              "id": "5060209",
+              "name": "Wallets & Card Cases"
+            }
+          ]
+        },
+        {
+          "id": "50603",
+          "name": "Accessories",
+          "second_child": [
+            {
+              "id": "5060302",
+              "name": "Hair Accessories"
+            },
+
+            {
+              "id": "5060304",
+              "name": "Scarves"
+            },
+
+            {
+              "id": "5060306",
+              "name": "Jeans & Denim"
+            },
+
+            {
+              "id": "5060309",
+              "name": "Eye wear"
+            }
+          ]
+        },
+        {
+          "id": "50604",
+          "name": "Others",
+          "second_child": [
+            {
+              "id": "5060401",
+              "name": "Sneakers & Athletic"
+            },
+
+            {
+              "id": "5060403",
+              "name": "Heels"
+            },
+
+            {
+              "id": "5060405",
+              "name": "Booties"
+            },
+
+            {
+              "id": "5060407",
+              "name": "Clogs"
+            },
+
+            {
+              "id": "5060409",
+              "name": "Dress Shoes"
+            },
+            {
+              "id": "5060410",
+              "name": "Espadrilles"
+            },
+
+            {
+              "id": "5060412",
+              "name": "Oxfords & Loafers"
+            },
+            {
+              "id": "5060413",
+              "name": "Running Shoes"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "507",
+      "name": "Furniture",
+      "img": "woocomerce/products/p23.png",
+      "advertisement": "woocomerce/category/Banner-7.png",
+      "first_child": [
+        {
+          "id": "50701",
+          "name": "Table",
+          "second_child": [
+            {
+              "id": "5070102",
+              "name": "Blazers & Suits"
+            },
+            {
+              "id": "5070103",
+              "name": "Separates"
+            },
+
+            {
+              "id": "5070105",
+              "name": "Dresses"
+            },
+            {
+              "id": "5070106",
+              "name": "Swimsuits"
+            },
+
+            {
+              "id": "5070108",
+              "name": "Jumpsuits & Rompers"
+            },
+
+            {
+              "id": "5070110",
+              "name": "Shape wear"
+            },
+
+            {
+              "id": "5070112",
+              "name": "Tops"
+            },
+
+            {
+              "id": "5070114",
+              "name": "Shorts"
+            },
+            {
+              "id": "5070117",
+              "name": "Sweaters"
+            },
+            {
+              "id": "5070118",
+              "name": "Hoodies"
+            }
+          ]
+        },
+        {
+          "id": "50702",
+          "name": "Chair",
+          "second_child": [
+            {
+              "id": "5070202",
+              "name": "Sling Bags"
+            },
+            {
+              "id": "5070204",
+              "name": "Crossbody Bags"
+            },
+            {
+              "id": "5070205",
+              "name": "Designer Bags"
+            },
+
+            {
+              "id": "5070207",
+              "name": "Straw Bags"
+            },
+
+            {
+              "id": "5070209",
+              "name": "Wallets & Card Cases"
+            },
+            {
+              "id": "5070210",
+              "name": "Luggage & Travel"
+            }
+          ]
+        },
+        {
+          "id": "50703",
+          "name": "Accessories",
+          "second_child": [
+            {
+              "id": "5070301",
+              "name": "Belts"
+            },
+
+            {
+              "id": "5070303",
+              "name": "Hats"
+            },
+
+            {
+              "id": "5070305",
+              "name": "Wraps"
+            },
+            {
+              "id": "5070306",
+              "name": "Jeans & Denim"
+            },
+            {
+              "id": "5070309",
+              "name": "Eye wear"
+            }
+          ]
+        },
+        {
+          "id": "50704",
+          "name": "Others",
+          "second_child": [
+            {
+              "id": "5070401",
+              "name": "Sneakers & Athletic"
+            },
+
+            {
+              "id": "5070403",
+              "name": "Heels"
+            },
+
+            {
+              "id": "5070405",
+              "name": "Booties"
+            },
+
+            {
+              "id": "5070407",
+              "name": "Clogs"
+            },
+
+            {
+              "id": "5070409",
+              "name": "Dress Shoes"
+            },
+
+            {
+              "id": "5070411",
+              "name": "Mules & Slides"
+            },
+
+            {
+              "id": "5070413",
+              "name": "Running Shoes"
+            },
+            {
+              "id": "5070414",
+              "name": "Slippers"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "508",
+      "name": "Home",
+      "img": "woocomerce/products/p17.png",
+      "advertisement": "woocomerce/category/Banner-8.png",
+      "first_child": [
+        {
+          "id": "50801",
+          "name": "Kitchen",
+          "second_child": [
+            {
+              "id": "5080101",
+              "name": "Active wear"
+            },
+
+            {
+              "id": "5080103",
+              "name": "Separates"
+            },
+            {
+              "id": "5080104",
+              "name": "Coats & Jackets"
+            },
+
+            {
+              "id": "5080106",
+              "name": "Swimsuits"
+            },
+
+            {
+              "id": "5080108",
+              "name": "Jumpsuits & Rompers"
+            },
+
+            {
+              "id": "5080110",
+              "name": "Shape wear"
+            },
+            {
+              "id": "5080111",
+              "name": "Lounge wear"
+            },
+
+            {
+              "id": "5080113",
+              "name": "Pants & Leggings"
+            },
+            {
+              "id": "5080114",
+              "name": "Shorts"
+            },
+
+            {
+              "id": "5080116",
+              "name": "Sleepwear & Robes"
+            },
+
+            {
+              "id": "5080118",
+              "name": "Hoodies"
+            }
+          ]
+        },
+        {
+          "id": "50802",
+          "name": "Electronics",
+          "second_child": [
+            {
+              "id": "5080201",
+              "name": "Backpacks"
+            },
+
+            {
+              "id": "5080203",
+              "name": "Clutches & Pouches"
+            },
+
+            {
+              "id": "5080205",
+              "name": "Designer Bags"
+            },
+
+            {
+              "id": "5080207",
+              "name": "Straw Bags"
+            },
+
+            {
+              "id": "5080209",
+              "name": "Wallets & Card Cases"
+            },
+            {
+              "id": "5080210",
+              "name": "Luggage & Travel"
+            }
+          ]
+        },
+        {
+          "id": "50803",
+          "name": "Accessories",
+          "second_child": [
+            {
+              "id": "5080302",
+              "name": "Hair Accessories"
+            },
+            {
+              "id": "5080303",
+              "name": "Hats"
+            },
+
+            {
+              "id": "5080305",
+              "name": "Wraps"
+            },
+
+            {
+              "id": "5080307",
+              "name": "Sunglasses"
+            },
+
+            {
+              "id": "5080309",
+              "name": "Eye wear"
+            }
+          ]
+        },
+        {
+          "id": "50804",
+          "name": "Others",
+          "second_child": [
+            {
+              "id": "5080402",
+              "name": "Sandals"
+            },
+
+            {
+              "id": "5080404",
+              "name": "Flats"
+            },
+            {
+              "id": "5080405",
+              "name": "Booties"
+            },
+
+            {
+              "id": "5080407",
+              "name": "Clogs"
+            },
+
+            {
+              "id": "5080409",
+              "name": "Dress Shoes"
+            },
+            {
+              "id": "5080410",
+              "name": "Espadrilles"
+            },
+
+            {
+              "id": "5080412",
+              "name": "Oxfords & Loafers"
+            },
+
+            {
+              "id": "5080414",
+              "name": "Slippers"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "509",
+      "name": "Technology",
+      "img": "woocomerce/products/p19.png",
+      "advertisement": "woocomerce/category/Banner-9.png",
+      "first_child": [
+        {
+          "id": "50901",
+          "name": "Computer",
+          "second_child": [
+            {
+              "id": "5090101",
+              "name": "Active wear"
+            },
+
+            {
+              "id": "5090103",
+              "name": "Separates"
+            },
+            {
+              "id": "5090104",
+              "name": "Coats & Jackets"
+            },
+
+            {
+              "id": "5090106",
+              "name": "Swimsuits"
+            },
+
+            {
+              "id": "5090108",
+              "name": "Jumpsuits & Rompers"
+            },
+            {
+              "id": "5090109",
+              "name": "Lingerie & Hosiery"
+            },
+
+            {
+              "id": "5090111",
+              "name": "Lounge wear"
+            },
+            {
+              "id": "5090112",
+              "name": "Tops"
+            },
+
+            {
+              "id": "5090114",
+              "name": "Shorts"
+            },
+            {
+              "id": "5090115",
+              "name": "Skirts"
+            },
+
+            {
+              "id": "5090117",
+              "name": "Sweaters"
+            }
+          ]
+        },
+        {
+          "id": "50902",
+          "name": "All Mobile",
+          "second_child": [
+            {
+              "id": "5090202",
+              "name": "Sling Bags"
+            },
+
+            {
+              "id": "5090204",
+              "name": "Crossbody Bags"
+            },
+
+            {
+              "id": "5090206",
+              "name": "Shoulder Bags"
+            },
+
+            {
+              "id": "5090208",
+              "name": "Tote Bags"
+            },
+
+            {
+              "id": "5090210",
+              "name": "Luggage & Travel"
+            }
+          ]
+        },
+        {
+          "id": "50903",
+          "name": "Accessories",
+          "second_child": [
+            {
+              "id": "5090302",
+              "name": "Hair Accessories"
+            },
+
+            {
+              "id": "5090304",
+              "name": "Scarves"
+            },
+
+            {
+              "id": "5090306",
+              "name": "Jeans & Denim"
+            },
+
+            {
+              "id": "5090309",
+              "name": "Eye wear"
+            }
+          ]
+        },
+        {
+          "id": "50904",
+          "name": "Others",
+          "second_child": [
+            {
+              "id": "5090403",
+              "name": "Heels"
+            },
+
+            {
+              "id": "5090405",
+              "name": "Booties"
+            },
+            {
+              "id": "5090406",
+              "name": "Boots"
+            },
+
+            {
+              "id": "5090408",
+              "name": "Comfort"
+            },
+
+            {
+              "id": "5090410",
+              "name": "Espadrilles"
+            },
+
+            {
+              "id": "5090412",
+              "name": "Oxfords & Loafers"
+            },
+
+            {
+              "id": "5090414",
+              "name": "Slippers"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "510",
+      "name": "Accessories",
+      "img": "woocomerce/products/p20.png",
+      "advertisement": "woocomerce/category/Banner-10.png",
+      "first_child": [
+        {
+          "id": "51001",
+          "name": "Tools",
+          "second_child": [
+            {
+              "id": "5100103",
+              "name": "Separates"
+            },
+            {
+              "id": "5100104",
+              "name": "Coats & Jackets"
+            },
+
+            {
+              "id": "5100106",
+              "name": "Swimsuits"
+            },
+            {
+              "id": "5100107",
+              "name": "Jeans & Denim"
+            },
+
+            {
+              "id": "5100109",
+              "name": "Lingerie & Hosiery"
+            },
+            {
+              "id": "5100110",
+              "name": "Shape wear"
+            },
+
+            {
+              "id": "5100112",
+              "name": "Tops"
+            },
+            {
+              "id": "5100113",
+              "name": "Pants & Leggings"
+            },
+
+            {
+              "id": "5100115",
+              "name": "Skirts"
+            },
+
+            {
+              "id": "5100117",
+              "name": "Sweaters"
+            },
+            {
+              "id": "5100118",
+              "name": "Hoodies"
+            }
+          ]
+        },
+        {
+          "id": "51002",
+          "name": "Shopping",
+          "second_child": [
+            {
+              "id": "5100201",
+              "name": "Backpacks"
+            },
+
+            {
+              "id": "5100203",
+              "name": "Clutches & Pouches"
+            },
+
+            {
+              "id": "5100205",
+              "name": "Designer Bags"
+            },
+
+            {
+              "id": "5100207",
+              "name": "Straw Bags"
+            },
+
+            {
+              "id": "5100209",
+              "name": "Wallets & Card Cases"
+            }
+          ]
+        },
+        {
+          "id": "51003",
+          "name": "Accessories",
+          "second_child": [
+            {
+              "id": "5100301",
+              "name": "Belts"
+            },
+
+            {
+              "id": "5100304",
+              "name": "Scarves"
+            },
+            {
+              "id": "5100305",
+              "name": "Wraps"
+            },
+
+            {
+              "id": "5100308",
+              "name": "Lingerie & Hosiery"
+            },
+            {
+              "id": "5100309",
+              "name": "Eye wear"
+            }
+          ]
+        },
+        {
+          "id": "51004",
+          "name": "Others",
+          "second_child": [
+            {
+              "id": "5100401",
+              "name": "Sneakers & Athletic"
+            },
+
+            {
+              "id": "5100404",
+              "name": "Flats"
+            },
+            {
+              "id": "5100405",
+              "name": "Booties"
+            },
+
+            {
+              "id": "5100408",
+              "name": "Comfort"
+            },
+            {
+              "id": "5100409",
+              "name": "Dress Shoes"
+            },
+
+            {
+              "id": "5100412",
+              "name": "Oxfords & Loafers"
+            },
+
+            {
+              "id": "5100414",
+              "name": "Slippers"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

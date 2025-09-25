@@ -1,0 +1,169 @@
+"use client"; // Mark this as a client component
+
+import Image from "next/image";
+import Link from "next/link";
+import { useRef, useState } from "react";
+import { toast } from "react-toastify";
+import { useRegisterMutation } from "@/store/api/authApi";
+import GoogleSignInButton from "./GoogleSigninButton";
+
+const SignUpForm = ({
+  className,
+  isHeading = true,
+  isModal = false,
+  onOpenSignInModal,
+  onHide,
+}) => {
+  const passwordInput = useRef();
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+  const [register, { isLoading }] = useRegisterMutation();
+
+  const hidePassword = () => {
+    if (passwordInput.current.type === "password") {
+      passwordInput.current.type = "text";
+    } else {
+      passwordInput.current.type = "password";
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await register({
+        name: formData.name,
+        email: formData.email,
+        password: formData.password,
+        signupMethod: "Email/Password",
+      }).unwrap();
+      toast.success("Successfully registered!", {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "light",
+      });
+
+      if (isModal && onHide) {
+        onHide();
+      }
+    } catch (error) {
+      console.error("Registration error:", error);
+      toast.error(error.data?.error || "Registration failed", {
+        position: "top-center",
+        autoClose: 1000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "light",
+      });
+    }
+  };
+
+  return (
+    <div className={`woocomerce__signin  ${className || ""}`}>
+      <div className="woocomerce__signin-wrapper">
+        {isHeading && (
+          <div className="woocomerce__signin-titlewrap">
+            <span className="woocomerce__signin-title">Sign up</span>
+          </div>
+        )}
+        <form onSubmit={handleSubmit}>
+          <div className="woocomerce__signin-field">
+            <label htmlFor="Name">Name</label>
+            <input
+              type="text"
+              required
+              name="Name"
+              id="Name"
+              placeholder="Name"
+              value={formData.name}
+              onChange={(e) =>
+                setFormData({ ...formData, name: e.target.value })
+              }
+            />
+          </div>
+          <div className="woocomerce__signin-field">
+            <label htmlFor="Email">Email</label>
+            <input
+              type="email"
+              name="Email"
+              required
+              id="Email"
+              placeholder="Your email"
+              value={formData.email}
+              onChange={(e) =>
+                setFormData({ ...formData, email: e.target.value })
+              }
+            />
+          </div>
+          <div className="woocomerce__signin-field">
+            <label htmlFor="Password">Password</label>
+            <div className="woocomerce__signin-passwordfield">
+              <input
+                type="password"
+                name="Password"
+                required
+                id="Password"
+                ref={passwordInput}
+                placeholder="Password"
+                value={formData.password}
+                onChange={(e) =>
+                  setFormData({ ...formData, password: e.target.value })
+                }
+              />
+              <button
+                type="button"
+                role="button"
+                className="woocomerce__signin-view"
+              >
+                <Image
+                  width={19}
+                  height={11}
+                  onClick={hidePassword}
+                  src="/assets/imgs/woocomerce/view.png"
+                  alt="view"
+                />
+              </button>
+            </div>
+          </div>
+          <div className="woocomerce__signin-btnwrap signupbtn d-flex flex-column gap-3">
+            <button
+              type="submit"
+              className="woocomerce__checkout-submitbtn"
+              disabled={isLoading}
+            >
+              {isLoading ? "Registering..." : "Sign up"}
+            </button>
+            <GoogleSignInButton onHide={onHide} />
+          </div>
+        </form>
+        <div className="woocomerce__signin-formfooter">
+          <p>
+            Already have an account?{" "}
+            {isModal ? (
+              <button
+                type="button"
+                className="btn btn-link p-0 m-0"
+                style={{ textDecoration: "underline", color: "#007bff" }}
+                onClick={onOpenSignInModal}
+              >
+                Sign in
+              </button>
+            ) : (
+              <Link href={"/sign-in"}>Sign in</Link>
+            )}
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default SignUpForm;

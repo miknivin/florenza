@@ -1,0 +1,2414 @@
+{
+  "details": [
+    {
+      "id": "301",
+      "parent_id": "201",
+      "pro_code": "#BGG09455",
+      "title": "Chairby Genzy Alexis4",
+      "description": {
+        "text": "Lightly padded bomber jacket, featuring eyelet embroidery and detachable sleeves. Made with a ribbed waistband and welt pockets, hood can be adjusted via drawstrings.",
+        "featured": [
+          {
+            "name": "Cruelty free"
+          },
+          {
+            "name": "Adjustable drawstrings at the hood"
+          },
+          {
+            "name": "Eyelet embroidery"
+          },
+          {
+            "name": "Cruelty free"
+          },
+          {
+            "name": "Welt pockets at waist"
+          }
+        ]
+      },
+      "img": [
+        "woocomerce/products/details/single-1.png",
+        "woocomerce/products/details/single-2.png",
+        "woocomerce/products/details/single-3.png",
+        "woocomerce/products/details/single-4.png"
+      ],
+      "category": "woman",
+      "price": "670.00",
+      "dis_price": "407.50",
+      "size": ["m", "lg", "xl", "xxl"],
+      "color": ["pink", "purple", "blue", "gray"],
+      "information": [
+        {
+          "details_text": "Percentage off promotions, discounts, or sale markdowns are most customarily based on our own opinion of the value of this product, which is not intended to reflect a former price at which this product has sold in the recent past.",
+          "keys": ["size", "chest", "length"],
+          "data": [
+            ["m", "35", "43"],
+            ["lg", "37", "43"],
+            ["xl", "39", "43"],
+            ["xxl", "41", "43"]
+          ]
+        }
+      ],
+      "reviews": [
+        {
+          "name": "Bijoy",
+          "details": "Nice product",
+          "star": "5"
+        },
+        {
+          "name": "Halim",
+          "details": "Good product",
+          "star": "4"
+        },
+        {
+          "name": "Mosarof",
+          "details": "Not so bad",
+          "star": "3"
+        }
+      ],
+      "related_product": [
+        {
+          "id": "204",
+          "title": "Jacket",
+          "img": "woocomerce/products/p4.png",
+          "hover_img": "woocomerce/products/p8.png",
+          "price": "820.00",
+          "dis_price": "400.00",
+          "category": "woman"
+        },
+        {
+          "id": "205",
+          "title": "Chairby Genzy Alexis",
+          "img": "woocomerce/products/p5.png",
+          "hover_img": "woocomerce/products/p10.png",
+          "price": "470.00",
+          "dis_price": "350.00",
+          "category": "woman"
+        },
+        {
+          "id": "206",
+          "title": "Harold Cabinet Visser",
+          "img": "woocomerce/products/p6.png",
+          "hover_img": "woocomerce/products/p12.png",
+          "price": "770.00",
+          "dis_price": "470.00",
+          "category": "woman"
+        },
+        {
+          "id": "210",
+          "title": "Zipup Jacket",
+          "img": "woocomerce/products/p10.png",
+          "hover_img": "woocomerce/products/p20.png",
+          "price": "970.00",
+          "dis_price": "800.00",
+          "category": "woman"
+        },
+        {
+          "id": "212",
+          "title": "Track Jacket",
+          "img": "woocomerce/products/p12.png",
+          "hover_img": "woocomerce/products/p24.png",
+          "price": "800.00",
+          "dis_price": "770.00",
+          "category": "woman"
+        },
+        {
+          "id": "213",
+          "title": "Women's Zipup Track Jacket",
+          "img": "woocomerce/products/p13.png",
+          "hover_img": "woocomerce/products/p1.png",
+          "price": "660.00",
+          "dis_price": "580.00",
+          "category": "woman"
+        },
+        {
+          "id": "218",
+          "title": "Shirt",
+          "img": "woocomerce/products/p18.png",
+          "hover_img": "woocomerce/products/p11.png",
+          "price": "470.00",
+          "dis_price": "420.00",
+          "category": "woman"
+        },
+        {
+          "id": "219",
+          "title": "Full Jacket",
+          "img": "woocomerce/products/p19.png",
+          "hover_img": "woocomerce/products/p13.png",
+          "price": "970.00",
+          "dis_price": "830.00",
+          "category": "woman"
+        }
+      ]
+    },
+    {
+      "id": "302",
+      "parent_id": "202",
+      "pro_code": "#BGG09455",
+      "title": "Harold Cabinet Visser",
+      "description": {
+        "text": "Lightly padded bomber jacket, featuring eyelet embroidery and detachable sleeves. Made with a ribbed waistband and welt pockets, hood can be adjusted via drawstrings.",
+        "featured": [
+          {
+            "name": "Cruelty free"
+          },
+          {
+            "name": "Adjustable drawstrings at the hood"
+          },
+          {
+            "name": "Eyelet embroidery"
+          },
+          {
+            "name": "Cruelty free"
+          },
+          {
+            "name": "Welt pockets at waist"
+          }
+        ]
+      },
+      "img": [
+        "woocomerce/products/details/single-5.png",
+        "woocomerce/products/details/single-6.png",
+        "woocomerce/products/details/single-7.png",
+        "woocomerce/products/details/single-8.png"
+      ],
+      "category": "kids & baby",
+      "price": "870.00",
+      "dis_price": "700.00",
+      "size": ["m", "lg", "xl", "xxl"],
+      "color": ["purple", "deep-purple", "skyblue", "red", "yellow"],
+      "information": [
+        {
+          "details_text": "Percentage off promotions, discounts, or sale markdowns are most customarily based on our own opinion of the value of this product, which is not intended to reflect a former price at which this product has sold in the recent past.",
+          "keys": ["size", "chest", "length"],
+          "data": [
+            ["m", "35", "43"],
+            ["lg", "37", "43"],
+            ["xl", "39", "43"],
+            ["xxl", "41", "43"]
+          ]
+        }
+      ],
+      "reviews": [
+        {
+          "name": "Robi",
+          "details": "Not perfect",
+          "star": "2"
+        },
+        {
+          "name": "Foysal",
+          "details": "Color quality is normal",
+          "star": "4"
+        },
+        {
+          "name": "Ranjit",
+          "details": "Size not perfect",
+          "star": "2"
+        }
+      ],
+      "related_product": []
+    },
+    {
+      "id": "303",
+      "parent_id": "203",
+      "pro_code": "#BGG09455",
+      "title": "Man Full-Hata T-shirt",
+      "description": {
+        "text": "Lightly padded bomber jacket, featuring eyelet embroidery and detachable sleeves. Made with a ribbed waistband and welt pockets, hood can be adjusted via drawstrings.",
+        "featured": [
+          {
+            "name": "Cruelty free"
+          },
+          {
+            "name": "Adjustable drawstrings at the hood"
+          },
+          {
+            "name": "Eyelet embroidery"
+          },
+          {
+            "name": "Cruelty free"
+          },
+          {
+            "name": "Welt pockets at waist"
+          }
+        ]
+      },
+      "img": [
+        "woocomerce/products/details/single-9.png",
+        "woocomerce/products/details/single-10.png",
+        "woocomerce/products/details/single-11.png",
+        "woocomerce/products/details/single-12.png"
+      ],
+      "category": "jewellery",
+      "price": "890.00",
+      "dis_price": "750.00",
+      "size": ["m", "lg", "xl", "xxl"],
+      "color": ["pink", "deep-purple", "blue", "red", "yellow"],
+      "information": [
+        {
+          "details_text": "Percentage off promotions, discounts, or sale markdowns are most customarily based on our own opinion of the value of this product, which is not intended to reflect a former price at which this product has sold in the recent past.",
+          "keys": ["size", "chest", "length"],
+          "data": [
+            ["m", "35", "43"],
+            ["lg", "37", "43"],
+            ["xl", "39", "43"],
+            ["xxl", "41", "43"]
+          ]
+        }
+      ],
+      "reviews": [
+        {
+          "name": "Mizan",
+          "details": "I like this",
+          "star": "5"
+        }
+      ],
+      "related_product": [
+        {
+          "id": "207",
+          "title": "Man T-shirt",
+          "img": "woocomerce/products/p7.png",
+          "hover_img": "woocomerce/products/p14.png",
+          "price": "780.00",
+          "dis_price": "500.00",
+          "category": "jewellery"
+        },
+        {
+          "id": "211",
+          "title": "Women's Zipup",
+          "img": "woocomerce/products/p11.png",
+          "hover_img": "woocomerce/products/p22.png",
+          "price": "700.00",
+          "dis_price": "650.00",
+          "category": "jewellery"
+        },
+        {
+          "id": "222",
+          "title": "Women's Jewellery",
+          "img": "woocomerce/products/p22.png",
+          "hover_img": "woocomerce/products/p19.png",
+          "price": "490.00",
+          "dis_price": "447.00",
+          "category": "jewellery"
+        }
+      ]
+    },
+    {
+      "id": "304",
+      "parent_id": "204",
+      "pro_code": "#BGG09455",
+      "title": "Jacket",
+      "description": {
+        "text": "Lightly padded bomber jacket, featuring eyelet embroidery and detachable sleeves. Made with a ribbed waistband and welt pockets, hood can be adjusted via drawstrings.",
+        "featured": [
+          {
+            "name": "Cruelty free"
+          },
+          {
+            "name": "Adjustable drawstrings at the hood"
+          },
+          {
+            "name": "Eyelet embroidery"
+          },
+          {
+            "name": "Cruelty free"
+          },
+          {
+            "name": "Welt pockets at waist"
+          }
+        ]
+      },
+      "img": [
+        "woocomerce/products/details/single-13.png",
+        "woocomerce/products/details/single-14.png",
+        "woocomerce/products/details/single-15.png",
+        "woocomerce/products/details/single-1.png"
+      ],
+      "category": "woman",
+      "price": "820.00",
+      "dis_price": "400.00",
+      "size": ["m", "lg", "xl", "xxl"],
+      "color": ["pink", "red", "yellow"],
+      "information": [
+        {
+          "details_text": "Percentage off promotions, discounts, or sale markdowns are most customarily based on our own opinion of the value of this product, which is not intended to reflect a former price at which this product has sold in the recent past.",
+          "keys": ["size", "chest", "length"],
+          "data": [
+            ["m", "35", "43"],
+            ["lg", "37", "43"],
+            ["xl", "39", "43"],
+            ["xxl", "41", "43"]
+          ]
+        }
+      ],
+      "reviews": [
+        {
+          "name": "Marianna",
+          "details": "Percentage off promotions, discounts, or sale markdowns are most customarily based on our own opinion of the value of this product, which is not intended to reflect a former price at which this product has sold in the recent past.",
+          "star": "5"
+        },
+        {
+          "name": "Thomas",
+          "details": "Nice Product",
+          "star": "4"
+        },
+        {
+          "name": "Adam",
+          "details": "Nice Product",
+          "star": "4"
+        },
+        {
+          "name": "Liza",
+          "details": "Not a good product",
+          "star": "1"
+        }
+      ],
+      "related_product": [
+        {
+          "id": "201",
+          "title": "Chairby Genzy Alexis4",
+          "img": "woocomerce/products/p1.png",
+          "hover_img": "woocomerce/products/p2.png",
+          "price": "670.00",
+          "dis_price": "407.50",
+          "category": "woman"
+        },
+        {
+          "id": "205",
+          "title": "Chairby Genzy Alexis",
+          "img": "woocomerce/products/p5.png",
+          "hover_img": "woocomerce/products/p10.png",
+          "price": "470.00",
+          "dis_price": "350.00",
+          "category": "woman"
+        },
+        {
+          "id": "206",
+          "title": "Harold Cabinet Visser",
+          "img": "woocomerce/products/p6.png",
+          "hover_img": "woocomerce/products/p12.png",
+          "price": "770.00",
+          "dis_price": "470.00",
+          "category": "woman"
+        },
+        {
+          "id": "210",
+          "title": "Zipup Jacket",
+          "img": "woocomerce/products/p10.png",
+          "hover_img": "woocomerce/products/p20.png",
+          "price": "970.00",
+          "dis_price": "800.00",
+          "category": "woman"
+        },
+        {
+          "id": "212",
+          "title": "Track Jacket",
+          "img": "woocomerce/products/p12.png",
+          "hover_img": "woocomerce/products/p24.png",
+          "price": "800.00",
+          "dis_price": "770.00",
+          "category": "woman"
+        },
+        {
+          "id": "213",
+          "title": "Women's Zipup Track Jacket",
+          "img": "woocomerce/products/p13.png",
+          "hover_img": "woocomerce/products/p1.png",
+          "price": "660.00",
+          "dis_price": "580.00",
+          "category": "woman"
+        },
+        {
+          "id": "218",
+          "title": "Shirt",
+          "img": "woocomerce/products/p18.png",
+          "hover_img": "woocomerce/products/p11.png",
+          "price": "470.00",
+          "dis_price": "420.00",
+          "category": "woman"
+        },
+        {
+          "id": "219",
+          "title": "Full Jacket",
+          "img": "woocomerce/products/p19.png",
+          "hover_img": "woocomerce/products/p13.png",
+          "price": "970.00",
+          "dis_price": "830.00",
+          "category": "woman"
+        }
+      ]
+    },
+    {
+      "id": "305",
+      "parent_id": "205",
+      "pro_code": "#BGG09455",
+      "title": "Chairby Genzy Alexis",
+      "description": {
+        "text": "Lightly padded bomber jacket, featuring eyelet embroidery and detachable sleeves. Made with a ribbed waistband and welt pockets, hood can be adjusted via drawstrings.",
+        "featured": [
+          {
+            "name": "Cruelty free"
+          },
+          {
+            "name": "Adjustable drawstrings at the hood"
+          },
+          {
+            "name": "Eyelet embroidery"
+          },
+          {
+            "name": "Cruelty free"
+          },
+          {
+            "name": "Welt pockets at waist"
+          }
+        ]
+      },
+      "img": [
+        "woocomerce/products/details/single-2.png",
+        "woocomerce/products/details/single-4.png",
+        "woocomerce/products/details/single-6.png",
+        "woocomerce/products/details/single-8.png"
+      ],
+      "category": "woman",
+      "price": "470.00",
+      "dis_price": "350.00",
+      "size": ["m", "lg", "xl", "xxl"],
+      "color": ["purple", "yellow"],
+      "information": [
+        {
+          "details_text": "Percentage off promotions, discounts, or sale markdowns are most customarily based on our own opinion of the value of this product, which is not intended to reflect a former price at which this product has sold in the recent past.",
+          "keys": ["size", "chest", "length"],
+          "data": [
+            ["m", "35", "43"],
+            ["lg", "37", "43"],
+            ["xl", "39", "43"],
+            ["xxl", "41", "43"]
+          ]
+        }
+      ],
+      "reviews": [],
+      "related_product": [
+        {
+          "id": "204",
+          "title": "Jacket",
+          "img": "woocomerce/products/p4.png",
+          "hover_img": "woocomerce/products/p8.png",
+          "price": "820.00",
+          "dis_price": "400.00",
+          "category": "woman"
+        },
+        {
+          "id": "201",
+          "title": "Chairby Genzy Alexis4",
+          "img": "woocomerce/products/p1.png",
+          "hover_img": "woocomerce/products/p2.png",
+          "price": "670.00",
+          "dis_price": "407.50",
+          "category": "woman"
+        },
+        {
+          "id": "206",
+          "title": "Harold Cabinet Visser",
+          "img": "woocomerce/products/p6.png",
+          "hover_img": "woocomerce/products/p12.png",
+          "price": "770.00",
+          "dis_price": "470.00",
+          "category": "woman"
+        },
+        {
+          "id": "210",
+          "title": "Zipup Jacket",
+          "img": "woocomerce/products/p10.png",
+          "hover_img": "woocomerce/products/p20.png",
+          "price": "970.00",
+          "dis_price": "800.00",
+          "category": "woman"
+        },
+        {
+          "id": "212",
+          "title": "Track Jacket",
+          "img": "woocomerce/products/p12.png",
+          "hover_img": "woocomerce/products/p24.png",
+          "price": "800.00",
+          "dis_price": "770.00",
+          "category": "woman"
+        },
+        {
+          "id": "213",
+          "title": "Women's Zipup Track Jacket",
+          "img": "woocomerce/products/p13.png",
+          "hover_img": "woocomerce/products/p1.png",
+          "price": "660.00",
+          "dis_price": "580.00",
+          "category": "woman"
+        },
+        {
+          "id": "218",
+          "title": "Shirt",
+          "img": "woocomerce/products/p18.png",
+          "hover_img": "woocomerce/products/p11.png",
+          "price": "470.00",
+          "dis_price": "420.00",
+          "category": "woman"
+        },
+        {
+          "id": "219",
+          "title": "Full Jacket",
+          "img": "woocomerce/products/p19.png",
+          "hover_img": "woocomerce/products/p13.png",
+          "price": "970.00",
+          "dis_price": "830.00",
+          "category": "woman"
+        }
+      ]
+    },
+    {
+      "id": "306",
+      "parent_id": "206",
+      "pro_code": "#BGG09455",
+      "title": "Harold Cabinet Visser",
+      "description": {
+        "text": "Lightly padded bomber jacket, featuring eyelet embroidery and detachable sleeves. Made with a ribbed waistband and welt pockets, hood can be adjusted via drawstrings.",
+        "featured": [
+          {
+            "name": "Cruelty free"
+          },
+          {
+            "name": "Adjustable drawstrings at the hood"
+          },
+          {
+            "name": "Eyelet embroidery"
+          },
+          {
+            "name": "Cruelty free"
+          },
+          {
+            "name": "Welt pockets at waist"
+          }
+        ]
+      },
+      "img": [
+        "woocomerce/products/details/single-10.png",
+        "woocomerce/products/details/single-12.png",
+        "woocomerce/products/details/single-14.png",
+        "woocomerce/products/details/single-2.png"
+      ],
+      "category": "woman",
+      "price": "770.00",
+      "dis_price": "470.00",
+      "size": ["m", "lg", "xl", "xxl"],
+      "color": ["deep-purple", "blue", "gray", "yellow"],
+      "information": [
+        {
+          "details_text": "Percentage off promotions, discounts, or sale markdowns are most customarily based on our own opinion of the value of this product, which is not intended to reflect a former price at which this product has sold in the recent past.",
+          "keys": ["size", "chest", "length"],
+          "data": [
+            ["m", "35", "43"],
+            ["lg", "37", "43"],
+            ["xl", "39", "43"],
+            ["xxl", "41", "43"]
+          ]
+        }
+      ],
+      "reviews": [
+        {
+          "name": "Jon",
+          "details": "Price is very heigh but product quality is good",
+          "star": "5"
+        }
+      ],
+      "related_product": [
+        {
+          "id": "204",
+          "title": "Jacket",
+          "img": "woocomerce/products/p4.png",
+          "hover_img": "woocomerce/products/p8.png",
+          "price": "820.00",
+          "dis_price": "400.00",
+          "category": "woman"
+        },
+        {
+          "id": "205",
+          "title": "Chairby Genzy Alexis",
+          "img": "woocomerce/products/p5.png",
+          "hover_img": "woocomerce/products/p10.png",
+          "price": "470.00",
+          "dis_price": "350.00",
+          "category": "woman"
+        },
+        {
+          "id": "201",
+          "title": "Chairby Genzy Alexis4",
+          "img": "woocomerce/products/p1.png",
+          "hover_img": "woocomerce/products/p2.png",
+          "price": "670.00",
+          "dis_price": "407.50",
+          "category": "woman"
+        },
+        {
+          "id": "210",
+          "title": "Zipup Jacket",
+          "img": "woocomerce/products/p10.png",
+          "hover_img": "woocomerce/products/p20.png",
+          "price": "970.00",
+          "dis_price": "800.00",
+          "category": "woman"
+        },
+        {
+          "id": "212",
+          "title": "Track Jacket",
+          "img": "woocomerce/products/p12.png",
+          "hover_img": "woocomerce/products/p24.png",
+          "price": "800.00",
+          "dis_price": "770.00",
+          "category": "woman"
+        },
+        {
+          "id": "213",
+          "title": "Women's Zipup Track Jacket",
+          "img": "woocomerce/products/p13.png",
+          "hover_img": "woocomerce/products/p1.png",
+          "price": "660.00",
+          "dis_price": "580.00",
+          "category": "woman"
+        },
+        {
+          "id": "218",
+          "title": "Shirt",
+          "img": "woocomerce/products/p18.png",
+          "hover_img": "woocomerce/products/p11.png",
+          "price": "470.00",
+          "dis_price": "420.00",
+          "category": "woman"
+        },
+        {
+          "id": "219",
+          "title": "Full Jacket",
+          "img": "woocomerce/products/p19.png",
+          "hover_img": "woocomerce/products/p13.png",
+          "price": "970.00",
+          "dis_price": "830.00",
+          "category": "woman"
+        }
+      ]
+    },
+    {
+      "id": "307",
+      "parent_id": "207",
+      "pro_code": "#BGG09455",
+      "title": "Man T-shirt",
+      "description": {
+        "text": "Lightly padded bomber jacket, featuring eyelet embroidery and detachable sleeves. Made with a ribbed waistband and welt pockets, hood can be adjusted via drawstrings.",
+        "featured": [
+          {
+            "name": "Cruelty free"
+          },
+          {
+            "name": "Adjustable drawstrings at the hood"
+          },
+          {
+            "name": "Eyelet embroidery"
+          },
+          {
+            "name": "Cruelty free"
+          },
+          {
+            "name": "Welt pockets at waist"
+          }
+        ]
+      },
+      "img": [
+        "woocomerce/products/details/single-1.png",
+        "woocomerce/products/details/single-3.png",
+        "woocomerce/products/details/single-5.png",
+        "woocomerce/products/details/single-7.png"
+      ],
+      "category": "jewellery",
+      "price": "780.00",
+      "dis_price": "500.00",
+      "size": ["m", "lg", "xl", "xxl"],
+      "color": ["purple", "deep-purple", "blue", "red", "yellow"],
+      "information": [
+        {
+          "details_text": "Percentage off promotions, discounts, or sale markdowns are most customarily based on our own opinion of the value of this product, which is not intended to reflect a former price at which this product has sold in the recent past.",
+          "keys": ["size", "chest", "length"],
+          "data": [
+            ["m", "35", "43"],
+            ["lg", "37", "43"],
+            ["xl", "39", "43"],
+            ["xxl", "41", "43"]
+          ]
+        }
+      ],
+      "reviews": [
+        {
+          "name": "Thomas",
+          "details": "Nice Product",
+          "star": "5"
+        }
+      ],
+      "related_product": [
+        {
+          "id": "203",
+          "title": "Man Full-Hata T-shirt",
+          "img": "woocomerce/products/p3.png",
+          "hover_img": "woocomerce/products/p6.png",
+          "price": "890.00",
+          "dis_price": "750.00",
+          "category": "jewellery"
+        },
+        {
+          "id": "211",
+          "title": "Women's Zipup",
+          "img": "woocomerce/products/p11.png",
+          "hover_img": "woocomerce/products/p22.png",
+          "price": "700.00",
+          "dis_price": "650.00",
+          "category": "jewellery"
+        },
+        {
+          "id": "222",
+          "title": "Women's Jewellery",
+          "img": "woocomerce/products/p22.png",
+          "hover_img": "woocomerce/products/p19.png",
+          "price": "490.00",
+          "dis_price": "447.00",
+          "category": "jewellery"
+        }
+      ]
+    },
+    {
+      "id": "308",
+      "parent_id": "208",
+      "pro_code": "#BGG09455",
+      "title": "Zipup Track Jacket",
+      "description": {
+        "text": "Lightly padded bomber jacket, featuring eyelet embroidery and detachable sleeves. Made with a ribbed waistband and welt pockets, hood can be adjusted via drawstrings.",
+        "featured": [
+          {
+            "name": "Cruelty free"
+          },
+          {
+            "name": "Adjustable drawstrings at the hood"
+          },
+          {
+            "name": "Eyelet embroidery"
+          },
+          {
+            "name": "Cruelty free"
+          },
+          {
+            "name": "Welt pockets at waist"
+          }
+        ]
+      },
+      "img": [
+        "woocomerce/products/details/single-9.png",
+        "woocomerce/products/details/single-11.png",
+        "woocomerce/products/details/single-13.png",
+        "woocomerce/products/details/single-15.png"
+      ],
+      "category": "furniture",
+      "price": "450.00",
+      "dis_price": "",
+      "size": ["m", "lg", "xl", "xxl"],
+      "color": ["purple", "red", "yellow"],
+      "information": [
+        {
+          "details_text": "Percentage off promotions, discounts, or sale markdowns are most customarily based on our own opinion of the value of this product, which is not intended to reflect a former price at which this product has sold in the recent past.",
+          "keys": ["size", "chest", "length"],
+          "data": [
+            ["m", "35", "43"],
+            ["lg", "37", "43"],
+            ["xl", "39", "43"],
+            ["xxl", "41", "43"]
+          ]
+        }
+      ],
+      "reviews": [],
+      "related_product": [
+        {
+          "id": "215",
+          "title": "T-Shirt",
+          "img": "woocomerce/products/p15.png",
+          "hover_img": "woocomerce/products/p5.png",
+          "price": "850.00",
+          "dis_price": "800.00",
+          "category": "furniture"
+        },
+        {
+          "id": "223",
+          "title": "Reading Table",
+          "img": "woocomerce/products/p23.png",
+          "hover_img": "woocomerce/products/p21.png",
+          "price": "570.00",
+          "dis_price": "500.00",
+          "category": "furniture"
+        }
+      ]
+    },
+    {
+      "id": "309",
+      "parent_id": "209",
+      "pro_code": "#BGG09455",
+      "title": "Women's Jacket",
+      "description": {
+        "text": "Lightly padded bomber jacket, featuring eyelet embroidery and detachable sleeves. Made with a ribbed waistband and welt pockets, hood can be adjusted via drawstrings.",
+        "featured": [
+          {
+            "name": "Cruelty free"
+          },
+          {
+            "name": "Adjustable drawstrings at the hood"
+          },
+          {
+            "name": "Eyelet embroidery"
+          },
+          {
+            "name": "Cruelty free"
+          },
+          {
+            "name": "Welt pockets at waist"
+          }
+        ]
+      },
+      "img": [
+        "woocomerce/products/details/single-3.png",
+        "woocomerce/products/details/single-6.png",
+        "woocomerce/products/details/single-9.png",
+        "woocomerce/products/details/single-12.png"
+      ],
+      "category": "sports & health",
+      "price": "400.00",
+      "dis_price": "300.00",
+      "size": ["m", "lg", "xl", "xxl"],
+      "color": ["pink", "skyblue", "red"],
+      "information": [
+        {
+          "details_text": "Percentage off promotions, discounts, or sale markdowns are most customarily based on our own opinion of the value of this product, which is not intended to reflect a former price at which this product has sold in the recent past.",
+          "keys": ["size", "chest", "length"],
+          "data": [
+            ["m", "35", "43"],
+            ["lg", "37", "43"],
+            ["xl", "39", "43"],
+            ["xxl", "41", "43"]
+          ]
+        }
+      ],
+      "reviews": [
+        {
+          "name": "Halim",
+          "details": "Good product",
+          "star": "4"
+        },
+        {
+          "name": "Mosarof",
+          "details": "Not so bad",
+          "star": "3"
+        }
+      ],
+      "related_product": []
+    },
+    {
+      "id": "310",
+      "parent_id": "210",
+      "pro_code": "#BGG09455",
+      "title": "Zipup Jacket",
+      "description": {
+        "text": "Lightly padded bomber jacket, featuring eyelet embroidery and detachable sleeves. Made with a ribbed waistband and welt pockets, hood can be adjusted via drawstrings.",
+        "featured": [
+          {
+            "name": "Cruelty free"
+          },
+          {
+            "name": "Adjustable drawstrings at the hood"
+          },
+          {
+            "name": "Eyelet embroidery"
+          },
+          {
+            "name": "Cruelty free"
+          },
+          {
+            "name": "Welt pockets at waist"
+          }
+        ]
+      },
+      "img": [
+        "woocomerce/products/details/single-15.png",
+        "woocomerce/products/details/single-4.png",
+        "woocomerce/products/details/single-8.png",
+        "woocomerce/products/details/single-12.png"
+      ],
+      "category": "woman",
+      "price": "970.00",
+      "dis_price": "800.00",
+      "size": ["m", "lg", "xl", "xxl"],
+      "color": ["pink", "purple", "deep-purple", "skyblue"],
+      "information": [
+        {
+          "details_text": "Percentage off promotions, discounts, or sale markdowns are most customarily based on our own opinion of the value of this product, which is not intended to reflect a former price at which this product has sold in the recent past.",
+          "keys": ["size", "chest", "length"],
+          "data": [
+            ["m", "35", "43"],
+            ["lg", "37", "43"],
+            ["xl", "39", "43"],
+            ["xxl", "41", "43"]
+          ]
+        }
+      ],
+      "reviews": [
+        {
+          "name": "Thomas",
+          "details": "Nice Product",
+          "star": "5"
+        },
+        {
+          "name": "Bijoy",
+          "details": "Nice product",
+          "star": "5"
+        }
+      ],
+      "related_product": [
+        {
+          "id": "204",
+          "title": "Jacket",
+          "img": "woocomerce/products/p4.png",
+          "hover_img": "woocomerce/products/p8.png",
+          "price": "820.00",
+          "dis_price": "400.00",
+          "category": "woman"
+        },
+        {
+          "id": "205",
+          "title": "Chairby Genzy Alexis",
+          "img": "woocomerce/products/p5.png",
+          "hover_img": "woocomerce/products/p10.png",
+          "price": "470.00",
+          "dis_price": "350.00",
+          "category": "woman"
+        },
+        {
+          "id": "206",
+          "title": "Harold Cabinet Visser",
+          "img": "woocomerce/products/p6.png",
+          "hover_img": "woocomerce/products/p12.png",
+          "price": "770.00",
+          "dis_price": "470.00",
+          "category": "woman"
+        },
+        {
+          "id": "201",
+          "title": "Chairby Genzy Alexis4",
+          "img": "woocomerce/products/p1.png",
+          "hover_img": "woocomerce/products/p2.png",
+          "price": "670.00",
+          "dis_price": "407.50",
+          "category": "woman"
+        },
+        {
+          "id": "212",
+          "title": "Track Jacket",
+          "img": "woocomerce/products/p12.png",
+          "hover_img": "woocomerce/products/p24.png",
+          "price": "800.00",
+          "dis_price": "770.00",
+          "category": "woman"
+        },
+        {
+          "id": "213",
+          "title": "Women's Zipup Track Jacket",
+          "img": "woocomerce/products/p13.png",
+          "hover_img": "woocomerce/products/p1.png",
+          "price": "660.00",
+          "dis_price": "580.00",
+          "category": "woman"
+        },
+        {
+          "id": "218",
+          "title": "Shirt",
+          "img": "woocomerce/products/p18.png",
+          "hover_img": "woocomerce/products/p11.png",
+          "price": "470.00",
+          "dis_price": "420.00",
+          "category": "woman"
+        },
+        {
+          "id": "219",
+          "title": "Full Jacket",
+          "img": "woocomerce/products/p19.png",
+          "hover_img": "woocomerce/products/p13.png",
+          "price": "970.00",
+          "dis_price": "830.00",
+          "category": "woman"
+        }
+      ]
+    },
+    {
+      "id": "311",
+      "parent_id": "211",
+      "pro_code": "#BGG09455",
+      "title": "Women's Zipup",
+      "description": {
+        "text": "Lightly padded bomber jacket, featuring eyelet embroidery and detachable sleeves. Made with a ribbed waistband and welt pockets, hood can be adjusted via drawstrings.",
+        "featured": [
+          {
+            "name": "Cruelty free"
+          },
+          {
+            "name": "Adjustable drawstrings at the hood"
+          },
+          {
+            "name": "Eyelet embroidery"
+          },
+          {
+            "name": "Cruelty free"
+          },
+          {
+            "name": "Welt pockets at waist"
+          }
+        ]
+      },
+      "img": [
+        "woocomerce/products/details/single-5.png",
+        "woocomerce/products/details/single-10.png",
+        "woocomerce/products/details/single-15.png",
+        "woocomerce/products/details/single-1.png"
+      ],
+      "category": "jewellery",
+      "price": "700.00",
+      "dis_price": "650.00",
+      "size": ["m", "lg", "xl", "xxl"],
+      "color": ["pink", "deep-purple", "blue", "red", "yellow"],
+      "information": [
+        {
+          "details_text": "Percentage off promotions, discounts, or sale markdowns are most customarily based on our own opinion of the value of this product, which is not intended to reflect a former price at which this product has sold in the recent past.",
+          "keys": ["size", "chest", "length"],
+          "data": [
+            ["m", "35", "43"],
+            ["lg", "37", "43"],
+            ["xl", "39", "43"],
+            ["xxl", "41", "43"]
+          ]
+        }
+      ],
+      "reviews": [
+        {
+          "name": "Mosarof",
+          "details": "Not so bad",
+          "star": "3"
+        }
+      ],
+      "related_product": [
+        {
+          "id": "207",
+          "title": "Man T-shirt",
+          "img": "woocomerce/products/p7.png",
+          "hover_img": "woocomerce/products/p14.png",
+          "price": "780.00",
+          "dis_price": "500.00",
+          "category": "jewellery"
+        },
+        {
+          "id": "203",
+          "title": "Man Full-Hata T-shirt",
+          "img": "woocomerce/products/p3.png",
+          "hover_img": "woocomerce/products/p6.png",
+          "price": "890.00",
+          "dis_price": "750.00",
+          "category": "jewellery"
+        },
+        {
+          "id": "222",
+          "title": "Women's Jewellery",
+          "img": "woocomerce/products/p22.png",
+          "hover_img": "woocomerce/products/p19.png",
+          "price": "490.00",
+          "dis_price": "447.00",
+          "category": "jewellery"
+        }
+      ]
+    },
+    {
+      "id": "312",
+      "parent_id": "212",
+      "pro_code": "#BGG09455",
+      "title": "Track Jacket",
+      "description": {
+        "text": "Lightly padded bomber jacket, featuring eyelet embroidery and detachable sleeves. Made with a ribbed waistband and welt pockets, hood can be adjusted via drawstrings.",
+        "featured": [
+          {
+            "name": "Cruelty free"
+          },
+          {
+            "name": "Adjustable drawstrings at the hood"
+          },
+          {
+            "name": "Eyelet embroidery"
+          },
+          {
+            "name": "Cruelty free"
+          },
+          {
+            "name": "Welt pockets at waist"
+          }
+        ]
+      },
+      "img": [
+        "woocomerce/products/details/single-6.png",
+        "woocomerce/products/details/single-12.png",
+        "woocomerce/products/details/single-3.png",
+        "woocomerce/products/details/single-9.png"
+      ],
+      "category": "woman",
+      "price": "800.00",
+      "dis_price": "770.00",
+      "size": ["m", "lg", "xl", "xxl"],
+      "color": ["deep-purple", "blue", "red", "yellow"],
+      "information": [
+        {
+          "details_text": "Percentage off promotions, discounts, or sale markdowns are most customarily based on our own opinion of the value of this product, which is not intended to reflect a former price at which this product has sold in the recent past.",
+          "keys": ["size", "chest", "length"],
+          "data": [
+            ["m", "35", "43"],
+            ["lg", "37", "43"],
+            ["xl", "39", "43"],
+            ["xxl", "41", "43"]
+          ]
+        }
+      ],
+      "reviews": [
+        {
+          "name": "Halim",
+          "details": "Good product",
+          "star": "4"
+        },
+        {
+          "name": "Robi",
+          "details": "Not perfect",
+          "star": "2"
+        },
+        {
+          "name": "Ranjit",
+          "details": "Size not perfect",
+          "star": "2"
+        }
+      ],
+      "related_product": [
+        {
+          "id": "204",
+          "title": "Jacket",
+          "img": "woocomerce/products/p4.png",
+          "hover_img": "woocomerce/products/p8.png",
+          "price": "820.00",
+          "dis_price": "400.00",
+          "category": "woman"
+        },
+        {
+          "id": "205",
+          "title": "Chairby Genzy Alexis",
+          "img": "woocomerce/products/p5.png",
+          "hover_img": "woocomerce/products/p10.png",
+          "price": "470.00",
+          "dis_price": "350.00",
+          "category": "woman"
+        },
+        {
+          "id": "206",
+          "title": "Harold Cabinet Visser",
+          "img": "woocomerce/products/p6.png",
+          "hover_img": "woocomerce/products/p12.png",
+          "price": "770.00",
+          "dis_price": "470.00",
+          "category": "woman"
+        },
+        {
+          "id": "210",
+          "title": "Zipup Jacket",
+          "img": "woocomerce/products/p10.png",
+          "hover_img": "woocomerce/products/p20.png",
+          "price": "970.00",
+          "dis_price": "800.00",
+          "category": "woman"
+        },
+        {
+          "id": "201",
+          "title": "Chairby Genzy Alexis4",
+          "img": "woocomerce/products/p1.png",
+          "hover_img": "woocomerce/products/p2.png",
+          "price": "670.00",
+          "dis_price": "407.50",
+          "category": "woman"
+        },
+        {
+          "id": "213",
+          "title": "Women's Zipup Track Jacket",
+          "img": "woocomerce/products/p13.png",
+          "hover_img": "woocomerce/products/p1.png",
+          "price": "660.00",
+          "dis_price": "580.00",
+          "category": "woman"
+        },
+        {
+          "id": "218",
+          "title": "Shirt",
+          "img": "woocomerce/products/p18.png",
+          "hover_img": "woocomerce/products/p11.png",
+          "price": "470.00",
+          "dis_price": "420.00",
+          "category": "woman"
+        },
+        {
+          "id": "219",
+          "title": "Full Jacket",
+          "img": "woocomerce/products/p19.png",
+          "hover_img": "woocomerce/products/p13.png",
+          "price": "970.00",
+          "dis_price": "830.00",
+          "category": "woman"
+        }
+      ]
+    },
+    {
+      "id": "313",
+      "parent_id": "213",
+      "pro_code": "#BGG09455",
+      "title": "Women's Zipup Track Jacket",
+      "description": {
+        "text": "Lightly padded bomber jacket, featuring eyelet embroidery and detachable sleeves. Made with a ribbed waistband and welt pockets, hood can be adjusted via drawstrings.",
+        "featured": [
+          {
+            "name": "Cruelty free"
+          },
+          {
+            "name": "Adjustable drawstrings at the hood"
+          },
+          {
+            "name": "Eyelet embroidery"
+          },
+          {
+            "name": "Cruelty free"
+          },
+          {
+            "name": "Welt pockets at waist"
+          }
+        ]
+      },
+      "img": [
+        "woocomerce/products/details/single-7.png",
+        "woocomerce/products/details/single-14.png",
+        "woocomerce/products/details/single-6.png",
+        "woocomerce/products/details/single-13.png"
+      ],
+      "category": "woman",
+      "price": "660.00",
+      "dis_price": "580.00",
+      "size": ["m", "lg", "xl", "xxl"],
+      "color": ["pink", "purple", "blue", "yellow"],
+      "information": [
+        {
+          "details_text": "Percentage off promotions, discounts, or sale markdowns are most customarily based on our own opinion of the value of this product, which is not intended to reflect a former price at which this product has sold in the recent past.",
+          "keys": ["size", "chest", "length"],
+          "data": [
+            ["m", "35", "43"],
+            ["lg", "37", "43"],
+            ["xl", "39", "43"],
+            ["xxl", "41", "43"]
+          ]
+        }
+      ],
+      "reviews": [],
+      "related_product": [
+        {
+          "id": "204",
+          "title": "Jacket",
+          "img": "woocomerce/products/p4.png",
+          "hover_img": "woocomerce/products/p8.png",
+          "price": "820.00",
+          "dis_price": "400.00",
+          "category": "woman"
+        },
+        {
+          "id": "205",
+          "title": "Chairby Genzy Alexis",
+          "img": "woocomerce/products/p5.png",
+          "hover_img": "woocomerce/products/p10.png",
+          "price": "470.00",
+          "dis_price": "350.00",
+          "category": "woman"
+        },
+        {
+          "id": "206",
+          "title": "Harold Cabinet Visser",
+          "img": "woocomerce/products/p6.png",
+          "hover_img": "woocomerce/products/p12.png",
+          "price": "770.00",
+          "dis_price": "470.00",
+          "category": "woman"
+        },
+        {
+          "id": "210",
+          "title": "Zipup Jacket",
+          "img": "woocomerce/products/p10.png",
+          "hover_img": "woocomerce/products/p20.png",
+          "price": "970.00",
+          "dis_price": "800.00",
+          "category": "woman"
+        },
+        {
+          "id": "212",
+          "title": "Track Jacket",
+          "img": "woocomerce/products/p12.png",
+          "hover_img": "woocomerce/products/p24.png",
+          "price": "800.00",
+          "dis_price": "770.00",
+          "category": "woman"
+        },
+        {
+          "id": "201",
+          "title": "Chairby Genzy Alexis4",
+          "img": "woocomerce/products/p1.png",
+          "hover_img": "woocomerce/products/p2.png",
+          "price": "670.00",
+          "dis_price": "407.50",
+          "category": "woman"
+        },
+        {
+          "id": "218",
+          "title": "Shirt",
+          "img": "woocomerce/products/p18.png",
+          "hover_img": "woocomerce/products/p11.png",
+          "price": "470.00",
+          "dis_price": "420.00",
+          "category": "woman"
+        },
+        {
+          "id": "219",
+          "title": "Full Jacket",
+          "img": "woocomerce/products/p19.png",
+          "hover_img": "woocomerce/products/p13.png",
+          "price": "970.00",
+          "dis_price": "830.00",
+          "category": "woman"
+        }
+      ]
+    },
+    {
+      "id": "314",
+      "parent_id": "214",
+      "pro_code": "#BGG09455",
+      "title": "Women's Pant",
+      "description": {
+        "text": "Lightly padded bomber jacket, featuring eyelet embroidery and detachable sleeves. Made with a ribbed waistband and welt pockets, hood can be adjusted via drawstrings.",
+        "featured": [
+          {
+            "name": "Cruelty free"
+          },
+          {
+            "name": "Adjustable drawstrings at the hood"
+          },
+          {
+            "name": "Eyelet embroidery"
+          },
+          {
+            "name": "Cruelty free"
+          },
+          {
+            "name": "Welt pockets at waist"
+          }
+        ]
+      },
+      "img": [
+        "woocomerce/products/details/single-8.png",
+        "woocomerce/products/details/single-1.png",
+        "woocomerce/products/details/single-9.png",
+        "woocomerce/products/details/single-3.png"
+      ],
+      "category": "beauty",
+      "price": "610.00",
+      "dis_price": "590.00",
+      "size": ["m", "lg", "xl", "xxl"],
+      "color": ["purple", "deep-purple", "gray", "skyblue", "yellow"],
+      "information": [
+        {
+          "details_text": "Percentage off promotions, discounts, or sale markdowns are most customarily based on our own opinion of the value of this product, which is not intended to reflect a former price at which this product has sold in the recent past.",
+          "keys": ["size", "chest", "length"],
+          "data": [
+            ["m", "35", "43"],
+            ["lg", "37", "43"],
+            ["xl", "39", "43"],
+            ["xxl", "41", "43"]
+          ]
+        }
+      ],
+      "reviews": [
+        {
+          "name": "Foysal",
+          "details": "Color quality is normal",
+          "star": "4"
+        }
+      ],
+      "related_product": [
+        {
+          "id": "221",
+          "title": "Women's T-Shirt",
+          "img": "woocomerce/products/p21.png",
+          "hover_img": "woocomerce/products/p17.png",
+          "price": "790.00",
+          "dis_price": "680.00",
+          "category": "beauty"
+        }
+      ]
+    },
+    {
+      "id": "315",
+      "parent_id": "215",
+      "pro_code": "#BGG09455",
+      "title": "T-Shirt",
+      "description": {
+        "text": "Lightly padded bomber jacket, featuring eyelet embroidery and detachable sleeves. Made with a ribbed waistband and welt pockets, hood can be adjusted via drawstrings.",
+        "featured": [
+          {
+            "name": "Cruelty free"
+          },
+          {
+            "name": "Adjustable drawstrings at the hood"
+          },
+          {
+            "name": "Eyelet embroidery"
+          },
+          {
+            "name": "Cruelty free"
+          },
+          {
+            "name": "Welt pockets at waist"
+          }
+        ]
+      },
+      "img": [
+        "woocomerce/products/details/single-9.png",
+        "woocomerce/products/details/single-3.png",
+        "woocomerce/products/details/single-12.png",
+        "woocomerce/products/details/single-6.png"
+      ],
+      "category": "furniture",
+      "price": "850.00",
+      "dis_price": "800.00",
+      "size": ["m", "lg", "xl", "xxl"],
+      "color": ["pink", "deep-purple", "blue", "skyblue", "red"],
+      "information": [
+        {
+          "details_text": "Percentage off promotions, discounts, or sale markdowns are most customarily based on our own opinion of the value of this product, which is not intended to reflect a former price at which this product has sold in the recent past.",
+          "keys": ["size", "chest", "length"],
+          "data": [
+            ["m", "35", "43"],
+            ["lg", "37", "43"],
+            ["xl", "39", "43"],
+            ["xxl", "41", "43"]
+          ]
+        }
+      ],
+      "reviews": [
+        {
+          "name": "Robi",
+          "details": "Not perfect",
+          "star": "2"
+        },
+        {
+          "name": "Ranjit",
+          "details": "Size not perfect",
+          "star": "2"
+        }
+      ],
+      "related_product": [
+        {
+          "id": "208",
+          "title": "Zipup Track Jacket",
+          "img": "woocomerce/products/p8.png",
+          "hover_img": "woocomerce/products/p16.png",
+          "price": "450.00",
+          "dis_price": "",
+          "category": "furniture"
+        },
+        {
+          "id": "223",
+          "title": "Reading Table",
+          "img": "woocomerce/products/p23.png",
+          "hover_img": "woocomerce/products/p21.png",
+          "price": "570.00",
+          "dis_price": "500.00",
+          "category": "furniture"
+        }
+      ]
+    },
+    {
+      "id": "316",
+      "parent_id": "216",
+      "pro_code": "#BGG09455",
+      "title": "Women's T-Shirt",
+      "description": {
+        "text": "Lightly padded bomber jacket, featuring eyelet embroidery and detachable sleeves. Made with a ribbed waistband and welt pockets, hood can be adjusted via drawstrings.",
+        "featured": [
+          {
+            "name": "Cruelty free"
+          },
+          {
+            "name": "Adjustable drawstrings at the hood"
+          },
+          {
+            "name": "Eyelet embroidery"
+          },
+          {
+            "name": "Cruelty free"
+          },
+          {
+            "name": "Welt pockets at waist"
+          }
+        ]
+      },
+      "img": [
+        "woocomerce/products/details/single-10.png",
+        "woocomerce/products/details/single-5.png",
+        "woocomerce/products/details/single-15.png",
+        "woocomerce/products/details/single-9.png"
+      ],
+      "category": "sports",
+      "price": "890.00",
+      "dis_price": "820.00",
+      "size": ["m", "lg", "xl", "xxl"],
+      "color": ["pink", "deep-purple", "blue", "red", "yellow"],
+      "information": [
+        {
+          "details_text": "Percentage off promotions, discounts, or sale markdowns are most customarily based on our own opinion of the value of this product, which is not intended to reflect a former price at which this product has sold in the recent past.",
+          "keys": ["size", "chest", "length"],
+          "data": [
+            ["m", "35", "43"],
+            ["lg", "37", "43"],
+            ["xl", "39", "43"],
+            ["xxl", "41", "43"]
+          ]
+        }
+      ],
+      "reviews": [
+        {
+          "name": "Mizan",
+          "details": "I like this",
+          "star": "5"
+        }
+      ],
+      "related_product": [
+        {
+          "id": "220",
+          "title": "Full T-Shirt",
+          "img": "woocomerce/products/p20.png",
+          "hover_img": "woocomerce/products/p15.png",
+          "price": "980.00",
+          "dis_price": "920.00",
+          "category": "sports"
+        }
+      ]
+    },
+    {
+      "id": "317",
+      "parent_id": "217",
+      "pro_code": "#BGG09455",
+      "title": "Women's Pant",
+      "description": {
+        "text": "Lightly padded bomber jacket, featuring eyelet embroidery and detachable sleeves. Made with a ribbed waistband and welt pockets, hood can be adjusted via drawstrings.",
+        "featured": [
+          {
+            "name": "Cruelty free"
+          },
+          {
+            "name": "Adjustable drawstrings at the hood"
+          },
+          {
+            "name": "Eyelet embroidery"
+          },
+          {
+            "name": "Cruelty free"
+          },
+          {
+            "name": "Welt pockets at waist"
+          }
+        ]
+      },
+      "img": [
+        "woocomerce/products/details/single-11.png",
+        "woocomerce/products/details/single-7.png",
+        "woocomerce/products/details/single-3.png",
+        "woocomerce/products/details/single-14.png"
+      ],
+      "category": "man",
+      "price": "570.00",
+      "dis_price": "420.00",
+      "size": ["m", "lg", "xl", "xxl"],
+      "color": ["pink", "purple", "gray", "skyblue", "yellow"],
+      "information": [
+        {
+          "details_text": "Percentage off promotions, discounts, or sale markdowns are most customarily based on our own opinion of the value of this product, which is not intended to reflect a former price at which this product has sold in the recent past.",
+          "keys": ["size", "chest", "length"],
+          "data": [
+            ["m", "35", "43"],
+            ["lg", "37", "43"],
+            ["xl", "39", "43"],
+            ["xxl", "41", "43"]
+          ]
+        }
+      ],
+      "reviews": [
+        {
+          "name": "Adam",
+          "details": "Nice Product",
+          "star": "4"
+        }
+      ],
+      "related_product": [
+        {
+          "id": "224",
+          "title": "Man T-Shirt",
+          "img": "woocomerce/products/p24.png",
+          "hover_img": "woocomerce/products/p23.png",
+          "price": "690.00",
+          "dis_price": "590.00",
+          "category": "man"
+        },
+        {
+          "id": "225",
+          "title": "Women's Zipup Track Jacket",
+          "img": "woocomerce/products/p5.png",
+          "hover_img": "woocomerce/products/p9.png",
+          "price": "890.00",
+          "dis_price": "840.00",
+          "category": "man"
+        }
+      ]
+    },
+    {
+      "id": "318",
+      "parent_id": "218",
+      "pro_code": "#BGG09455",
+      "title": "Shirt",
+      "description": {
+        "text": "Lightly padded bomber jacket, featuring eyelet embroidery and detachable sleeves. Made with a ribbed waistband and welt pockets, hood can be adjusted via drawstrings.",
+        "featured": [
+          {
+            "name": "Cruelty free"
+          },
+          {
+            "name": "Adjustable drawstrings at the hood"
+          },
+          {
+            "name": "Eyelet embroidery"
+          },
+          {
+            "name": "Cruelty free"
+          },
+          {
+            "name": "Welt pockets at waist"
+          }
+        ]
+      },
+      "img": [
+        "woocomerce/products/details/single-12.png",
+        "woocomerce/products/details/single-9.png",
+        "woocomerce/products/details/single-6.png",
+        "woocomerce/products/details/single-3.png"
+      ],
+      "category": "woman",
+      "price": "470.00",
+      "dis_price": "420.00",
+      "size": ["m", "lg", "xl", "xxl"],
+      "color": ["deep-purple", "gray", "skyblue", "yellow"],
+      "information": [
+        {
+          "details_text": "Percentage off promotions, discounts, or sale markdowns are most customarily based on our own opinion of the value of this product, which is not intended to reflect a former price at which this product has sold in the recent past.",
+          "keys": ["size", "chest", "length"],
+          "data": [
+            ["m", "35", "43"],
+            ["lg", "37", "43"],
+            ["xl", "39", "43"],
+            ["xxl", "41", "43"]
+          ]
+        }
+      ],
+      "reviews": [
+        {
+          "name": "Marianna",
+          "details": "Perfect product",
+          "star": "5"
+        }
+      ],
+      "related_product": [
+        {
+          "id": "204",
+          "title": "Jacket",
+          "img": "woocomerce/products/p4.png",
+          "hover_img": "woocomerce/products/p8.png",
+          "price": "820.00",
+          "dis_price": "400.00",
+          "category": "woman"
+        },
+        {
+          "id": "205",
+          "title": "Chairby Genzy Alexis",
+          "img": "woocomerce/products/p5.png",
+          "hover_img": "woocomerce/products/p10.png",
+          "price": "470.00",
+          "dis_price": "350.00",
+          "category": "woman"
+        },
+        {
+          "id": "206",
+          "title": "Harold Cabinet Visser",
+          "img": "woocomerce/products/p6.png",
+          "hover_img": "woocomerce/products/p12.png",
+          "price": "770.00",
+          "dis_price": "470.00",
+          "category": "woman"
+        },
+        {
+          "id": "210",
+          "title": "Zipup Jacket",
+          "img": "woocomerce/products/p10.png",
+          "hover_img": "woocomerce/products/p20.png",
+          "price": "970.00",
+          "dis_price": "800.00",
+          "category": "woman"
+        },
+        {
+          "id": "212",
+          "title": "Track Jacket",
+          "img": "woocomerce/products/p12.png",
+          "hover_img": "woocomerce/products/p24.png",
+          "price": "800.00",
+          "dis_price": "770.00",
+          "category": "woman"
+        },
+        {
+          "id": "213",
+          "title": "Women's Zipup Track Jacket",
+          "img": "woocomerce/products/p13.png",
+          "hover_img": "woocomerce/products/p1.png",
+          "price": "660.00",
+          "dis_price": "580.00",
+          "category": "woman"
+        },
+        {
+          "id": "201",
+          "title": "Chairby Genzy Alexis4",
+          "img": "woocomerce/products/p1.png",
+          "hover_img": "woocomerce/products/p2.png",
+          "price": "670.00",
+          "dis_price": "407.50",
+          "category": "woman"
+        },
+        {
+          "id": "219",
+          "title": "Full Jacket",
+          "img": "woocomerce/products/p19.png",
+          "hover_img": "woocomerce/products/p13.png",
+          "price": "970.00",
+          "dis_price": "830.00",
+          "category": "woman"
+        }
+      ]
+    },
+    {
+      "id": "319",
+      "parent_id": "219",
+      "pro_code": "#BGG09455",
+      "title": "Full Jacket",
+      "description": {
+        "text": "Lightly padded bomber jacket, featuring eyelet embroidery and detachable sleeves. Made with a ribbed waistband and welt pockets, hood can be adjusted via drawstrings.",
+        "featured": [
+          {
+            "name": "Cruelty free"
+          },
+          {
+            "name": "Adjustable drawstrings at the hood"
+          },
+          {
+            "name": "Eyelet embroidery"
+          },
+          {
+            "name": "Cruelty free"
+          },
+          {
+            "name": "Welt pockets at waist"
+          }
+        ]
+      },
+      "img": [
+        "woocomerce/products/details/single-13.png",
+        "woocomerce/products/details/single-11.png",
+        "woocomerce/products/details/single-9.png",
+        "woocomerce/products/details/single-7.png"
+      ],
+      "category": "woman",
+      "price": "970.00",
+      "dis_price": "830.00",
+      "size": ["m", "lg", "xl", "xxl"],
+      "color": ["pink", "skyblue", "red", "yellow"],
+      "information": [
+        {
+          "details_text": "Percentage off promotions, discounts, or sale markdowns are most customarily based on our own opinion of the value of this product, which is not intended to reflect a former price at which this product has sold in the recent past.",
+          "keys": ["size", "chest", "length"],
+          "data": [
+            ["m", "35", "43"],
+            ["lg", "37", "43"],
+            ["xl", "39", "43"],
+            ["xxl", "41", "43"]
+          ]
+        }
+      ],
+      "reviews": [
+        {
+          "name": "Thomas",
+          "details": "Nice Product",
+          "star": "5"
+        }
+      ],
+      "related_product": [
+        {
+          "id": "204",
+          "title": "Jacket",
+          "img": "woocomerce/products/p4.png",
+          "hover_img": "woocomerce/products/p8.png",
+          "price": "820.00",
+          "dis_price": "400.00",
+          "category": "woman"
+        },
+        {
+          "id": "205",
+          "title": "Chairby Genzy Alexis",
+          "img": "woocomerce/products/p5.png",
+          "hover_img": "woocomerce/products/p10.png",
+          "price": "470.00",
+          "dis_price": "350.00",
+          "category": "woman"
+        },
+        {
+          "id": "206",
+          "title": "Harold Cabinet Visser",
+          "img": "woocomerce/products/p6.png",
+          "hover_img": "woocomerce/products/p12.png",
+          "price": "770.00",
+          "dis_price": "470.00",
+          "category": "woman"
+        },
+        {
+          "id": "210",
+          "title": "Zipup Jacket",
+          "img": "woocomerce/products/p10.png",
+          "hover_img": "woocomerce/products/p20.png",
+          "price": "970.00",
+          "dis_price": "800.00",
+          "category": "woman"
+        },
+        {
+          "id": "212",
+          "title": "Track Jacket",
+          "img": "woocomerce/products/p12.png",
+          "hover_img": "woocomerce/products/p24.png",
+          "price": "800.00",
+          "dis_price": "770.00",
+          "category": "woman"
+        },
+        {
+          "id": "213",
+          "title": "Women's Zipup Track Jacket",
+          "img": "woocomerce/products/p13.png",
+          "hover_img": "woocomerce/products/p1.png",
+          "price": "660.00",
+          "dis_price": "580.00",
+          "category": "woman"
+        },
+        {
+          "id": "218",
+          "title": "Shirt",
+          "img": "woocomerce/products/p18.png",
+          "hover_img": "woocomerce/products/p11.png",
+          "price": "470.00",
+          "dis_price": "420.00",
+          "category": "woman"
+        },
+        {
+          "id": "201",
+          "title": "Chairby Genzy Alexis4",
+          "img": "woocomerce/products/p1.png",
+          "hover_img": "woocomerce/products/p2.png",
+          "price": "670.00",
+          "dis_price": "407.50",
+          "category": "woman"
+        }
+      ]
+    },
+    {
+      "id": "320",
+      "parent_id": "220",
+      "pro_code": "#BGG09455",
+      "title": "Denim Jacket",
+      "description": {
+        "text": "Lightly padded bomber jacket, featuring eyelet embroidery and detachable sleeves. Made with a ribbed waistband and welt pockets, hood can be adjusted via drawstrings.",
+        "featured": [
+          {
+            "name": "Cruelty free"
+          },
+          {
+            "name": "Adjustable drawstrings at the hood"
+          },
+          {
+            "name": "Eyelet embroidery"
+          },
+          {
+            "name": "Cruelty free"
+          },
+          {
+            "name": "Welt pockets at waist"
+          }
+        ]
+      },
+      "img": [
+        "woocomerce/products/details/single-14.png",
+        "woocomerce/products/details/single-2.png",
+        "woocomerce/products/details/single-6.png",
+        "woocomerce/products/details/single-10.png"
+      ],
+      "category": "sports",
+      "price": "980.00",
+      "dis_price": "920.00",
+      "size": ["m", "lg", "xl", "xxl"],
+      "color": ["purple", "blue", "red", "yellow"],
+      "information": [
+        {
+          "details_text": "Percentage off promotions, discounts, or sale markdowns are most customarily based on our own opinion of the value of this product, which is not intended to reflect a former price at which this product has sold in the recent past.",
+          "keys": ["size", "chest", "length"],
+          "data": [
+            ["m", "35", "43"],
+            ["lg", "37", "43"],
+            ["xl", "39", "43"],
+            ["xxl", "41", "43"]
+          ]
+        }
+      ],
+      "reviews": [
+        {
+          "name": "Thomas",
+          "details": "Nice Product",
+          "star": "5"
+        },
+        {
+          "name": "Mizan",
+          "details": "I like this",
+          "star": "5"
+        }
+      ],
+      "related_product": [
+        {
+          "id": "216",
+          "title": "Women's T-Shirt",
+          "img": "woocomerce/products/p16.png",
+          "hover_img": "woocomerce/products/p7.png",
+          "price": "890.00",
+          "dis_price": "820.00",
+          "category": "sports"
+        }
+      ]
+    },
+    {
+      "id": "321",
+      "parent_id": "221",
+      "pro_code": "#BGG09455",
+      "title": "Women's T-Shirt",
+      "description": {
+        "text": "Lightly padded bomber jacket, featuring eyelet embroidery and detachable sleeves. Made with a ribbed waistband and welt pockets, hood can be adjusted via drawstrings.",
+        "featured": [
+          {
+            "name": "Cruelty free"
+          },
+          {
+            "name": "Adjustable drawstrings at the hood"
+          },
+          {
+            "name": "Eyelet embroidery"
+          },
+          {
+            "name": "Cruelty free"
+          },
+          {
+            "name": "Welt pockets at waist"
+          }
+        ]
+      },
+      "img": [
+        "woocomerce/products/details/single-12.png",
+        "woocomerce/products/details/single-15.png",
+        "woocomerce/products/details/single-3.png",
+        "woocomerce/products/details/single-9.png"
+      ],
+      "category": "beauty",
+      "price": "790.00",
+      "dis_price": "680.00",
+      "size": ["m", "lg", "xl", "xxl"],
+      "color": ["pink", "purple", "gray", "red", "yellow"],
+      "information": [
+        {
+          "details_text": "Percentage off promotions, discounts, or sale markdowns are most customarily based on our own opinion of the value of this product, which is not intended to reflect a former price at which this product has sold in the recent past.",
+          "keys": ["size", "chest", "length"],
+          "data": [
+            ["m", "35", "43"],
+            ["lg", "37", "43"],
+            ["xl", "39", "43"],
+            ["xxl", "41", "43"]
+          ]
+        }
+      ],
+      "reviews": [
+        {
+          "name": "Ranjit",
+          "details": "Size not perfect",
+          "star": "2"
+        }
+      ],
+      "related_product": [
+        {
+          "id": "214",
+          "title": "Women's Pant",
+          "img": "woocomerce/products/p14.png",
+          "hover_img": "woocomerce/products/p3.png",
+          "price": "610.00",
+          "dis_price": "590.00",
+          "category": "beauty"
+        }
+      ]
+    },
+    {
+      "id": "322",
+      "parent_id": "222",
+      "pro_code": "#BGG09455",
+      "title": "Women's Jewellery",
+      "description": {
+        "text": "Lightly padded bomber jacket, featuring eyelet embroidery and detachable sleeves. Made with a ribbed waistband and welt pockets, hood can be adjusted via drawstrings.",
+        "featured": [
+          {
+            "name": "Cruelty free"
+          },
+          {
+            "name": "Adjustable drawstrings at the hood"
+          },
+          {
+            "name": "Eyelet embroidery"
+          },
+          {
+            "name": "Cruelty free"
+          },
+          {
+            "name": "Welt pockets at waist"
+          }
+        ]
+      },
+      "img": [
+        "woocomerce/products/details/single-13.png",
+        "woocomerce/products/details/single-4.png",
+        "woocomerce/products/details/single-10.png",
+        "woocomerce/products/details/single-12.png"
+      ],
+      "category": "jewellery",
+      "price": "490.00",
+      "dis_price": "447.00",
+      "size": ["m", "lg", "xl", "xxl"],
+      "color": ["deep-purple", "red", "yellow"],
+      "information": [
+        {
+          "details_text": "Percentage off promotions, discounts, or sale markdowns are most customarily based on our own opinion of the value of this product, which is not intended to reflect a former price at which this product has sold in the recent past.",
+          "keys": ["size", "chest", "length"],
+          "data": [
+            ["m", "35", "43"],
+            ["lg", "37", "43"],
+            ["xl", "39", "43"],
+            ["xxl", "41", "43"]
+          ]
+        }
+      ],
+      "reviews": [
+        {
+          "name": "Bijoy",
+          "details": "Nice product",
+          "star": "5"
+        },
+        {
+          "name": "Halim",
+          "details": "Good product",
+          "star": "4"
+        }
+      ],
+      "related_product": [
+        {
+          "id": "207",
+          "title": "Man T-shirt",
+          "img": "woocomerce/products/p7.png",
+          "hover_img": "woocomerce/products/p14.png",
+          "price": "780.00",
+          "dis_price": "500.00",
+          "category": "jewellery"
+        },
+        {
+          "id": "211",
+          "title": "Women's Zipup",
+          "img": "woocomerce/products/p11.png",
+          "hover_img": "woocomerce/products/p22.png",
+          "price": "700.00",
+          "dis_price": "650.00",
+          "category": "jewellery"
+        },
+        {
+          "id": "203",
+          "title": "Man Full-Hata T-shirt",
+          "img": "woocomerce/products/p3.png",
+          "hover_img": "woocomerce/products/p6.png",
+          "price": "890.00",
+          "dis_price": "750.00",
+          "category": "jewellery"
+        }
+      ]
+    },
+    {
+      "id": "323",
+      "parent_id": "223",
+      "pro_code": "#BGG09455",
+      "title": "Reading Table",
+      "description": {
+        "text": "Lightly padded bomber jacket, featuring eyelet embroidery and detachable sleeves. Made with a ribbed waistband and welt pockets, hood can be adjusted via drawstrings.",
+        "featured": [
+          {
+            "name": "Cruelty free"
+          },
+          {
+            "name": "Adjustable drawstrings at the hood"
+          },
+          {
+            "name": "Eyelet embroidery"
+          },
+          {
+            "name": "Cruelty free"
+          },
+          {
+            "name": "Welt pockets at waist"
+          }
+        ]
+      },
+      "img": [
+        "woocomerce/products/details/single-14.png",
+        "woocomerce/products/details/single-2.png",
+        "woocomerce/products/details/single-9.png",
+        "woocomerce/products/details/single-11.png"
+      ],
+      "category": "furniture",
+      "price": "570.00",
+      "dis_price": "500.00",
+      "size": ["m", "lg", "xl", "xxl"],
+      "color": ["purple", "blue", "gray"],
+      "information": [
+        {
+          "details_text": "Percentage off promotions, discounts, or sale markdowns are most customarily based on our own opinion of the value of this product, which is not intended to reflect a former price at which this product has sold in the recent past.",
+          "keys": ["size", "chest", "length"],
+          "data": [
+            ["m", "35", "43"],
+            ["lg", "37", "43"],
+            ["xl", "39", "43"],
+            ["xxl", "41", "43"]
+          ]
+        }
+      ],
+      "reviews": [
+        {
+          "name": "Foysal",
+          "details": "Color quality is normal",
+          "star": "4"
+        }
+      ],
+      "related_product": [
+        {
+          "id": "215",
+          "title": "T-Shirt",
+          "img": "woocomerce/products/p15.png",
+          "hover_img": "woocomerce/products/p5.png",
+          "price": "850.00",
+          "dis_price": "800.00",
+          "category": "furniture"
+        },
+        {
+          "id": "208",
+          "title": "Zipup Track Jacket",
+          "img": "woocomerce/products/p8.png",
+          "hover_img": "woocomerce/products/p16.png",
+          "price": "450.00",
+          "dis_price": "",
+          "category": "furniture"
+        }
+      ]
+    },
+    {
+      "id": "324",
+      "parent_id": "224",
+      "pro_code": "#BGG09455",
+      "title": "Man T-Shirt",
+      "description": {
+        "text": "Lightly padded bomber jacket, featuring eyelet embroidery and detachable sleeves. Made with a ribbed waistband and welt pockets, hood can be adjusted via drawstrings.",
+        "featured": [
+          {
+            "name": "Cruelty free"
+          },
+          {
+            "name": "Adjustable drawstrings at the hood"
+          },
+          {
+            "name": "Eyelet embroidery"
+          },
+          {
+            "name": "Cruelty free"
+          },
+          {
+            "name": "Welt pockets at waist"
+          }
+        ]
+      },
+      "img": [
+        "woocomerce/products/details/single-3.png",
+        "woocomerce/products/details/single-1.png",
+        "woocomerce/products/details/single-7.png",
+        "woocomerce/products/details/single-12.png"
+      ],
+      "category": "man",
+      "price": "690.00",
+      "dis_price": "590.00",
+      "size": ["m", "lg", "xl", "xxl"],
+      "color": ["pink", "purple", "deep-purple", "red", "yellow"],
+      "information": [
+        {
+          "details_text": "Percentage off promotions, discounts, or sale markdowns are most customarily based on our own opinion of the value of this product, which is not intended to reflect a former price at which this product has sold in the recent past.",
+          "keys": ["size", "chest", "length"],
+          "data": [
+            ["m", "35", "43"],
+            ["lg", "37", "43"],
+            ["xl", "39", "43"],
+            ["xxl", "41", "43"]
+          ]
+        }
+      ],
+      "reviews": [
+        {
+          "name": "Thomas",
+          "details": "Nice Product",
+          "star": "5"
+        },
+        {
+          "name": "Marianna",
+          "details": "Perfect product",
+          "star": "5"
+        }
+      ],
+      "related_product": [
+        {
+          "id": "217",
+          "title": "Women's Pant",
+          "img": "woocomerce/products/p17.png",
+          "hover_img": "woocomerce/products/p9.png",
+          "price": "570.00",
+          "dis_price": "420.00",
+          "category": "man"
+        },
+        {
+          "id": "225",
+          "title": "Women's Zipup Track Jacket",
+          "img": "woocomerce/products/p5.png",
+          "hover_img": "woocomerce/products/p9.png",
+          "price": "890.00",
+          "dis_price": "840.00",
+          "category": "man"
+        }
+      ]
+    },
+    {
+      "id": "325",
+      "parent_id": "225",
+      "pro_code": "#BGG09455",
+      "title": "Women's Zipup Track Jacket",
+      "description": {
+        "text": "Lightly padded bomber jacket, featuring eyelet embroidery and detachable sleeves. Made with a ribbed waistband and welt pockets, hood can be adjusted via drawstrings.",
+        "featured": [
+          {
+            "name": "Cruelty free"
+          },
+          {
+            "name": "Adjustable drawstrings at the hood"
+          },
+          {
+            "name": "Eyelet embroidery"
+          },
+          {
+            "name": "Cruelty free"
+          },
+          {
+            "name": "Welt pockets at waist"
+          }
+        ]
+      },
+      "img": [
+        "woocomerce/products/details/single-6.png",
+        "woocomerce/products/details/single-2.png",
+        "woocomerce/products/details/single-14.png",
+        "woocomerce/products/details/single-9.png"
+      ],
+      "category": "man",
+      "price": "890.00",
+      "dis_price": "840.00",
+      "size": ["m", "lg", "xl", "xxl"],
+      "color": ["purple", "blue", "gray", "yellow"],
+      "information": [
+        {
+          "details_text": "Percentage off promotions, discounts, or sale markdowns are most customarily based on our own opinion of the value of this product, which is not intended to reflect a former price at which this product has sold in the recent past.",
+          "keys": ["size", "chest", "length"],
+          "data": [
+            ["m", "35", "43"],
+            ["lg", "37", "43"],
+            ["xl", "39", "43"],
+            ["xxl", "41", "43"]
+          ]
+        }
+      ],
+      "reviews": [
+        {
+          "name": "Adam",
+          "details": "Nice Product",
+          "star": "4"
+        },
+        {
+          "name": "Liza",
+          "details": "Not a good product",
+          "star": "1"
+        }
+      ],
+      "related_product": [
+        {
+          "id": "224",
+          "title": "Man T-Shirt",
+          "img": "woocomerce/products/p24.png",
+          "hover_img": "woocomerce/products/p23.png",
+          "price": "690.00",
+          "dis_price": "590.00",
+          "category": "man"
+        },
+        {
+          "id": "217",
+          "title": "Women's Pant",
+          "img": "woocomerce/products/p17.png",
+          "hover_img": "woocomerce/products/p9.png",
+          "price": "570.00",
+          "dis_price": "420.00",
+          "category": "man"
+        }
+      ]
+    }
+  ]
+}

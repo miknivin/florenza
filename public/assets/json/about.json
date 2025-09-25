@@ -1,0 +1,86 @@
+{
+  "intro": {
+    "title": "Florenza is where scent becomes emotion. Each perfume is crafted to captivate the senses, awaken memories, and leave an unforgettable presence.",
+    "description": "We see our customers as storytellers, not just wearers. Each Florenza fragrance captures identity, memory, and emotion empowering you to leave an unforgettable signature wherever your journey leads",
+    "btn_text": "Identity & Lifestyle",
+    "award_logo": "about/award.png",
+    "intro_video": "video/video.mp4",
+    "from": "1990"
+  },
+  "story": {
+    "title": "Our story",
+    "sub_title": "Every drop tells the story of its creation",
+    "description": "Every Florenza fragrance begins as a dream, blending rare essences, fine craftsmanship and boundless passion. We see perfume as more than aroma; it is wearable art, an intimate expression of self. Top notes spark curiosity. Heart notes unveil emotion. Base notes leave a lasting memory. From first breath to final whisper, each creation becomes a timeless part of your story.Fragrance is the art that remains when words fall silent",
+    "story_image_1": "story/img2.webp",
+    "story_image_2": "story/img 1.webp",
+    "story_image_3": "story/img5.webp",
+    "story_image_4": "story/img4.webp",
+    "from": "1990"
+  },
+  "counter": [
+    {
+      "name": "Project completed",
+      "value": "25",
+      "suffix": "k"
+    },
+    {
+      "name": "Happy customers",
+      "value": "1",
+      "suffix": "M"
+    },
+    {
+      "name": "Years experiences",
+      "value": "3",
+      "suffix": ""
+    },
+    {
+      "name": "Awards achievement",
+      "value": "98",
+      "suffix": ""
+    }
+  ],
+  "brand": {
+    "title": "We are happy to work with global largest brands",
+    "sub_title": "Internation Brands",
+    "logo": [
+      "brand/1.png",
+      "brand/2.png",
+      "brand/3.png",
+      "brand/4.png",
+      "brand/5.png",
+      "brand/6.png",
+      "brand/1.png",
+      "brand/2.png",
+      "brand/3.png",
+      "brand/4.png",
+      "brand/5.png",
+      "brand/6.png"
+    ]
+  },
+  "testimonial": {
+    "test_video": "florenza 2_2.mp4",
+    "test_content": [
+      {
+        "id": "1201",
+        "title": "Amazing scent, lasts long",
+"description": "Florenza is a good choice for fragrance lovers.\nTheir wide selection of perfumes ensures there's something for everyone.\nThe staff is knowledgeable and friendly, providing excellent recommendations based on your preferences",
+        "author": "Mathew",
+        "role": "Customer"
+      },
+      {
+        "id": "1202",
+        "title": "Amazing scent, lasts long",
+        "description": "Best fragrance perfume I've experienced. Heard many positive reviews, and got many flavours that lasts for many hours,Very good smell & long lasting ,I bought florenza rumba and florenza one. Both lasts almost 7-8 hours. I feel like it's worthy",
+        "author": "Rosh",
+        "role": "Customer"
+      },
+      {
+        "id": "1203",
+        "title": "Amazing scent, lasts long",
+        "description": "I was using blue for men since 2017. Accidentally I experience the smell of rumba perfume at family weeding, manjeri it last whole day and the guy who taught me how the perfume should spray and everything related. For him only I bought one, but now im addicted to the smell. . it's like strong floral woody perfume family. I would suggest this and will buy one more soon ",
+        "author": "Thomas",
+        "role": "Customer"
+      }
+    ]
+  }
+}
