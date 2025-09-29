@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
@@ -9,6 +9,11 @@ import Modal from "../common/modal/ReusableModal";
 import SignInForm from "@/components/auth/SigninForm";
 import SignUpForm from "@/components/auth/SignupForm";
 import { setOrderProduct, clearCart } from "@/store/features/cartSlice";
+import {
+  validateOrder,
+  clearErrors,
+  clearShippingInfo,
+} from "@/store/features/orderValidationSlice";
 import {
   useCreateNewOrderMutation,
   useRazorpayCheckoutSessionMutation,
@@ -22,22 +27,16 @@ export default function CheckoutContent() {
   const [showModal, setShowModal] = useState(false);
   const [isSignUp, setIsSignUp] = useState(false);
   const router = useRouter();
-
-  const handleOpenSignUpModal = () => {
-    setIsSignUp(true);
-  };
-
-  const handleOpenSignInModal = () => {
-    setIsSignUp(false);
-  };
   const dispatch = useDispatch();
   const { cartData, totalCost } = useSelector((state) => state.cart);
-  const formRef = useRef();
+  const { isAuthenticated } = useSelector((state) => state.user);
+  const { isValid, errors, shippingInfo } = useSelector(
+    (state) => state.orderValidation
+  );
   const [createNewOrder, { isLoading, error }] = useCreateNewOrderMutation();
   const [razorpayCheckoutSession, { isLoading: sessionLoading }] =
     useRazorpayCheckoutSessionMutation();
   const [razorpayWebhook] = useRazorpayWebhookMutation();
-  const { isAuthenticated } = useSelector((state) => state.user);
 
   // Load Razorpay script dynamically
   useEffect(() => {
@@ -50,17 +49,17 @@ export default function CheckoutContent() {
     };
   }, []);
 
-  const handleOrderSubmission = async () => {
-    // Check if cart is empty
-    if (!cartData || cartData.length === 0) {
-      toast.error("Your cart is empty. Please add items before placing an order.", {
-        position: "top-center",
-        autoClose: 2000,
-      });
-      return;
-    }
+  const handleOpenSignUpModal = () => {
+    setIsSignUp(true);
+  };
 
+  const handleOpenSignInModal = () => {
+    setIsSignUp(false);
+  };
+
+  const handleOrderSubmission = async () => {
     if (!isAuthenticated) {
+      window.scrollTo(0, 0);
       toast.error("You need to log in to place an order.", {
         position: "top-center",
         autoClose: 2000,
@@ -69,73 +68,31 @@ export default function CheckoutContent() {
       return;
     }
 
-    if (!formRef.current || typeof formRef.current.submitForm !== "function") {
-      console.error("Form reference or submitForm method not available");
-      toast.error("Form submission error. Please try again.", {
-        position: "top-center",
-        autoClose: 2000,
-      });
-      return;
-    }
+    const orderData = {
+      cartItems: cartData,
+      shippingInfo,
+      paymentMethod: paymentMethod === 1 ? "Online" : "COD",
+      itemsPrice: cartData.reduce(
+        (total, item) => total + item.price * item.quantity,
+        0
+      ),
+      taxAmount: 0,
+      shippingAmount: 0,
+      totalAmount: totalCost,
+      orderNotes: shippingInfo.msg || "",
+      couponApplied: "No",
+    };
+    console.log(orderData, 'order');
 
-    if (!paymentMethod) {
-      toast.error("Please select a payment method", {
-        position: "top-center",
-        autoClose: 2000,
-      });
-      return;
+    // Validate order data with toast on submission
+    dispatch(validateOrder({ orderData, showToast: true }));
+    if (!isValid) {
+      return; // Errors are displayed via toast and field-specific errors
     }
 
     try {
-      // Trigger form submission and validation
-      const { isValid, formData } = await formRef.current.submitForm();
-      console.log("isValid:", isValid, "formData:", formData);
-      if (!isValid) {
-        toast.error("Please fill in all required address fields correctly", {
-          position: "top-center",
-          autoClose: 2000,
-        });
-        return;
-      }
-      if (!formData || Object.keys(formData).length === 0) {
-        console.error("Form data is empty after submission", { formData });
-        toast.error("Form data could not be processed. Please try again.", {
-          position: "top-center",
-          autoClose: 2000,
-        });
-        return;
-      }
-
-      const itemsPrice = cartData.reduce(
-        (total, item) => total + item.price * item.quantity,
-        0
-      );
-      const taxAmount = 0;
-      const shippingAmount = 0;
-      const totalAmount = itemsPrice;
-
-      const shippingInfo = {
-        email: formData.email,
-        country: formData.country,
-        fullName: formData.fullName,
-        state: formData.state,
-        city: formData.city,
-        zipCode: formData.zipCode,
-        phoneNo: formData.phone,
-        address: formData.address,
-        msg: formData.msg,
-      };
-
       if (paymentMethod === 1) {
         // Razorpay payment
-        const orderData = {
-          cartItems: cartData,
-          shippingInfo,
-          taxAmount,
-          shippingAmount,
-          paymentMethod: "Online",
-        };
-
         const response = await razorpayCheckoutSession(orderData).unwrap();
         const { orderId: razorpayOrderId } = response;
 
@@ -143,31 +100,30 @@ export default function CheckoutContent() {
         const options = {
           key: process.env.NEXT_PUBLIC_RAZORPAY_KEY,
           order_id: razorpayOrderId,
-          amount: totalAmount * 100,
+          amount: totalCost * 100,
           currency: "INR",
           name: "Florenza",
           description: "Order Payment",
           handler: async (response) => {
             try {
               setIsWebhookLoading(true);
-              console.log(response.razorpay_order_id, "Razorpay Order ID");
-              console.log(razorpayOrderId, "Generated Order ID");
-
               const webhookResponse = await razorpayWebhook({
                 razorpay_order_id: response.razorpay_order_id,
                 razorpay_payment_id: response.razorpay_payment_id,
                 razorpay_signature: response.razorpay_signature,
                 cartItems: cartData,
                 shippingInfo,
-                taxAmount,
-                shippingAmount,
-                orderNotes: formData.msg || "",
-                couponApplied: "No",
+                taxAmount: orderData.taxAmount,
+                shippingAmount: orderData.shippingAmount,
+                orderNotes: orderData.orderNotes,
+                couponApplied: orderData.couponApplied,
               }).unwrap();
 
               if (webhookResponse.success) {
                 dispatch(setOrderProduct(cartData));
                 dispatch(clearCart());
+                dispatch(clearErrors());
+                dispatch(clearShippingInfo());
                 toast.success("Order created successfully!", {
                   position: "top-center",
                   autoClose: 1000,
@@ -188,15 +144,15 @@ export default function CheckoutContent() {
             }
           },
           prefill: {
-            name: formData.fullName,
-            email: formData.email,
-            contact: formData.phone,
+            name: shippingInfo.fullName,
+            email: shippingInfo.email,
+            contact: shippingInfo.phoneNo,
           },
           notes: {
-            address: formData.address,
+            address: shippingInfo.address,
           },
           theme: {
-            color: "#3399cc",
+            color: "#6c757d", // Use neutral gray instead of primary color
           },
         };
 
@@ -204,18 +160,11 @@ export default function CheckoutContent() {
         razorpay.open();
       } else {
         // COD payment
-        const orderData = {
-          cartItems: cartData,
-          shippingInfo,
-          paymentMethod: "COD",
-          taxAmount,
-          shippingAmount,
-        };
-
         const response = await createNewOrder(orderData).unwrap();
-
         dispatch(setOrderProduct(cartData));
         dispatch(clearCart());
+        dispatch(clearErrors());
+        dispatch(clearShippingInfo());
         toast.success("Order created successfully!", {
           position: "top-center",
           autoClose: 1000,
@@ -277,7 +226,7 @@ export default function CheckoutContent() {
             setPaymentMethod={setPaymentMethod}
             isLoading={isLoading}
           />
-          <Address reference={formRef} />
+          <Address />
         </div>
       </div>
     </>

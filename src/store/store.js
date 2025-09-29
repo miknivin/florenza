@@ -5,11 +5,13 @@ import { authApi } from "./api/authApi";
 import { orderApi } from "./api/orderApi";
 import { userApi } from "./api/userApi";
 import { productApi } from "./api/productApi";
+import orderValidationReducer from "./features/orderValidationSlice";
 
 export const store = configureStore({
   reducer: {
     cart: cartReducer,
     user: userReducer,
+    orderValidation: orderValidationReducer,
     [authApi.reducerPath]: authApi.reducer,
     [orderApi.reducerPath]: orderApi.reducer,
     [userApi.reducerPath]: userApi.reducer,

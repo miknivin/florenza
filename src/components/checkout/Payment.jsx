@@ -2,7 +2,8 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { toast } from "react-toastify";
+import { useSelector, useDispatch } from "react-redux";
+import { validateOrder } from "@/store/features/orderValidationSlice";
 
 export default function Payment({
   paymentSubmit,
@@ -12,6 +13,8 @@ export default function Payment({
 }) {
   const [active, setActive] = useState(1);
   const [isClient, setIsClient] = useState(false);
+  const dispatch = useDispatch();
+  const { cartData } = useSelector((state) => state.cart);
 
   useEffect(() => {
     setIsClient(true);
@@ -21,6 +24,23 @@ export default function Payment({
   const handlePaymentChange = (value) => {
     setActive(value);
     setPaymentMethod(value);
+    // Validate payment method without toast
+    dispatch(
+      validateOrder({
+        orderData: {
+          cartItems: cartData,
+          paymentMethod: value === 1 ? "Online" : "COD",
+          itemsPrice: cartData.reduce(
+            (total, item) => total + item.price * item.quantity,
+            0
+          ),
+          taxAmount: 0,
+          shippingAmount: 0,
+          totalAmount: totalCost,
+        },
+        showToast: false,
+      })
+    );
   };
 
   return (

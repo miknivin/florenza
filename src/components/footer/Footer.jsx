@@ -1,7 +1,17 @@
+import { useGetProductsQuery } from "@/store/api/productApi";
 import Image from "next/image";
 import Link from "next/link";
 
 const Footer = () => {
+  // Fetch the first 4 products, sorted by ratings (optional)
+  const { data, isLoading, error } = useGetProductsQuery({
+    page: 1,
+    resPerPage: 4,
+  });
+
+  // Extract the first 4 products from the response
+  const products = data?.filteredProducts?.slice(0, 4) || [];
+
   return (
     <>
       <footer className="woocomerce__footer">
@@ -19,41 +29,45 @@ const Footer = () => {
               src="/assets/imgs/logo/logo.png"
               alt="logo-img"
             />
-<p className="woocomerce__footer-dis">
-  JJ PERFUMES INTERNATIONAL,<br />
-  <span className="woocomerce__footer-address">
-    SDF 16, Ground Floor,<br />
-    Cochin Special Economic Zone, Kakkanad,<br />
-    Cochin – 682037
-  </span>
-</p>
-
+            <p className="woocomerce__footer-dis">
+              JJ PERFUMES INTERNATIONAL,
+              <br />
+              <span className="woocomerce__footer-address">
+                SDF 16, Ground Floor,
+                <br />
+                Cochin Special Economic Zone, Kakkanad,
+                <br />
+                Cochin – 682037
+              </span>
+            </p>
             <a
               className="woocomerce__footer-mail"
               href="mailTo:info@florenzaitaliya.com"
             >
               info@florenzaitaliya.com
             </a>
-            <a href="tel:+918848101280">+91 8848101280</a> |{" "}
-            <br />
+            <a href="tel:+918848101280">+91 8848101280</a> | <br />
             <a href="tel:+917012909452">+91 7012909452</a>
           </div>
           <div className="woocomerce__footer-category category1">
             <span className="woocomerce__footer-title">Top Products</span>
-            <ul className="woocomerce__footer-list">
-              <li>
-                <Link href={"/shop/68b02956db84a40a8a443151"}>Oud white</Link>
-              </li>
-              <li>
-                <Link href={"/shop/68aec7caf045b00bcb36693d"}>Rumba</Link>
-              </li>
-              <li>
-                <Link href={"/shop/68aec5d2f045b00bcb366913"}>Cool water</Link>
-              </li>
-              <li>
-                <Link href={"/shop/68b02aa6db84a40a8a443195"}>One</Link>
-              </li>
-            </ul>
+            {isLoading ? (
+              <p>Loading products...</p>
+            ) : error ? (
+              <p>Error loading products</p>
+            ) : (
+              <ul className="woocomerce__footer-list">
+                {products.length > 0 ? (
+                  products.map((product) => (
+                    <li key={product._id}>
+                      <Link href={`/shop/${product._id}`}>{product.name}</Link>
+                    </li>
+                  ))
+                ) : (
+                  <li>No products available</li>
+                )}
+              </ul>
+            )}
           </div>
           <div className="woocomerce__footer-category">
             <span className="woocomerce__footer-title">Quick Links</span>
@@ -67,9 +81,6 @@ const Footer = () => {
               <li>
                 <Link href="/contact">Get in touch</Link>
               </li>
-              {/* <li>
-                <Link href="/faq">FAQ</Link>
-              </li> */}
             </ul>
           </div>
           <div className="woocomerce__footer-category">
@@ -78,7 +89,6 @@ const Footer = () => {
               <li>
                 <Link href="/privacy-policy">Privacy Policy</Link>
               </li>
-
               <li>
                 <Link href="/refund-policy">Refund Policy</Link>
               </li>
@@ -111,7 +121,7 @@ const Footer = () => {
         </div>
         <div className="woocomerce__footer-bottom">
           <p className="woocomerce__footer-copytext">
-            © 2025 | Alrights reserved <br />
+            © 2025 | All rights reserved <br />
           </p>
           <ul className="woocomerce__footer-social">
             <li>
@@ -119,21 +129,11 @@ const Footer = () => {
                 <i className="fa-brands fa-facebook-f"></i>
               </a>
             </li>
-            {/* <li>
-              <a href="#">
-                <i className="fa-brands fa-twitter"></i>
-              </a>
-            </li> */}
             <li>
               <a href="https://www.instagram.com/florenza_italiya?utm_source=ig_web_button_share_sheet&igsh=MXZ5eDBpaGZ6ejBmZQ==">
                 <i className="fa-brands fa-instagram"></i>
               </a>
             </li>
-            {/* <li>
-              <a href="#">
-                <i className="fa-brands fa-linkedin"></i>
-              </a>
-            </li> */}
           </ul>
           <ul className="woocomerce__footer-payment">
             <li>
@@ -148,14 +148,6 @@ const Footer = () => {
                 alt="payment"
               />
             </li>
-            {/* <li>
-              <Image
-                width={40}
-                height={30}
-                src="/assets/imgs/woocomerce/payment/payment-2.png"
-                alt="payment"
-              />
-            </li> */}
             <li>
               <Image
                 width={40}

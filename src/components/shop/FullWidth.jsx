@@ -22,25 +22,25 @@ const FullWidth = () => {
     max: null,
   });
 
-  const { data, isLoading, error } = useGetProductsQuery({
+  const queryParams = {
     page: filters.page,
     keyword: filters.keyword,
     resPerPage: filters.resPerPage,
     category: filters.category.length ? filters.category.join(",") : undefined,
-    "price[gte]": filters.min,
-    "price[lte]": filters.max,
-  });
+    min: filters.min !== null ? filters.min : undefined,
+    max: filters.max !== null ? filters.max : undefined,
+  };
 
-  useEffect(() => {
-    console.log("Product Data:", data);
-    console.log("Categories:", data?.filters?.categories);
-    console.log("Filters:", filters);
-    console.log("setOpenMobile is function:", typeof setOpenMobile === "function");
-  }, [data, filters, setOpenMobile]);
+  const { data, isLoading, isFetching, error } =
+    useGetProductsQuery(queryParams);
 
   const allFilter = {
     category: data?.filters?.categories || [],
-    price: data?.filters?.prices || [[0, 1000], [1000, 5000], [5000, 10000]],
+    price: data?.filters?.prices || [
+      [0, 1000],
+      [1000, 5000],
+      [5000, 10000],
+    ],
   };
 
   if (isLoading) {
@@ -55,6 +55,10 @@ const FullWidth = () => {
       [type]: value,
     }));
   };
+
+  // useEffect(() => {
+  //   console.log("Current filters:", filters);
+  // }, [filters]);
 
   const handleSearch = (e) => {
     updateFilters("keyword", e.target.value);
@@ -153,6 +157,8 @@ const FullWidth = () => {
                             updateFilters("min", action.value[0]);
                             updateFilters("max", action.value[1]);
                           }}
+                          initialMin={filters.min}
+                          initialMax={filters.max}
                         />
                       </Accordion.Body>
                     </Accordion.Item>
@@ -169,10 +175,16 @@ const FullWidth = () => {
 
         <div className="woocomerce__shopinner wc_feature_products">
           <div className="woocomerce__feature-wrapper filteringwrapper">
-            {isLoading ? (
-              <p>Loading products...</p>
+            {isLoading || isFetching ? (
+              <div className="d-flex justify-content-start w-100">
+                <div className="spinner-border text-dark" role="status">
+                  <span className="visually-hidden">Loading...</span>
+                </div>
+              </div>
             ) : error ? (
-              <p>Error loading products: {error?.data?.message || error.message}</p>
+              <p>
+                Error loading products: {error?.data?.message || error.message}
+              </p>
             ) : showData && showData.length ? (
               showData.map((el) => <ProductCard2 el={el} key={el._id} />)
             ) : (

@@ -314,16 +314,22 @@
     }
   }
 
- &__single {
+  &__single {
     /* your existing desktop / tablet layout stays here */
-    &-wrapper {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+    &-wrapper {
       display: grid;
       grid-template-columns: 1.8fr 1fr;
       grid-gap: 175px;
       padding-bottom: 90px;
-      @media #{$xxl-1} { grid-gap: 110px; }
-      @media #{$lg}    { grid-gap: 50px; }
-      @media #{$md}    { grid-gap: 50px; }
+      @media #{$xxl-1} {
+        grid-gap: 110px;
+      }
+      @media #{$lg} {
+        grid-gap: 50px;
+      }
+      @media #{$md} {
+        grid-gap: 50px;
+      }
     }
 
     &-wrapper2 {
@@ -331,9 +337,15 @@
       grid-template-columns: 1fr 1.8fr;
       grid-gap: 30px;
       padding-bottom: 90px;
-      @media #{$xxl-1} { grid-gap: 30px; }
-      @media #{$lg}    { grid-gap: 25px; }
-      @media #{$md}    { grid-gap: 25px; }
+      @media #{$xxl-1} {
+        grid-gap: 30px;
+      }
+      @media #{$lg} {
+        grid-gap: 25px;
+      }
+      @media #{$md} {
+        grid-gap: 25px;
+      }
     }
 
     /* 🔽 MOBILE-ONLY: Breadcrumb → Images → Content (title/price/cart) → Tabs */
@@ -351,25 +363,37 @@
 
       /* flatten columns only on mobile */
       &-left,
-      &-right { display: contents; }
+      &-right {
+        display: contents;
+      }
 
-      &-breadcrumb   { grid-area: breadcrumb !important; margin-bottom: 0; }
-      &-productview  { grid-area: gallery   !important; }
-      &-content      { grid-area: content   !important; }
-      &-productMore  { grid-area: tabs      !important; }
+      &-breadcrumb {
+        grid-area: breadcrumb !important;
+        margin-bottom: 0;
+      }
+      &-productview {
+        grid-area: gallery !important;
+      }
+      &-content {
+        grid-area: content !important;
+      }
+      &-productMore {
+        grid-area: tabs !important;
+      }
 
       .woocomerce__single-productview img {
-        width: 100%; height: auto; display: block;
+        width: 100%;
+        height: auto;
+        display: block;
       }
     }
-
 
     &-productview {
       display: grid;
       grid-gap: 10px;
       position: relative;
       z-index: 0;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr;
 
       img {
         width: 100%;
@@ -568,7 +592,7 @@
 
     &-features {
       padding-top: 25px;
-
+      padding-bottom: 25px;
       li {
         font-family: $font_primary;
         font-weight: 300;

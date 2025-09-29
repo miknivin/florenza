@@ -2,10 +2,9 @@ import { FreeMode, Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
-import "swiper/css";
-import "swiper/css/autoplay";
-import "swiper/css/navigation";
-import "swiper/css/free-mode";
+// import "swiper/css";
+// import "swiper/css/navigation";
+// import "swiper/css/free-mode";
 import { Testimonial } from "..";
 
 const AboutTestimonial = ({ testimonial }) => {

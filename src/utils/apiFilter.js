@@ -1,7 +1,7 @@
 class APIFilters {
   constructor(query, queryStr) {
-    this.query = query || []; // Make sure this.query is initialized as an array or the appropriate type
-    this.queryStr = queryStr;
+    this.query = query || []; // Ensure query is initialized (assumes query is a Mongoose query object)
+    this.queryStr = queryStr || {};
   }
 
   search() {
@@ -14,10 +14,6 @@ class APIFilters {
         }
       : {};
     this.query = this.query.find({ ...keyword });
-
-    // Return the modified query
-    // console.log(this.queryStr);
-    // console.log('query ='+ this.query);
     return this;
   }
 
@@ -25,9 +21,31 @@ class APIFilters {
     const queryCopy = { ...this.queryStr };
     const fieldsToRemove = ["keyword", "page", "resPerPage"];
 
+    // Remove non-filter fields
     fieldsToRemove.forEach((el) => delete queryCopy[el]);
 
-    // Advance filter for price, rating, etc.
+    // Handle price filtering for variants
+    if (queryCopy["price[gte]"] || queryCopy["price[lte]"]) {
+      const priceFilter = {};
+      if (queryCopy["price[gte]"]) {
+        priceFilter.$gte = Number(queryCopy["price[gte]"]);
+        delete queryCopy["price[gte]"];
+      }
+      if (queryCopy["price[lte]"]) {
+        priceFilter.$lte = Number(queryCopy["price[lte]"]);
+        delete queryCopy["price[lte]"];
+      }
+      // Use $elemMatch to filter products with at least one variant matching the price range
+      this.query = this.query.find({
+        variants: {
+          $elemMatch: {
+            price: priceFilter,
+          },
+        },
+      });
+    }
+
+    // Handle other filters (e.g., category)
     let queryStr = JSON.stringify(queryCopy);
     queryStr = queryStr.replace(/\b(gt|gte|lt|lte)\b/g, (match) => `$${match}`);
     this.query = this.query.find(JSON.parse(queryStr));

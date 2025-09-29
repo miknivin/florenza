@@ -62,15 +62,15 @@ export default function Cart() {
                       <li>₹{countTotal(totalCost)}</li>
                     </ul>
                     <p className="woocomerce__cart-info">
-                      You can pay our payment by <strong>Cash</strong> or
+                      You can pay our payment by <strong>Cash</strong> or{" "}
                       <strong>Online</strong> <br />
                       gateway system{" "}
-                      <Image
+                      {/* <Image
                         width={15}
                         height={15}
                         src="/assets/imgs/woocomerce/info.png"
                         alt="info"
-                      />
+                      /> */}
                     </p>
                     <button
                       onClick={() => goToCheckout(countTotal(totalCost))}
@@ -88,13 +88,13 @@ export default function Cart() {
                 {cartData && cartData.length ? (
                   cartData.map((el, i) => (
                     <div key={i + "cart"}>
-                      <ul className="woocomerce__cart-menuitems">
+                      {/* <ul className="woocomerce__cart-menuitems">
                         <li>Item</li>
                         <li>Unit Price</li>
                         <li>Quantity</li>
                         <li>Total</li>
-                        <li></li>
-                      </ul>
+                        <li>Action</li>
+                      </ul> */}
                       <CartContent
                         el={el}
                         dispatch={dispatch}

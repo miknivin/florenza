@@ -1,4 +1,5 @@
-import { useRef, useState } from "react";
+"use client";
+import { useRef, useState, useEffect } from "react";
 
 export default function PriceFilter({ allPrice, open, setOpen, dispatch }) {
   // Use the first price range as default or set to reasonable values
@@ -12,8 +13,10 @@ export default function PriceFilter({ allPrice, open, setOpen, dispatch }) {
     const minValue = parseInt(rangeValue1);
     const maxValue = parseInt(rangeValue2);
     if (progressSlide.current) {
-      progressSlide.current.style.left = ((minValue - minPrice) / (maxPrice - minPrice)) * 100 + "%";
-      progressSlide.current.style.right = ((maxPrice - maxValue) / (maxPrice - minPrice)) * 100 + "%";
+      progressSlide.current.style.left =
+        ((minValue - minPrice) / (maxPrice - minPrice)) * 100 + "%";
+      progressSlide.current.style.right =
+        ((maxPrice - maxValue) / (maxPrice - minPrice)) * 100 + "%";
     }
   };
 
@@ -39,26 +42,33 @@ export default function PriceFilter({ allPrice, open, setOpen, dispatch }) {
   };
 
   const applyFilters = () => {
+    console.log("Dispatching price filter:", [rangeValue1, rangeValue2]);
     dispatch({ value: [rangeValue1, rangeValue2] });
   };
 
-  // Update progress bar and dispatch filters on value change
   const handleInputChange = (e, isMin) => {
     handleChange(e, isMin);
-    updateProgress();
-    applyFilters();
   };
 
-  // Initialize progress bar
-  useState(() => {
+  // Update progress bar on value change
+  useEffect(() => {
     updateProgress();
   }, [rangeValue1, rangeValue2]);
+
+  // Initialize progress bar on mount
+  useEffect(() => {
+    updateProgress();
+  }, []);
 
   return (
     <>
       <span
         id="price"
-        className={rangeValue1 > minPrice || rangeValue2 < maxPrice ? "item active" : "item"}
+        className={
+          rangeValue1 > minPrice || rangeValue2 < maxPrice
+            ? "item active"
+            : "item"
+        }
         onClick={() => setOpen(open === "price" ? "" : "price")}
       >
         Price
@@ -68,14 +78,11 @@ export default function PriceFilter({ allPrice, open, setOpen, dispatch }) {
           <h3 className="woocomerce__filtering-ftitle">Filter By Price</h3>
           <div className="price-range-slider">
             <p className="range-value">
-              <span>${rangeValue1}</span> - <span>${rangeValue2}</span>
+              <span>₹{rangeValue1}</span> - <span>₹{rangeValue2}</span>
             </p>
             <div style={{ marginTop: "10px" }}>
               <div className="custom_slider">
-                <div
-                  className="slider_progress"
-                  ref={progressSlide}
-                ></div>
+                <div className="slider_progress" ref={progressSlide}></div>
               </div>
               <div className="range_slier_imput">
                 <input
@@ -85,6 +92,8 @@ export default function PriceFilter({ allPrice, open, setOpen, dispatch }) {
                   max={maxPrice}
                   value={rangeValue1}
                   onChange={(e) => handleInputChange(e, true)}
+                  onMouseUp={applyFilters}
+                  onTouchEnd={applyFilters}
                 />
                 <input
                   type="range"
@@ -93,14 +102,14 @@ export default function PriceFilter({ allPrice, open, setOpen, dispatch }) {
                   max={maxPrice}
                   value={rangeValue2}
                   onChange={(e) => handleInputChange(e, false)}
+                  onMouseUp={applyFilters}
+                  onTouchEnd={applyFilters}
                 />
               </div>
             </div>
           </div>
         </div>
-      ) : (
-        ""
-      )}
+      ) : null}
     </>
   );
 }

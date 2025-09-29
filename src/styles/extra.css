@@ -1121,3 +1121,74 @@ img {
   margin-top: 0 !important;
   padding-top: 0 !important;
 }
+
+.woocomerce__checkout-frfieldwrapper3 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+@media (min-width: 1024px) {
+  .woocomerce__checkout-frfieldwrapper3 {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+.woocomerce__checkout-frfieldwrapper2 {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+@media (min-width: 1024px) {
+  .woocomerce__checkout-frfieldwrapper2 {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 1023px) {
+  .woocomerce__cart-right.checkout {
+    padding-top: 15px;
+  }
+}
+
+.swiper {
+  width: 100% !important; /* Use !important to override inline styles if necessary */
+}
+
+.product-swiper {
+  padding-bottom: 40px; /* Increased space for pagination */
+}
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.card {
+  border: none;
+  background: transparent;
+}
+@media (min-width: 1024px) {
+  .product-swiper .swiper-slide {
+    height: 50%; /* Ensure 2x2 grid */
+  }
+}
+.swiper-pagination-bullet {
+  width: 8px;
+  height: 8px;
+  background-color: #eee !important; /* Inactive dot color */
+  opacity: 1 !important;
+  margin: 0 3px !important;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  transform: scale(0.7) !important;
+}
+.swiper-pagination-bullet-active {
+  width: 16px;
+  height: 16px;
+  background-color: #fff !important; /* Active dot color, matches the image */
+  transform: scale(1.2) !important;
+}
+.custom-pagination {
+  position: absolute;
+  z-index: 99;
+  bottom: 20px; /* Adjust based on your layout */
+}

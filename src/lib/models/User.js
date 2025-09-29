@@ -13,7 +13,7 @@ const userSchema = new mongoose.Schema(
     email: {
       type: String,
       unique: true,
-      sparse: true, 
+      sparse: true,
       validate: {
         validator: function (value) {
           return !this.phone || !!value; // Only validate email if phone is not provided
@@ -57,9 +57,6 @@ const userSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
-
-// Explicitly create an index on the email field
-userSchema.index({ email: 1 }, { unique: true, sparse: true });
 
 // Hash password before saving
 userSchema.pre("save", async function (next) {

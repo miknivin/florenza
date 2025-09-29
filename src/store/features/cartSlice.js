@@ -21,16 +21,26 @@ const loadCartFromLocalStorage = () => {
 };
 
 const loadWishlistFromLocalStorage = () => {
-  if (typeof window === "undefined") return undefined;
+  if (typeof window === "undefined")
+    return { allWishList: [], activeWishList: [] }; // CHANGED: Return default object with empty arrays instead of undefined
   try {
     const serializedState = localStorage.getItem("wishlist");
     if (serializedState === null) {
-      return undefined;
+      return { allWishList: [], activeWishList: [] }; // CHANGED: Return default object with empty arrays instead of undefined
     }
-    return JSON.parse(serializedState);
+    const parsedState = JSON.parse(serializedState);
+    // CHANGED: Ensure allWishList and activeWishList are arrays
+    return {
+      allWishList: Array.isArray(parsedState.allWishList)
+        ? parsedState.allWishList
+        : [],
+      activeWishList: Array.isArray(parsedState.activeWishList)
+        ? parsedState.activeWishList
+        : [],
+    };
   } catch (e) {
     console.warn("Could not load wishlist from localStorage", e);
-    return undefined;
+    return { allWishList: [], activeWishList: [] }; // CHANGED: Return default object with empty arrays instead of undefined
   }
 };
 
@@ -150,6 +160,22 @@ const cartSlice = createSlice({
       state.activeWishList = action.payload;
       saveWishlistToLocalStorage(state);
     },
+    removeFromWishList(state, action) {
+      const { parent_id, variant } = action.payload;
+      state.allWishList = state.allWishList.filter(
+        (item) => !(item.parent_id === parent_id && item.variant === variant)
+      );
+      // Update activeWishList: remove parent_id if no variants of this product remain
+      const hasOtherVariants = state.allWishList.some(
+        (item) => item.parent_id === parent_id
+      );
+      if (!hasOtherVariants) {
+        state.activeWishList = state.activeWishList.filter(
+          (id) => id !== parent_id
+        );
+      }
+      saveWishlistToLocalStorage(state);
+    },
   },
 });
 
@@ -161,5 +187,6 @@ export const {
   setOrderProduct,
   setAllWishList,
   setActiveWishList,
+  removeFromWishList,
 } = cartSlice.actions;
 export default cartSlice.reducer;

@@ -12,7 +12,7 @@ import { Provider } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import { store } from "@/store/store";
 import UserProfile from "@/components/auth/UserProfile";
-
+import { Analytics } from "@vercel/analytics/next";
 config.autoAddCss = false;
 
 export default function App({ Component, pageProps }) {
@@ -32,6 +32,7 @@ export default function App({ Component, pageProps }) {
         pauseOnHover
         theme="light"
       />
+      <Analytics />
     </Provider>
   );
 }

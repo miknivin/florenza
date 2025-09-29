@@ -7,7 +7,7 @@ const Full = () => {
   return (
     <>
       <Head>
-        <title>Shop Full Width</title>
+        <title>Products</title>
         <meta name="description" content="Shop Full Width Description" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>

@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
+import DeleteIcon from "../icons/DeleteIcon";
 
 export default function CartContent({
   el,
@@ -43,7 +44,7 @@ export default function CartContent({
 
   return (
     <>
-      <div className="woocomerce__cart-productlist">
+      <div className="woocomerce__cart-productlist pt-0">
         <div className="woocomerce__cart-product">
           <div
             className="woocomerce__cart-thumb pointer_cursor"
@@ -52,7 +53,12 @@ export default function CartContent({
             <Image
               width={90}
               height={140}
-              style={{ height: "auto" }}
+              style={{
+                height: "auto",
+                maxHeight: "100px",
+                borderRadius: "10px",
+                objectFit: "cover",
+              }}
               src={el?.img?.url}
               alt="cart"
             />
@@ -72,7 +78,10 @@ export default function CartContent({
         </div>
         <div className="woocomerce__cart-price">₹{el.price}</div>
         <div className="woocomerce__cart-quantity">
-          <div className="woocomerce__single-counter counter2">
+          <div
+            style={{ maxWidth: "fit-content" }}
+            className="woocomerce__single-counter counter2"
+          >
             <p
               className="counter__decrement decrement2 pointer_cursor"
               onClick={() => updateCount(el, "minus")}
@@ -99,15 +108,11 @@ export default function CartContent({
           ₹{parseFloat(el.price) * parseInt(el.quantity)}
         </div>
         <button
-          className="woocomerce__cart-close pointer_cursor"
+          style={{ height: 0 }}
+          className="woocomerce__cart-close pointer_cursor text-danger "
           onClick={() => deleteCart(el)}
         >
-          <Image
-            width={22}
-            height={22}
-            src="/assets/imgs/woocomerce/close.png"
-            alt="close"
-          />
+          <DeleteIcon />
         </button>
       </div>
     </>

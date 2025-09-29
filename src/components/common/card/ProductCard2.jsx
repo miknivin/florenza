@@ -17,8 +17,8 @@ const ProductCard = ({ el }) => {
   const activeWishList = useSelector((state) => state.cart.activeWishList);
 
   // Debug logging
-  console.log("Product data:", el);
-  console.log("Selected variant:", selectedVariant);
+  // console.log("Product data:", el);
+  // console.log("Selected variant:", selectedVariant);
 
   const warningTost = (data) => {
     toast.warn(data, {
@@ -79,7 +79,7 @@ const ProductCard = ({ el }) => {
       size: selectedVariant?.size || null,
     };
 
-    console.log("Wishlist item:", customDetails); // Debug log
+    // console.log("Wishlist item:", customDetails); // Debug log
 
     if (allWishList && allWishList.length) {
       let result = allWishList.find(
@@ -133,9 +133,9 @@ const ProductCard = ({ el }) => {
     ? el.images[1]?.url
     : mainImage;
 
-  console.log("Has variant images:", hasVariantImages); // Debug log
-  console.log("Main image:", mainImage); // Debug log
-  console.log("Hover image:", hoverImage); // Debug log
+  // // console.log("Has variant images:", hasVariantImages); // Debug log
+  // // console.log("Main image:", mainImage); // Debug log
+  // // console.log("Hover image:", hoverImage); // Debug log
 
   return (
     <div className="woocomerce__feature-product">
