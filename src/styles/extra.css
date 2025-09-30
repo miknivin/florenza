@@ -551,7 +551,7 @@
 
 .search-name:first-child {
   margin-top: 4px;
-  color: var(--black-2);
+  color: var(--black-3);
 }
 .search-name:last-child {
   border-bottom: none;

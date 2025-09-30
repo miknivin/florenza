@@ -79,7 +79,7 @@ const AllWithFilter = () => {
     }
   `;
 
-  // Handle loading and error states
+  
   if (isLoading) {
     return (
       <div className="woocomerce__feature woocomerce-padding wc_feature_products">
