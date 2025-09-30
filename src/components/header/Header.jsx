@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useSelector } from "react-redux";
-import { usePathname } from "next/navigation"; // Import usePathname
+import { usePathname, useRouter } from "next/navigation"; // Import usePathname
 import Canvas from "../canvas/Canvas";
 import Modal from "../common/modal/ReusableModal"; // Adjust the import path
 import HeaderSearch from "../search/HeaderSearch";
@@ -28,7 +28,7 @@ const Header = ({ option }) => {
   const ofCanvasArea = useRef();
   const menuAnim = useRef();
   const pathname = usePathname(); // Get the current pathname
-
+  const router = useRouter();
   const handleOpenSignInModal = () => {
     setIsSignUp(false);
     setShowModal(true);
