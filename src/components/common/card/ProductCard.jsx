@@ -235,14 +235,14 @@ const ProductCard = ({ el }) => {
         </div>
         <div className="d-flex justify-content-between align-items-center">
          <div className="price-container">
-  <span className="woocomerce__feature-newprice">
-    ₹{selectedVariant?.discountPrice || selectedVariant?.price || "N/A"}
-  </span>
-  <span className="woocomerce__feature-oldprice">
-    <span className="mrp-text">MRP</span>
-    <span className="price-value p-2" >₹{selectedVariant.price}</span>
-  </span>
-</div>
+            <span className="woocomerce__feature-newprice">
+              ₹{selectedVariant?.discountPrice || selectedVariant?.price || "N/A"}
+            </span>
+            <span className="woocomerce__feature-oldprice">
+              <span className="mrp-text">MRP</span>
+              <span className="price-value p-2" >₹{selectedVariant.price}</span>
+            </span>
+          </div>
           <div className="dropdown">
             <button
               className="dropdown-toggle text-decoration-underline"

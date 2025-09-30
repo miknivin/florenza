@@ -25,9 +25,9 @@ const validateOrderData = (orderData, showToast = false) => {
       errors.state = "State is required"; // Added
     }
     if (!shippingInfo.phoneNo) {
-      errors.phoneNo = "Phone number is required";
+      errors.phoneNo = "Please enter your phone number so we can contact you for delivery.";
     } else if (!/^[0-9]+$/.test(shippingInfo.phoneNo)) {
-      errors.phoneNo = "Please enter a valid phone number";
+      errors.phoneNo = "Phone number should contain digits only (0-9).";
     }
     if (!shippingInfo.zipCode) {
       errors.zipCode = "Zip code is required";
@@ -117,7 +117,7 @@ const orderValidationSlice = createSlice({
     isValid: false,
     shippingInfo: {
       email: "",
-      country: "",
+      country: "India",
       fullName: "",
       state: "",
       city: "",
