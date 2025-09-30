@@ -15,7 +15,7 @@ import SignUpForm from "@/components/auth/SignupForm";
 import Autocomplete from "../shared/AutoComplete";
 
 export default function Address() {
-  const [selectedCountry, setSelectedCountry] = useState("");
+  const [selectedCountry, setSelectedCountry] = useState("India");
   const [selectedState, setSelectedState] = useState("");
   const [filteredState, setFilteredState] = useState([]);
   const [filteredCity, setFilteredCity] = useState([]);
@@ -117,7 +117,10 @@ export default function Address() {
                 gap: "1rem",
               }}
             >
-              <div style={{order:1}} className="woocomerce__checkout-rformfield">
+              <div
+                style={{ order: 1 }}
+                className="woocomerce__checkout-rformfield"
+              >
                 <label htmlFor="fullName" className="form-label">
                   Full Name*
                 </label>
@@ -139,12 +142,15 @@ export default function Address() {
                 )}
               </div>
               {!isAuthenticated && (
-                <div style={{order:2}} className="woocomerce__checkout-fieldright">
+                <div
+                  style={{ order: 2 }}
+                  className="woocomerce__checkout-fieldright"
+                >
                   <p>
                     Already have an account? <br />
                     <span
                       className="text-info"
-                      style={{ cursor: "pointer", textDecoration:"underline" }}
+                      style={{ cursor: "pointer", textDecoration: "underline" }}
                       onClick={() => setShowModal(true)}
                     >
                       Log in
@@ -160,7 +166,6 @@ export default function Address() {
                 options={countries}
                 value={selectedCountry}
                 onChange={(value) => {
-                  console.log(value, "value");
                   setSelectedCountry(value);
                   handleInputChange("country", value);
                 }}
@@ -183,7 +188,7 @@ export default function Address() {
               
             </div> */}
 
-                        <div className="woocomerce__checkout-frfieldwrapper2">
+            <div className="woocomerce__checkout-frfieldwrapper2">
               <div className="woocomerce__checkout-rformfield">
                 <label htmlFor="phoneNo" className="form-label">
                   Phone*
@@ -220,7 +225,7 @@ export default function Address() {
                     onChange={(e) =>
                       handleInputChange("phoneNo", e.target.value)
                     }
-                    type="text"
+                    type="tel"
                     className="form-control"
                     style={{ flex: 1 }}
                   />
@@ -268,21 +273,25 @@ export default function Address() {
                 getOptionValue={(option) => option.name || ""}
                 getOptionLabel={(option) => option.name || ""}
               />
-              <Autocomplete
-                id="city"
-                label="City / Town*"
-                options={filteredCity}
-                value={shippingInfo.city}
-                onChange={(value) => {
-                  handleInputChange("city", value);
-                }}
-                placeholder="Select a city"
-                autoComplete="address-level2"
-                error={errors?.city}
-                disabled={!selectedState}
-                getOptionValue={(option) => option.name || ""}
-                getOptionLabel={(option) => option.name || ""}
-              />
+              <div className="woocomerce__checkout-rformfield">
+                <label htmlFor="city" className="form-label">
+                  City / Town*
+                </label>
+                <input
+                  id="city"
+                  placeholder="City"
+                  autoComplete="address-level2"
+                  value={shippingInfo.city}
+                  onChange={(e) => handleInputChange("city", e.target.value)}
+                  type="text"
+                  className="form-control"
+                />
+                {errors?.city && (
+                  <span className="warning_text text-danger" role="alert">
+                    {errors.city}
+                  </span>
+                )}
+              </div>
               <div className="woocomerce__checkout-rformfield">
                 <label htmlFor="zipCode" className="form-label">
                   Zip Code*

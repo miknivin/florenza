@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useSelector } from "react-redux";
-import { useRouter } from "next/navigation"; // Import useRouter for navigation
+import { usePathname } from "next/navigation"; // Import usePathname
 import Canvas from "../canvas/Canvas";
 import Modal from "../common/modal/ReusableModal"; // Adjust the import path
 import HeaderSearch from "../search/HeaderSearch";
@@ -27,7 +27,7 @@ const Header = ({ option }) => {
   const [isSignUp, setIsSignUp] = useState(false); // Toggle between SignIn and SignUp
   const ofCanvasArea = useRef();
   const menuAnim = useRef();
-  const router = useRouter(); // Initialize router for navigation
+  const pathname = usePathname(); // Get the current pathname
 
   const handleOpenSignInModal = () => {
     setIsSignUp(false);
@@ -121,18 +121,18 @@ const Header = ({ option }) => {
       >
         <div className="woocomerce__header-inner shopfull">
           <div className="woocomerce__header-center">
-              <div className="woocomerce__header-logo">
+            <div className="woocomerce__header-logo">
               <Link href={"/"}>
                 <Image
                   priority
-                  width={option === "black" ? 136 : 94}
-                  height={option === "black" ? 45 : 31}
+                  width={option === "black" ? 110 : 110}
+                  height={option === "black" ? 48 : 48}
                   style={{ height: "auto" }}
                   src={option === "black" ? LogoBlack : Logo}
                   alt="Logo"
                 />
               </Link>
-            </div> 
+            </div>
           </div>
           <div className="woocomerce__header-left">
             <div className="header__nav-2">
@@ -144,17 +144,73 @@ const Header = ({ option }) => {
                 }`}
                 ref={menuAnim}
               >
-                <li>
+                <li className="position-relative">
                   <Link href={"/"}>Home</Link>
+                  {pathname === "/" && (
+                    <div
+                      style={{
+                        width: "35%",
+                        height: "1.5px",
+                        backgroundColor: `${
+                          option === "black" ? "#000" : "#fefefe"
+                        }`,
+                        position: "absolute",
+                        bottom: "15px",
+                      }}
+                      className="active"
+                    ></div>
+                  )}
                 </li>
-                <li>
+                <li className="position-relative">
                   <Link href={"/about"}>About</Link>
+                  {pathname === "/about" && (
+                    <div
+                      style={{
+                        width: "35%",
+                        height: "1.5px",
+                        backgroundColor: `${
+                          option === "black" ? "#000" : "#fefefe"
+                        }`,
+                        position: "absolute",
+                        bottom: "15px",
+                      }}
+                      className="active"
+                    ></div>
+                  )}
                 </li>
-                <li>
+                <li className="position-relative">
                   <Link href={"/shop/full"}>Products</Link>
+                  {pathname === "/shop/full" && (
+                    <div
+                      style={{
+                        width: "35%",
+                        height: "1.5px",
+                        backgroundColor: `${
+                          option === "black" ? "#000" : "#fefefe"
+                        }`,
+                        position: "absolute",
+                        bottom: "15px",
+                      }}
+                      className="active"
+                    ></div>
+                  )}
                 </li>
-                <li>
+                <li className="position-relative">
                   <Link href={"/contact"}>Contact</Link>
+                  {pathname === "/contact" && (
+                    <div
+                      style={{
+                        width: "35%",
+                        height: "1.5px",
+                        backgroundColor: `${
+                          option === "black" ? "#000" : "#fefefe"
+                        }`,
+                        position: "absolute",
+                        bottom: "15px",
+                      }}
+                      className="active"
+                    ></div>
+                  )}
                 </li>
               </ul>
             </div>

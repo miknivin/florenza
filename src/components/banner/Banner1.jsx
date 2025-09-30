@@ -2,8 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 const Banner1 = ({ banner }) => {
-  console.log(banner);
-
+ 
   return (
     <>
       <section className="woocomerce__exclusive woocomerce-padding">
@@ -22,7 +21,7 @@ const Banner1 = ({ banner }) => {
 
               <div className="woocomerce__exclusive-content">
                 <span className="woocomerce__exclusive-subtitle title-anim">
-                  {el.sub_title}{" "}
+                  {el.sub_title}
                 </span>
                 <h2 className="woocomerce__exclusive-title title-anim w-100">
                   {el.title}
@@ -30,7 +29,7 @@ const Banner1 = ({ banner }) => {
                 <div className="woocomerce__exclusive-btnwraper wc_btn_wrapper">
                   <Link
                     className="woocomerce__exclusive-btn"
-                    href={"shop/full"}
+                    href={el.link ? `shop/${el.link}` : "shop/full"}
                   >
                     Shop Now
                   </Link>
