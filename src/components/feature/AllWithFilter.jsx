@@ -12,35 +12,28 @@ const AllWithFilter = () => {
   const { data, error, isLoading } = useGetProductsQuery({
     page: 1,
     resPerPage: 20,
-    // Add other query params like keyword, category, min, max, ratings if needed
   });
 
   // Handle the fetched data
   useEffect(() => {
     if (data && data.filteredProducts && data.filteredProducts.length) {
-      // Custom sorting order for variants
       const variantOrder = {
         '50ml': 1,
         '12ml': 2,
-        '20ml':3,
+        '20ml': 3,
         '30ml': 4,
         '100ml': 5,
-        '150ml': 6
+        '150ml': 6,
       };
-      
+
       const sorted = [...data.filteredProducts].sort((a, b) => {
-        // Get the first variant's size from each product
         const variantA = a.variants && a.variants[0] ? a.variants[0].size : '';
         const variantB = b.variants && b.variants[0] ? b.variants[0].size : '';
-        
-        // Get the order values, default to a high number if variant not in order list
         const orderA = variantOrder[variantA] || 999;
         const orderB = variantOrder[variantB] || 999;
-        
-        // Sort by variant order
         return orderA - orderB;
       });
-      
+
       setLatest(sorted);
       setVisibleCount(4);
     }
@@ -52,11 +45,7 @@ const AllWithFilter = () => {
 
     let result = data.filteredProducts;
     if (filterKey !== "all") {
-      if (
-        filterKey === "man" ||
-        filterKey === "woman" ||
-        filterKey === "unisex"
-      ) {
+      if (filterKey === "man" || filterKey === "woman" || filterKey === "unisex") {
         result = data.filteredProducts.filter(
           (el) => el.gender.toLowerCase() === filterKey
         );
@@ -66,7 +55,6 @@ const AllWithFilter = () => {
         );
       }
     }
-    // Sort filtered results by createdAt ascending
     const sorted = [...result].sort(
       (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
     );
@@ -75,68 +63,38 @@ const AllWithFilter = () => {
     setIsActive(value);
   };
 
+  // CSS for the spinner
+  const spinnerStyles = `
+    .spinner {
+      border: 4px solid rgba(0, 0, 0, 0.1);
+      border-left-color: #000000ff;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin: 20px auto;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  `;
+
   // Handle loading and error states
-  if (isLoading) return <div>Loading products...</div>;
+  if (isLoading) {
+    return (
+      <div className="woocomerce__feature woocomerce-padding wc_feature_products">
+        <style>{spinnerStyles}</style>
+        <div className="spinner"></div>
+        <p style={{ textAlign: "center",color:"white" }}>Loading products...</p>
+      </div>
+    );
+  }
   if (error) return <div>Error fetching products: {error.message}</div>;
 
   return (
     <div className="woocomerce__feature woocomerce-padding wc_feature_products">
       <div className="woocomerce__feature-top">
         <p className="woocomerce__feature-title">Our products</p>
-        {/* <div className="woocomerce__feature-rightwrapper rightwrapper2">
-          <div className="woocomerce__feature-arrowwrapper">
-            <ul className="nav nav-pills woocomerce__feature-filtermenu">
-              <li>
-                <button
-                  onClick={() => filterData("all", 1)}
-                  className={isActive === 1 ? "nav-link active" : "nav-link"}
-                  type="button"
-                >
-                  All
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => filterData("floral", 2)}
-                  className={isActive === 2 ? "nav-link active" : "nav-link"}
-                  type="button"
-                >
-                  Floral
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => filterData("man", 3)}
-                  className={isActive === 3 ? "nav-link active" : "nav-link"}
-                  type="button"
-                >
-                  Man
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => filterData("woman", 4)}
-                  className={isActive === 4 ? "nav-link active" : "nav-link"}
-                  type="button"
-                >
-                  Woman
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => filterData("unisex", 5)}
-                  className={isActive === 5 ? "nav-link active" : "nav-link"}
-                  type="button"
-                >
-                  Unisex
-                </button>
-              </li>
-            </ul>
-          </div>
-          <Link className="woocomerce__feature-viewall" href={"shop/full"}>
-            View all
-          </Link>
-        </div> */}
       </div>
 
       <div>
