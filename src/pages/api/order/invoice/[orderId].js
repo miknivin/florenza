@@ -4,6 +4,8 @@ import path from "path";
 import dbConnect from "@/lib/connection/connection";
 import { uploadToS3 } from "@/utils/uploadToS3";
 import Order from "@/lib/models/Orders";
+import Product from "@/lib/models/Product";
+import User from "@/lib/models/User";
 
 export default async function handler(req, res) {
   if (req.method !== "GET") {
@@ -17,6 +19,8 @@ export default async function handler(req, res) {
   }
 
   try {
+    Product;
+    User;
     await dbConnect();
 
     const order = await Order.findById(orderId).populate("user", "name email");
@@ -44,6 +48,8 @@ export default async function handler(req, res) {
     const browser = await puppeteer.launch({
       headless: "new",
       args: ["--no-sandbox", "--disable-setuid-sandbox"],
+      executablePath:
+        process.env.PUPPETEER_EXECUTABLE_PATH || "/usr/bin/chromium-browser", // Fallback to system Chromium if bundled fails
     });
     const page = await browser.newPage();
     await page.setContent(html, { waitUntil: "networkidle0" });
