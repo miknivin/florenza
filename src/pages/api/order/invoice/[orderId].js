@@ -1,11 +1,12 @@
 import ejs from "ejs";
-import puppeteer from "puppeteer";
+import puppeteer from "puppeteer-core"; // Use puppeteer-core
 import path from "path";
 import dbConnect from "@/lib/connection/connection";
 import { uploadToS3 } from "@/utils/uploadToS3";
 import Order from "@/lib/models/Orders";
 import Product from "@/lib/models/Product";
 import User from "@/lib/models/User";
+import chromium from "@sparticuz/chromium"; // Import for serverless Chromium
 
 export default async function handler(req, res) {
   if (req.method !== "GET") {
@@ -44,11 +45,13 @@ export default async function handler(req, res) {
     );
     const html = await ejs.renderFile(templatePath, { order });
 
-    // Generate PDF
+    // Generate PDF using serverless-optimized Chromium
     const browser = await puppeteer.launch({
-      headless: "new",
-      args: ["--no-sandbox", "--disable-setuid-sandbox"],
-      executablePath: puppeteer.executablePath(),
+      args: chromium.args,
+      defaultViewport: chromium.defaultViewport,
+      executablePath: await chromium.executablePath(), // Automatically resolves serverless Chromium
+      headless: chromium.headless,
+      ignoreHTTPSErrors: true,
     });
     const page = await browser.newPage();
     await page.setContent(html, { waitUntil: "networkidle0" });
