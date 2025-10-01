@@ -48,8 +48,7 @@ export default async function handler(req, res) {
     const browser = await puppeteer.launch({
       headless: "new",
       args: ["--no-sandbox", "--disable-setuid-sandbox"],
-      executablePath:
-        process.env.PUPPETEER_EXECUTABLE_PATH || "/usr/bin/chromium-browser", // Fallback to system Chromium if bundled fails
+      executablePath: puppeteer.executablePath(),
     });
     const page = await browser.newPage();
     await page.setContent(html, { waitUntil: "networkidle0" });
