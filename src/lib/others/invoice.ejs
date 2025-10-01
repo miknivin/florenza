@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Invoice</title>
+    <style>
+      body {
+        font-family: Helvetica, sans-serif;
+      }
+      .header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+      }
+      .header img {
+        width: 200px;
+        height: auto;
+        object-fit: contain;
+      }
+      .invoice-details {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 20px;
+      }
+      .office-address,
+      .to {
+        text-align: left;
+      }
+      table {
+        margin: 0 auto;
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        border: 1px solid #000;
+        padding: 8px;
+        text-align: left;
+      }
+      th {
+        background-color: #fefefe;
+        color: #000;
+      }
+      .total {
+        font-weight: bold;
+      }
+      .thank-you {
+        text-align: center;
+        margin-top: 20px;
+      }
+      .footer {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 12px;
+        color: #666;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <div class="header">
+        <img
+          src="https://ik.imagekit.io/c1jhxlxiy/logo-black.png?updatedAt=1759311049739"
+          alt="Florenza Italia Logo"
+        />
+        <h1><b>INVOICE</b></h1>
+      </div>
+      <div class="invoice-details">
+        <div class="office-address">
+          <p><b>Office Address</b></p>
+          <p>63/695 Old No. 5/3283G 6th Tower, Kozhikode Mavoor Road,</p>
+          <p>Kozhikode, Kerala, 673001</p>
+        </div>
+        <div class="to">
+          <p><b>To</b></p>
+          <p><%= order.shippingInfo.fullName %></p>
+          <p>
+            <%= order.shippingInfo.address %>, <%= order.shippingInfo.city %>,
+            <%= order.shippingInfo.state %>, <%= order.shippingInfo.zipCode %>,
+            <%= order.shippingInfo.country %>
+          </p>
+          <p>
+            <b>Date</b> <%= new Date(order.createdAt).toLocaleDateString() %>
+          </p>
+          <p><b>Invoice</b> #<%= order._id.toString().slice(-6) %></p>
+        </div>
+      </div>
+      <table>
+        <tr>
+          <th><b>Items Description</b></th>
+          <th><b>Unit Price</b></th>
+          <th><b>Qty</b></th>
+          <th><b>Total</b></th>
+        </tr>
+        <% order.orderItems.forEach(item => { %>
+        <tr>
+          <td><b><%= item.name %></b><br /><%= item.variant %></td>
+          <td>₹<%= item.price %></td>
+          <td><%= item.quantity %></td>
+          <td>₹<%= item.price * item.quantity %></td>
+        </tr>
+        <% }) %>
+        <tr>
+          <td colspan="3" class="total">TOTAL</td>
+          <td>₹<%= order.itemsPrice %></td>
+        </tr>
+        <tr>
+          <td colspan="3" class="total">TAX</td>
+          <td>₹<%= order.taxAmount %></td>
+        </tr>
+        <tr>
+          <td colspan="3" class="total">SHIPPING</td>
+          <td>₹<%= order.shippingAmount %></td>
+        </tr>
+        <% if (order.couponApplied !== 'No') { %>
+        <tr>
+          <td colspan="3" class="total">DISCOUNT</td>
+          <td>
+            <%= order.itemsPrice + order.taxAmount + order.shippingAmount -
+            order.totalAmount %>
+          </td>
+        </tr>
+        <% } %>
+        <tr>
+          <td colspan="3" class="total">Grand Total</td>
+          <td>₹<%= order.totalAmount %></td>
+        </tr>
+      </table>
+      <div class="thank-you">
+        <p><b>Thank you for your Business</b></p>
+      </div>
+      <div class="footer">
+        <p>+91 884 810 1280</p>
+        <p>info@florenzaitaliya.com</p>
+      </div>
+    </div>
+  </body>
+</html>

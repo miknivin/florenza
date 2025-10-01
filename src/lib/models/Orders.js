@@ -124,6 +124,10 @@ const orderSchema = new mongoose.Schema(
       type: String,
       required: false,
     },
+    invoiceURL: {
+      type: String,
+      required: false,
+    },
     deliveredAt: Date,
   },
   { timestamps: true }

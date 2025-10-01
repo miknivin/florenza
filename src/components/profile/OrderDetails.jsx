@@ -4,9 +4,14 @@ import Image from "next/image";
 import { useRouter } from "next/router"; // Use useRouter for Pages Router
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import {
+  faArrowLeft,
+  faDownload,
+  faSpinner,
+} from "@fortawesome/free-solid-svg-icons";
 import { useOrderDetailsQuery } from "@/store/api/orderApi";
 import { Preloader } from "..";
+import axios from "axios";
 
 export default function OrderDetails() {
   const router = useRouter();
@@ -16,12 +21,7 @@ export default function OrderDetails() {
   });
   const [orderDetails, setOrderDetails] = useState(null);
   const [activeTab, setActiveTab] = useState("Order History");
-
-  // Debug logs
-  useEffect(() => {
-    console.log("Order ID:", orderId);
-    console.log("API Data:", data);
-  }, [orderId, data]);
+  const [isDownloading, setIsDownloading] = useState(false); // New loading state
 
   const formatDate = (dateString) => {
     if (!dateString) return "N/A";
@@ -45,6 +45,27 @@ export default function OrderDetails() {
       month: "2-digit",
       year: "numeric",
     }).format(date);
+  };
+
+  const handleDownloadInvoice = async () => {
+    setIsDownloading(true); // Start loading
+    try {
+      const response = await axios.get(`/api/order/invoice/${orderId}`);
+      const { invoiceURL } = response.data;
+
+      // Trigger download using the S3 URL
+      const link = document.createElement("a");
+      link.href = invoiceURL;
+      link.download = `invoice-${orderId}.pdf`; // Ensures proper filename
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (error) {
+      console.error("Error downloading invoice:", error);
+      alert("Failed to download invoice. Please try again.");
+    } finally {
+      setIsDownloading(false); // Stop loading regardless of success or failure
+    }
   };
 
   useEffect(() => {
@@ -104,7 +125,11 @@ export default function OrderDetails() {
   if (isLoading) return <Preloader />;
   if (error) return <div>Error: {error.message}</div>;
   if (!orderDetails && !isLoading) {
-    return <div>No order details found for Order #{orderId}</div>;
+    return (
+      <div className="text-center">
+        No order details found for Order #{orderId}
+      </div>
+    );
   }
 
   return (
@@ -112,33 +137,58 @@ export default function OrderDetails() {
       {orderDetails && (
         <div className="wd-form-order mt-5">
           <div className="d-flex justify-content-between">
-            <div className="order-head">
-              <figure className="img-product">
-                {orderDetails.orderItems?.[0]?.image && (
-                  <Image
-                    alt="product"
-                    src={orderDetails.orderItems[0].image}
-                    width={720}
-                    height={1005}
-                  />
-                )}
-              </figure>
-              <div className="content-order">
-                <div className="badge">{orderDetails.orderStatus}</div>
-                <h6 className="mt-8 fw-5">
-                  Order #{orderDetails?._id?.slice(-6)}
-                </h6>
-                <p>Payment method: {orderDetails?.paymentMethod}</p>
+            <div>
+              <div className="order-head">
+                <div className="d-flex justify-content-start flex-column gap-2">
+                  <Link
+                    style={{ width: "fit-content", marginLeft: "8px" }}
+                    href="/profile?tab=order"
+                    className="btn btn-dark d-flex align-items-center "
+                  >
+                    <FontAwesomeIcon icon={faArrowLeft} />
+                  </Link>
+                  <figure className="img-product">
+                    {orderDetails.orderItems?.[0]?.image && (
+                      <Image
+                        alt="product"
+                        src={orderDetails.orderItems[0].image}
+                        width={720}
+                        height={1005}
+                      />
+                    )}
+                  </figure>
+                </div>
+                <div className="content-order">
+                  <div className="badge">{orderDetails.orderStatus}</div>
+                  <h6 className="mt-8 fw-5">
+                    Order #{orderDetails?._id?.toString().slice(-6)}
+                  </h6>
+                  <p>Payment method: {orderDetails?.paymentMethod}</p>
+                </div>
               </div>
             </div>
+
             <div>
-              <Link
-                href="/profile?tab=order"
+              <button
+                onClick={handleDownloadInvoice}
                 className="btn btn-dark d-flex align-items-center gap-2"
+                disabled={isDownloading} // Disable button while loading
               >
-                <FontAwesomeIcon icon={faArrowLeft} />
-                <span className="d-none d-sm-inline">Go Back</span>
-              </Link>
+                {isDownloading ? (
+                  <>
+                    <div className="spinner-border" role="status">
+                      <span className="visually-hidden">Loading...</span>
+                    </div>
+
+                    <span className="d-none d-sm-inline">Downloading...</span>
+                  </>
+                ) : (
+                  <>
+                    <FontAwesomeIcon icon={faDownload} />
+                    <span className="d-none d-sm-inline">Download Invoice</span>
+                  </>
+                )}
+              </button>
             </div>
           </div>
 
@@ -168,7 +218,7 @@ export default function OrderDetails() {
                 }`}
                 onClick={() => handleTabClick("Order History")}
               >
-                <span className="inner">Order History</span>
+                <span className="inner">Order Status</span>
               </li>
               <li
                 className={`item-title ${
@@ -261,7 +311,8 @@ export default function OrderDetails() {
                       </div>
                       <div className="mt_4">
                         <span className="fw-6">Variant: </span>
-                        {item.variant || "N/A"} {/* Fallback for undefined variant */}
+                        {item.variant || "N/A"}{" "}
+                        {/* Fallback for undefined variant */}
                       </div>
                       {item.sku && (
                         <div className="mt_4">
