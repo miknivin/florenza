@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Invoice</title>
     <style>
+      @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap");
       body {
-        font-family: Helvetica, sans-serif;
+        font-family: "Noto Sans" Helvetica, sans-serif; /* Added Noto Sans */
       }
       .header {
         display: flex;
@@ -71,6 +72,7 @@
           <p><b>Office Address</b></p>
           <p>63/695 Old No. 5/3283G 6th Tower, Kozhikode Mavoor Road,</p>
           <p>Kozhikode, Kerala, 673001</p>
+          <p><b>GST No:</b>32AAIFO0471H1ZI</p>
         </div>
         <div class="to">
           <p><b>To</b></p>
@@ -117,9 +119,10 @@
         <tr>
           <td colspan="3" class="total">DISCOUNT</td>
           <td>
-            <%= order.itemsPrice + order.taxAmount + order.shippingAmount -
-            order.totalAmount %>
+            <highlight>₹</highlight><%= order.itemsPrice + order.taxAmount +
+            order.shippingAmount - order.totalAmount %>
           </td>
+          <!-- Added rupee symbol -->
         </tr>
         <% } %>
         <tr>
