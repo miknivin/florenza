@@ -7,7 +7,7 @@
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap");
       body {
-        font-family: "Noto Sans" Helvetica, sans-serif; /* Added Noto Sans */
+        font-family: "Noto Sans", Arial, sans-serif; /* Prioritize Noto Sans, fallback to Arial */
       }
       .header {
         display: flex;
@@ -46,6 +46,11 @@
       .total {
         font-weight: bold;
       }
+      .rupee {
+        font-family: "Noto Sans", Arial !important; /* Force font for rupee symbol */
+        font-weight: bold;
+        color: #000;
+      }
       .thank-you {
         text-align: center;
         margin-top: 20px;
@@ -56,11 +61,6 @@
         font-size: 12px;
         color: #666;
       }
-      .rupee {
-  font-weight: bold;
-  color: #000; /* or highlight color */
-}
-
     </style>
   </head>
   <body>
@@ -77,7 +77,7 @@
           <p><b>Office Address</b></p>
           <p>63/695 Old No. 5/3283G 6th Tower, Kozhikode Mavoor Road,</p>
           <p>Kozhikode, Kerala, 673001</p>
-          <p><b>GST No:</b>32AAIFO0471H1ZI</p>
+          <p><b>GST No:</b> 32AAIFO0471H1ZI</p>
         </div>
         <div class="to">
           <p><b>To</b></p>
@@ -103,9 +103,9 @@
         <% order.orderItems.forEach(item => { %>
         <tr>
           <td><b><%= item.name %></b><br /><%= item.variant %></td>
-          <td>₹<%= item.price %></td>
+          <td><span class="rupee">₹</span><%= item.price %></td>
           <td><%= item.quantity %></td>
-          <td>₹<%= item.price * item.quantity %></td>
+          <td><span class="rupee">₹</span><%= item.price * item.quantity %></td>
         </tr>
         <% }) %>
         <tr>
@@ -115,19 +115,19 @@
         <tr>
           <td colspan="3" class="total">TAX</td>
           <td><%= order.taxAmount %></td>
+          <!-- Tax might not need rupee if it's a rate -->
         </tr>
         <tr>
           <td colspan="3" class="total">SHIPPING</td>
-          <td>₹<%= order.shippingAmount %></td>
+          <td><span class="rupee">₹</span><%= order.shippingAmount %></td>
         </tr>
         <% if (order.couponApplied !== 'No') { %>
         <tr>
           <td colspan="3" class="total">DISCOUNT</td>
           <td>
-            &#8377<%= order.itemsPrice + order.taxAmount +
+            <span class="rupee">₹</span><%= order.itemsPrice + order.taxAmount +
             order.shippingAmount - order.totalAmount %>
           </td>
-          <!-- Added rupee symbol -->
         </tr>
         <% } %>
         <tr>
