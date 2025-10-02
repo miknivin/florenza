@@ -8,7 +8,7 @@ const Full = () => {
     <>
       <Head>
         <title>Products</title>
-        <meta name="description" content="Shop Full Width Description" />
+        <meta name="description" content="All products" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <main>

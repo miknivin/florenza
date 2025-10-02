@@ -117,8 +117,8 @@ const Index = () => {
   return (
     <>
       <Head>
-        <title>Home</title>
-        <meta name="description" content="Home Description" />
+        <title>Florenza Italiya</title>
+        <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <main>
@@ -128,7 +128,7 @@ const Index = () => {
           <CursorAnimation cursor1={cursor1} cursor2={cursor2} />
           {/* <Switcher cursor1={cursor1} cursor2={cursor2} /> */}
           <ScrollTop />
-          <div id="smooth-wrapper" className="woocomerce__main"  >
+          <div id="smooth-wrapper" className="woocomerce__main">
             <div id="smooth-content">
               <Header />
               <Hero advertising={heroAdd} />
