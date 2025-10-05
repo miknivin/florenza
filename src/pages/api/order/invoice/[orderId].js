@@ -1,12 +1,12 @@
 import ejs from "ejs";
-import puppeteer from "puppeteer-core"; // Use puppeteer-core
+import puppeteer from "puppeteer-core";
 import path from "path";
 import dbConnect from "@/lib/connection/connection";
 import { uploadToS3 } from "@/utils/uploadToS3";
 import Order from "@/lib/models/Orders";
 import Product from "@/lib/models/Product";
 import User from "@/lib/models/User";
-import chromium from "@sparticuz/chromium"; // Import for serverless Chromium
+import chromium from "@sparticuz/chromium";
 
 export default async function handler(req, res) {
   if (req.method !== "GET") {
@@ -35,6 +35,19 @@ export default async function handler(req, res) {
       return res.status(200).json({ invoiceURL: order.invoiceURL });
     }
 
+    // Calculate base price and tax amount for EJS template (without saving)
+    const originalItemsPrice = order.itemsPrice;
+    const taxRate =
+      process.env.TAX !== undefined ? Number(process.env.TAX) : 0.18; // 18% tax
+    const basePrice = (originalItemsPrice * 100) / (100 + taxRate * 100); // Base price without tax
+    const taxAmount = originalItemsPrice - basePrice; // Tax component
+
+    const orderForTemplate = {
+      ...order.toObject(), // Convert Mongoose document to plain object
+      itemsPrice: basePrice,
+      taxAmount: taxAmount,
+    };
+
     // Render EJS to HTML
     const templatePath = path.join(
       process.cwd(),
@@ -43,13 +56,15 @@ export default async function handler(req, res) {
       "others",
       "invoice.ejs"
     );
-    const html = await ejs.renderFile(templatePath, { order });
+    const html = await ejs.renderFile(templatePath, {
+      order: orderForTemplate,
+    });
 
     // Generate PDF using serverless-optimized Chromium
     const browser = await puppeteer.launch({
       args: chromium.args,
       defaultViewport: chromium.defaultViewport,
-      executablePath: await chromium.executablePath(), // Automatically resolves serverless Chromium
+      executablePath: await chromium.executablePath(),
       headless: chromium.headless,
       ignoreHTTPSErrors: true,
     });
@@ -66,7 +81,7 @@ export default async function handler(req, res) {
     const fileKey = `invoices/invoice-${orderId}.pdf`;
     const invoiceURL = await uploadToS3(pdfBuffer, fileKey);
 
-    // Update order with invoiceURL
+    // Update order with invoiceURL (only the invoiceURL is saved)
     order.invoiceURL = invoiceURL;
     await order.save();
 
