@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { useRouter } from "next/router"; // Use useRouter for Pages Router
+import { useRouter } from "next/router";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -15,13 +15,13 @@ import axios from "axios";
 
 export default function OrderDetails() {
   const router = useRouter();
-  const { orderId } = router.query; // Extract orderId from dynamic route
+  const { orderId } = router.query;
   const { data, isLoading, error } = useOrderDetailsQuery(orderId, {
     skip: !orderId,
   });
   const [orderDetails, setOrderDetails] = useState(null);
   const [activeTab, setActiveTab] = useState("Order History");
-  const [isDownloading, setIsDownloading] = useState(false); // New loading state
+  const [isDownloading, setIsDownloading] = useState(false);
 
   const formatDate = (dateString) => {
     if (!dateString) return "N/A";
@@ -48,15 +48,14 @@ export default function OrderDetails() {
   };
 
   const handleDownloadInvoice = async () => {
-    setIsDownloading(true); // Start loading
+    setIsDownloading(true);
     try {
       const response = await axios.get(`/api/order/invoice/${orderId}`);
       const { invoiceURL } = response.data;
 
-      // Trigger download using the S3 URL
       const link = document.createElement("a");
       link.href = invoiceURL;
-      link.download = `invoice-${orderId}.pdf`; // Ensures proper filename
+      link.download = `invoice-${orderId}.pdf`;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
@@ -64,7 +63,7 @@ export default function OrderDetails() {
       console.error("Error downloading invoice:", error);
       alert("Failed to download invoice. Please try again.");
     } finally {
-      setIsDownloading(false); // Stop loading regardless of success or failure
+      setIsDownloading(false);
     }
   };
 
@@ -115,7 +114,22 @@ export default function OrderDetails() {
   }, []);
 
   useEffect(() => {
-    setOrderDetails(data?.order || null);
+    if (data?.order) {
+      // Calculate base price and tax amount for display
+      const taxRate = isNaN(Number(process.env.TAX))
+        ? 0.18
+        : Number(process.env.TAX);
+      const originalItemsPrice = Number(data.order.itemsPrice);
+      const basePrice = (originalItemsPrice * 100) / (100 + taxRate * 100);
+      const taxAmount = originalItemsPrice - basePrice;
+
+      // Create modified order details with updated itemsPrice and taxAmount
+      setOrderDetails({
+        ...data.order,
+        itemsPrice: Number(basePrice.toFixed(2)),
+        taxAmount: Number(taxAmount.toFixed(2)),
+      });
+    }
   }, [orderId, data]);
 
   const handleTabClick = (tabName) => {
@@ -172,14 +186,13 @@ export default function OrderDetails() {
               <button
                 onClick={handleDownloadInvoice}
                 className="btn btn-dark d-flex align-items-center gap-2"
-                disabled={isDownloading} // Disable button while loading
+                disabled={isDownloading}
               >
                 {isDownloading ? (
                   <>
                     <div className="spinner-border" role="status">
                       <span className="visually-hidden">Loading...</span>
                     </div>
-
                     <span className="d-none d-sm-inline">Downloading...</span>
                   </>
                 ) : (
@@ -305,14 +318,13 @@ export default function OrderDetails() {
                       <div className="text-2 fw-6">{item.name}</div>
                       <div className="mt_4">
                         <span className="fw-6">Price: </span>
-                        {`₹${item.price}${
+                        {`₹${Number(item.price).toFixed(2)}${
                           item.quantity > 1 ? ` * ${item.quantity}` : ""
                         }`}
                       </div>
                       <div className="mt_4">
                         <span className="fw-6">Variant: </span>
-                        {item.variant || "N/A"}{" "}
-                        {/* Fallback for undefined variant */}
+                        {item.variant || "N/A"}
                       </div>
                       {item.sku && (
                         <div className="mt_4">
@@ -325,33 +337,33 @@ export default function OrderDetails() {
                 ))}
                 <ul>
                   <li className="d-flex justify-content-between text-2">
-                    <span>Items Price</span>
+                    <span>Subtotal</span>
                     <span className="fw-6">
-                      ₹{orderDetails?.itemsPrice.toFixed(2)}
+                      ₹{Number(orderDetails.itemsPrice).toFixed(2)}
                     </span>
                   </li>
                   <li className="d-flex justify-content-between text-2 mt_4">
-                    <span>Tax Amount</span>
+                    <span>Tax Amount (18%)</span>
                     <span className="fw-6">
-                      ₹{orderDetails?.taxAmount.toFixed(2)}
+                      ₹{Number(orderDetails.taxAmount).toFixed(2)}
                     </span>
                   </li>
                   <li className="d-flex justify-content-between text-2 mt_4">
                     <span>Shipping Amount</span>
                     <span className="fw-6">
-                      ₹{orderDetails?.shippingAmount.toFixed(2)}
+                      ₹{Number(orderDetails.shippingAmount).toFixed(2)}
                     </span>
                   </li>
-                  {orderDetails?.couponApplied !== "No" && (
+                  {orderDetails.couponApplied !== "No" && (
                     <li className="d-flex justify-content-between text-2 mt_4 pb_8 line">
                       <span>Total Discounts</span>
                       <span className="fw-6">
                         - ₹
-                        {(
-                          orderDetails?.itemsPrice +
-                          orderDetails?.taxAmount +
-                          orderDetails?.shippingAmount -
-                          orderDetails?.totalAmount
+                        {Number(
+                          orderDetails.itemsPrice +
+                            orderDetails.taxAmount +
+                            orderDetails.shippingAmount -
+                            orderDetails.totalAmount
                         ).toFixed(2)}
                       </span>
                     </li>
@@ -359,11 +371,11 @@ export default function OrderDetails() {
                   <li className="d-flex justify-content-between text-2 mt_8">
                     <span>Order Total</span>
                     <span className="fw-6">
-                      ₹{orderDetails?.totalAmount.toFixed(2)}
+                      ₹{Number(orderDetails.totalAmount).toFixed(2)}
                     </span>
                   </li>
                 </ul>
-                {orderDetails?.orderNotes && (
+                {orderDetails.orderNotes && (
                   <div className="mt_8">
                     <span className="fw-6">Order Notes: </span>
                     {orderDetails.orderNotes}
