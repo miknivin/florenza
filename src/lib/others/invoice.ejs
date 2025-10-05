@@ -104,36 +104,34 @@
         <% order.orderItems.forEach(item => { %>
         <tr>
           <td><b><%= item.name %></b><br /><%= item.variant %></td>
-          <td><span class="rupee">₹</span><%= item.price %></td>
+          <td><span class="rupee">₹</span><%= Number(item.price).toFixed(2) %></td>
           <td><%= item.quantity %></td>
-          <td><span class="rupee">₹</span><%= item.price * item.quantity %></td>
+          <td><span class="rupee">₹</span><%= (Number(item.price) * item.quantity).toFixed(2) %></td>
         </tr>
         <% }) %>
         <tr>
-          <td colspan="3" class="total">TOTAL</td>
-          <td><span class="rupee">₹</span><%= order.itemsPrice %></td>
+          <td colspan="3" class="total">SUBTOTAL</td>
+          <td><span class="rupee">₹</span><%= Number(order.itemsPrice).toFixed(2) %></td>
         </tr>
         <tr>
-          <td colspan="3" class="total">TAX</td>
-          <td><%= order.taxAmount %></td>
-          <!-- Tax might not need rupee if it's a rate -->
+          <td colspan="3" class="total">TAX (18%)</td>
+          <td><span class="rupee">₹</span><%= Number(order.taxAmount).toFixed(2) %></td>
         </tr>
         <tr>
           <td colspan="3" class="total">SHIPPING</td>
-          <td><span class="rupee">₹</span><%= order.shippingAmount %></td>
+          <td><span class="rupee">₹</span><%= Number(order.shippingAmount).toFixed(2) %></td>
         </tr>
         <% if (order.couponApplied !== 'No') { %>
         <tr>
           <td colspan="3" class="total">DISCOUNT</td>
           <td>
-            <span class="rupee">₹</span><%= order.itemsPrice + order.taxAmount +
-            order.shippingAmount - order.totalAmount %>
+            <span class="rupee">₹</span><%= Number(order.itemsPrice + order.taxAmount + order.shippingAmount - order.totalAmount).toFixed(2) %>
           </td>
         </tr>
         <% } %>
         <tr>
-          <td colspan="3" class="total">Grand Total</td>
-          <td><span class="rupee">₹</span><%= order.totalAmount %></td>
+          <td colspan="3" class="total">GRAND TOTAL</td>
+          <td><span class="rupee">₹</span><%= Number(order.totalAmount).toFixed(2) %></td>
         </tr>
       </table>
       <div class="thank-you">
