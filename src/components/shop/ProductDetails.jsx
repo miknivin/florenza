@@ -33,10 +33,12 @@ export default function ProductDetails({ id }) {
 
   // Auto-select first variant when product data is loaded
   useEffect(() => {
-    if (product?.variants?.length > 0 && !selectedVariant) {
+    if (product?.variants?.length > 0) {
       setSelectedVariant(product.variants[0]);
+    } else {
+      setSelectedVariant(null); // Reset to null if variants is null or empty
     }
-  }, [product, selectedVariant]);
+  }, [product, id]);
 
   if (isLoading) {
     return <Preloader />;
