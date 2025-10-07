@@ -15,6 +15,7 @@ export default function Payment({
   const [isClient, setIsClient] = useState(false);
   const dispatch = useDispatch();
   const { cartData } = useSelector((state) => state.cart);
+  const { shippingInfo } = useSelector((state) => state.orderValidation);
 
   useEffect(() => {
     setIsClient(true);
@@ -24,11 +25,12 @@ export default function Payment({
   const handlePaymentChange = (value) => {
     setActive(value);
     setPaymentMethod(value);
-    // Validate payment method without toast
+    // Validate payment method with shippingInfo from orderValidation
     dispatch(
       validateOrder({
         orderData: {
           cartItems: cartData,
+          shippingInfo,
           paymentMethod: value === 1 ? "Online" : "COD",
           itemsPrice: cartData.reduce(
             (total, item) => total + item.price * item.quantity,
@@ -37,6 +39,8 @@ export default function Payment({
           taxAmount: 0,
           shippingAmount: 0,
           totalAmount: totalCost,
+          orderNotes: shippingInfo?.msg || "",
+          couponApplied: "No",
         },
         showToast: false,
       })

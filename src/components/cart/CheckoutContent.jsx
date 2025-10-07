@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector, useStore } from "react-redux";
 import { toast } from "react-toastify";
 import Payment from "@/components/checkout/Payment";
 import Address from "@/components/checkout/Address";
@@ -27,6 +27,7 @@ export default function CheckoutContent() {
   const [showModal, setShowModal] = useState(false);
   const [isSignUp, setIsSignUp] = useState(false);
   const router = useRouter();
+  const store = useStore();
   const dispatch = useDispatch();
   const { cartData, totalCost } = useSelector((state) => state.cart);
   const { isAuthenticated } = useSelector((state) => state.user);
@@ -58,6 +59,8 @@ export default function CheckoutContent() {
   };
 
   const handleOrderSubmission = async () => {
+    console.log("executed");
+
     if (!isAuthenticated) {
       window.scrollTo(0, 0);
       toast.error("You need to log in to place an order.", {
@@ -82,12 +85,20 @@ export default function CheckoutContent() {
       orderNotes: shippingInfo.msg || "",
       couponApplied: "No",
     };
-    console.log(orderData, 'order');
 
-    // Validate order data with toast on submission
     dispatch(validateOrder({ orderData, showToast: true }));
-    if (!isValid) {
-      return; // Errors are displayed via toast and field-specific errors
+    const { isValid: updatedIsValid } = store.getState().orderValidation;
+
+    const isOrderValid =
+      cartData.length > 0 &&
+      shippingInfo.fullName &&
+      shippingInfo.email &&
+      shippingInfo.phoneNo &&
+      shippingInfo.address &&
+      paymentMethod !== null;
+
+    if (!updatedIsValid || !isOrderValid) {
+      return;
     }
 
     try {
