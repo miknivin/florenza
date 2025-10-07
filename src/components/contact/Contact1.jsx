@@ -1,10 +1,21 @@
-import { useEffect, useRef } from "react";
+"use client";
+import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { SplitText } from "@/plugins";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const Contact1 = ({ contact }) => {
   const animationWordCome = useRef();
   const animationCharCome = useRef();
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       let tHero = gsap.context(() => {
@@ -31,6 +42,42 @@ const Contact1 = ({ contact }) => {
       return () => tHero.revert();
     }
   }, []);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const { name, email, message } = formData;
+
+    if (!name || !email || !message) {
+      toast.error("Please provide name, email, and message");
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      const response = await axios.post("/api/enquiry", formData);
+      if (response.data.success) {
+        toast.success("Enquiry submitted successfully");
+        setFormData({ name: "", email: "", phone: "", message: "" });
+      } else {
+        toast.error(response?.data?.message || "Failed to submit enquiry");
+      }
+    } catch (error) {
+      if (error) {
+        toast.error(
+          error?.response?.data?.message || "Error submitting enquiry"
+        );
+      }
+      console.error("Submission error:", error);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <>
       <section className="contact__area-6">
@@ -86,28 +133,44 @@ const Contact1 = ({ contact }) => {
               </div>
               <div className="col-xxl-7 col-xl-7 col-lg-7 col-md-7">
                 <div className="contact__form">
-                  <form action="assets/mail.php" method="POST">
+                  <form onSubmit={handleSubmit}>
                     <div className="row g-3">
                       <div className="col-xxl-6 col-xl-6 col-12">
-                        <input type="text" name="name" placeholder="Name *" />
+                        <input
+                          type="text"
+                          name="name"
+                          placeholder="Name *"
+                          value={formData.name}
+                          onChange={handleInputChange}
+                        />
                       </div>
                       <div className="col-xxl-6 col-xl-6 col-12">
                         <input
                           type="email"
                           name="email"
                           placeholder="Email *"
+                          value={formData.email}
+                          onChange={handleInputChange}
                         />
                       </div>
                     </div>
                     <div className="row g-3">
                       <div className="col-xxl-6 col-xl-6 col-12">
-                        <input type="tel" name="phone" placeholder="Phone" />
+                        <input
+                          type="tel"
+                          name="phone"
+                          placeholder="Phone"
+                          value={formData.phone}
+                          onChange={handleInputChange}
+                        />
                       </div>
                       <div className="col-xxl-6 col-xl-6 col-12">
                         <input
                           type="text"
                           name="subject"
                           placeholder="Subject *"
+                          value={formData.subject || ""}
+                          onChange={handleInputChange}
                         />
                       </div>
                     </div>
@@ -116,14 +179,21 @@ const Contact1 = ({ contact }) => {
                         <textarea
                           name="message"
                           placeholder="Messages *"
+                          value={formData.message}
+                          onChange={handleInputChange}
                         ></textarea>
                       </div>
                     </div>
                     <div className="row g-3">
                       <div className="col-12">
                         <div className="btn_wrapper">
-                          <button className="wc-btn-primary btn-hover btn-item">
-                            <span></span> Send <br />
+                          <button
+                            className="wc-btn-primary btn-hover btn-item"
+                            type="submit"
+                            disabled={isSubmitting}
+                          >
+                            <span></span>{" "}
+                            {isSubmitting ? "Submitting..." : "Send"} <br />
                             Messages <i className="fa-solid fa-arrow-right"></i>
                           </button>
                         </div>
