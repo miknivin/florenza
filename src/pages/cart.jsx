@@ -12,8 +12,7 @@ import {
   removeFromCart,
   setOrderProduct,
 } from "@/store/features/cartSlice";
-import { analytics } from "@vercel/analytics/next";
-
+import { track } from "@vercel/analytics";
 export default function Cart() {
   const dispatch = useDispatch();
   const router = useRouter();
@@ -36,10 +35,10 @@ export default function Cart() {
   };
 
   const goToCheckout = (total) => {
-    console.log("Vercel Analytics:", analytics);
+    if (track) {
+      console.log("tracked");
 
-    if (analytics && typeof analytics.track === "function") {
-      analytics.track("InitiateCheckout", {
+      track("InitiateCheckout", {
         total: total,
         currency: "INR",
         items: cartData.map((item) => ({
