@@ -36,7 +36,7 @@ export default function Cart() {
   };
 
   const goToCheckout = (total) => {
-    analytics.track("InitiateCheckout", {
+    analytics?.track("InitiateCheckout", {
       total: total,
       currency: "INR",
       items: cartData.map((item) => ({
