@@ -962,12 +962,12 @@ img {
 
 .widget-timeline .timeline:before {
   top: 20px;
-  bottom: 48px;
+  bottom: 15px;
   position: absolute;
   content: " ";
   width: 2px;
   left: 10px;
-  border-right: 1px dashed var(--text-2);
+  border-right: 2px dashed #ccc;
 }
 
 .widget-timeline .timeline > li .timeline-badge.success:after {

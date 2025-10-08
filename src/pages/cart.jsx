@@ -12,6 +12,7 @@ import {
   removeFromCart,
   setOrderProduct,
 } from "@/store/features/cartSlice";
+import { analytics } from "@vercel/analytics/next";
 
 export default function Cart() {
   const dispatch = useDispatch();
@@ -35,6 +36,15 @@ export default function Cart() {
   };
 
   const goToCheckout = (total) => {
+    analytics.track("InitiateCheckout", {
+      total: total,
+      currency: "INR",
+      items: cartData.map((item) => ({
+        id: item.id,
+        quantity: item.quantity,
+        price: item.price,
+      })),
+    });
     dispatch(setOrderProduct(cartData));
     router.push("/checkout");
   };

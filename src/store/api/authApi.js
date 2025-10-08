@@ -54,7 +54,10 @@ export const authApi = createApi({
       async onQueryStarted(args, { dispatch, queryFulfilled }) {
         try {
           await queryFulfilled;
-          await dispatch(userApi.endpoints.getMe.initiate());
+          console.log("queryFulfilled");
+          await dispatch(
+            userApi.endpoints.getMe.initiate(undefined, { force: true })
+          );
         } catch (error) {
           console.log(error);
         }
@@ -71,6 +74,7 @@ export const authApi = createApi({
           // After logout, you might want to clear user state instead of calling getMe
           dispatch(clearUser());
           dispatch(setIsAuthenticated(false));
+          dispatch(userApi?.util?.invalidateTags(["User"]));
         } catch (error) {
           console.log(error);
         }

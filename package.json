@@ -34,7 +34,7 @@
     "jsonwebtoken": "^9.0.2",
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
-    "mongoose": "^8.17.0",
+    "mongoose": "^8.19.1",
     "next": "^15.5.2",
     "next-sitemap": "^4.2.3",
     "node-fetch": "^2.7.0",

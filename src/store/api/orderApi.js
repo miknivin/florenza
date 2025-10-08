@@ -133,6 +133,16 @@ export const orderApi = createApi({
         method: "DELETE",
       }),
     }),
+    trackOrder: builder.query({
+      query: ({ waybill, refIds }) => ({
+        url: "/order/track",
+        params: {
+          waybill,
+          ref_ids: refIds || "ORD1243244",
+        },
+      }),
+      providesTags: ["Order"],
+    }),
   }),
 });
 
@@ -153,4 +163,5 @@ export const {
   useApplyCouponMutation,
   useUploadKidsImageMutation,
   useDeleteSessionOrderMutation,
+  useTrackOrderQuery,
 } = orderApi;

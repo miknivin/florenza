@@ -27,8 +27,11 @@ async function dbConnect() {
   // If no promise exists, create one
   if (!cached.promise) {
     const opts = {
-      serverSelectionTimeoutMS: 10000, // Fail fast if server isn’t found (5s)
-      connectTimeoutMS: 15000, // Max time to establish connection (10s)
+      serverSelectionTimeoutMS: 30000, // 30s to select a server
+      connectTimeoutMS: 30000, // 30s to establish connection
+      socketTimeoutMS: 45000, // 45s for socket inactivity
+      retryWrites: true, // Already in URI, but explicit in options
+      retryReads: true, // Retry read operations
     };
 
     console.log(

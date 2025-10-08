@@ -6,6 +6,9 @@ import { useRef, useState } from "react";
 import { toast } from "react-toastify";
 import { useLoginMutation } from "@/store/api/authApi";
 import GoogleSignInButton from "./GoogleSigninButton";
+import { useDispatch } from "react-redux";
+import axios from "axios";
+import { setIsAuthenticated, setUser } from "@/store/features/userSlice";
 
 const SignInForm = ({
   className,
@@ -21,6 +24,7 @@ const SignInForm = ({
     remember: false,
   });
   const [login, { isLoading }] = useLoginMutation();
+  const dispatch = useDispatch();
 
   const hidePassword = () => {
     if (passwordInput.current.type === "password") {
@@ -30,15 +34,48 @@ const SignInForm = ({
     }
   };
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      console.log("Submitting login with:", formData);
       await login({
         email: formData.email,
         password: formData.password,
         signupMethod: "Email/Password",
       }).unwrap();
+      console.log("Login successful, waiting to fetch user data");
+
+      // Delay getMe by 500ms to handle server-side cookie setting
+      await new Promise((resolve) => setTimeout(resolve, 100));
+
+      // Make axios request to /api/auth/me
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_URL || "/api"}/auth/me`,
+        {
+          withCredentials: true, // Send cookies
+          params: { t: Date.now() }, // Prevent browser caching
+        }
+      );
+
+      // Process response
+      if (response.data.success) {
+        const user = response.data.user || response.data.data;
+        if (user) {
+          const userData = {
+            id: user._id || "",
+            name: user.name || "",
+            email: user.email || "",
+            phone: user.phone || "",
+          };
+          dispatch(setUser(userData));
+          dispatch(setIsAuthenticated(true));
+        } else {
+          throw new Error("No user data in response");
+        }
+      } else {
+        throw new Error(response.data.error || "Failed to fetch user data");
+      }
+
       toast.success("Successfully signed in!", {
         position: "top-center",
         autoClose: 1000,
@@ -48,12 +85,14 @@ const SignInForm = ({
         draggable: true,
         theme: "light",
       });
+
       if (isModal && onHide) {
         onHide();
       }
     } catch (error) {
-      console.error("Login error:", error);
-      toast.error(error.data?.error || "Login failed", {
+      console.error("Login or getMe error:", error);
+      const errorMessage = error?.data?.error || error.message || "Login failed";
+      toast.error(errorMessage, {
         position: "top-center",
         autoClose: 1000,
         hideProgressBar: false,
@@ -62,6 +101,11 @@ const SignInForm = ({
         draggable: true,
         theme: "light",
       });
+      // Clear user state on auth error
+      if (error.response?.status === 401 || error.response?.status === 403) {
+        dispatch(clearUser());
+        dispatch(setIsAuthenticated(false));
+      }
     }
   };
 
@@ -114,7 +158,7 @@ const SignInForm = ({
               </button>
             </div>
           </div>
-      
+
           <div className="woocomerce__signin-btnwrap pb-0">
             <button
               type="submit"

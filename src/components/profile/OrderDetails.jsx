@@ -9,7 +9,7 @@ import {
   faDownload,
   faSpinner,
 } from "@fortawesome/free-solid-svg-icons";
-import { useOrderDetailsQuery } from "@/store/api/orderApi";
+import { useOrderDetailsQuery, useTrackOrderQuery } from "@/store/api/orderApi";
 import { Preloader } from "..";
 import axios from "axios";
 
@@ -22,6 +22,16 @@ export default function OrderDetails() {
   const [orderDetails, setOrderDetails] = useState(null);
   const [activeTab, setActiveTab] = useState("Order History");
   const [isDownloading, setIsDownloading] = useState(false);
+
+  // Use trackOrderQuery only if waybill exists
+  const {
+    data: trackingData,
+    isLoading: isTrackingLoading,
+    error: trackingError,
+  } = useTrackOrderQuery(
+    { waybill: orderDetails?.waybill, refIds: orderDetails?.refIds },
+    { skip: !orderDetails?.waybill }
+  );
 
   const formatDate = (dateString) => {
     if (!dateString) return "N/A";
@@ -52,7 +62,6 @@ export default function OrderDetails() {
     try {
       const response = await axios.get(`/api/order/invoice/${orderId}`);
       const { invoiceURL } = response.data;
-
       const link = document.createElement("a");
       link.href = invoiceURL;
       link.download = `invoice-${orderId}.pdf`;
@@ -73,25 +82,21 @@ export default function OrderDetails() {
         const titles = widgetTab.querySelectorAll(
           ".widget-menu-tab .item-title"
         );
-
         titles.forEach((title, index) => {
           title.addEventListener("click", () => {
             titles.forEach((item) => item.classList.remove("active"));
             title.classList.add("active");
-
             const contentItems = widgetTab.querySelectorAll(
               ".widget-content-tab > *"
             );
             contentItems.forEach((content) =>
               content.classList.remove("active")
             );
-
             const contentActive = contentItems[index];
             contentActive.classList.add("active");
             contentActive.style.display = "block";
             contentActive.style.opacity = 0;
             setTimeout(() => (contentActive.style.opacity = 1), 0);
-
             contentItems.forEach((content, idx) => {
               if (idx !== index) {
                 content.style.display = "none";
@@ -101,9 +106,7 @@ export default function OrderDetails() {
         });
       });
     };
-
     tabs();
-
     return () => {
       document
         .querySelectorAll(".widget-menu-tab .item-title")
@@ -122,7 +125,6 @@ export default function OrderDetails() {
       const originalItemsPrice = Number(data.order.itemsPrice);
       const basePrice = (originalItemsPrice * 100) / (100 + taxRate * 100);
       const taxAmount = originalItemsPrice - basePrice;
-
       // Create modified order details with updated itemsPrice and taxAmount
       setOrderDetails({
         ...data.order,
@@ -136,8 +138,40 @@ export default function OrderDetails() {
     setActiveTab(tabName);
   };
 
+  // Filter unique scans based on Scan field, keeping the most recent
+  const scans = trackingData?.ShipmentData?.[0]?.Shipment?.Scans || [];
+  const uniqueScans = [];
+  const seenScans = new Set();
+  [...scans]
+    ?.sort(
+      (a, b) =>
+        new Date(b.ScanDetail.StatusDateTime) -
+        new Date(a.ScanDetail.StatusDateTime)
+    )
+    ?.forEach((scan) => {
+      if (!seenScans.has(scan.ScanDetail.Scan)) {
+        seenScans.add(scan.ScanDetail.Scan);
+        uniqueScans.push(scan);
+      }
+    });
+  const reversedUniqueScans = uniqueScans?.reverse();
+
+  // Determine current status from latest scan
+  const currentStatus =
+    reversedUniqueScans[0]?.ScanDetail?.Scan ||
+    orderDetails?.orderStatus ||
+    "Unknown";
+
   if (isLoading) return <Preloader />;
-  if (error) return <div>Error: {error.message}</div>;
+  if (error)
+    return (
+      <div
+        style={{ minHeight: "60vh" }}
+        className="d-flex justify-content-center align-items-center"
+      >
+        Error: {error.message}
+      </div>
+    );
   if (!orderDetails && !isLoading) {
     return (
       <div className="text-center">
@@ -173,7 +207,7 @@ export default function OrderDetails() {
                   </figure>
                 </div>
                 <div className="content-order">
-                  <div className="badge">{orderDetails.orderStatus}</div>
+                  <div className="badge">{currentStatus}</div>
                   <h6 className="mt-8 fw-5">
                     Order #{orderDetails?._id?.toString().slice(-6)}
                   </h6>
@@ -181,7 +215,6 @@ export default function OrderDetails() {
                 </div>
               </div>
             </div>
-
             <div>
               <button
                 onClick={handleDownloadInvoice}
@@ -204,7 +237,6 @@ export default function OrderDetails() {
               </button>
             </div>
           </div>
-
           <div className="tf-grid-layout md-col-2 gap-15">
             <div className="item">
               <div className="text-2 text_black-2">Start Time</div>
@@ -249,54 +281,86 @@ export default function OrderDetails() {
                 }`}
               >
                 <div className="widget-timeline">
-                  <ul className="timeline">
-                    {["Processing", "Shipped", "Delivered"].includes(
-                      orderDetails.orderStatus
-                    ) && (
-                      <li>
-                        <div className="timeline-badge success" />
-                        <div className="timeline-box">
-                          <a className="timeline-panel" href="#">
-                            <div className="text-2 text-dark fw-6">
-                              Product Processing
-                            </div>
-                          </a>
-                          <p>
-                            <strong>Estimated Delivery Date: </strong>
-                            {addDate(orderDetails.createdAt, 7)}
-                          </p>
-                        </div>
-                      </li>
-                    )}
-                    {["Shipped", "Delivered"].includes(
-                      orderDetails.orderStatus
-                    ) && (
-                      <li>
-                        <div className="timeline-badge success" />
-                        <div className="timeline-box">
-                          <a className="timeline-panel" href="#">
-                            <div className="text-2 text-dark fw-6">
-                              Product Shipped
-                            </div>
-                            <span>{formatDate(orderDetails.updatedAt)}</span>
-                          </a>
-                        </div>
-                      </li>
-                    )}
-                    {["Delivered"].includes(orderDetails.orderStatus) && (
-                      <li>
-                        <div className="timeline-badge success" />
-                        <div className="timeline-box">
-                          <a className="timeline-panel" href="#">
-                            <div className="text-2 text-dark fw-6">
-                              Product Delivered
-                            </div>
-                            <span>{formatDate(orderDetails.deliveredAt)}</span>
-                          </a>
-                        </div>
-                      </li>
-                    )}
-                  </ul>
+                  {isTrackingLoading && orderDetails?.waybill ? (
+                    <div>Loading tracking information...</div>
+                  ) : trackingError && orderDetails?.waybill ? (
+                    <div>
+                      Error loading tracking:{" "}
+                      {trackingError?.message || "Unknown error"}
+                    </div>
+                  ) : orderDetails?.waybill &&
+                    reversedUniqueScans.length > 0 ? (
+                    <ul className="timeline">
+                      {reversedUniqueScans.map((scan, index) => (
+                        <li key={index}>
+                          <div className="timeline-badge success" />
+                          <div className="timeline-box">
+                            <a className="timeline-panel" href="#">
+                              <div className="text-2 text-dark fw-6">
+                                {scan.ScanDetail.Scan}
+                              </div>
+                              <span>
+                                {formatDate(scan.ScanDetail.StatusDateTime)}
+                              </span>
+                              <p className="mt-2">
+                                <strong>Location: </strong>
+                                {scan.ScanDetail.ScannedLocation}
+                              </p>
+                            </a>
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <ul className="timeline">
+                      {["Processing", "Shipped", "Delivered"].includes(
+                        currentStatus
+                      ) && (
+                        <li>
+                          <div className="timeline-badge success" />
+                          <div className="timeline-box">
+                            <a className="timeline-panel" href="#">
+                              <div className="text-2 text-dark fw-6">
+                                Product Processing
+                              </div>
+                            </a>
+                            <p>
+                              <strong>Estimated Delivery Date: </strong>
+                              {addDate(orderDetails.createdAt, 7)}
+                            </p>
+                          </div>
+                        </li>
+                      )}
+                      {["Shipped", "Delivered"].includes(currentStatus) && (
+                        <li>
+                          <div className="timeline-badge success" />
+                          <div className="timeline-box">
+                            <a className="timeline-panel" href="#">
+                              <div className="text-2 text-dark fw-6">
+                                Product Shipped
+                              </div>
+                              <span>{formatDate(orderDetails.updatedAt)}</span>
+                            </a>
+                          </div>
+                        </li>
+                      )}
+                      {["Delivered"].includes(currentStatus) && (
+                        <li>
+                          <div className="timeline-badge success" />
+                          <div className="timeline-box">
+                            <a className="timeline-panel" href="#">
+                              <div className="text-2 text-dark fw-6">
+                                Product Delivered
+                              </div>
+                              <span>
+                                {formatDate(orderDetails.deliveredAt)}
+                              </span>
+                            </a>
+                          </div>
+                        </li>
+                      )}
+                    </ul>
+                  )}
                 </div>
               </div>
               <div

@@ -57,7 +57,6 @@ export const userApi = createApi({
         }
       },
       providesTags: ["User"],
-      extraOptions: { refetchOnMountOrArgChange: true }, // Force refetch on mount
     }),
     updateProfile: builder.mutation({
       query: ({ id, body }) => ({
