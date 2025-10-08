@@ -35,17 +35,13 @@ export default function Cart() {
   };
 
   const goToCheckout = (total) => {
-    if (track) {
+    if (typeof window !== "undefined" && track && typeof track === "function") {
       console.log("tracked");
 
       track("InitiateCheckout", {
         total: total,
         currency: "INR",
-        items: cartData.map((item) => ({
-          id: item.id,
-          quantity: item.quantity,
-          price: item.price,
-        })),
+        items: cartData?.length,
       });
     } else {
       console.warn("Vercel Analytics is not available.");
