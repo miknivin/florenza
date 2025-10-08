@@ -36,15 +36,21 @@ export default function Cart() {
   };
 
   const goToCheckout = (total) => {
-    analytics?.track("InitiateCheckout", {
-      total: total,
-      currency: "INR",
-      items: cartData.map((item) => ({
-        id: item.id,
-        quantity: item.quantity,
-        price: item.price,
-      })),
-    });
+    console.log("Vercel Analytics:", analytics);
+
+    if (analytics && typeof analytics.track === "function") {
+      analytics.track("InitiateCheckout", {
+        total: total,
+        currency: "INR",
+        items: cartData.map((item) => ({
+          id: item.id,
+          quantity: item.quantity,
+          price: item.price,
+        })),
+      });
+    } else {
+      console.warn("Vercel Analytics is not available.");
+    }
     dispatch(setOrderProduct(cartData));
     router.push("/checkout");
   };
