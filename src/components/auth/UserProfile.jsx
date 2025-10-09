@@ -8,10 +8,9 @@ export default function UserProfile() {
   const { error, isLoading } = useGetMeQuery(); // Use the RTK Query hook
   const router = useRouter();
 
-  useEffect(() => {
+  useEffect(async () => {
     // Prefetch the cart and checkout pages
-    router.prefetch("/cart");
-    router.prefetch("/checkout");
+    await Promise.all([router.prefetch("/cart"), router.prefetch("/checkout")]);
   }, [router]);
 
   return null; // No HTML rendering
