@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 import { useGetProductsQuery } from "@/store/api/productApi"; // Adjust path if needed
 import debounce from "lodash/debounce";
+import SearchIcon from "../icons/SearchIcon";
 
 export default function HeaderSearch() {
   const [searchValue, setSearchValue] = useState("");
@@ -52,7 +53,12 @@ export default function HeaderSearch() {
   };
 
   const closeSearch = () => {
-    if (searchHeader.current && searchOpen.current && searchClose.current && inputData.current) {
+    if (
+      searchHeader.current &&
+      searchOpen.current &&
+      searchClose.current &&
+      inputData.current
+    ) {
       searchHeader.current.classList.remove("open-search");
       searchOpen.current.style.display = "block";
       searchClose.current.style.display = "none";
@@ -86,7 +92,7 @@ export default function HeaderSearch() {
           onClick={openSearch}
           id="search_icon"
         >
-          <i className="fa-solid fa-magnifying-glass"></i>
+          <SearchIcon />
         </button>
         <button
           className="search-icon"
@@ -113,7 +119,10 @@ export default function HeaderSearch() {
                 <i className="fa-solid fa-spinner fa-spin"></i>
               </div>
             ) : isError && searchValue ? (
-              <p>Error loading products: {error?.data?.message || "An error occurred"}</p>
+              <p>
+                Error loading products:{" "}
+                {error?.data?.message || "An error occurred"}
+              </p>
             ) : searchValue && searchSlug?.length > 0 ? (
               searchSlug.map((el, i) => (
                 <div
@@ -125,7 +134,9 @@ export default function HeaderSearch() {
                 </div>
               ))
             ) : searchValue ? (
-              <p>No results found for <span>{searchValue}</span></p>
+              <p>
+                No results found for <span>{searchValue}</span>
+              </p>
             ) : (
               <p>Enter a product name to search</p>
             )}

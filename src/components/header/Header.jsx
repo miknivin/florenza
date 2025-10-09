@@ -17,6 +17,9 @@ import Bar from "../../../public/assets/imgs/woocomerce/bar.png";
 import BarBlack from "../../../public/assets/imgs/woocomerce/bar-b.png";
 import SignUpForm from "../auth/SignupForm";
 import SignInForm from "../auth/SigninForm";
+import HamburgerIcon from "../icons/HamburgerIcon";
+import CartIcon from "../icons/CartIcon";
+import UserIcon from "../icons/UserIcon";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
@@ -225,32 +228,28 @@ const Header = ({ option }) => {
             <div className="woocomerce__header-cart">
               <div className="woocomerce__header-cartwrapper">
                 <Link href={"/cart"}>
-                  <i className="fa-solid fa-cart-shopping"></i>
+                  <CartIcon />
                   <p>Cart</p>
-                  <span>({cartData.length})</span>
+                  <span style={{ paddingLeft: "3px" }}>
+                    ({cartData.length})
+                  </span>
                 </Link>
               </div>
               <div className="woocomerce__header-user">
-                <i
-                  className={`fa-regular fa-user ${
-                    option === "black" ? `text-black` : `text-white`
-                  }`}
-                  onClick={handleUserIconClick} // Updated to use new handler
+                <button
+                  onClick={handleUserIconClick}
                   style={{ cursor: "pointer" }}
-                ></i>
+                >
+                  <UserIcon color={option === "black" ? "#000" : "#fff"} />
+                </button>
               </div>
               <div className="woocomerce__header-search">
                 <HeaderSearch allData={allData} />
               </div>
               <div onClick={openCanvas} className="woocomerce__header-search">
-                <Image
-                  priority
-                  width={45}
-                  style={{ height: "auto" }}
-                  src={option === "black" ? BarBlack : Bar}
-                  alt="Menu"
-                  className="woocomerce__offcanvas"
-                  id="open_offcanvas"
+                <HamburgerIcon
+                  size={45}
+                  color={option === "black" ? "#000" : "#fff"}
                 />
               </div>
             </div>
