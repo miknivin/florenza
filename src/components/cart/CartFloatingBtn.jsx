@@ -1,6 +1,23 @@
+"use client";
+import Link from "next/link";
+import { usePathname } from "next/navigation"; // Use usePathname for App Router
 import React from "react";
+import { useSelector } from "react-redux";
 
 const CartButton = () => {
+  const { cartData, totalCost } = useSelector((state) => state.cart); // Assuming 'cart' is the slice name in your store
+  // Calculate total number of items
+  const totalItems = cartData.reduce((total, item) => total + item.quantity, 0);
+  const currentPath = usePathname() || "/"; // Use usePathname for current route
+
+  if (
+    totalItems === 0 ||
+    currentPath?.includes("/cart") ||
+    currentPath?.includes("/checkout")
+  ) {
+    return null;
+  }
+
   return (
     <div className="cart-button-container">
       <button className="cart-btn">
@@ -22,7 +39,7 @@ const CartButton = () => {
 
           <div className="cart-info">
             <div className="cart-items">
-              <span className="item-count">1</span>
+              <span className="item-count">{totalItems}</span>
               <span className="item-text">Item(s)</span>
               {/* <div className="collapse-icon">
                 <svg
@@ -37,10 +54,15 @@ const CartButton = () => {
                 </svg>
               </div> */}
             </div>
-            <div className="cart-savings">You save 49</div>
+            <div className="cart-savings">Total: ₹{totalCost.toFixed(2)}</div>
           </div>
 
-          <div className="view-cart-text">View Cart</div>
+          <Link
+            href="/cart"
+            className="view-cart-text text-white text-decoration-underline"
+          >
+            View Cart
+          </Link>
         </div>
       </button>
     </div>

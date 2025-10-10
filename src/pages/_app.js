@@ -64,7 +64,7 @@ export default function App({ Component, pageProps }) {
         pauseOnHover
         theme="light"
       />
-      {/* <CartButton /> */}
+      <CartButton />
       <Analytics />
     </Provider>
   );
