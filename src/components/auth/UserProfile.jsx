@@ -1,17 +1,23 @@
-"use client"; // Mark this as a client component
+"use client";
 
-import { useGetMeQuery } from "@/store/api/userApi"; // Adjust the import path based on your project structure
+import { useGetMeQuery } from "@/store/api/userApi";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 export default function UserProfile() {
-  const { error, isLoading } = useGetMeQuery(); // Use the RTK Query hook
+  const { error, isLoading } = useGetMeQuery();
   const router = useRouter();
 
-  useEffect(async () => {
-    // Prefetch the cart and checkout pages
-    await Promise.all([router.prefetch("/cart"), router.prefetch("/checkout")]);
+  useEffect(() => {
+    const prefetchPages = async () => {
+      await Promise.all([
+        router.prefetch("/cart"),
+        router.prefetch("/checkout"),
+      ]);
+    };
+
+    prefetchPages();
   }, [router]);
 
-  return null; // No HTML rendering
+  return null;
 }
