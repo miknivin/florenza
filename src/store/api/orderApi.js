@@ -4,9 +4,9 @@ export const orderApi = createApi({
   reducerPath: "orderApi",
   baseQuery: fetchBaseQuery({
     baseUrl: `/api/`,
-    credentials: "include", // This ensures cookies are sent with requests
+    credentials: "include", // Ensures cookies are sent with requests
   }),
-  tagTypes: ["Order", "AdminOrders", "UserOrders", "Coupons"],
+  tagTypes: ["Order", "AdminOrders", "UserOrders", "Coupons", "Tracking"],
   endpoints: (builder) => ({
     createNewOrder: builder.mutation({
       query(body) {
@@ -16,13 +16,15 @@ export const orderApi = createApi({
           body,
         };
       },
+      invalidatesTags: ["Order", "UserOrders", "AdminOrders"], // New order affects user and admin order lists, and specific order details
     }),
     myOrders: builder.query({
       query: () => `/order/by-user`,
+      providesTags: ["UserOrders"], // Cache user-specific orders
     }),
     orderDetails: builder.query({
       query: (id) => `/order/${id}`,
-      providesTags: ["Order"],
+      providesTags: (result, error, id) => [{ type: "Order", id }], // Cache specific order by ID
     }),
     razorpayCheckoutSession: builder.mutation({
       query(body) {
@@ -32,6 +34,7 @@ export const orderApi = createApi({
           body,
         };
       },
+      // No invalidation needed; this creates a session, not an order
     }),
     razorpayWebhook: builder.mutation({
       query(body) {
@@ -41,10 +44,11 @@ export const orderApi = createApi({
           body,
         };
       },
+      invalidatesTags: ["Order", "UserOrders", "AdminOrders"], // Payment confirmation may update order status
     }),
     getAdminOrders: builder.query({
       query: () => `/admin/orders`,
-      providesTags: ["AdminOrders"],
+      providesTags: ["AdminOrders"], // Cache admin order list
     }),
     updateOrder: builder.mutation({
       query({ id, body }) {
@@ -54,7 +58,12 @@ export const orderApi = createApi({
           body,
         };
       },
-      invalidatesTags: ["Order"],
+      invalidatesTags: (result, error, { id }) => [
+        { type: "Order", id },
+        "UserOrders",
+        "AdminOrders",
+        "Tracking", // Order updates (e.g., status) may affect tracking
+      ],
     }),
     deleteOrder: builder.mutation({
       query(id) {
@@ -63,7 +72,11 @@ export const orderApi = createApi({
           method: "DELETE",
         };
       },
-      invalidatesTags: ["AdminOrders"],
+      invalidatesTags: (result, error, id) => [
+        { type: "Order", id },
+        "UserOrders",
+        "AdminOrders",
+      ],
     }),
     createCoupon: builder.mutation({
       query(body) {
@@ -106,7 +119,7 @@ export const orderApi = createApi({
           body,
         };
       },
-      invalidatesTags: ["Coupons"],
+      // No invalidation needed; this is a read-only check
     }),
     applyCoupon: builder.mutation({
       query(body) {
@@ -116,7 +129,7 @@ export const orderApi = createApi({
           body,
         };
       },
-      invalidatesTags: ["Coupons"],
+      invalidatesTags: ["Order", "UserOrders"], // Applying a coupon may update order totals
     }),
     uploadKidsImage: builder.mutation({
       query(body) {
@@ -126,12 +139,14 @@ export const orderApi = createApi({
           body,
         };
       },
+      invalidatesTags: ["Order", "UserOrders"], // Image upload may affect order details
     }),
     deleteSessionOrder: builder.mutation({
       query: (sessionOrderId) => ({
         url: `/payments/session/${sessionOrderId}`,
         method: "DELETE",
       }),
+      // No invalidation needed; session orders are temporary
     }),
     trackOrder: builder.query({
       query: ({ waybill, refIds }) => ({
@@ -141,7 +156,9 @@ export const orderApi = createApi({
           ref_ids: refIds || "ORD1243244",
         },
       }),
-      providesTags: ["Order"],
+      providesTags: (result, error, { waybill }) => [
+        { type: "Tracking", id: waybill }, // Cache tracking by waybill
+      ],
     }),
   }),
 });
