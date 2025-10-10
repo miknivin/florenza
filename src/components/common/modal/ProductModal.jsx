@@ -6,7 +6,11 @@ import Modal from "react-bootstrap/Modal";
 import { toast } from "react-toastify";
 import { addToCart, setAllWishList } from "@/store/features/cartSlice";
 
-export default function ProductModal({ setModalShow, product, selectedVariant: initialVariant }) {
+export default function ProductModal({
+  setModalShow,
+  product,
+  selectedVariant: initialVariant,
+}) {
   const dispatch = useDispatch();
   const { cartData, allWishList } = useSelector((state) => state.cart);
   const [count, setCount] = useState(1);
@@ -88,8 +92,12 @@ export default function ProductModal({ setModalShow, product, selectedVariant: i
       quantity: count,
       img: {
         url: mainImage, // Use variant image if available
-        alt: selectedVariant?.imageUrl?.length > 0 ? `Variant Image` : mappedProduct.img.alt,
-        _id: selectedVariant?.imageUrl?.length > 0 ? null : mappedProduct.img._id,
+        alt:
+          selectedVariant?.imageUrl?.length > 0
+            ? `Variant Image`
+            : mappedProduct.img.alt,
+        _id:
+          selectedVariant?.imageUrl?.length > 0 ? null : mappedProduct.img._id,
       },
       sku: mappedProduct.sku,
       variant: selectedVariant.size,
@@ -143,7 +151,7 @@ export default function ProductModal({ setModalShow, product, selectedVariant: i
   };
 
   const percentage = (partialValue, totalValue) => {
-    return Math.round((100 * partialValue) / totalValue);
+    return Number((100 - (100 * partialValue) / totalValue).toFixed(2));
   };
 
   return (
@@ -172,9 +180,16 @@ export default function ProductModal({ setModalShow, product, selectedVariant: i
                   }}
                   className="image-box__item"
                   src={hoverImage}
-                  alt={hasVariantImages ? "Variant Thumbnail" : (mappedProduct.img.alt || "Product Thumbnail")}
+                  alt={
+                    hasVariantImages
+                      ? "Variant Thumbnail"
+                      : mappedProduct.img.alt || "Product Thumbnail"
+                  }
                   onError={(e) => {
-                    console.error("ProductModal - Image load error (hover):", hoverImage); // Debug log
+                    console.error(
+                      "ProductModal - Image load error (hover):",
+                      hoverImage
+                    ); // Debug log
                     e.currentTarget.src = "/assets/imgs/placeholder.jpg";
                   }}
                 />
@@ -189,9 +204,16 @@ export default function ProductModal({ setModalShow, product, selectedVariant: i
                   }}
                   className="woocomerce__feature-mainImg"
                   src={mainImage}
-                  alt={hasVariantImages ? "Variant Image" : (mappedProduct.img.alt || "Product Image")}
+                  alt={
+                    hasVariantImages
+                      ? "Variant Image"
+                      : mappedProduct.img.alt || "Product Image"
+                  }
                   onError={(e) => {
-                    console.error("ProductModal - Image load error (main):", mainImage); // Debug log
+                    console.error(
+                      "ProductModal - Image load error (main):",
+                      mainImage
+                    ); // Debug log
                     e.currentTarget.src = "/assets/imgs/placeholder.jpg";
                   }}
                 />

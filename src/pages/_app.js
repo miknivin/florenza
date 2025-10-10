@@ -15,6 +15,7 @@ import UserProfile from "@/components/auth/UserProfile";
 import { Analytics } from "@vercel/analytics/next";
 import Head from "next/head";
 import Script from "next/script";
+import CartButton from "@/components/cart/CartFloatingBtn";
 
 config.autoAddCss = false;
 
@@ -63,6 +64,7 @@ export default function App({ Component, pageProps }) {
         pauseOnHover
         theme="light"
       />
+      {/* <CartButton /> */}
       <Analytics />
     </Provider>
   );

@@ -78,9 +78,7 @@ export default function ProductDetails({ id }) {
   };
 
   const percentage = (partialValue, totalValue) => {
-    return Math.round(
-      100 - (100 * parseFloat(partialValue)) / parseFloat(totalValue)
-    );
+    return Number((100 - (100 * partialValue) / totalValue).toFixed(2));
   };
 
   const star = (data) => {
