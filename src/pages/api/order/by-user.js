@@ -13,9 +13,10 @@ export default async function handler(req, res) {
   }
 
   try {
-    await dbConnect();
     Product;
     User;
+    await dbConnect();
+
     const user = await isAuthenticatedUser(req);
     if (!user) {
       return res
@@ -40,7 +41,7 @@ export default async function handler(req, res) {
     if (!orders || orders.length === 0) {
       return res
         .status(404)
-        .json({ success: false, message: "No orders found for this user" });
+        .json({ success: false, message: "No orders found" });
     }
 
     // Return the orders

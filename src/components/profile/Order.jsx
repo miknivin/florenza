@@ -67,7 +67,7 @@ export default function Order() {
           <div>
             {row.original.createdAt}
             {row.original.isToday && (
-              <span className="badge bg-success ms-2" >Today</span>
+              <span className="badge bg-success ms-2">Today</span>
             )}
           </div>
         ),
@@ -76,7 +76,7 @@ export default function Order() {
         Header: "Actions",
         id: "actions", // Unique ID for the column
         Cell: ({ row }) => (
-              <button
+          <button
             style={{ width: "fitContent" }}
             className="woocomerce__cart-couponbtn me-3 "
             onClick={() => router.push(`/order/${row.original.id}`)}
@@ -95,10 +95,9 @@ export default function Order() {
 
   return (
     <div className="tab-pane fade show">
-      <div className="woocomerce__account-rtitlewrap" >
+      <div className="woocomerce__account-rtitlewrap">
         <span className="woocomerce__account-rtitle">
           Your Orders: {tableData?.length}
-          
         </span>
       </div>
 
@@ -110,10 +109,17 @@ export default function Order() {
             </div>
           </div>
         ) : error ? (
-          <p>Error loading orders: {error?.data?.message || "Unknown error"}</p>
+          <p>{error?.data?.message || "Unknown error"}</p>
         ) : tableData.length ? (
-          <div style={{ overflowX: "auto", maxWidth: "100vw",
-              WebkitOverflowScrolling: "touch", whiteSpace: "nowrap" }} className="table_content">
+          <div
+            style={{
+              overflowX: "auto",
+              maxWidth: "100vw",
+              WebkitOverflowScrolling: "touch",
+              whiteSpace: "nowrap",
+            }}
+            className="table_content"
+          >
             <table className="table table-bordered" {...getTableProps()}>
               <thead>
                 {headerGroups.map((headerGroup, i) => (
@@ -135,7 +141,11 @@ export default function Order() {
                   return (
                     <tr {...row.getRowProps()} key={`row-${i}`}>
                       {row.cells.map((cell, j) => (
-                        <td style={{whiteSpace:"break-spaces"}} {...cell.getCellProps()} key={`cell-${i}-${j}`}>
+                        <td
+                          style={{ whiteSpace: "break-spaces" }}
+                          {...cell.getCellProps()}
+                          key={`cell-${i}-${j}`}
+                        >
                           {cell.render("Cell")}
                         </td>
                       ))}

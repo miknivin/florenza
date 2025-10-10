@@ -715,7 +715,8 @@
       justify-content: space-between;
       align-items: center;
       min-width: 125px;
-      max-width: 125px;
+      width: fit-content;
+      // max-width: 125px;
       border: 1px solid var(--white-3);
       padding: 14px;
 
