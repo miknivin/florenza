@@ -1,39 +1,97 @@
 "use client";
 import { useTable } from "react-table";
-import { useMemo } from "react";
+import { useMemo, useEffect, useState } from "react";
 import { useMyOrdersQuery } from "@/store/api/orderApi";
 import { useRouter } from "next/router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
 
 export default function Order() {
   const { data, isLoading, error } = useMyOrdersQuery();
-  const orders = data?.orders || []; // Access data.orders, default to empty array
+  const orders = data?.orders || [];
   const router = useRouter();
+  const [trackingDataMap, setTrackingDataMap] = useState({});
+
+  // Fetch tracking data for all orders with waybill using Promise.all
+  useEffect(() => {
+    const fetchTrackingData = async () => {
+      const ordersWithWaybill = orders.filter((order) => order.waybill);
+      if (ordersWithWaybill.length === 0) return;
+
+      try {
+        const trackingPromises = ordersWithWaybill.map((order) =>
+          axios
+            .get("/api/order/track", {
+              params: {
+                waybill: order.waybill,
+                ref_ids: order.refIds || "ORD1243244",
+              },
+            })
+            .then((response) => ({
+              orderId: order._id,
+              trackingData: response.data,
+            }))
+            .catch((err) => ({
+              orderId: order._id,
+              trackingData: null,
+              error: err.message,
+            }))
+        );
+
+        const trackingResults = await Promise.all(trackingPromises);
+
+        const newTrackingDataMap = trackingResults.reduce((acc, result) => {
+          acc[result.orderId] = result.trackingData || null;
+          return acc;
+        }, {});
+        setTrackingDataMap(newTrackingDataMap);
+      } catch (err) {
+        console.error("Error fetching tracking data:", err);
+      }
+    };
+
+    if (orders.length > 0) {
+      fetchTrackingData();
+    }
+  }, [orders]);
 
   // Memoize table data
   const tableData = useMemo(() => {
     if (!orders.length) return [];
-    return orders.map((order) => ({
-      id: order._id,
-      items: order.orderItems
-        .map(
-          (item) =>
-            `${item.name} (x${item.quantity}${
-              item.variant ? `, ${item.variant}` : ""
-            })`
-        )
-        .join(", "), // Handle optional variant
-      totalAmount: order.totalAmount,
-      paymentMethod: order.paymentMethod,
-      orderStatus: order.orderStatus,
-      createdAt: new Date(order.createdAt).toLocaleDateString("en-IN", {
-        timeZone: "Asia/Kolkata",
-      }), // Format for IST
-      isToday:
-        new Date(order.createdAt).toDateString() === new Date().toDateString(), // Check if created today
-    }));
-  }, [orders]);
+
+    return orders.map((order) => {
+      // Get tracking data for this order
+      const trackingData = trackingDataMap[order._id];
+
+      // Determine current status: ShipmentData[0].Shipment.Status.Status or fallback to orderStatus
+      const currentStatus =
+        trackingData?.ShipmentData?.[0]?.Shipment?.Status?.Status ||
+        order.orderStatus ||
+        "Unknown";
+
+      return {
+        id: order._id,
+        items: order.orderItems
+          .map(
+            (item) =>
+              `${item.name} (x${item.quantity}${
+                item.variant ? `, ${item.variant}` : ""
+              })`
+          )
+          .join(", "),
+        totalAmount: order.totalAmount,
+        paymentMethod: order.paymentMethod,
+        orderStatus: currentStatus, // Use currentStatus for the Status column
+        createdAt: new Date(order.createdAt).toLocaleDateString("en-IN", {
+          timeZone: "Asia/Kolkata",
+        }),
+        isToday:
+          new Date(order.createdAt).toDateString() ===
+          new Date().toDateString(),
+      };
+    });
+  }, [orders, trackingDataMap]);
 
   // Define table columns
   const columns = useMemo(
@@ -41,7 +99,7 @@ export default function Order() {
       {
         Header: "Order ID",
         accessor: "id",
-        Cell: ({ value }) => <span>#{value.slice(-6)}</span>, // Shorten ID
+        Cell: ({ value }) => <span>#{value.slice(-6)}</span>,
       },
       {
         Header: "Items",
@@ -50,7 +108,7 @@ export default function Order() {
       {
         Header: "Total Amount",
         accessor: "totalAmount",
-        Cell: ({ value }) => <span>₹{value.toFixed(2)}</span>, // Use INR symbol
+        Cell: ({ value }) => <span>₹{value.toFixed(2)}</span>,
       },
       {
         Header: "Payment Method",
@@ -58,7 +116,7 @@ export default function Order() {
       },
       {
         Header: "Status",
-        accessor: "orderStatus",
+        accessor: "orderStatus", // Reflects currentStatus (tracking or fallback)
       },
       {
         Header: "Created At",
@@ -74,15 +132,15 @@ export default function Order() {
       },
       {
         Header: "Actions",
-        id: "actions", // Unique ID for the column
+        id: "actions",
         Cell: ({ row }) => (
           <button
-            style={{ width: "fitContent" }}
-            className="woocomerce__cart-couponbtn me-3 "
+            style={{ width: "fit-content", height: "fit-content" }}
+            className="woocomerce__cart-couponbtn px-3 py-2"
             onClick={() => router.push(`/order/${row.original.id}`)}
             title="View Order"
           >
-            View <FontAwesomeIcon icon={faEye} />
+            <FontAwesomeIcon icon={faEye} />
           </button>
         ),
       },

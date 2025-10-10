@@ -6,6 +6,13 @@ import { useRef, useState } from "react";
 import { toast } from "react-toastify";
 import { useRegisterMutation } from "@/store/api/authApi";
 import GoogleSignInButton from "./GoogleSigninButton";
+import { useDispatch } from "react-redux";
+import {
+  setIsAuthenticated,
+  setUser,
+  clearUser,
+} from "@/store/features/userSlice";
+import axios from "axios";
 
 const SignUpForm = ({
   className,
@@ -21,6 +28,7 @@ const SignUpForm = ({
     password: "",
   });
   const [register, { isLoading }] = useRegisterMutation();
+  const dispatch = useDispatch();
 
   const hidePassword = () => {
     if (passwordInput.current.type === "password") {
@@ -39,6 +47,38 @@ const SignUpForm = ({
         password: formData.password,
         signupMethod: "Email/Password",
       }).unwrap();
+
+      // Delay getMe by 100ms to handle server-side cookie setting
+      await new Promise((resolve) => setTimeout(resolve, 100));
+
+      // Fetch user data from /api/auth/me
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_URL || "/api"}/auth/me`,
+        {
+          withCredentials: true, // Send cookies
+          params: { t: Date.now() }, // Prevent browser caching
+        }
+      );
+
+      // Process response
+      if (response.data.success) {
+        const userData = response.data.user || response.data.data;
+        if (userData) {
+          const user = {
+            id: userData._id || "",
+            name: userData.name || "",
+            email: userData.email || "",
+            phone: userData.phone || "",
+          };
+          dispatch(setUser(user));
+          dispatch(setIsAuthenticated(true));
+        } else {
+          throw new Error("No user data in response");
+        }
+      } else {
+        throw new Error(response.data.error || "Failed to fetch user data");
+      }
+
       toast.success("Successfully registered!", {
         position: "top-center",
         autoClose: 1000,
@@ -53,8 +93,10 @@ const SignUpForm = ({
         onHide();
       }
     } catch (error) {
-      console.error("Registration error:", error);
-      toast.error(error.data?.error || "Registration failed", {
+      console.error("Registration or getMe error:", error);
+      const errorMessage =
+        error?.data?.error || error.message || "Registration failed";
+      toast.error(errorMessage, {
         position: "top-center",
         autoClose: 1000,
         hideProgressBar: false,
@@ -63,6 +105,12 @@ const SignUpForm = ({
         draggable: true,
         theme: "light",
       });
+
+      // Clear user state on auth error
+      if (error.response?.status === 401 || error.response?.status === 403) {
+        dispatch(clearUser());
+        dispatch(setIsAuthenticated(false));
+      }
     }
   };
 

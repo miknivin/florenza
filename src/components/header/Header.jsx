@@ -267,6 +267,7 @@ const Header = ({ option }) => {
             className="m-0"
             isHeading={false}
             isModal={true}
+            onHide={() => setShowModal(false)}
             onOpenSignInModal={handleOpenSignInModal}
           />
         ) : (
