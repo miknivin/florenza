@@ -6,7 +6,6 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import "swiper/css";
 import "swiper/css/bundle";
 import "react-toastify/dist/ReactToastify.css";
-
 import { config } from "@fortawesome/fontawesome-svg-core";
 import { Provider } from "react-redux";
 import { ToastContainer } from "react-toastify";
@@ -15,7 +14,11 @@ import UserProfile from "@/components/auth/UserProfile";
 import { Analytics } from "@vercel/analytics/next";
 import Head from "next/head";
 import Script from "next/script";
-import CartButton from "@/components/cart/CartFloatingBtn";
+import dynamic from "next/dynamic";
+
+const CartButton = dynamic(() => import("@/components/cart/CartFloatingBtn"), {
+  ssr: false, // Disable server-side rendering
+});
 
 config.autoAddCss = false;
 
