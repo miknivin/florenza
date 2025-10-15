@@ -399,8 +399,13 @@ const ShippingAddressModal = ({
                         placeholder="Enter your city"
                       />
                       <label htmlFor="city" className="form-label">
-                        City
+                        City*
                       </label>
+                      {errors.city && (
+                        <p className="text-danger text-sm mt-1">
+                          {errors.city}
+                        </p>
+                      )}
                     </div>
                     <div className="col-md-6 form-floating">
                       <input

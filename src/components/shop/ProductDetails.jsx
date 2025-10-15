@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Accordion } from "react-bootstrap";
 import { Feature } from "..";
 import { Preloader } from "@/components";
@@ -27,6 +28,8 @@ import ShippingAddressModal from "./product-details-components/ShippingAddressMo
 
 export default function ProductDetails({ id }) {
   const dispatch = useDispatch();
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const { cartData, allWishList, activeWishList } = useSelector(
     (state) => state.cart
   );
@@ -42,6 +45,13 @@ export default function ProductDetails({ id }) {
   });
   const product = data?.product;
 
+  // Check for buyNow query param on mount
+  useEffect(() => {
+    if (searchParams.get("toBuyNow") === "true" && isAuthenticated) {
+      onBuyNowHandler();
+    }
+  }, [isAuthenticated, searchParams]);
+
   const handleOpenSignInModal = () => {
     setIsSignUp(false);
     setShowModal(true);
@@ -56,12 +66,33 @@ export default function ProductDetails({ id }) {
     setShowAddressModal(true);
   };
 
+  // Handle modal close and remove query params
+  const handleModalClose = () => {
+    setShowModal(false);
+    // Remove toBuyNow query param
+    const params = new URLSearchParams(searchParams);
+    params.delete("toBuyNow");
+    router.replace(`${window.location.pathname}?${params.toString()}`, {
+      scroll: false,
+    });
+  };
+
+  const handleAddressModalClose = () => {
+    setShowAddressModal(false);
+    // Remove toBuyNow query param
+    const params = new URLSearchParams(searchParams);
+    params.delete("toBuyNow");
+    router.replace(`${window.location.pathname}?${params.toString()}`, {
+      scroll: false,
+    });
+  };
+
   // Auto-select first variant when product data is loaded
   useEffect(() => {
     if (product?.variants?.length > 0) {
       setSelectedVariant(product.variants[0]);
     } else {
-      setSelectedVariant(null); // Reset to null if variants is null or empty
+      setSelectedVariant(null);
     }
   }, [product, id]);
 
@@ -167,6 +198,10 @@ export default function ProductDetails({ id }) {
     }
 
     if (!isAuthenticated) {
+      // Add toBuyNow query param
+      const params = new URLSearchParams(searchParams);
+      params.set("toBuyNow", "true");
+      router.push(`${window.location.pathname}?${params.toString()}`);
       handleOpenSignInModal();
       return;
     }
@@ -196,7 +231,6 @@ export default function ProductDetails({ id }) {
   };
 
   const addWishListHandler = () => {
-    // NEW: Validate selectedVariant
     if (!selectedVariant?.size) {
       warningTost("Please select a variant to add to wishlist");
       return;
@@ -215,7 +249,6 @@ export default function ProductDetails({ id }) {
       variant: selectedVariant?.size,
     };
 
-    // Ensure allWishList is an array
     const wishListArray = Array.isArray(allWishList) ? allWishList : [];
 
     const existingWishListItem = wishListArray.find(
@@ -586,7 +619,7 @@ export default function ProductDetails({ id }) {
       )}
       <Modal
         show={showModal}
-        onHide={() => setShowModal(false)}
+        onHide={handleModalClose}
         title={isSignUp ? "Sign Up" : "Sign In"}
         size="md"
       >
@@ -602,14 +635,14 @@ export default function ProductDetails({ id }) {
             className="m-0"
             isHeading={false}
             isModal={true}
-            onHide={() => setShowModal(false)}
+            onHide={handleModalClose}
             onOpenSignUpModal={handleOpenSignUpModal}
           />
         )}
       </Modal>
       <ShippingAddressModal
         show={showAddressModal}
-        onHide={() => setShowAddressModal(false)}
+        onHide={handleAddressModalClose}
         product={product}
         selectedVariant={selectedVariant}
         count={count}

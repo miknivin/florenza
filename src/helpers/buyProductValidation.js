@@ -1,6 +1,7 @@
 export const validateShippingForm = (formData) => {
   const newErrors = {};
   if (!formData.fullName) newErrors.fullName = "Full name is required";
+  if (!formData.city) newErrors.city = "City is required";
   if (!formData.email) {
     newErrors.email = "Email is required";
   } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
@@ -8,8 +9,6 @@ export const validateShippingForm = (formData) => {
   }
   if (!formData.phoneNo) {
     newErrors.phoneNo = "Phone number is required";
-  } else if (!/^\d{10}$/.test(formData.phoneNo)) {
-    newErrors.phoneNo = "Phone number must be 10 digits";
   }
   if (!formData.houseNoBuilding)
     newErrors.houseNoBuilding = "House No, Building Name is required";
