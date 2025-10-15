@@ -12,24 +12,49 @@ import {
   setAllWishList,
   setActiveWishList,
   removeFromWishList,
+  setBuyProduct,
 } from "@/store/features/cartSlice";
 import { useState, useEffect } from "react";
 import { useGetProductDetailsQuery } from "@/store/api/productApi";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Grid } from "swiper";
 import "swiper/css/grid";
+import ProductQuantity from "./product-details-components/ProductSelector";
+import Modal from "../common/modal/ReusableModal";
+import SignUpForm from "../auth/SignupForm";
+import SignInForm from "../auth/SigninForm";
+import ShippingAddressModal from "./product-details-components/ShippingAddressModal";
+
 export default function ProductDetails({ id }) {
   const dispatch = useDispatch();
   const { cartData, allWishList, activeWishList } = useSelector(
     (state) => state.cart
   );
+  const { isAuthenticated } = useSelector((state) => state.user);
   const [tab, setTab] = useState(1);
   const [count, setCount] = useState(1);
+  const [showModal, setShowModal] = useState(false);
+  const [isSignUp, setIsSignUp] = useState(false);
+  const [showAddressModal, setShowAddressModal] = useState(false);
   const [selectedVariant, setSelectedVariant] = useState(null);
   const { data, isLoading, error } = useGetProductDetailsQuery(id, {
     retry: 3,
   });
   const product = data?.product;
+
+  const handleOpenSignInModal = () => {
+    setIsSignUp(false);
+    setShowModal(true);
+  };
+
+  const handleOpenSignUpModal = () => {
+    setIsSignUp(true);
+    setShowModal(true);
+  };
+
+  const handleOpenAddressModal = () => {
+    setShowAddressModal(true);
+  };
 
   // Auto-select first variant when product data is loaded
   useEffect(() => {
@@ -134,6 +159,42 @@ export default function ProductDetails({ id }) {
     }
   };
 
+  const onBuyNowHandler = () => {
+    if (typeof window !== "undefined") window.scrollTo(0, 0);
+    if (!selectedVariant) {
+      warningTost("Please select a variant");
+      return;
+    }
+
+    if (!isAuthenticated) {
+      handleOpenSignInModal();
+      return;
+    }
+
+    const fullData = {
+      id: product._id,
+      name: product.name,
+      price: selectedVariant?.discountPrice || selectedVariant?.price,
+      quantity: count,
+      img: {
+        url:
+          selectedVariant?.imageUrl?.[0] ||
+          product.images[0]?.url ||
+          "/assets/imgs/placeholder.jpg",
+        alt: selectedVariant?.imageUrl
+          ? "Variant Image"
+          : product.images[0]?.alt || "Product Image",
+        _id: selectedVariant?.imageUrl ? null : product.images[0]?._id,
+      },
+      sku: product.sku,
+      variant: selectedVariant?.size,
+    };
+
+    dispatch(setBuyProduct(fullData));
+    successTost("Proceeding to checkout");
+    handleOpenAddressModal();
+  };
+
   const addWishListHandler = () => {
     // NEW: Validate selectedVariant
     if (!selectedVariant?.size) {
@@ -181,8 +242,6 @@ export default function ProductDetails({ id }) {
       );
       successTost("Successfully added to wishlist");
     }
-
-    // NEW: Log state after action
   };
 
   return (
@@ -502,69 +561,13 @@ export default function ProductDetails({ id }) {
                     </Accordion>
                     <p className="woocomerce__single-sku">SKU: {product.sku}</p>
                   </div>
-                  <div className="woocomerce__single-buttons">
-                    <div className="woocomerce__single-counter mt-4">
-                      <p
-                        onClick={() => setCount(count > 1 ? count - 1 : 1)}
-                        className="counter__decrement pointer_cursor"
-                      >
-                        &ndash;
-                      </p>
-                      <input
-                        className="counter__input"
-                        type="text"
-                        value={count}
-                        name="counter"
-                        size="5"
-                        readOnly="readonly"
-                      />
-                      <p
-                        onClick={() => setCount(count + 1)}
-                        className="counter__increment pointer_cursor"
-                      >
-                        +
-                      </p>
-                    </div>
-                    <div
-                      style={{ gap: 0 }}
-                      className="woocomerce__single-incrementwrap pt-4 flex-nowrap"
-                    >
-                      <button
-                        className="woocomerce__single-cart w-100 d-flex justify-content-center"
-                        onClick={addToCartHandler}
-                      >
-                        <Image
-                          width={25}
-                          height={22}
-                          src="/assets/imgs/woocomerce/cart.png"
-                          alt="cart"
-                        />
-                        Add to cart
-                      </button>
-                      <button
-                        style={{
-                          padding: "20px 22px",
-                          border: "2px solid #000",
-                        }}
-                        className="woocomerce__single-wish bg-white"
-                        onClick={addWishListHandler}
-                      >
-                        <i
-                          className={
-                            // CHANGED: Use allWishList to check for specific variant
-                            allWishList?.some(
-                              (item) =>
-                                item.parent_id === product._id &&
-                                item.variant === selectedVariant?.size
-                            )
-                              ? "fa-solid fa-heart text-danger"
-                              : "fa-regular fa-heart"
-                          }
-                          style={{ fontSize: "20px" }}
-                        ></i>
-                      </button>
-                    </div>
-                  </div>
+
+                  <ProductQuantity
+                    onBuyNow={onBuyNowHandler}
+                    onAddToCart={addToCartHandler}
+                    onIncrease={() => setCount(count + 1)}
+                    onDecrease={() => setCount(count > 1 ? count - 1 : 1)}
+                  />
                 </div>
               </div>
             </div>
@@ -581,6 +584,36 @@ export default function ProductDetails({ id }) {
       ) : (
         ""
       )}
+      <Modal
+        show={showModal}
+        onHide={() => setShowModal(false)}
+        title={isSignUp ? "Sign Up" : "Sign In"}
+        size="md"
+      >
+        {isSignUp ? (
+          <SignUpForm
+            className="m-0"
+            isHeading={false}
+            isModal={true}
+            onOpenSignInModal={handleOpenSignInModal}
+          />
+        ) : (
+          <SignInForm
+            className="m-0"
+            isHeading={false}
+            isModal={true}
+            onHide={() => setShowModal(false)}
+            onOpenSignUpModal={handleOpenSignUpModal}
+          />
+        )}
+      </Modal>
+      <ShippingAddressModal
+        show={showAddressModal}
+        onHide={() => setShowAddressModal(false)}
+        product={product}
+        selectedVariant={selectedVariant}
+        count={count}
+      />
     </>
   );
 }

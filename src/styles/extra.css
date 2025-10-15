@@ -1390,3 +1390,7 @@ img {
     height: 16px;
   }
 }
+
+.quantity-btn {
+  width: 45px;
+}

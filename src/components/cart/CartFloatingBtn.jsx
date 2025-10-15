@@ -1,16 +1,20 @@
 "use client";
 import Link from "next/link";
-import { usePathname } from "next/navigation"; // Use usePathname for App Router
+import { usePathname } from "next/navigation";
 import React from "react";
 import { useSelector } from "react-redux";
 
 const CartButton = () => {
-  const { cartData, totalCost } = useSelector((state) => state.cart); // Assuming 'cart' is the slice name in your store
+  const { cartData, totalCost, buyProduct } = useSelector(
+    (state) => state.cart
+  );
   // Calculate total number of items
   const totalItems = cartData.reduce((total, item) => total + item.quantity, 0);
-  const currentPath = usePathname() || "/"; // Use usePathname for current route
+  const currentPath = usePathname() || "/";
 
+  // Return null if buyProduct is not null, cart is empty, or on cart/checkout pages
   if (
+    buyProduct !== null ||
     totalItems === 0 ||
     currentPath?.includes("/cart") ||
     currentPath?.includes("/checkout")
@@ -41,18 +45,6 @@ const CartButton = () => {
             <div className="cart-items">
               <span className="item-count">{totalItems}</span>
               <span className="item-text">Item(s)</span>
-              {/* <div className="collapse-icon">
-                <svg
-                  width="30"
-                  height="30"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                >
-                  <polyline points="18 15 12 9 6 15" />
-                </svg>
-              </div> */}
             </div>
             <div className="cart-savings">Total: ₹{totalCost.toFixed(2)}</div>
           </div>

@@ -191,7 +191,7 @@ export default async function handler(req, res) {
           shipmentResponse.success &&
           shipmentResponse.packages?.[0]?.waybill
         ) {
-          order.waybill = shipmentResponse.packages[0].waybill; 
+          order.waybill = shipmentResponse.packages[0].waybill;
           await order.save();
         }
       } catch (error) {

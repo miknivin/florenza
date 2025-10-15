@@ -17,7 +17,7 @@ import Script from "next/script";
 import dynamic from "next/dynamic";
 
 const CartButton = dynamic(() => import("@/components/cart/CartFloatingBtn"), {
-  ssr: false, // Disable server-side rendering
+  ssr: false,
 });
 
 config.autoAddCss = false;

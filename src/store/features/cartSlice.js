@@ -13,7 +13,11 @@ const loadCartFromLocalStorage = () => {
       (total, i) => total + i.price * i.quantity,
       0
     );
-    return { ...persistedState, totalCost };
+    return {
+      ...persistedState,
+      totalCost,
+      buyProduct: persistedState.buyProduct || null,
+    };
   } catch (e) {
     console.warn("Could not load cart from localStorage", e);
     return undefined;
@@ -51,6 +55,7 @@ const saveCartToLocalStorage = (state) => {
       cartData: state.cartData,
       totalCost: state.totalCost,
       orderProduct: state.orderProduct,
+      buyProduct: state.buyProduct,
     };
     const serializedState = JSON.stringify(cartState);
     localStorage.setItem("cart", serializedState);
@@ -77,6 +82,7 @@ const initialCartState = loadCartFromLocalStorage() || {
   cartData: [], // Array of cart items, e.g., [{ id, name, price, quantity, img, sku, variant }]
   totalCost: 0, // Total cost of items in cart
   orderProduct: [], // Array of ordered products
+  buyProduct: null,
 };
 
 const initialWishlistState = loadWishlistFromLocalStorage() || {
@@ -110,7 +116,17 @@ const cartSlice = createSlice({
       );
       saveCartToLocalStorage(state);
     },
-    // Remove item from cart by id and variant
+
+    setBuyProduct(state, action) {
+      state.buyProduct = action.payload;
+      saveCartToLocalStorage(state);
+    },
+
+    clearBuyProduct(state) {
+      state.buyProduct = null;
+      saveCartToLocalStorage(state);
+    },
+
     removeFromCart(state, action) {
       const { id, variant } = action.payload;
       console.log(id);
@@ -143,6 +159,7 @@ const cartSlice = createSlice({
     clearCart(state) {
       state.cartData = [];
       state.totalCost = 0;
+      state.buyProduct = null;
       saveCartToLocalStorage(state);
     },
     // Set order products
@@ -186,6 +203,8 @@ export const {
   clearCart,
   setOrderProduct,
   setAllWishList,
+  setBuyProduct,
+  clearBuyProduct,
   setActiveWishList,
   removeFromWishList,
 } = cartSlice.actions;

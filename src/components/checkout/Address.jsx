@@ -313,7 +313,7 @@ export default function Address() {
               </div>
             </div>
 
-            <div className="woocomerce__checkout-frfieldwrapperc">
+            <div className="woocomerce__checkout-frfieldwrapperc d-flex flex-column gap-3">
               <div className="woocomerce__checkout-rformfield">
                 <label htmlFor="houseNoBuilding" className="form-label">
                   House No, Building Name*
@@ -356,7 +356,7 @@ export default function Address() {
                   </span>
                 )}
               </div>
-              <div className="woocomerce__checkout-msg">
+              <div className="woocomerce__checkout-msg woocomerce__checkout-rformfield">
                 <label htmlFor="msg" className="form-label">
                   Order Notes (Optional)
                 </label>

@@ -11,6 +11,7 @@ export default function Autocomplete({
   placeholder,
   autoComplete,
   error,
+  isFloating = false,
   getOptionLabel = (option) => option.name || "",
   getOptionValue = (option) => option.name || "",
 }) {
@@ -56,8 +57,6 @@ export default function Autocomplete({
   const handleOptionSelect = useCallback(
     (option) => {
       const optionValue = getOptionValue(option);
-      console.log(optionValue);
-
       setInputValue(optionValue);
       onChange(optionValue);
       setIsOpen(false);
@@ -66,48 +65,65 @@ export default function Autocomplete({
   );
 
   const handleInputFocus = useCallback(() => {
-    setIsOpen(!!inputValue || options.length > 0); // Open dropdown on focus if input non-empty or options exist
+    setIsOpen(!!inputValue || options.length > 0); // Open dropdown on focus
   }, [inputValue, options]);
 
-  //   const handleInputBlur = useCallback(() => {
-  //     setTimeout(() => {
-  //       const matchedOption = options.find(
-  //         (option) =>
-  //           getOptionLabel(option).toLowerCase() === inputValue.toLowerCase()
-  //       );
-  //       if (matchedOption) {
-  //         const optionValue = getOptionValue(matchedOption);
-  //         setInputValue(optionValue);
-  //         onChange(optionValue);
-  //       } else {
-  //         setInputValue("");
-  //         onChange("");
-  //       }
-  //       setIsOpen(false);
-  //     }, 200); // Delay to allow option click
-  //   }, [inputValue, options, onChange, getOptionValue]);
-
-  return (
-    <div
-      className="woocomerce__checkout-rformfield"
-      style={{ position: "relative" }}
-    >
-      <label htmlFor={id} className="form-label">
-        {label}
-      </label>
+  // Render input with conditional floating label
+  const renderInput = () => (
+    <>
       <input
         id={id}
         type="text"
         className="form-control"
-        placeholder={placeholder}
+        placeholder={isFloating ? label : placeholder} // Use label as placeholder for floating
         autoComplete={autoComplete}
         value={inputValue}
         onChange={handleInputChange}
         onFocus={handleInputFocus}
-        // onBlur={handleInputBlur}
         disabled={disabled}
         ref={inputRef}
       />
+      {label && (
+        <label htmlFor={id} className={`form-label`}>
+          {label}
+        </label>
+      )}
+    </>
+  );
+
+  return (
+    <div
+      className={`woocomerce__checkout-rformfield ${
+        isFloating ? "form-floating" : ""
+      }`}
+      style={{ position: "relative" }}
+    >
+      {isFloating ? (
+        <>{renderInput()}</>
+      ) : (
+        <>
+          {label && (
+            <label
+              htmlFor={id}
+              className={`form-label ${!label ? "py-2" : ""}`}
+            >
+              {label}
+            </label>
+          )}
+          <input
+            id={id}
+            type="text"
+            className="form-control"
+            placeholder={placeholder}
+            autoComplete={autoComplete}
+            value={inputValue}
+            onChange={handleInputChange}
+            onFocus={handleInputFocus}
+            disabled={disabled}
+            ref={inputRef}
+          />
+        </>
+      )}
       {isOpen && filteredOptions.length > 0 && (
         <ul
           ref={dropdownRef}

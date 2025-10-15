@@ -91,11 +91,6 @@ export default function Payment({
                 </ul>
               </div>
             </div>
-            {active === 1 && (
-              <p className="razorpay-text">
-                You will be redirected to Razorpay to complete the payment.
-              </p>
-            )}
           </label>
 
           <label
@@ -126,9 +121,6 @@ export default function Payment({
                 </ul>
               </div>
             </div>
-            {active === 2 && (
-              <p className="cash-text">You can pay cash on delivery.</p>
-            )}
           </label>
         </div>
         <div className="woocomerce__checkout-btnwrapper">
