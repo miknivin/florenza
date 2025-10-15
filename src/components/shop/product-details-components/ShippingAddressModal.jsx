@@ -126,26 +126,41 @@ const ShippingAddressModal = ({
 
     const timeout = setTimeout(() => {
       setFetched(true);
-    }, 2000);
+    }, 3000);
 
     try {
       const response = await fetch(
-        `https://api.zippopotam.us/in/${formData.pincode}`
+        `https://api.postalpincode.in/pincode/${formData.pincode}`
       );
       if (!response.ok) {
         throw new Error("Invalid PIN code");
       }
+
       const data = await response.json();
-      const place = data.places[0];
+
+      if (
+        !data ||
+        !Array.isArray(data) ||
+        data[0].Status !== "Success" ||
+        !data[0].PostOffice ||
+        data[0].PostOffice.length === 0
+      ) {
+        throw new Error("Invalid or unknown PIN code");
+      }
+
+      const place = data[0].PostOffice[0];
+
       setFormData((prev) => ({
         ...prev,
-        state: place["state"],
-        country: "India",
+        state: place.State,
+        country: place.Country || "India",
         houseNoBuilding: "",
-        streetArea: `${place["place name"]}, ${place["state"]}`,
+        streetArea: `${place.Name}, ${place.District}`,
       }));
-      setSelectedCountry("India");
-      setSelectedState(place["state"]);
+
+      setSelectedCountry(place.Country || "India");
+      setSelectedState(place.State);
+
       clearTimeout(timeout);
       setFetched(true);
     } catch (err) {

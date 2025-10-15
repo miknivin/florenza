@@ -25,6 +25,7 @@ import Modal from "../common/modal/ReusableModal";
 import SignUpForm from "../auth/SignupForm";
 import SignInForm from "../auth/SigninForm";
 import ShippingAddressModal from "./product-details-components/ShippingAddressModal";
+import { animate } from "framer-motion";
 
 export default function ProductDetails({ id }) {
   const dispatch = useDispatch();
@@ -191,7 +192,12 @@ export default function ProductDetails({ id }) {
   };
 
   const onBuyNowHandler = () => {
-    if (typeof window !== "undefined") window.scrollTo(0, 0);
+    if (typeof window !== "undefined") {
+      animate(window, { scrollY: 0 }, { duration: 0 }); // Immediate scroll
+      window.scrollTo({ top: 0, left: 0, behavior: "auto" }); // Fallback
+      document.body.scrollTop = 0; // Fallback for Safari
+      document.documentElement.scrollTop = 0; // Fallback for other browsers
+    }
     if (!selectedVariant) {
       warningTost("Please select a variant");
       return;
