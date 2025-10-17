@@ -1,182 +1,308 @@
 .woocomerce {
-    &__signin {
-        max-width: 690px;
-        margin: 150px auto 200px;
+  &__signin {
+    max-width: 690px;
+    margin: 150px auto 200px;
 
-        @media #{$lg} {
-            margin: 120px auto;
-        }
-
-        @media #{$md} {
-            margin: 100px auto;
-        }
-
-        @media #{$sm} {
-            margin: 60px auto;
-        }
-
-        &-titlewrap {
-            padding-bottom: 30px;
-        }
-
-        &-title {
-            font-family: $font_primary;
-            font-weight: 400;
-            font-size: 40px;
-            line-height: 1.8;
-            color: var(--black-2);
-            display: block;
-        }
-
-        &-dis {
-            font-family: $font_primary;
-            font-weight: 400;
-            font-size: 18px;
-            line-height: 25px;
-            color: var(--black-7);
-
-            span {
-                font-weight: 500;
-                color: var(--black-2);
-            }
-        }
-
-        &-field {
-            margin-bottom: 25px;
-
-            label {
-                display: block;
-                padding-bottom: 7px;
-                font-size: 14px;
-                font-family: $font_primary;
-            }
-
-            input {
-                width: 100%;
-                border: 1px solid #E9E9E9;
-                height: 50px;
-                padding: 15px;
-                padding-right: 46px;
-
-                &::placeholder {
-                    font-family: $font_primary;
-                    font-weight: 400;
-                    font-size: 14px;
-                    line-height: 20px;
-                    color: #999999;
-                }
-
-                &:focus {
-                    outline: 0;
-                }
-            }
-        }
-
-        &-passwordfield {
-            position: relative;
-        }
-
-        &-view {
-            position: absolute;
-            right: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-        }
-
-        &-checkbox {
-            input {
-                appearance: none;
-
-                &:checked~label::after {
-                    opacity: 1;
-                    visibility: visible;
-                }
-            }
-
-            label {
-                font-family: $font_primary;
-                font-weight: 400;
-                font-size: 14px;
-                line-height: 14px;
-                color: var(--black-2);
-                position: relative;
-                padding-left: 30px;
-                cursor: pointer;
-
-                &::before {
-                    content: "";
-                    width: 20px;
-                    height: 20px;
-                    border: 1px solid #999999;
-                    top: -3px;
-                    left: 0;
-                    position: absolute;
-                }
-
-                // update v0.3 
-                &::after {
-                    content: "";
-                    position: absolute;
-                    background-image: url(/assets/imgs/woocomerce/check-sign.png);
-                    top: 3px;
-                    left: 6px;
-                    width: 100%;
-                    height: 100%;
-                    z-index: 99;
-                    border-radius: 50px;
-                    opacity: 0;
-                    visibility: hidden;
-                    background-repeat: no-repeat;
-                    transition: 0.5s;
-                }
-            }
-        }
-
-        &-btnwrap {
-            padding-top: 30px;
-            padding-bottom: 50px;
-
-            &.signupbtn {
-                padding-top: 8px;
-                padding-bottom: 30px;
-            }
-        }
-
-        &-resetbuton {
-            padding-top: 5px;
-        }
-
-        &-formfooter {
-            p {
-                font-family: $font_primary;
-                font-weight: 400;
-                font-size: 18px;
-                line-height: 20px;
-                color: var(--black-7);
-                padding-bottom: 10px;
-
-                a {
-                    color: var(--black-2);
-                    text-decoration: underline;
-
-                    &:hover {
-                        color: var(--black-7);
-                    }
-                }
-            }
-
-            a {
-                font-family: $font_primary;
-                font-weight: 400;
-                font-size: 18px;
-                line-height: 20px;
-                color: var(--black-7);
-                transition: .5s;
-
-                &:hover {
-                    color: var(--black-2);
-                }
-            }
-        }
+    @media #{$lg} {
+      margin: 120px auto;
     }
+
+    @media #{$md} {
+      margin: 100px auto;
+    }
+
+    @media #{$sm} {
+      margin: 60px auto;
+    }
+
+    &-titlewrap {
+      padding-bottom: 30px;
+    }
+
+    &-title {
+      font-family: $font_primary;
+      font-weight: 400;
+      font-size: 40px;
+      line-height: 1.8;
+      color: var(--black-2);
+      display: block;
+    }
+
+    &-dis {
+      font-family: $font_primary;
+      font-weight: 400;
+      font-size: 18px;
+      line-height: 25px;
+      color: var(--black-7);
+
+      span {
+        font-weight: 500;
+        color: var(--black-2);
+      }
+    }
+
+    &-field {
+      margin-bottom: 18px;
+
+      label {
+        display: block;
+        padding-bottom: 7px;
+        font-size: 14px;
+        font-family: $font_primary;
+      }
+
+      input {
+        width: 100%;
+        border: 1px solid #e9e9e9;
+        height: 50px;
+        padding: 15px;
+        padding-right: 46px;
+
+        &::placeholder {
+          font-family: $font_primary;
+          font-weight: 400;
+          font-size: 14px;
+          line-height: 20px;
+          color: #999999;
+        }
+
+        &:focus {
+          outline: 0;
+        }
+      }
+    }
+
+    &-passwordfield {
+      position: relative;
+    }
+
+    &-view {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    &-checkbox {
+      input {
+        appearance: none;
+
+        &:checked ~ label::after {
+          opacity: 1;
+          visibility: visible;
+        }
+      }
+
+      label {
+        font-family: $font_primary;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 14px;
+        color: var(--black-2);
+        position: relative;
+        padding-left: 30px;
+        cursor: pointer;
+
+        &::before {
+          content: "";
+          width: 20px;
+          height: 20px;
+          border: 1px solid #999999;
+          top: -3px;
+          left: 0;
+          position: absolute;
+        }
+
+        // update v0.3
+        &::after {
+          content: "";
+          position: absolute;
+          background-image: url(/assets/imgs/woocomerce/check-sign.png);
+          top: 3px;
+          left: 6px;
+          width: 100%;
+          height: 100%;
+          z-index: 99;
+          border-radius: 50px;
+          opacity: 0;
+          visibility: hidden;
+          background-repeat: no-repeat;
+          transition: 0.5s;
+        }
+      }
+    }
+
+    &-btnwrap {
+      padding-top: 30px;
+      padding-bottom: 50px;
+
+      &.signupbtn {
+        padding-top: 8px;
+        padding-bottom: 30px;
+      }
+    }
+
+    &-resetbuton {
+      padding-top: 5px;
+    }
+
+    &-formfooter {
+      p {
+        font-family: $font_primary;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 20px;
+        color: var(--black-7);
+        padding-bottom: 10px;
+
+        a {
+          color: var(--black-2);
+          text-decoration: underline;
+
+          &:hover {
+            color: var(--black-7);
+          }
+        }
+      }
+
+      a {
+        font-family: $font_primary;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 20px;
+        color: var(--black-7);
+        transition: 0.5s;
+
+        &:hover {
+          color: var(--black-2);
+        }
+      }
+    }
+  }
+}
+
+/***************************************/
+.phone-otp-wrapper {
+  margin: 0;
+  max-width: 100%;
+  margin-bottom: 18px;
+  font-family: "Kanit", sans-serif;
+}
+
+.phone-label {
+  font-size: 14px;
+  color: #000;
+  margin-bottom: 7px;
+  display: block;
+}
+
+.phone-input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.country-select-wrapper {
+  position: relative;
+}
+
+.country-select {
+  height: 60px;
+  border: 1px solid #e9e9e9;
+  padding: 16px 12px;
+  font-size: 16px;
+  color: #333;
+  background-color: #fff;
+  cursor: pointer;
+  transition: border-color 0.3s ease;
+  font-family: "Kanit", sans-serif;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 32px;
+}
+
+.country-select:focus {
+  border-color: #000;
+  outline: none;
+}
+
+.phone-input-wrapper {
+  position: relative;
+  flex: 1;
+}
+
+.phone-input {
+  width: 100%;
+  height: 60px;
+  border: 1px solid #e9e9e9;
+  padding: 16px 120px 16px 20px;
+  font-size: 16px;
+  color: #333;
+  transition: border-color 0.3s ease;
+  font-family: "Kanit", sans-serif;
+}
+
+.phone-input::placeholder {
+  color: #d0d0d0;
+  font-size: 14px;
+}
+
+.phone-input:focus {
+  border-color: #000;
+  box-shadow: none;
+  outline: none;
+}
+
+.otp-button {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 44px;
+  padding: 0 24px;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  font-size: 15px;
+  cursor: pointer;
+  font-family: "Kanit", sans-serif;
+  transition: all 0.3s ease;
+}
+
+.otp-button:hover {
+  background-color: #333;
+}
+
+.otp-button:active {
+  background-color: #000;
+  transform: translateY(-50%) scale(0.98);
+}
+
+/* Responsive adjustments */
+@media (max-width: 576px) {
+  .phone-input-container {
+    gap: 6px;
+  }
+
+  .country-select {
+    padding: 16px 8px;
+    font-size: 14px;
+    padding-right: 13px;
+    background-position: right 8px center;
+  }
+
+  .phone-input {
+    padding-right: 100px;
+    font-size: 14px;
+  }
+
+  .otp-button {
+    padding: 0 16px;
+    font-size: 14px;
+  }
 }

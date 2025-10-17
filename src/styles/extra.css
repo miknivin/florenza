@@ -1394,3 +1394,7 @@ img {
 .quantity-btn {
   width: 45px;
 }
+
+#recaptcha-container {
+  display: none !important;
+}

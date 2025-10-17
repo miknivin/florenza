@@ -13,6 +13,7 @@ import {
   clearUser,
 } from "@/store/features/userSlice";
 import axios from "axios";
+import PhoneOTP from "./PhoneOtp";
 
 const SignUpForm = ({
   className,
@@ -124,6 +125,16 @@ const SignUpForm = ({
         )}
         <form onSubmit={handleSubmit}>
           <div className="woocomerce__signin-field">
+            <PhoneOTP />
+            <div className="text-center position-relative">
+              <h6
+                style={{ left: "0", top: "-8px" }}
+                className="position-absolute w-100"
+              >
+                OR
+              </h6>
+              <hr />
+            </div>
             <label htmlFor="Name">Name</label>
             <input
               type="text"

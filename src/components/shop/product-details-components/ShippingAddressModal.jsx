@@ -145,6 +145,7 @@ const ShippingAddressModal = ({
         !data[0].PostOffice ||
         data[0].PostOffice.length === 0
       ) {
+        formData.pincode = "";
         throw new Error("Invalid or unknown PIN code");
       }
 

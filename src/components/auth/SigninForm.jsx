@@ -9,6 +9,7 @@ import GoogleSignInButton from "./GoogleSigninButton";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 import { setIsAuthenticated, setUser } from "@/store/features/userSlice";
+import PhoneOTP from "./PhoneOtp";
 
 const SignInForm = ({
   className,
@@ -43,7 +44,6 @@ const SignInForm = ({
         password: formData.password,
         signupMethod: "Email/Password",
       }).unwrap();
-      console.log("Login successful, waiting to fetch user data");
 
       // Delay getMe by 500ms to handle server-side cookie setting
       await new Promise((resolve) => setTimeout(resolve, 100));
@@ -91,7 +91,8 @@ const SignInForm = ({
       }
     } catch (error) {
       console.error("Login or getMe error:", error);
-      const errorMessage = error?.data?.error || error.message || "Login failed";
+      const errorMessage =
+        error?.data?.error || error.message || "Login failed";
       toast.error(errorMessage, {
         position: "top-center",
         autoClose: 1000,
@@ -109,6 +110,16 @@ const SignInForm = ({
     }
   };
 
+  const handleClearFields = () => {
+    setFormData({ email: "", password: "", remember: false });
+  };
+
+  const handleAuthSuccess = () => {
+    if (isModal && onHide) {
+      onHide();
+    }
+  };
+
   return (
     <div className={`woocomerce__signin  ${className || ""}`}>
       <div className="woocomerce__signin-wrapper">
@@ -118,6 +129,19 @@ const SignInForm = ({
           </div>
         )}
         <form onSubmit={handleSubmit}>
+          <PhoneOTP
+            onClearFields={handleClearFields}
+            onAuthSuccess={handleAuthSuccess}
+          />
+          <div className="text-center position-relative">
+            <h6
+              style={{ left: "0", top: "-8px" }}
+              className="position-absolute w-100"
+            >
+              OR
+            </h6>
+            <hr />
+          </div>
           <div className="woocomerce__signin-field">
             <label htmlFor="Email">Email</label>
             <input
@@ -159,7 +183,7 @@ const SignInForm = ({
             </div>
           </div>
 
-          <div className="woocomerce__signin-btnwrap pb-0">
+          <div className="woocomerce__signin-btnwrap pb-3">
             <button
               type="submit"
               className="woocomerce__checkout-submitbtn"
@@ -168,15 +192,7 @@ const SignInForm = ({
               {isLoading ? "Signing in..." : "Sign In"}
             </button>
           </div>
-          <div className="text-center position-relative">
-            <h6
-              style={{ left: "0", top: "-8px" }}
-              className="position-absolute w-100"
-            >
-              OR
-            </h6>
-            <hr />
-          </div>
+
           <GoogleSignInButton onHide={onHide} />
         </form>
         <div className="woocomerce__signin-formfooter">
