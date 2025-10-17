@@ -21,7 +21,6 @@ export default function Autocomplete({
   const inputRef = useRef(null);
   const dropdownRef = useRef(null);
 
-  // Use useMemo for filteredOptions to avoid unnecessary re-renders
   const filteredOptions = useMemo(() => {
     if (!inputValue) {
       return options;
@@ -48,27 +47,37 @@ export default function Autocomplete({
     }
   }, [isOpen, filteredOptions]);
 
-  const handleInputChange = useCallback((e) => {
-    const newValue = e.target.value;
-    setInputValue(newValue);
-    setIsOpen(!!newValue); // Open dropdown if input is non-empty
-  }, []);
-
   const handleOptionSelect = useCallback(
     (option) => {
       const optionValue = getOptionValue(option);
-      setInputValue(optionValue);
+      setInputValue(getOptionLabel(option)); // Set input to the option's label
       onChange(optionValue);
       setIsOpen(false);
     },
-    [onChange, getOptionValue]
+    [onChange, getOptionValue, getOptionLabel]
+  );
+
+  const handleInputChange = useCallback(
+    (e) => {
+      const newValue = e.target.value;
+      setInputValue(newValue);
+      setIsOpen(!!newValue);
+
+      const exactMatch = options.find(
+        (option) =>
+          getOptionLabel(option).toLowerCase() === newValue.toLowerCase()
+      );
+      if (exactMatch) {
+        handleOptionSelect(exactMatch);
+      }
+    },
+    [options, getOptionLabel, handleOptionSelect]
   );
 
   const handleInputFocus = useCallback(() => {
     setIsOpen(!!inputValue || options.length > 0); // Open dropdown on focus
   }, [inputValue, options]);
 
-  // Render input with conditional floating label
   const renderInput = () => (
     <>
       <input

@@ -12,6 +12,7 @@ export default function UserProfile() {
     const prefetchPages = async () => {
       await Promise.all([
         router.prefetch("/cart"),
+        router.prefetch("/about"),
         router.prefetch("/checkout"),
       ]);
     };
