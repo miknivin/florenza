@@ -53,7 +53,7 @@ const ShippingAddressModal = ({
     pincode: "",
     fullName: user.name || "",
     email: user.email || "",
-    phoneNo: user.phone || "",
+    phoneNo: user.phone ? user.phone.replace(/\D/g, "") : "",
     houseNoBuilding: "",
     streetArea: "",
     orderNotes: "",
@@ -72,6 +72,7 @@ const ShippingAddressModal = ({
   const [isLoading, setIsLoading] = useState(false);
   const [activePayment, setActivePayment] = useState(1);
   const [isOrderProcessing, setIsOrderProcessing] = useState(false); // Added for Preloader
+  const [isFetchingLocation, setIsFetchingLocation] = useState(false);
 
   // Calculate total cost
   const totalCost = selectedVariant?.discountPrice
@@ -105,7 +106,11 @@ const ShippingAddressModal = ({
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+
+    // If field is phone number → allow only digits
+    const cleanedValue = name === "phoneNo" ? value.replace(/\D/g, "") : value;
+
+    setFormData((prev) => ({ ...prev, [name]: cleanedValue }));
     setErrors((prev) => ({ ...prev, [name]: "" }));
     setFetchError("");
     setPaymentError("");
@@ -123,7 +128,7 @@ const ShippingAddressModal = ({
       return;
     }
     setFetchError("");
-
+    setIsFetchingLocation(true);
     const timeout = setTimeout(() => {
       setFetched(true);
     }, 3000);
@@ -163,11 +168,15 @@ const ShippingAddressModal = ({
       setSelectedState(place.State);
 
       clearTimeout(timeout);
+      setIsFetchingLocation(false);
       setFetched(true);
     } catch (err) {
+      setIsFetchingLocation(false);
       setFetchError(
         err.message || "Failed to fetch location. Please check the PIN code."
       );
+    } finally {
+      setIsFetchingLocation(false);
     }
   };
 
@@ -355,7 +364,7 @@ const ShippingAddressModal = ({
                       className="woocomerce__checkout-submitbtn btn btn-primary"
                       type="button"
                     >
-                      Next
+                      {isFetchingLocation ? "Fetching Details..." : "Next"}
                     </button>
                   </div>
                 </>
