@@ -3,9 +3,22 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import WishlistProductModal from "../common/modal/WishListProductModal";
+import { track } from "@vercel/analytics";
 
 export default function WishListItem({ el, removeWishlist }) {
   const [modalShow, setModalShow] = useState(false);
+  const handleAddToCartClick = () => {
+    // Track "Add to Cart" intent when clicking the cart button
+    if (typeof window !== "undefined" && track && typeof track === "function") {
+      console.log("Add to Cart intent tracked");
+      track("AddToCartIntent", {
+        product_name: el.title,
+      });
+    } else {
+      console.warn("Vercel Analytics is not available.");
+    }
+    setModalShow(true);
+  };
   return (
     <>
       <div className="wishlist wc_slide_btm">

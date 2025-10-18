@@ -5,6 +5,7 @@ import Image from "next/image";
 import Modal from "react-bootstrap/Modal";
 import { toast } from "react-toastify";
 import { addToCart, setAllWishList } from "@/store/features/cartSlice";
+import { track } from "@vercel/analytics";
 
 export default function ProductModal({
   setModalShow,
@@ -121,6 +122,18 @@ export default function ProductModal({
         theme: "light",
       });
       return;
+    }
+
+// Track "Add to Cart" event with product name
+    if (typeof window !== "undefined" && track && typeof track === "function") {
+      console.log("Add to Cart tracked");
+      track("AddToCart", {
+        product_name: mappedProduct.title,
+       quantity: count,
+        
+      });
+    } else {
+      console.warn("Vercel Analytics is not available.");
     }
 
     dispatch(addToCart(cartItem));
