@@ -193,10 +193,14 @@ export default function ProductDetails({ id }) {
 
   const onBuyNowHandler = () => {
     if (typeof window !== "undefined") {
-      animate(window, { scrollY: 0 }, { duration: 0 }); // Immediate scroll
-      window.scrollTo({ top: 0, left: 0, behavior: "auto" }); // Fallback
-      document.body.scrollTop = 0; // Fallback for Safari
-      document.documentElement.scrollTop = 0; // Fallback for other browsers
+      // Delay ensures Safari completes reflows before scroll
+      requestAnimationFrame(() => {
+        setTimeout(() => {
+          window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+          document.body.scrollTop = 0;
+          document.documentElement.scrollTop = 0;
+        }, 50);
+      });
     }
     if (!selectedVariant) {
       warningTost("Please select a variant");
@@ -473,10 +477,16 @@ export default function ProductDetails({ id }) {
                         ? percentage(product.dis_price, product.price) + "% OFF"
                         : ""}
                     </span>
-                    
-<p style={{ color: "#6d6868ff", fontSize: "13px", marginTop: "4px" }}>
-  Inc.TAX
-</p>
+
+                    <p
+                      style={{
+                        color: "#6d6868ff",
+                        fontSize: "13px",
+                        marginTop: "4px",
+                      }}
+                    >
+                      Inc.TAX
+                    </p>
                   </div>
                   {product.reviews && product.reviews.length ? (
                     <div className="woocomerce__single-review">
