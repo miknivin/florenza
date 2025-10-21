@@ -25,7 +25,7 @@ import Modal from "../common/modal/ReusableModal";
 import SignUpForm from "../auth/SignupForm";
 import SignInForm from "../auth/SigninForm";
 import ShippingAddressModal from "./product-details-components/ShippingAddressModal";
-import { animate } from "framer-motion";
+
 import { track } from "@vercel/analytics";
 
 export default function ProductDetails({ id }) {
@@ -188,12 +188,15 @@ export default function ProductDetails({ id }) {
       warningTost("Already added to cart");
     } else {
       // Track "Add to Cart" event
-      if (typeof window !== "undefined" && track && typeof track === "function") {
+      if (
+        typeof window !== "undefined" &&
+        track &&
+        typeof track === "function"
+      ) {
         console.log("Add to Cart tracked");
         track("AddToCart", {
           product_name: fullData.name,
-       quantity: fullData.quantity,
-       
+          quantity: fullData.quantity,
         });
       } else {
         console.warn("Vercel Analytics is not available.");
@@ -246,6 +249,15 @@ export default function ProductDetails({ id }) {
       sku: product.sku,
       variant: selectedVariant?.size,
     };
+    if (typeof window !== "undefined" && track && typeof track === "function") {
+      console.log("Buy Now tracked");
+      track("BuyNow", {
+        product_name: fullData.name,
+        quantity: fullData.quantity,
+      });
+    } else {
+      console.warn("Vercel Analytics is not available.");
+    }
 
     dispatch(setBuyProduct(fullData));
     successTost("Proceeding to checkout");
