@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { track } from "@vercel/analytics";
 
 export default function ProductQuantity({
   initialQuantity = 1,
@@ -6,6 +7,7 @@ export default function ProductQuantity({
   onIncrease,
   onAddToCart,
   onBuyNow,
+  productData,
 }) {
   const [quantity, setQuantity] = useState(initialQuantity);
 
@@ -24,10 +26,27 @@ export default function ProductQuantity({
   };
 
   const handleAddToCart = () => {
+    // Track "Add to Cart" intent
+    if (
+      typeof window !== "undefined" &&
+      track &&
+      typeof track === "function" &&
+      productData
+    ) {
+      console.log("Add to Cart intent tracked");
+      track("AddToCartIntent", {
+        product_name: productData.name,
+        quantity: quantity,
+
+      });
+    } else {
+      console.warn("Vercel Analytics or product data is not available.");
+    }
     if (onAddToCart) onAddToCart(quantity);
   };
 
   const handleBuyNow = () => {
+    
     if (onBuyNow) onBuyNow(quantity);
   };
 

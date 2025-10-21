@@ -6,6 +6,7 @@ import Modal from "react-bootstrap/Modal";
 import { toast } from "react-toastify";
 import { addToCart, setAllWishList } from "@/store/features/cartSlice";
 import { useGetProductDetailsQuery } from "@/store/api/productApi";
+import { track } from "@vercel/analytics";
 
 export default function WishlistProductModal({ setModalShow, wishlistItem }) {
   const dispatch = useDispatch();
@@ -152,7 +153,16 @@ export default function WishlistProductModal({ setModalShow, wishlistItem }) {
       });
       return;
     }
-
+if (typeof window !== "undefined" && track && typeof track === "function") {
+      console.log("Add to Cart tracked");
+      track("AddToCart", {
+        product_name: cartItem.name,
+       quantity: cartItem.quantity,
+       
+      });
+    } else {
+      console.warn("Vercel Analytics is not available.");
+    }
     console.log("WishlistProductModal - Dispatching addToCart");
     dispatch(addToCart(cartItem));
     removeFromWishlist(mappedProduct);
