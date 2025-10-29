@@ -14,7 +14,7 @@ const ProductLayout = ({ children }) => {
     <>
       <CommonAnimation>
         <div className="has-smooth" id="has_smooth"></div>
-        <ScrollSmootherComponents />
+        {/* <ScrollSmootherComponents /> */}
         <CursorAnimation />
         <ScrollTop />
 

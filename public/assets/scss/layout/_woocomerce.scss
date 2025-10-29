@@ -1029,12 +1029,18 @@
       font-weight: 400;
       font-size: 14px;
       color: var(--black-2);
-      background: rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.7);
       transition: 0.5s;
-
+      .fa-heart {
+        color: var(--black-2);
+        transition: color 0.5s;
+      }
       &:hover {
-        color: var(--white);
+        color: var(--white) !important;
         background-color: var(--black-2);
+        .fa-heart {
+          color: var(--white);
+        }
       }
     }
 

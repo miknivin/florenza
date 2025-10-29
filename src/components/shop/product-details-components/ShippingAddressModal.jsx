@@ -32,6 +32,7 @@ import {
 } from "@/helpers/buyProductValidation";
 import BackIcon from "@/components/icons/BackIcon";
 import { Preloader } from "@/components";
+import { calculateOrderTotals } from "@/helpers/checkOutTotals";
 
 const ShippingAddressModal = ({
   show,
@@ -75,10 +76,19 @@ const ShippingAddressModal = ({
   const [isFetchingLocation, setIsFetchingLocation] = useState(false);
 
   // Calculate total cost
-  const totalCost = selectedVariant?.discountPrice
+  const baseTotal = selectedVariant?.discountPrice
     ? selectedVariant.discountPrice * count
     : selectedVariant?.price * count;
 
+  const { totalAmount: liveTotal, shippingAmount } = calculateOrderTotals(
+    [
+      {
+        price: selectedVariant?.discountPrice || selectedVariant?.price,
+        quantity: count,
+      },
+    ],
+    activePayment
+  );
   // Load Razorpay script when payment step is reached
   useEffect(() => {
     if (step === "payment") {
@@ -203,7 +213,7 @@ const ShippingAddressModal = ({
         position: "top-center",
         autoClose: 2000,
       });
-      router.push("/auth/signin");
+      router.push("/sign-in");
       setIsLoading(false);
       return;
     }
@@ -240,10 +250,10 @@ const ShippingAddressModal = ({
         zipCode: formData.pincode,
       },
       paymentMethod: activePayment === 1 ? "Online" : "COD",
-      itemsPrice: cartItems[0].price * cartItems[0].quantity,
+      itemsPrice: baseTotal,
       taxAmount: 0,
-      shippingAmount: 0,
-      totalAmount: cartItems[0].price * cartItems[0].quantity,
+      shippingAmount,
+      totalAmount: liveTotal, // ← final total
       orderNotes: formData.orderNotes,
       couponApplied: "No",
     };
@@ -334,7 +344,12 @@ const ShippingAddressModal = ({
         size="md"
       >
         <div
-          style={{ overflowY: "auto", overflowX: "hidden", maxHeight: "80vh" }}
+          style={{
+            overflowY: "auto",
+            overflowX: "hidden",
+            maxHeight: "80vh",
+            fontFamily: "Kanit, sans-serif",
+          }}
           className="woocomerce__auth-form"
         >
           {step === "shipping" ? (
@@ -637,8 +652,14 @@ const ShippingAddressModal = ({
                         </div>
                       </div>
                       {activePayment === 2 && (
-                        <p className="cash-text">
-                          You can pay cash on delivery.
+                        <p className="text-warning small mt-2">
+                          <strong>₹100 extra shipping fee</strong> will be added
+                          for COD orders.
+                          <br />
+                          <span className="text-muted">
+                            Total: ₹{baseTotal} + ₹100 ={" "}
+                            <strong>₹{liveTotal}</strong>
+                          </span>
                         </p>
                       )}
                     </label>
@@ -667,7 +688,7 @@ const ShippingAddressModal = ({
                     >
                       {isLoading || createOrderLoading || sessionLoading
                         ? "Processing..."
-                        : `Place Order ₹${totalCost ? totalCost : ""}`}
+                        : `Place Order ₹${liveTotal ? liveTotal : ""}`}
                     </button>
                   </div>
                 </div>

@@ -1398,3 +1398,10 @@ img {
 #recaptcha-container {
   display: none !important;
 }
+
+@media (max-width: 768px) {
+  .woocomerce__feature-newprice,
+  .woocomerce__feature-oldprice {
+    font-size: 14px !important;
+  }
+}

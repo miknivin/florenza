@@ -4,6 +4,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { useSelector, useDispatch } from "react-redux";
 import { validateOrder } from "@/store/features/orderValidationSlice";
+import { calculateOrderTotals } from "@/helpers/checkOutTotals";
+import InfoIcon from "../icons/InfoIcon";
+import { toast } from "react-toastify";
+import PriceBreakdownPopover from "../common/popovers/PriceBreakDownPopover";
 
 export default function Payment({
   paymentSubmit,
@@ -22,23 +26,31 @@ export default function Payment({
     setPaymentMethod(1); // Default to Razorpay
   }, [setPaymentMethod]);
 
+  // ── NEW: live totals based on selected payment method ──
+  const { totalAmount: liveTotal, shippingAmount } = calculateOrderTotals(
+    cartData,
+    active // 1 = Online, 2 = COD
+  );
+  const itemsTotal = cartData.reduce((t, i) => t + i.price * i.quantity, 0);
+
   const handlePaymentChange = (value) => {
     setActive(value);
     setPaymentMethod(value);
     // Validate payment method with shippingInfo from orderValidation
+    const { itemsPrice, shippingAmount, totalAmount } = calculateOrderTotals(
+      cartData,
+      value
+    );
     dispatch(
       validateOrder({
         orderData: {
           cartItems: cartData,
           shippingInfo,
           paymentMethod: value === 1 ? "Online" : "COD",
-          itemsPrice: cartData.reduce(
-            (total, item) => total + item.price * item.quantity,
-            0
-          ),
+          itemsPrice: itemsPrice,
           taxAmount: 0,
-          shippingAmount: 0,
-          totalAmount: totalCost,
+          shippingAmount: shippingAmount,
+          totalAmount: totalAmount,
           orderNotes: shippingInfo?.msg || "",
           couponApplied: "No",
         },
@@ -51,12 +63,18 @@ export default function Payment({
     <div className="woocomerce__cart-left checkout">
       <ul className="woocomerce__cart-payheaderup">
         <li className="woocomerce__cart-topamount">
-          Amount: ₹{isClient ? totalCost : "Loading..."}
+          Amount: ₹{isClient ? liveTotal : "Loading..."}{" "}
+          <PriceBreakdownPopover
+            itemsTotal={itemsTotal}
+            shippingAmount={shippingAmount}
+            total={liveTotal}
+          />
         </li>
-        <li className="woocomerce__cart-upcart">
+        <li style={{ zIndex: 0 }} className="woocomerce__cart-upcart">
           <Link href="/cart">Update Cart</Link>
         </li>
       </ul>
+
       <span className="woocomerce__cart-checktitle">Payment</span>
       <p className="woocomerce__cart-checkdis">
         * All transactions are secure and encrypted.
@@ -97,7 +115,7 @@ export default function Payment({
             htmlFor="cash"
             className="woocomerce__cart-paymentoption w-100"
           >
-            <div className="woocomerce__cart-payheader px-0">
+            <div className="woocomerce__cart-payheader px-0 pb-1">
               <div className="woocomerce__cart-payleft">
                 <input
                   type="radio"
@@ -121,6 +139,15 @@ export default function Payment({
                 </ul>
               </div>
             </div>
+            {active === 2 && (
+              <p
+                style={{ color: "#D97706" }}
+                className="woocomerce__cart-checkdis"
+              >
+                Extra ₹100 shipping charge will be applied for Cash on Delivery
+                orders.
+              </p>
+            )}
           </label>
         </div>
         <div className="woocomerce__checkout-btnwrapper">

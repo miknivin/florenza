@@ -9,6 +9,7 @@ import CategoryFilter2 from "./filter/type2/CategoryFilter2";
 import PriceFilter2 from "./filter/type2/PriceFilter2";
 import { useGetProductsQuery } from "@/store/api/productApi";
 import { Preloader } from "..";
+import ProductCard from "../common/card/ProductCard";
 
 const FullWidth = () => {
   const [open, setOpen] = useState("");
@@ -186,7 +187,9 @@ const FullWidth = () => {
                 Error loading products: {error?.data?.message || error.message}
               </p>
             ) : showData && showData.length ? (
-              showData.map((el) => <ProductCard2 el={el} key={el._id} />)
+              showData.map((el) => (
+                <ProductCard el={el} key={el._id} isShopFull={true} />
+              ))
             ) : (
               <p>No Product Found</p>
             )}

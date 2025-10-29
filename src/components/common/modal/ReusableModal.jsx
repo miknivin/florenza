@@ -16,16 +16,16 @@ export default function Modal({
     setIsVisible(show);
   }, [show]);
 
-    useEffect(() => {
+  useEffect(() => {
     // Prevent body scrolling when modal is visible
     if (isVisible) {
-      document.body.style.overflow = 'hidden';
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = '';
+      document.body.style.overflow = "";
     }
     // Cleanup on unmount
     return () => {
-      document.body.style.overflow = '';
+      document.body.style.overflow = "";
     };
   }, [isVisible]);
 

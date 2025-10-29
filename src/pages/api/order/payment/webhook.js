@@ -154,6 +154,7 @@ export default async function handler(req, res) {
           weight: weight.toString(), // Total weight in grams
           shipping_mode: "Surface", // Default as per sample
           address_type: "home", // Default as per sample
+          seller_gst: process.env.GSTNO || "32AAIFO0471H1ZI",
         },
       ],
       pickup_location: {
@@ -164,6 +165,7 @@ export default async function handler(req, res) {
         state: "Kerala",
         country: "India",
         phone: "9778766273",
+        gst: process.env.GSTNO || "32AAIFO0471H1ZI",
       },
     };
 

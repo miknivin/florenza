@@ -4,6 +4,7 @@ import Link from "next/link";
 import ProductLayout from "@/components/common/layout/ProductLayout";
 import { useRef } from "react";
 import SignUpForm from "@/components/auth/SignupForm";
+import AuthLayout from "@/components/common/layout/AuthLayout";
 
 const SignUp = () => {
   const passwordInput = useRef();
@@ -22,9 +23,11 @@ const SignUp = () => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <main>
-        <ProductLayout>
-          <SignUpForm />
-        </ProductLayout>
+        <AuthLayout>
+          <ProductLayout>
+            <SignUpForm />
+          </ProductLayout>
+        </AuthLayout>
       </main>
     </>
   );

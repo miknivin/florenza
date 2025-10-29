@@ -15,8 +15,8 @@ export default async function handler(req, res) {
 
   try {
     const user = await isAuthenticatedUser(req);
-  Product;
-  User
+    Product;
+    User;
     await dbConnect();
 
     const {
@@ -24,9 +24,23 @@ export default async function handler(req, res) {
       shippingInfo,
       paymentMethod,
       taxAmount = 0,
-      shippingAmount = 0,
+      shippingAmount: clientShippingAmount = 0,
     } = req.body;
 
+    if (!paymentMethod || paymentMethod.trim().toUpperCase() !== "COD") {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid payment method. This route only supports COD.",
+      });
+    }
+
+    let shippingAmount = clientShippingAmount;
+
+    if (paymentMethod === "COD") {
+      if (!shippingAmount || shippingAmount <= 0) {
+        shippingAmount = 100;
+      }
+    }
     // Validate required fields
     if (!cartItems || !shippingInfo || !paymentMethod) {
       return res
@@ -126,6 +140,7 @@ export default async function handler(req, res) {
           weight: weight.toString(), // Total weight in grams
           shipping_mode: "Surface", // Default as per sample
           address_type: "home", // Default as per sample
+          seller_gst: process.env.GSTNO || "32AAIFO0471H1ZI",
         },
       ],
       pickup_location: {
@@ -136,6 +151,7 @@ export default async function handler(req, res) {
         state: "Kerala",
         country: "India",
         phone: "9778766273",
+        gst: process.env.GSTNO || "32AAIFO0471H1ZI",
       },
     };
 

@@ -207,16 +207,16 @@ export default function ProductDetails({ id }) {
   };
 
   const onBuyNowHandler = () => {
-    if (typeof window !== "undefined") {
-      // Delay ensures Safari completes reflows before scroll
-      requestAnimationFrame(() => {
-        setTimeout(() => {
-          window.scrollTo({ top: 0, left: 0, behavior: "auto" });
-          document.body.scrollTop = 0;
-          document.documentElement.scrollTop = 0;
-        }, 50);
-      });
-    }
+    // if (typeof window !== "undefined") {
+    //   // Delay ensures Safari completes reflows before scroll
+    //   // requestAnimationFrame(() => {
+    //   //   setTimeout(() => {
+    //   //     window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    //   //     document.body.scrollTop = 0;
+    //   //     document.documentElement.scrollTop = 0;
+    //   //   }, 50);
+    //   // });
+    // }
     if (!selectedVariant) {
       warningTost("Please select a variant");
       return;
@@ -224,9 +224,12 @@ export default function ProductDetails({ id }) {
 
     if (!isAuthenticated) {
       // Add toBuyNow query param
+
       const params = new URLSearchParams(searchParams);
       params.set("toBuyNow", "true");
-      router.push(`${window.location.pathname}?${params.toString()}`);
+      router.push(`${window.location.pathname}?${params.toString()}`, {
+        scroll: false,
+      });
       handleOpenSignInModal();
       return;
     }

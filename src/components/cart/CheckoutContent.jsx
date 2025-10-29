@@ -20,6 +20,7 @@ import {
   useRazorpayWebhookMutation,
 } from "@/store/api/orderApi";
 import { Preloader } from "..";
+import { calculateOrderTotals } from "@/helpers/checkOutTotals";
 
 export default function CheckoutContent() {
   const [paymentMethod, setPaymentMethod] = useState(null);
@@ -39,7 +40,6 @@ export default function CheckoutContent() {
     useRazorpayCheckoutSessionMutation();
   const [razorpayWebhook] = useRazorpayWebhookMutation();
 
-  // Load Razorpay script dynamically
   useEffect(() => {
     const script = document.createElement("script");
     script.src = "https://checkout.razorpay.com/v1/checkout.js";
@@ -71,17 +71,20 @@ export default function CheckoutContent() {
       return;
     }
 
+    const { itemsPrice, shippingAmount, totalAmount } = calculateOrderTotals(
+      cartData,
+      paymentMethod
+    );
+    console.log(paymentMethod);
+
     const orderData = {
       cartItems: cartData,
       shippingInfo,
       paymentMethod: paymentMethod === 1 ? "Online" : "COD",
-      itemsPrice: cartData.reduce(
-        (total, item) => total + item.price * item.quantity,
-        0
-      ),
+      itemsPrice: itemsPrice,
       taxAmount: 0,
-      shippingAmount: 0,
-      totalAmount: totalCost,
+      shippingAmount,
+      totalAmount,
       orderNotes: shippingInfo.msg || "",
       couponApplied: "No",
     };

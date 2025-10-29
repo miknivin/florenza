@@ -124,7 +124,7 @@ const Index = () => {
       <main>
         <CommonAnimation>
           <div className="has-smooth" id="has_smooth"></div>
-          <ScrollSmootherComponents />
+          {/* <ScrollSmootherComponents /> */}
           <CursorAnimation cursor1={cursor1} cursor2={cursor2} />
           {/* <Switcher cursor1={cursor1} cursor2={cursor2} /> */}
           <ScrollTop />
