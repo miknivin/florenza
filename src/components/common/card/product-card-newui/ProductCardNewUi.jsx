@@ -9,9 +9,22 @@ const ProductCardNewUi = ({ product }) => {
     shortDescription = "A luxurious fragrance with captivating notes.",
     mainImage,
     color,
-    discount = "05% OFF",
+    variants = [],
   } = product;
 
+  // 1. Auto-select first variant
+  const firstVariant = variants[0] || {};
+  const { price = 0, discountPrice = null } = firstVariant;
+
+  // 2. Calculate discount % → only if valid
+  let discountBadge = null;
+  if (discountPrice && discountPrice < price) {
+    const discountPercent = Math.round(((price - discountPrice) / price) * 100);
+    const formatted = String(discountPercent).padStart(2, "0");
+    discountBadge = `${formatted}% OFF`; // e.g. "05% OFF"
+  }
+
+  // 3. Image fallback
   const imageUrl =
     mainImage ||
     "https://ik.imagekit.io/c1jhxlxiy/Group%2081.png?updatedAt=1761982915643";
@@ -20,7 +33,7 @@ const ProductCardNewUi = ({ product }) => {
     <Link href={`/shop/${_id}`} className="text-decoration-none d-block">
       <div className="product-card">
         <div
-          style={{ backgroundColor: `${color?.primaryColor || "##f3f3f3"}` }}
+          style={{ backgroundColor: color?.primaryColor || "#f3f3f3" }}
           className="product-content"
         >
           <Image
@@ -31,9 +44,11 @@ const ProductCardNewUi = ({ product }) => {
             className="product-image-absolute"
             style={{ objectFit: "contain" }}
           />
-
           <div className="position-relative">
-            <div className="discount-badge">{discount}</div>
+            {/* Only render badge if discount exists */}
+            {discountBadge && (
+              <div className="discount-badge">{discountBadge}</div>
+            )}
             <h1 className="product-title line-clamp-1">{name}</h1>
             <p className="product-description line-clamp-2">
               {shortDescription}
