@@ -76,8 +76,14 @@ export default function HeaderSearchNewUi() {
           {/* Dropdown Results */}
           {searchValue && (
             <div
-              style={{ top: "100%", zIndex: 999, marginLeft: "-8px" }}
-              className="position-absolute left-0 right-0 mt-1 bg-white border rounded-3 border-gray-200 w-100 rounded-md shadow-lg z-50 max-h-96 overflow-y-auto"
+              style={{
+                top: "100%",
+                zIndex: 999,
+                marginLeft: "-8px",
+                maxHeight: "400px",
+                overflowY: "auto",
+              }}
+              className="position-absolute left-0 right-0 mt-1 bg-white border rounded-3 d-flex flex-column border-gray-200 w-100 rounded-md shadow-lg z-50 max-h-96 overflow-y-auto"
             >
               {isLoading || isFetching ? (
                 <div className="d-flex justify-content-center align-items-center py-3">
