@@ -2089,3 +2089,10 @@ img {
   padding: 4px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
+
+@media (max-width: 767px) {
+  .products-swiper-wrapper {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}

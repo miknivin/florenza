@@ -33,7 +33,7 @@ const ProductSwiperGrid = ({ initialPage = 1, isProductPage = false }) => {
   }
 
   return (
-    <div className={`${isProductPage ? "py-1" : "py-5"} woocomerce-padding`}>
+    <div className={`${isProductPage ? "py-1" : "py-5"} woocomerce-padding products-swiper-wrapper`}>
       {/* ---------- Header ---------- */}
       {!isProductPage && (
         <>
