@@ -20,7 +20,7 @@ export default function ComboSwiper() {
 
   if (isLoading) {
     return (
-      <section className="py-5">
+      <section style={{ minHeight: "30dvh" }} className="py-5">
         <div className="container text-center">
           <div className="spinner-border" role="status">
             <span className="visually-hidden">Loading combos…</span>

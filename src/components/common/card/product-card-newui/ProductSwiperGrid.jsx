@@ -33,7 +33,11 @@ const ProductSwiperGrid = ({ initialPage = 1, isProductPage = false }) => {
   }
 
   return (
-    <div className={`${isProductPage ? "py-1" : "py-5"} woocomerce-padding products-swiper-wrapper`}>
+    <div
+      className={`${
+        isProductPage ? "py-1" : "py-5"
+      } woocomerce-padding products-swiper-wrapper`}
+    >
       {/* ---------- Header ---------- */}
       {!isProductPage && (
         <>
@@ -190,7 +194,7 @@ const ProductSwiperGrid = ({ initialPage = 1, isProductPage = false }) => {
 
       {/* ---------- Loading ---------- */}
       {isLoading && (
-        <div className="text-center py-3">
+        <div style={{ minHeight: "50dvh" }} className="text-center py-3">
           <div className="spinner-border text-dark" role="status">
             <span className="visually-hidden">Loading...</span>
           </div>
