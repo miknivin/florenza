@@ -65,7 +65,7 @@ export default function CartWrapper() {
                     <li>Subtotal</li>
                     <li>₹{cartData && cartData.length ? totalCost : "0"}</li>
                     <li>Shipping</li>
-                    <li>FREE</li>
+                    <li>FREE *</li>
                     <li>Estimated Tax (0%)</li>
                     <li>₹{texCount()}</li>
                     <li>Total</li>
@@ -76,6 +76,8 @@ export default function CartWrapper() {
                     <strong>Online</strong> <br />
                     gateway system
                   </p>
+                  <p className="woocomerce__cart-info">*Free delivery applicable only for prepaid orders</p>
+                  
                   <button
                     onClick={() => goToCheckout(countTotal(totalCost))}
                     className="woocomerce__cart-btn"
