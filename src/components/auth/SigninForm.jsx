@@ -10,6 +10,8 @@ import { useDispatch } from "react-redux";
 import axios from "axios";
 import { setIsAuthenticated, setUser } from "@/store/features/userSlice";
 import PhoneOTP from "./PhoneOtp";
+import EyeIcon from "../icons/EyeIcon";
+import EyeSlash from "../icons/EyeSlash";
 
 const SignInForm = ({
   className,
@@ -24,10 +26,12 @@ const SignInForm = ({
     password: "",
     remember: false,
   });
+  const [isPasswordHidden, setIsPasswordHidden] = useState(true);
   const [login, { isLoading }] = useLoginMutation();
   const dispatch = useDispatch();
 
   const hidePassword = () => {
+    setIsPasswordHidden(!isPasswordHidden);
     if (passwordInput.current.type === "password") {
       passwordInput.current.type = "text";
     } else {
@@ -121,7 +125,7 @@ const SignInForm = ({
   };
 
   return (
-    <div className={`woocomerce__signin  ${className || ""}`}>
+    <div className={`woocomerce__signin font-roboto  ${className || ""}`}>
       <div className="woocomerce__signin-wrapper">
         {isHeading && (
           <div className="woocomerce__signin-titlewrap">
@@ -171,14 +175,12 @@ const SignInForm = ({
                   setFormData({ ...formData, password: e.target.value })
                 }
               />
-              <button type="button" className="woocomerce__signin-view">
-                <Image
-                  width={19}
-                  height={11}
-                  onClick={hidePassword}
-                  src="/assets/imgs/woocomerce/view.png"
-                  alt="view"
-                />
+              <button
+                type="button"
+                onClick={hidePassword}
+                className="woocomerce__signin-view"
+              >
+                {isPasswordHidden ? <EyeIcon /> : <EyeSlash />}
               </button>
             </div>
           </div>

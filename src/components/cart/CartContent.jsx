@@ -5,6 +5,8 @@ import { toast } from "react-toastify";
 import DeleteIcon from "../icons/DeleteIcon";
 
 export default function CartContent({
+  i,
+  length,
   el,
   dispatch,
   updateQuantity,
@@ -44,7 +46,11 @@ export default function CartContent({
 
   return (
     <>
-      <div className="woocomerce__cart-productlist pt-0">
+      <div
+        className={`woocomerce__cart-productlist pt-0 ${
+          i + 1 === length ? "border-0" : ""
+        }`}
+      >
         <div className="woocomerce__cart-product">
           <div
             className="woocomerce__cart-thumb pointer_cursor"

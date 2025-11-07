@@ -93,6 +93,8 @@ export default function CartWrapper() {
                 cartData.map((el, i) => (
                   <div key={i + "cart"}>
                     <CartContent
+                      i={i}
+                      length={cartData?.length || 0}
                       el={el}
                       dispatch={dispatch}
                       updateQuantity={updateQuantity}

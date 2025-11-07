@@ -21,6 +21,12 @@ import {
 
 import useSWR from "swr";
 import { useRef } from "react";
+import ProductGrid from "@/components/common/card/product-card-newui/ProductScrollGrid";
+import ProductSwiperGrid from "@/components/common/card/product-card-newui/ProductSwiperGrid";
+import ProductScrollGrid from "@/components/common/card/product-card-newui/ProductScrollGrid";
+import HeaderSearchNewUi from "@/components/search/HeaderSearchNewUi";
+import FooterLinks from "@/components/footer/FooterNewUi/FooterLinks";
+import ContactCard from "@/components/footer/FooterNewUi/ContactCard";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
@@ -131,6 +137,7 @@ const Index = () => {
           <div id="smooth-wrapper" className="woocomerce__main">
             <div id="smooth-content">
               <Header />
+
               <Hero advertising={heroAdd} />
               {/* <Feature
                 featured={featured}
@@ -146,13 +153,17 @@ const Index = () => {
                 routeName="new"
               /> */}
               <Banner2 banner={banner2Add} />
-              <AllWithFilter allData={allData} />
+
+              <ProductSwiperGrid />
+              {/* <AllWithFilter allData={allData} /> */}
               {/* <Category categories={categories} /> */}
               <VideoBanner />
               {/* <Testimonial review={review} /> */}
               <Brand brand={brand} />
               <Instagram instagram={instagram} />
-              <Footer />
+              <FooterLinks />
+              <ContactCard />
+              {/* <Footer /> */}
             </div>
           </div>
         </CommonAnimation>

@@ -1,5 +1,6 @@
 import { Preloader } from "@/components";
 import ProductLayout from "@/components/common/layout/ProductLayout";
+import ProductDetailsNewUi from "@/components/shop/product-details-new-ui/ProductDetailsNewUi";
 import ProductDetails from "@/components/shop/ProductDetails";
 import Head from "next/head";
 import { useRouter } from "next/router"; // Temporary fallback
@@ -41,7 +42,8 @@ const Details = ({ params }) => {
       </Head>
       <main>
         <ProductLayout>
-          <ProductDetails id={id} />
+          {/* <ProductDetails id={id} /> */}
+          <ProductDetailsNewUi id={id}/>
         </ProductLayout>
       </main>
     </>

@@ -1,15 +1,21 @@
 import Image from "next/image";
-import { Autoplay, EffectFade, Pagination, Navigation } from "swiper";
+import { Autoplay, EffectFade, Pagination, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 import Circle01 from "../../../public/assets/imgs/woocomerce/circle-1.png";
 import HeroPrev from "../../../public/assets/imgs/woocomerce/hero-prev.png";
 import HeroRight from "../../../public/assets/imgs/woocomerce/hero-right.png";
+import HeaderSearchNewUi from "../search/HeaderSearchNewUi";
 
 const Hero = ({ advertising }) => {
   return (
     <>
-      <div className="woocomerce__hero">
+      <div className="d-block"></div>
+      <div style={{ zIndex: 9 }} className="woocomerce__hero">
+        <div className="d-block d-md-none font-roboto">
+          <HeaderSearchNewUi />
+        </div>
+
         <Image
           priority
           width={315}
@@ -18,10 +24,10 @@ const Hero = ({ advertising }) => {
           alt="shape"
           className="woocomerce__hero-circle"
         />
-        <span className="woocomerce__hero-line line1"></span>
+        {/* <span className="woocomerce__hero-line line1"></span>
         <span className="woocomerce__hero-line line2"></span>
         <span className="woocomerce__hero-line line3"></span>
-        <span className="woocomerce__hero-line line4"></span>
+        <span className="woocomerce__hero-line line4"></span> */}
         <div className="woocomerce-active">
           <Swiper
             modules={[Autoplay, EffectFade, Pagination, Navigation]}
@@ -32,6 +38,7 @@ const Hero = ({ advertising }) => {
             }}
             effect={"fade"}
             fadeEffect={true}
+            style={{ position: "relative" }}
             // pagination removed
             navigation={{
               nextEl: ".woocomerce__hero-next",
@@ -58,6 +65,15 @@ const Hero = ({ advertising }) => {
                 </SwiperSlide>
               );
             })}
+            <div
+              style={{ width: "100vw" }}
+              className="position-absolute bottom-0 w-100"
+            >
+              <img
+                style={{ width: "100%" }}
+                src="assets/imgs/hero/shadow.png"
+              />
+            </div>
           </Swiper>
 
           {/* If we need navigation buttons  */}

@@ -1,0 +1,303 @@
+// app/shop/[id]/page.js
+"use client";
+
+import { useEffect, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
+
+import { Feature, Preloader } from "@/components";
+import { addToCart, setBuyProduct } from "@/store/features/cartSlice";
+
+import {
+  useGetProductDetailsQuery,
+  useGetProductsQuery,
+} from "@/store/api/productApi";
+
+import ProductImageSwiper from "./ProductImageSwiper";
+import ProductTabs from "./ProductTabs";
+import ProductInfo from "./ProductInfo";
+
+import Modal from "@/components/common/modal/ReusableModal";
+import SignUpForm from "@/components/auth/SignupForm";
+import SignInForm from "@/components/auth/SigninForm";
+import ShippingAddressModal from "../product-details-components/ShippingAddressModal";
+import Link from "next/link";
+import ComboSwiper from "@/components/common/card/product-card-newui/combo/ComboSwiper";
+
+export default function ProductDetailsNewUi({ id }) {
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const { cartData } = useSelector((s) => s.cart);
+  const { isAuthenticated } = useSelector((s) => s.user);
+
+  const [count, setCount] = useState(1);
+  const [showModal, setShowModal] = useState(false);
+  const [isSignUp, setIsSignUp] = useState(false);
+  const [showAddressModal, setShowAddressModal] = useState(false);
+  const [selectedVariant, setSelectedVariant] = useState(null);
+
+  // === FETCH CURRENT PRODUCT ===
+  const { data, isLoading, error } = useGetProductDetailsQuery(id, {
+    retry: 3,
+  });
+  const product = data?.product;
+
+  // === FETCH ALL PRODUCTS (for related) ===
+  const {
+    data: allProductsData,
+    isLoading: allLoading,
+    error: allError,
+  } = useGetProductsQuery({
+    page: 1,
+    resPerPage: 100, // adjust if needed
+  });
+
+  const relatedProducts =
+    allProductsData?.filteredProducts?.filter((p) => p._id !== id) || [];
+
+  // === EFFECTS ===
+  useEffect(() => {
+    if (searchParams.get("toBuyNow") === "true" && isAuthenticated) {
+      onBuyNowHandler();
+    }
+  }, [isAuthenticated, searchParams]);
+
+  useEffect(() => {
+    if (product?.variants?.length) {
+      setSelectedVariant(product.variants[0]);
+    }
+  }, [product]);
+
+  if (isLoading) return <Preloader />;
+  if (error || !product)
+    return <div className="text-center py-5">Product not found.</div>;
+
+  // === HELPERS ===
+  const warningTost = (msg) => toast.warn(msg, { position: "top-center" });
+  const successTost = (msg) => toast.success(msg, { position: "top-center" });
+
+  const percentage = (disc, orig) =>
+    Number((100 - (100 * disc) / orig).toFixed(2));
+
+  const star = (reviews) => {
+    const avg = Math.round(
+      reviews.reduce((a, r) => a + r.star, 0) / reviews.length
+    );
+    return Array.from({ length: 5 }, (_, i) => (
+      <i
+        key={i}
+        className="fa-solid fa-star"
+        style={{ color: i < avg ? "#FFAE4F" : "gray" }}
+      />
+    ));
+  };
+
+  const handleOpenSignUpModal = () => {
+    setIsSignUp(true);
+    setShowModal(true);
+  };
+
+  const handleModalClose = () => {
+    setShowModal(false);
+
+    // Remove toBuyNow query param
+
+    const params = new URLSearchParams(searchParams);
+
+    params.delete("toBuyNow");
+
+    router.replace(`${window.location.pathname}?${params.toString()}`, {
+      scroll: false,
+    });
+  };
+
+  const addToCartHandler = () => {
+    if (!selectedVariant) return warningTost("Select a variant");
+    const item = {
+      id: product._id,
+      name: product.name,
+      price: selectedVariant.discountPrice || selectedVariant.price,
+      quantity: count,
+      img: { url: product.images[0]?.url || "/assets/imgs/placeholder.jpg" },
+      sku: product.sku,
+      variant: selectedVariant.size,
+    };
+    if (cartData.some((c) => c.id === item.id && c.variant === item.variant)) {
+      warningTost("Already in cart");
+    } else {
+      dispatch(addToCart(item));
+      successTost("Added to cart");
+    }
+  };
+
+  const onBuyNowHandler = () => {
+    if (!selectedVariant) return warningTost("Select a variant");
+    if (!isAuthenticated) {
+      const currentUrl = new URL(window.location.href);
+      currentUrl.searchParams.set("toBuyNow", "true");
+      router.push(currentUrl.pathname + currentUrl.search, { scroll: false });
+      setIsSignUp(false);
+      setShowModal(true);
+      return;
+    }
+    const item = {
+      id: product._id,
+      name: product.name,
+      price: selectedVariant.discountPrice || selectedVariant.price,
+      quantity: count,
+      img: { url: product.images[0]?.url || "/assets/imgs/placeholder.jpg" },
+      sku: product.sku,
+      variant: selectedVariant.size,
+    };
+    dispatch(setBuyProduct(item));
+    successTost("Proceeding to checkout");
+    setShowAddressModal(true);
+  };
+
+  const images = selectedVariant?.imageUrl?.length
+    ? selectedVariant.imageUrl.map((url) => ({ url }))
+    : product.images;
+
+  return (
+    <>
+      {/* === MAIN PRODUCT GRID === */}
+      <section className="py-4">
+        <div className="sec-plr-50">
+          <div className="row g-4">
+            {/* LE FT COLUMN: Image + Tabs */}
+            <div className="col-lg-6">
+              <nav className="d-block d-lg-none" aria-label="breadcrumb">
+                <ol className="breadcrumb">
+                  <li className="breadcrumb-item">
+                    <Link className="text-muted" href="/">
+                      Home
+                    </Link>
+                  </li>
+                  <li className="breadcrumb-item">
+                    <Link className="text-muted" href="/shop/full">
+                      Shop
+                    </Link>
+                  </li>
+                  <li
+                    className="text-black breadcrumb-item active"
+                    aria-current="page"
+                  >
+                    {product.name}
+                  </li>
+                </ol>
+              </nav>
+              <ProductImageSwiper images={product.images} />
+            </div>
+
+            {/* RIGHT COLUMN: Info */}
+            <div className="col-lg-6">
+              {/* Breadcrumb */}
+              <nav
+                className="d-none text-black d-lg-block"
+                aria-label="breadcrumb"
+              >
+                <ol className="breadcrumb">
+                  <li className="breadcrumb-item">
+                    <Link className="text-muted" href="/">
+                      Home
+                    </Link>
+                  </li>
+                  <li className="breadcrumb-item ">
+                    <Link className="text-muted" href="/shop/full">
+                      Shop
+                    </Link>
+                  </li>
+                  <li
+                    className="breadcrumb-item active text-black"
+                    aria-current="page"
+                  >
+                    {product.name}
+                  </li>
+                </ol>
+              </nav>
+
+              <ProductInfo
+                name={product.name}
+                product={product}
+                sku={product.sku}
+                shortDescription={product.shortDescription}
+                selectedVariant={selectedVariant}
+                variants={product.variants}
+                fragranceNotes={product.fragranceNotes}
+                count={count}
+                onVariantSelect={setSelectedVariant}
+                onIncrease={() => setCount((c) => c + 1)}
+                onDecrease={() => setCount((c) => (c > 1 ? c - 1 : 1))}
+                onAddToCart={addToCartHandler}
+                onBuyNow={onBuyNowHandler}
+                percentage={percentage}
+                star={star}
+                reviews={product.reviews}
+              />
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-lg-12">
+              <ProductTabs
+                description={product.description}
+                reviews={product.reviews}
+                features={product.features || []}
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <ComboSwiper />
+
+      {/* {allLoading ? (
+        <div className="text-center py-5">
+          <div className="spinner-border text-primary" role="status">
+            <span className="visually-hidden">Loading related products…</span>
+          </div>
+        </div>
+      ) : allError ? (
+        <p className="text-center text-danger">
+          Failed to load related products.
+        </p>
+      ) : relatedProducts.length > 0 ? (
+        <Feature featured={relatedProducts} headerTitle="Related" />
+      ) : null} */}
+
+      <Modal
+        show={showModal}
+        size="md"
+        onHide={() => setShowModal(false)}
+        title={isSignUp ? "Sign Up" : "Sign In"}
+      >
+        {isSignUp ? (
+          <SignUpForm
+            className="m-0"
+            isHeading={false}
+            isModal={true}
+            onOpenSignInModal={handleOpenSignInModal}
+          />
+        ) : (
+          <SignInForm
+            className="m-0"
+            isHeading={false}
+            isModal={true}
+            onHide={handleModalClose}
+            onOpenSignUpModal={handleOpenSignUpModal}
+          />
+        )}
+      </Modal>
+
+      <ShippingAddressModal
+        show={showAddressModal}
+        onHide={() => setShowAddressModal(false)}
+        product={product}
+        selectedVariant={selectedVariant}
+        count={count}
+      />
+    </>
+  );
+}

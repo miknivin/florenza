@@ -109,6 +109,7 @@ export default function HeaderSearch() {
             type="text"
             name="s"
             autoComplete="off"
+            className="font-roboto"
             ref={inputData}
             placeholder="Search products..."
             onChange={(event) => debouncedSetSearchValue(event.target.value)}
@@ -138,7 +139,7 @@ export default function HeaderSearch() {
                 No results found for <span>{searchValue}</span>
               </p>
             ) : (
-              <p>Enter a product name to search</p>
+              <p className="font-roboto">Enter a product name to search</p>
             )}
           </div>
         </form>

@@ -8,6 +8,8 @@ import {
   Header,
   Footer,
 } from "@/components";
+import ContactCard from "@/components/footer/FooterNewUi/ContactCard";
+import FooterLinks from "@/components/footer/FooterNewUi/FooterLinks";
 
 const ProductLayout = ({ children }) => {
   return (
@@ -22,7 +24,7 @@ const ProductLayout = ({ children }) => {
           <div id="smooth-content">
             <Header option={"black"} />
             {children}
-            <Footer />
+            <ContactCard />
           </div>
         </div>
       </CommonAnimation>

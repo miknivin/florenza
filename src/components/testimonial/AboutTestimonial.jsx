@@ -1,4 +1,4 @@
-import { FreeMode, Navigation } from "swiper";
+import { FreeMode, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
@@ -45,7 +45,7 @@ const AboutTestimonial = ({ testimonial }) => {
                         <SwiperSlide key={el.id}>
                           <div className="testimonial__slide">
                             <div className="testimonial__inner-2">
-                              <h2 className="testimonial__title-2">
+                              <h2 className="testimonial__title-2 font-roboto-serif">
                                 {el.title}
                               </h2>
                               <p className="testimonial__text-2">

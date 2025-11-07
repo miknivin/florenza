@@ -2,7 +2,6 @@
 /*  12. HEADER CSS START
 /*----------------------------------------*/
 
-
 .header {
   &__area {
     position: fixed;
@@ -40,7 +39,7 @@
       width: 100%;
       height: auto;
     }
-    // update v0.2 
+    // update v0.2
     button {
       // display: block;
       // margin-top: -58px;
@@ -86,7 +85,6 @@
       top: 0;
       z-index: 99;
     }
-
   }
 
   &__inner {
@@ -166,11 +164,11 @@
       text-align: right;
 
       @media #{$lg} {
-        display: none;
+        display: block;
       }
 
       @media #{$md} {
-        display: none;
+        display: block;
       }
 
       @media #{$sm} {
@@ -265,7 +263,6 @@
           }
         }
       }
-
     }
   }
 
@@ -370,7 +367,6 @@
   }
 }
 
-
 // sticky Menu
 .sticky-2 {
   .header__nav-icon-2 .menu-icon-2::after {
@@ -379,7 +375,6 @@
     right: -20px;
     top: -30px;
   }
-
 
   .header__logo-5 img {
     filter: invert(1);
@@ -399,11 +394,9 @@
   }
 }
 
-
 // Logo
 .logo {
   &-primary {
-
     @media #{$lg} {
       display: none;
     }
@@ -433,7 +426,6 @@
     }
   }
 }
-
 
 // Dark Version
 .dark {

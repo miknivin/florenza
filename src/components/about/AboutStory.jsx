@@ -14,10 +14,15 @@ const AboutStory = ({ story }) => {
 
               <div className="row">
                 <div className="col-xxl-5 col-xl-5 col-lg-5 col-md-5">
-                  <h2 className="sec-sub-title title-anim">
+                  <h2
+                    
+                    className="sec-sub-title title-anim"
+                  >
                     {story.sub_title}
                   </h2>
-                  <h3 className="sec-title title-anim">{story.title}</h3>
+                  <h3  className="sec-title title-anim font-roboto-serif">
+                    {story.title}
+                  </h3>
                 </div>
                 <div className="col-xxl-7 col-xl-7 col-lg-7 col-md-7">
                   <div className="story__text">

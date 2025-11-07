@@ -18,7 +18,7 @@ import {
 import { useState, useEffect } from "react";
 import { useGetProductDetailsQuery } from "@/store/api/productApi";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination, Grid } from "swiper";
+import { Pagination, Grid } from "swiper/modules";
 import "swiper/css/grid";
 import ProductQuantity from "./product-details-components/ProductSelector";
 import Modal from "../common/modal/ReusableModal";
@@ -462,12 +462,6 @@ export default function ProductDetails({ id }) {
                   <li>
                     <Link href={"/shop/full"}>
                       Shop <i className="fa-solid fa-chevron-right"></i>
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href={"#"}>
-                      {product.category}{" "}
-                      <i className="fa-solid fa-chevron-right"></i>
                     </Link>
                   </li>
                   <li>

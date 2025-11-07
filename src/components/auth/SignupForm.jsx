@@ -14,6 +14,8 @@ import {
 } from "@/store/features/userSlice";
 import axios from "axios";
 import PhoneOTP from "./PhoneOtp";
+import EyeIcon from "../icons/EyeIcon";
+import EyeSlash from "../icons/EyeSlash";
 
 const SignUpForm = ({
   className,
@@ -29,9 +31,11 @@ const SignUpForm = ({
     password: "",
   });
   const [register, { isLoading }] = useRegisterMutation();
+  const [isPasswordHidden, setIsPasswordHidden] = useState(true);
   const dispatch = useDispatch();
 
   const hidePassword = () => {
+    setIsPasswordHidden(!isPasswordHidden);
     if (passwordInput.current.type === "password") {
       passwordInput.current.type = "text";
     } else {
@@ -116,7 +120,7 @@ const SignUpForm = ({
   };
 
   return (
-    <div className={`woocomerce__signin  ${className || ""}`}>
+    <div className={`woocomerce__signin font-roboto  ${className || ""}`}>
       <div className="woocomerce__signin-wrapper">
         {isHeading && (
           <div className="woocomerce__signin-titlewrap">
@@ -180,15 +184,10 @@ const SignUpForm = ({
               <button
                 type="button"
                 role="button"
+                onClick={hidePassword}
                 className="woocomerce__signin-view"
               >
-                <Image
-                  width={19}
-                  height={11}
-                  onClick={hidePassword}
-                  src="/assets/imgs/woocomerce/view.png"
-                  alt="view"
-                />
+                {isPasswordHidden ? <EyeIcon /> : <EyeSlash />}
               </button>
             </div>
           </div>

@@ -15,7 +15,7 @@
   // update v0.3
   &__header {
     grid-template-columns: auto 150px 150px;
-    padding: 5px 50px;
+    padding: 5px;
     position: relative;
     left: 0;
     right: 0;
@@ -24,7 +24,18 @@
     // update v0.3
 
     &.absolute-header {
-      position: absolute;
+      @media (max-width: 764px) {
+        position: sticky !important;
+        top: 0;
+      }
+
+      // Desktop (≥1024px): absolute
+      @media (min-width: 764px) {
+        position: absolute !important;
+        top: 0;
+        left: 0;
+        right: 0;
+      }
     }
 
     &.account-header {
@@ -107,11 +118,11 @@
         }
 
         @media #{$lg} {
-          grid-template-columns: 1fr 1fr;
+          grid-template-columns: 1fr 2.5fr 1fr;
         }
 
         @media #{$md} {
-          grid-template-columns: 1fr 1fr;
+          grid-template-columns: 0.5fr 2fr 1fr;
         }
 
         @media #{$sm} {
@@ -125,11 +136,11 @@
       justify-content: center;
 
       @media #{$lg} {
-        display: none;
+        display: flex;
       }
 
       @media #{$md} {
-        display: none;
+        display: flex;
       }
 
       @media #{$sm} {
@@ -470,7 +481,7 @@
       }
 
       @media #{$sm} {
-        padding: 190px 10px 50px;
+        padding: 190px 10px 0px;
         height: unset;
         background-size: cover;
         background-position: center center;
@@ -680,7 +691,7 @@
 
     &-top {
       padding-bottom: 8px;
-      border-bottom: 1px solid #e3dcd5;
+      // border-bottom: 1px solid #e3dcd5;
       margin-bottom: 20px;
       display: flex;
       justify-content: space-between;
@@ -2117,8 +2128,8 @@
   padding-right: 50px;
 
   @media #{$md} {
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
   }
 
   @media #{$sm} {

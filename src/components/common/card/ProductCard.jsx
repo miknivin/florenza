@@ -371,7 +371,6 @@ const ProductCard = ({ el, isShopFull = false }) => {
         product={el}
         selectedVariant={selectedVariant}
         onProceedToCheckout={(data) => {
-          console.log(data, "from product modal");
           if (data && data.quantity && data.quantity > 1) {
             setQuantity(data.quantity || 1);
           }

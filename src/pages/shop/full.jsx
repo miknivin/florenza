@@ -1,6 +1,7 @@
 "use client";
 import { FullWidth, Preloader } from "@/components";
 import ProductLayout from "@/components/common/layout/ProductLayout";
+import FullWidthNewUi from "@/components/shop/FullWidthNewUi";
 import Head from "next/head";
 
 const Full = () => {
@@ -13,7 +14,7 @@ const Full = () => {
       </Head>
       <main>
         <ProductLayout>
-          <FullWidth />
+          <FullWidthNewUi />
         </ProductLayout>
       </main>
     </>

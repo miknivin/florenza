@@ -20,6 +20,7 @@ import SignInForm from "../auth/SigninForm";
 import HamburgerIcon from "../icons/HamburgerIcon";
 import CartIcon from "../icons/CartIcon";
 import UserIcon from "../icons/UserIcon";
+import HeaderSearchNewUi from "../search/HeaderSearchNewUi";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
@@ -119,8 +120,9 @@ const Header = ({ option }) => {
         className={`${
           option === "black"
             ? "woocomerce__header"
-            : "woocomerce__header absolute-header"
-        }`}
+            : "woocomerce__header absolute-header "
+        } woocomerce-padding`}
+        style={{ position: "relative", zIndex: 99 }}
       >
         <div className="woocomerce__header-inner shopfull">
           <div className="woocomerce__header-center">
@@ -137,9 +139,9 @@ const Header = ({ option }) => {
               </Link>
             </div>
           </div>
-          <div className="woocomerce__header-left">
-            <div className="header__nav-2">
-              <ul
+          <div className="woocomerce__header-left font-roboto">
+            <div className="header__nav-2 w-100">
+              {/* <ul
                 className={`${
                   option === "black"
                     ? "main-menu-3 menu-anim woocomerce-menu"
@@ -215,7 +217,8 @@ const Header = ({ option }) => {
                     ></div>
                   )}
                 </li>
-              </ul>
+              </ul> */}
+              <HeaderSearchNewUi />
             </div>
           </div>
           <div
@@ -227,10 +230,14 @@ const Header = ({ option }) => {
           >
             <div className="woocomerce__header-cart">
               <div className="woocomerce__header-cartwrapper">
-                <Link href={"/cart"}>
+                <Link className="font-roboto position-relative" href={"/cart"}>
                   <CartIcon />
-                  <p>Cart</p>
-                  <span style={{ paddingLeft: "3px" }}>
+                  <span
+                    className={`cart-badge-1 ${
+                      option === "black" ? "bg-white" : "bg-black"
+                    }`}
+                    style={{ paddingLeft: "3px" }}
+                  >
                     ({cartData.length})
                   </span>
                 </Link>
@@ -243,9 +250,9 @@ const Header = ({ option }) => {
                   <UserIcon color={option === "black" ? "#000" : "#fff"} />
                 </button>
               </div>
-              <div className="woocomerce__header-search">
+              {/* <div className="woocomerce__header-search">
                 <HeaderSearch allData={allData} />
-              </div>
+              </div> */}
               <div onClick={openCanvas} className="woocomerce__header-search">
                 <HamburgerIcon
                   size={45}
@@ -256,6 +263,7 @@ const Header = ({ option }) => {
           </div>
         </div>
       </header>
+
       <Modal
         show={showModal}
         onHide={() => setShowModal(false)}

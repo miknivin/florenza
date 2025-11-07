@@ -1,19 +1,19 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 
 const CartButton = () => {
   const { cartData, totalCost, buyProduct } = useSelector(
     (state) => state.cart
   );
-  // Calculate total number of items
+  const [isClosed, setIsClosed] = useState(false);
   const totalItems = cartData.reduce((total, item) => total + item.quantity, 0);
   const currentPath = usePathname() || "/";
 
-  // Return null if buyProduct is not null, cart is empty, or on cart/checkout pages
   if (
+    isClosed ||
     buyProduct !== null ||
     totalItems === 0 ||
     currentPath?.includes("/cart") ||
@@ -24,7 +24,7 @@ const CartButton = () => {
 
   return (
     <div className="cart-button-container">
-      <button className="cart-btn">
+      <div className="cart-btn position-relative">
         <div className="cart-content">
           <div className="cart-icon">
             <svg
@@ -56,7 +56,26 @@ const CartButton = () => {
             View Cart
           </Link>
         </div>
-      </button>
+        <button
+          onClick={() => setIsClosed(true)}
+          className="close-cart-btn position-absolute"
+          aria-label="Close cart button"
+        >
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M18 6L6 18" />
+            <path d="M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
     </div>
   );
 };

@@ -34,7 +34,8 @@ const AboutHero = ({ intro }) => {
               <div className="col-xxl-12">
                 <div className="hero__about-content">
                   <h1
-                    className="hero-title animation__word_come"
+                    style={{ letterSpacing: 10 }}
+                    className="hero-title animation__word_come  font-roboto-serif fw-4"
                     ref={animationWordCome}
                   >
                     {intro.title}
@@ -42,14 +43,11 @@ const AboutHero = ({ intro }) => {
                   <div className="hero__about-info">
                     <div className="hero__about-btn">
                       <div className="btn_wrapper">
-                        <Link
-                          href="/"
-                          className="wc-btn-primary btn-hover btn-item"
-                        >
+                        <div className="wc-btn-primary btn-hover btn-item">
                           <span></span>{" "}
                           <p style={{ width: "50%" }}>{intro.btn_text}</p>
                           <i className="fa-solid fa-arrow-right"></i>
-                        </Link>
+                        </div>
                       </div>
                     </div>
                     <div className="hero__about-text title-anim">

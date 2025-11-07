@@ -10,8 +10,8 @@ const CTA = () => {
             <div className="col-xxl-12">
               <div className="cta__content">
                 <p className="cta__sub-title">Elegant & Alluring </p>
-                <h2 className="cta__title title-anim">
-                We are captivated by the art of fragrance
+                <h2 className="cta__title title-anim font-roboto-serif">
+                  We are captivated by the art of fragrance
                 </h2>
                 <div className="btn_wrapper">
                   <Link

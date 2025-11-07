@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 const Banner1 = ({ banner }) => {
- 
   return (
     <>
       <section className="woocomerce__exclusive woocomerce-padding">
@@ -20,10 +19,10 @@ const Banner1 = ({ banner }) => {
               </div>
 
               <div className="woocomerce__exclusive-content">
-                <span className="woocomerce__exclusive-subtitle title-anim">
+                <span className="woocomerce__exclusive-subtitle title-anim fw-4">
                   {el.sub_title}
                 </span>
-                <h2 className="woocomerce__exclusive-title title-anim w-100">
+                <h2 className="woocomerce__exclusive-title title-anim w-100 fw-4">
                   {el.title}
                 </h2>
                 <div className="woocomerce__exclusive-btnwraper wc_btn_wrapper">

@@ -19,9 +19,9 @@ export default function AllProfileContent({ initialTab = "profile" }) {
   useEffect(() => {
     setActiveTab(tab || "profile");
   }, [tab]);
-  
-    const [logout, { isLoading }] = useLogoutMutation();
-    const handleLogout = async () => {
+
+  const [logout, { isLoading }] = useLogoutMutation();
+  const handleLogout = async () => {
     try {
       await logout().unwrap();
       // Optionally clear client-side auth state here
@@ -74,15 +74,6 @@ export default function AllProfileContent({ initialTab = "profile" }) {
                   </Nav.Item>
                   <Nav.Item>
                     <Nav.Link
-                      eventKey="wishlist"
-                      as="button"
-                      className={activeTab === "wishlist" ? "active" : ""}
-                    >
-                      Wishlist
-                    </Nav.Link>
-                  </Nav.Item>
-                  <Nav.Item>
-                    <Nav.Link
                       eventKey="order"
                       as="button"
                       className={activeTab === "order" ? "active" : ""}
@@ -90,11 +81,16 @@ export default function AllProfileContent({ initialTab = "profile" }) {
                       Order
                     </Nav.Link>
                   </Nav.Item>
-                 <Nav.Item>
-    <Nav.Link eventKey="logout" as="button" onClick={handleLogout} disabled={isLoading}>
-      Sign out
-    </Nav.Link>
-  </Nav.Item>
+                  <Nav.Item>
+                    <Nav.Link
+                      eventKey="logout"
+                      as="button"
+                      onClick={handleLogout}
+                      disabled={isLoading}
+                    >
+                      Sign out
+                    </Nav.Link>
+                  </Nav.Item>
                 </Nav>
               </div>
 
@@ -132,10 +128,15 @@ export default function AllProfileContent({ initialTab = "profile" }) {
                     </Nav.Link>
                   </Nav.Item>
                   <Nav.Item>
-    <Nav.Link eventKey="logout" as="button" onClick={handleLogout} disabled={isLoading}>
-      Sign out
-    </Nav.Link>
-  </Nav.Item>
+                    <Nav.Link
+                      eventKey="logout"
+                      as="button"
+                      onClick={handleLogout}
+                      disabled={isLoading}
+                    >
+                      Sign out
+                    </Nav.Link>
+                  </Nav.Item>
                 </Nav>
               </div>
             </div>

@@ -348,7 +348,7 @@ const ShippingAddressModal = ({
             overflowY: "auto",
             overflowX: "hidden",
             maxHeight: "80vh",
-            fontFamily: "Kanit, sans-serif",
+            fontFamily: "Roboto, sans-serif",
           }}
           className="woocomerce__auth-form"
         >
