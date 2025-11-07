@@ -7,6 +7,7 @@ import CacheFilters from "@/utils/CacheApiFilter";
 
 const FULL_CACHE_KEY = "allProducts";
 const TTL = 6 * 60 * 60;
+const CACHE_TIMEOUT_MS = 1000; // 1 second timeout for cache fetch
 
 export default async function handler(req, res) {
   if (req.method !== "GET") {
@@ -16,31 +17,46 @@ export default async function handler(req, res) {
   }
 
   try {
-    await dbConnect();
-
-    const { resPerPage = 50, ...queryParams } = req.query;
+    const { resPerPage = 50, isDistinctCategory, ...queryParams } = req.query;
     const perPage = Number(resPerPage);
-    console.log(queryParams);
+    let cachedFull = null;
+    let source = "db";
 
-    const cachedFull = await kv.get(FULL_CACHE_KEY);
+    // === 1. Try to fetch from cache with 1-second timeout ===
+    try {
+      cachedFull = await Promise.race([
+        kv.get(FULL_CACHE_KEY),
+        new Promise((_, reject) =>
+          setTimeout(() => reject(new Error("Cache timeout")), CACHE_TIMEOUT_MS)
+        ),
+      ]);
+    } catch (cacheError) {
+      console.warn("Cache fetch failed or timed out:", cacheError.message);
+      // Continue to DB — cache miss
+    }
 
     let filteredProducts, filteredProductsCount, categories;
 
     if (cachedFull) {
+      // === 2. CACHE HIT: Use in-memory filtering, no DB connection needed ===
+      source = "cache";
       const cacheFilter = new CacheFilters(cachedFull, queryParams)
         .search()
         .filter()
         .sort();
-      if (queryParams && queryParams.category) {
-        console.log(cacheFilter.result().length);
-      }
+
       const totalAfterFilter = cacheFilter.result().length;
       filteredProductsCount = totalAfterFilter;
-
       filteredProducts = cacheFilter.pagination(perPage).result();
-      categories = [...new Set(cachedFull.map((p) => p.category))];
+
+      // Only compute distinct categories if explicitly requested
+      if (isDistinctCategory === "true") {
+        categories = [...new Set(cachedFull.map((p) => p.category))];
+      }
     } else {
-      // ----- CACHE MISS → DB + Mongo filters -----
+      // === 3. CACHE MISS: Connect to DB and fetch data ===
+      await dbConnect();
+
       const apiFilters = new APIFilters(Product, queryParams)
         .search()
         .filter()
@@ -53,17 +69,25 @@ export default async function handler(req, res) {
       apiFilters.pagination(perPage);
       filteredProducts = await apiFilters.query.clone();
 
-      categories = await Product.distinct("category");
+      // Only fetch distinct categories if requested
+      if (isDistinctCategory === "true") {
+        categories = await Product.distinct("category");
+      }
 
-      // ----- store full list for future calls -----
-      const fullList = await Product.find({}).lean();
-      await kv.set(FULL_CACHE_KEY, fullList, { ttl: TTL });
+      // === 4. Warm up cache for future requests ===
+      try {
+        const fullList = await Product.find({}).lean();
+        await kv.set(FULL_CACHE_KEY, fullList, { ttl: TTL });
+      } catch (cacheSetError) {
+        console.warn("Failed to warm cache:", cacheSetError.message);
+        // Non-critical — continue
+      }
     }
 
     return res.status(200).json({
       success: true,
       resPerPage: perPage,
-      source: cachedFull ? "cache" : "db",
+      source,
       filteredProductsCount,
       filteredProducts,
       filters: {

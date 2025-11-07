@@ -1,4 +1,5 @@
 import dbConnect from "@/lib/connection/connection";
+import Product from "@/lib/models/Product";
 import { isAuthenticatedUser } from "@/middlewares/auth";
 
 export default async function handler(req, res) {
@@ -9,6 +10,7 @@ export default async function handler(req, res) {
   }
 
   try {
+    Product
     await dbConnect();
     const user = await isAuthenticatedUser(req);
     return res.status(200).json({ success: true, user });

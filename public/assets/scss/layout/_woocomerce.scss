@@ -262,12 +262,11 @@
       transition: all 0.3s;
 
       span {
-        display: inline-block;
         margin-left: -12px;
         // update v0.3
         @media #{$sm} {
-          margin-top: -15px;
-          font-size: 12px;
+          margin-top: 0px;
+          font-size: 10px;
         }
       }
 
