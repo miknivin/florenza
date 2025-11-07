@@ -80,7 +80,7 @@ export default function HeaderSearchNewUi() {
               className="position-absolute left-0 right-0 mt-1 bg-white border rounded-3 border-gray-200 w-100 rounded-md shadow-lg z-50 max-h-96 overflow-y-auto"
             >
               {isLoading || isFetching ? (
-                <div className="d-flex justify-content-center align-items-center">
+                <div className="d-flex justify-content-center align-items-center py-3">
                   <div className="spinner-border" role="status">
                     <span className="visually-hidden">Loading...</span>
                   </div>
@@ -91,10 +91,10 @@ export default function HeaderSearchNewUi() {
                 </p>
               ) : searchSlug.length > 0 ? (
                 searchSlug.map((product) => (
-                  <div
+                  <button
                     key={product._id}
                     class="search-result-item"
-                    onclick="navigateToProduct('${product._id}')"
+                    onClick={() => navigate(product._id)}
                   >
                     <Link
                       href={`/shop/${product._id}`}
@@ -102,12 +102,12 @@ export default function HeaderSearchNewUi() {
                     >
                       {product.name || "Unnamed Product"}
                     </Link>
-                  </div>
+                  </button>
                 ))
               ) : (
                 <p className="p-4 text-gray-500 text-sm text-start">
                   No results found for{" "}
-                  <span className="font-medium">"{searchValue}"</span>
+                  <span className="font-medium">&quot;{searchValue}&quot;</span>
                 </p>
               )}
             </div>
