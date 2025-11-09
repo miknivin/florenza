@@ -254,7 +254,7 @@ const PhoneOTP = ({ onClearFields, onAuthSuccess }) => {
               </div>
 
               {/* RESEND + LOADER */}
-              <div className="d-flex align-items-start justify-content-start gap-3 mt-2 w-100 justify-content-center">
+              <div className="d-flex align-items-start justify-content-start gap-3 mt-2 w-100">
                 {isLoading && (
                   <div
                     className="spinner-border spinner-border-sm"
