@@ -1,14 +1,8 @@
 "use client";
-
 import { countries } from "@/data/countries";
 import { useState, useEffect, useRef } from "react";
 import { toast } from "react-toastify";
-import {
-  getAuth,
-  signInWithPhoneNumber,
-  RecaptchaVerifier,
-} from "firebase/auth";
-
+import { signInWithPhoneNumber, RecaptchaVerifier } from "firebase/auth";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setIsAuthenticated, setUser } from "@/store/features/userSlice";
@@ -19,61 +13,42 @@ const PhoneOTP = ({ onClearFields, onAuthSuccess }) => {
   const [selectedCountry, setSelectedCountry] = useState(countries[0]);
   const [otp, setOtp] = useState("");
   const [isOtpSent, setIsOtpSent] = useState(false);
-  const [resendCountdown, setResendCountdown] = useState(0); // seconds left
+  const [resendCountdown, setResendCountdown] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [confirmationResult, setConfirmationResult] = useState(null);
   const recaptchaRef = useRef(null);
   const dispatch = useDispatch();
 
-  // Initialize reCAPTCHA
-
+  /* ────── CREATE RECAPTCHA ONCE (ON MOUNT) ────── */
   useEffect(() => {
-    if (resendCountdown <= 0) return;
-    const timer = setInterval(() => {
-      setResendCountdown((prev) => prev - 1);
-    }, 1000);
-    return () => clearInterval(timer);
-  }, [resendCountdown]);
+    const container = document.getElementById("recaptcha-container");
+    if (!container || recaptchaRef.current) return;
 
-  useEffect(() => {
-    // Ensure DOM is ready and auth is initialized
-    if (
-      !recaptchaRef.current &&
-      document.getElementById("recaptcha-container")
-    ) {
-      try {
-        recaptchaRef.current = new RecaptchaVerifier(
-          auth,
-          "recaptcha-container",
-          {
-            size: "invisible", // Or "normal" for visible reCAPTCHA
-            callback: () => {
-              // reCAPTCHA solved
-            },
-            "expired-callback": () => {
-              toast.error("reCAPTCHA expired, please try again", {
-                position: "top-center",
-                autoClose: 1000,
-              });
-            },
-          }
-        );
-
-        // Enable testing mode for development (bypass reCAPTCHA, use test numbers)
-        if (process.env.NODE_ENV === "development") {
-          // Use Firebase test phone numbers (e.g., +16505550123, OTP: 123456)
-          recaptchaRef.current.appVerificationDisabledForTesting = true;
-        }
-      } catch (error) {
-        console.error("reCAPTCHA init error:", error);
-        toast.error("Failed to initialize reCAPTCHA", {
+    recaptchaRef.current = new RecaptchaVerifier(auth, "recaptcha-container", {
+      size: "invisible",
+      callback: () => {},
+      "expired-callback": () => {
+        toast.error("reCAPTCHA expired, please try again", {
           position: "top-center",
           autoClose: 1000,
         });
-      }
+      },
+    });
+
+    // Required for invisible reCAPTCHA
+    recaptchaRef.current.render().catch((err) => {
+      console.error("reCAPTCHA render error:", err);
+      toast.error("Failed to load reCAPTCHA", {
+        position: "top-center",
+        autoClose: 1000,
+      });
+    });
+
+    if (process.env.NODE_ENV === "development") {
+      recaptchaRef.current.appVerificationDisabledForTesting = true;
     }
 
-    // Cleanup reCAPTCHA on unmount
+    // Cleanup on unmount
     return () => {
       if (recaptchaRef.current) {
         recaptchaRef.current.clear();
@@ -82,12 +57,30 @@ const PhoneOTP = ({ onClearFields, onAuthSuccess }) => {
     };
   }, []);
 
-  const startResendTimer = () => setResendCountdown(60);
+  /* ────── RESEND COUNTDOWN ────── */
+  useEffect(() => {
+    if (resendCountdown <= 0) return;
+    const timer = setInterval(() => setResendCountdown((p) => p - 1), 1000);
+    return () => clearInterval(timer);
+  }, [resendCountdown]);
 
+  const startResendTimer = () =>
+    setResendCountdown(process.env.NODE_ENV === "development" ? 5 : 60);
+
+  /* ────── SEND / RESEND OTP (REUSES SAME VERIFIER) ────── */
   const handleGetOTP = async (e) => {
-    e.preventDefault(); // Prevent any default form behavior
+    if (e) e.preventDefault();
+
     if (!phoneNumber.trim()) {
       toast.error("Please enter a phone number", {
+        position: "top-center",
+        autoClose: 1000,
+      });
+      return;
+    }
+
+    if (!recaptchaRef.current) {
+      toast.error("reCAPTCHA not ready", {
         position: "top-center",
         autoClose: 1000,
       });
@@ -98,17 +91,12 @@ const PhoneOTP = ({ onClearFields, onAuthSuccess }) => {
     setIsLoading(true);
 
     try {
-      if (!recaptchaRef.current) {
-        throw new Error("reCAPTCHA not initialized");
-      }
-
-      // Prevent scrolling by maintaining scroll position
-      const scrollY = window.scrollY;
       const result = await signInWithPhoneNumber(
         auth,
         fullPhone,
-        recaptchaRef.current
+        recaptchaRef.current // ← SAME verifier every time
       );
+
       setConfirmationResult(result);
       setIsOtpSent(true);
       startResendTimer();
@@ -116,10 +104,8 @@ const PhoneOTP = ({ onClearFields, onAuthSuccess }) => {
         position: "top-center",
         autoClose: 1000,
       });
-      if (onClearFields) {
-        onClearFields();
-      }
-      // Restore scroll position
+
+      if (onClearFields) onClearFields();
     } catch (error) {
       console.error("OTP send error:", error);
       toast.error(error.message || "Failed to send OTP", {
@@ -134,9 +120,10 @@ const PhoneOTP = ({ onClearFields, onAuthSuccess }) => {
   const handleResendOTP = async () => {
     setOtp("");
     setConfirmationResult(null);
-    await handleGetOTP();
+    await handleGetOTP(); // ← reuses same verifier
   };
 
+  /* ────── VERIFY OTP ────── */
   const handleVerifyOTP = async () => {
     if (!otp.trim()) {
       toast.error("Please enter the OTP", {
@@ -145,14 +132,11 @@ const PhoneOTP = ({ onClearFields, onAuthSuccess }) => {
       });
       return;
     }
-
     setIsLoading(true);
     try {
-      // Verify OTP client-side
       const credential = await confirmationResult.confirm(otp);
       const idToken = await credential.user.getIdToken();
 
-      // Send idToken to backend
       const response = await axios.put(
         `${process.env.NEXT_PUBLIC_API_URL || "/api"}/auth/otp`,
         { phone: credential.user.phoneNumber, idToken },
@@ -160,9 +144,7 @@ const PhoneOTP = ({ onClearFields, onAuthSuccess }) => {
       );
 
       if (response.data.success) {
-        const { user, token } = response.data;
-        console.log(user, "user");
-
+        const { user } = response.data;
         dispatch(
           setUser({
             id: user.id,
@@ -176,9 +158,7 @@ const PhoneOTP = ({ onClearFields, onAuthSuccess }) => {
           position: "top-center",
           autoClose: 1000,
         });
-        if (onAuthSuccess) {
-          onAuthSuccess();
-        }
+        if (onAuthSuccess) onAuthSuccess();
       } else {
         throw new Error(response.data.error || "OTP verification failed");
       }
@@ -193,16 +173,19 @@ const PhoneOTP = ({ onClearFields, onAuthSuccess }) => {
     }
   };
 
+  /* ────── RENDER ────── */
   return (
     <>
       <div className="phone-otp-wrapper">
         <div id="recaptcha-container"></div>
+
         <label
           htmlFor={isOtpSent ? "otp" : "phoneNumber"}
           className="phone-label"
         >
           {isOtpSent ? "Enter OTP" : "Phone number"}
         </label>
+
         <div className="phone-input-container">
           {!isOtpSent ? (
             <>
@@ -217,13 +200,14 @@ const PhoneOTP = ({ onClearFields, onAuthSuccess }) => {
                     setSelectedCountry(country);
                   }}
                 >
-                  {countries.map((country) => (
-                    <option key={country.id} value={country.id}>
-                      +{country.phoneCode}
+                  {countries.map((c) => (
+                    <option key={c.id} value={c.id}>
+                      +{c.phoneCode}
                     </option>
                   ))}
                 </select>
               </div>
+
               <div className="phone-input-wrapper w-100">
                 <input
                   type="tel"
@@ -232,16 +216,11 @@ const PhoneOTP = ({ onClearFields, onAuthSuccess }) => {
                   placeholder="Phone number"
                   value={phoneNumber}
                   onChange={(e) => setPhoneNumber(e.target.value)}
-                  onKeyPress={(e) => {
-                    if (e.key === "Enter") {
-                      handleGetOTP();
-                    }
-                  }}
+                  onKeyPress={(e) => e.key === "Enter" && handleGetOTP()}
                   disabled={isLoading}
                 />
                 <button
                   type="button"
-                  role="button"
                   className="otp-button"
                   onClick={handleGetOTP}
                   disabled={isLoading}
@@ -251,22 +230,17 @@ const PhoneOTP = ({ onClearFields, onAuthSuccess }) => {
               </div>
             </>
           ) : (
-            <div className="d-flex flex-column w-100 justify-content-start align-items-start">
+            <div className="d-flex flex-column w-100 align-items-start">
               <div className="phone-input-wrapper w-100">
                 <input
                   type="text"
                   id="otp"
-                  role="button"
-                  maxLength={"6"}
+                  maxLength={6}
                   className="phone-input"
                   placeholder="Enter OTP"
                   value={otp}
-                  onChange={(e) => setOtp(e.target.value)}
-                  onKeyPress={(e) => {
-                    if (e.key === "Enter") {
-                      handleVerifyOTP();
-                    }
-                  }}
+                  onChange={(e) => setOtp(e.target.value.replace(/\D/g, ""))}
+                  onKeyPress={(e) => e.key === "Enter" && handleVerifyOTP()}
                   disabled={isLoading}
                 />
                 <button
@@ -278,28 +252,32 @@ const PhoneOTP = ({ onClearFields, onAuthSuccess }) => {
                   {isLoading ? "Verifying..." : "Verify OTP"}
                 </button>
               </div>
-              <button
-                type="button"
-                className="btn btn-link  py-1 px-0 text-black "
-                onClick={handleResendOTP}
-                disabled={isLoading || resendCountdown > 0}
-                style={{ fontSize: "0.875rem" }}
-              >
-                {resendCountdown > 0
-                  ? `Resend in ${resendCountdown}s`
-                  : "Resend OTP"}
-              </button>
+
+              {/* RESEND + LOADER */}
+              <div className="d-flex align-items-start justify-content-start gap-3 mt-2 w-100 justify-content-center">
+                {isLoading && (
+                  <div
+                    className="spinner-border spinner-border-sm"
+                    role="status"
+                  >
+                    <span className="visually-hidden">Loading...</span>
+                  </div>
+                )}
+                <button
+                  type="button"
+                  className="btn btn-link py-1 px-0 text-black"
+                  onClick={handleResendOTP}
+                  disabled={isLoading || resendCountdown > 0}
+                  style={{ fontSize: "0.875rem" }}
+                >
+                  {resendCountdown > 0
+                    ? `Resend in ${resendCountdown}s`
+                    : "Resend OTP"}
+                </button>
+              </div>
             </div>
           )}
         </div>
-
-        {isLoading && (
-          <div>
-            <div className="spinner-border spinner-border-sm" role="status">
-              <span className="visually-hidden">Loading...</span>
-            </div>
-          </div>
-        )}
       </div>
     </>
   );
