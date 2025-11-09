@@ -19,12 +19,22 @@ const PhoneOTP = ({ onClearFields, onAuthSuccess }) => {
   const [selectedCountry, setSelectedCountry] = useState(countries[0]);
   const [otp, setOtp] = useState("");
   const [isOtpSent, setIsOtpSent] = useState(false);
+  const [resendCountdown, setResendCountdown] = useState(0); // seconds left
   const [isLoading, setIsLoading] = useState(false);
   const [confirmationResult, setConfirmationResult] = useState(null);
   const recaptchaRef = useRef(null);
   const dispatch = useDispatch();
 
   // Initialize reCAPTCHA
+
+  useEffect(() => {
+    if (resendCountdown <= 0) return;
+    const timer = setInterval(() => {
+      setResendCountdown((prev) => prev - 1);
+    }, 1000);
+    return () => clearInterval(timer);
+  }, [resendCountdown]);
+
   useEffect(() => {
     // Ensure DOM is ready and auth is initialized
     if (
@@ -72,6 +82,8 @@ const PhoneOTP = ({ onClearFields, onAuthSuccess }) => {
     };
   }, []);
 
+  const startResendTimer = () => setResendCountdown(60);
+
   const handleGetOTP = async (e) => {
     e.preventDefault(); // Prevent any default form behavior
     if (!phoneNumber.trim()) {
@@ -99,6 +111,7 @@ const PhoneOTP = ({ onClearFields, onAuthSuccess }) => {
       );
       setConfirmationResult(result);
       setIsOtpSent(true);
+      startResendTimer();
       toast.success("OTP sent successfully!", {
         position: "top-center",
         autoClose: 1000,
@@ -107,7 +120,6 @@ const PhoneOTP = ({ onClearFields, onAuthSuccess }) => {
         onClearFields();
       }
       // Restore scroll position
-      window.scrollTo(0, scrollY);
     } catch (error) {
       console.error("OTP send error:", error);
       toast.error(error.message || "Failed to send OTP", {
@@ -117,6 +129,12 @@ const PhoneOTP = ({ onClearFields, onAuthSuccess }) => {
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const handleResendOTP = async () => {
+    setOtp("");
+    setConfirmationResult(null);
+    await handleGetOTP();
   };
 
   const handleVerifyOTP = async () => {
@@ -206,7 +224,7 @@ const PhoneOTP = ({ onClearFields, onAuthSuccess }) => {
                   ))}
                 </select>
               </div>
-              <div className="phone-input-wrapper">
+              <div className="phone-input-wrapper w-100">
                 <input
                   type="tel"
                   id="phoneNumber"
@@ -233,30 +251,43 @@ const PhoneOTP = ({ onClearFields, onAuthSuccess }) => {
               </div>
             </>
           ) : (
-            <div className="phone-input-wrapper">
-              <input
-                type="text"
-                id="otp"
-                role="button"
-                maxLength={"6"}
-                className="phone-input"
-                placeholder="Enter OTP"
-                value={otp}
-                onChange={(e) => setOtp(e.target.value)}
-                onKeyPress={(e) => {
-                  if (e.key === "Enter") {
-                    handleVerifyOTP();
-                  }
-                }}
-                disabled={isLoading}
-              />
+            <div className="d-flex flex-column w-100 justify-content-start align-items-start">
+              <div className="phone-input-wrapper w-100">
+                <input
+                  type="text"
+                  id="otp"
+                  role="button"
+                  maxLength={"6"}
+                  className="phone-input"
+                  placeholder="Enter OTP"
+                  value={otp}
+                  onChange={(e) => setOtp(e.target.value)}
+                  onKeyPress={(e) => {
+                    if (e.key === "Enter") {
+                      handleVerifyOTP();
+                    }
+                  }}
+                  disabled={isLoading}
+                />
+                <button
+                  type="button"
+                  className="otp-button"
+                  onClick={handleVerifyOTP}
+                  disabled={isLoading}
+                >
+                  {isLoading ? "Verifying..." : "Verify OTP"}
+                </button>
+              </div>
               <button
                 type="button"
-                className="otp-button"
-                onClick={handleVerifyOTP}
-                disabled={isLoading}
+                className="btn btn-link  py-1 px-0 text-black "
+                onClick={handleResendOTP}
+                disabled={isLoading || resendCountdown > 0}
+                style={{ fontSize: "0.875rem" }}
               >
-                {isLoading ? "Verifying..." : "Verify OTP"}
+                {resendCountdown > 0
+                  ? `Resend in ${resendCountdown}s`
+                  : "Resend OTP"}
               </button>
             </div>
           )}
