@@ -39,24 +39,23 @@ export default function ProductDetailsNewUi({ id }) {
   const [showAddressModal, setShowAddressModal] = useState(false);
   const [selectedVariant, setSelectedVariant] = useState(null);
 
-  // === FETCH CURRENT PRODUCT ===
   const { data, isLoading, error } = useGetProductDetailsQuery(id, {
     retry: 3,
   });
   const product = data?.product;
 
   // === FETCH ALL PRODUCTS (for related) ===
-  const {
-    data: allProductsData,
-    isLoading: allLoading,
-    error: allError,
-  } = useGetProductsQuery({
-    page: 1,
-    resPerPage: 100, // adjust if needed
-  });
+  // const {
+  //   data: allProductsData,
+  //   isLoading: allLoading,
+  //   error: allError,
+  // } = useGetProductsQuery({
+  //   page: 1,
+  //   resPerPage: 100, // adjust if needed
+  // });
 
-  const relatedProducts =
-    allProductsData?.filteredProducts?.filter((p) => p._id !== id) || [];
+  // const relatedProducts =
+  //   allProductsData?.filteredProducts?.filter((p) => p._id !== id) || [];
 
   // === EFFECTS ===
   useEffect(() => {
@@ -116,12 +115,15 @@ export default function ProductDetailsNewUi({ id }) {
 
   const addToCartHandler = () => {
     if (!selectedVariant) return warningTost("Select a variant");
+
+    const firstImg = selectedVariant.imageUrl?.[0] ?? product.images[0]?.url;
+    const imgUrl = firstImg || "/assets/imgs/placeholder.jpg";
     const item = {
       id: product._id,
       name: product.name,
       price: selectedVariant.discountPrice || selectedVariant.price,
       quantity: count,
-      img: { url: product.images[0]?.url || "/assets/imgs/placeholder.jpg" },
+      img: { url: imgUrl },
       sku: product.sku,
       variant: selectedVariant.size,
     };
@@ -143,12 +145,15 @@ export default function ProductDetailsNewUi({ id }) {
       setShowModal(true);
       return;
     }
+
+    const firstImg = selectedVariant.imageUrl?.[0] ?? product.images[0]?.url;
+    const imgUrl = firstImg || "/assets/imgs/placeholder.jpg";
     const item = {
       id: product._id,
       name: product.name,
       price: selectedVariant.discountPrice || selectedVariant.price,
       quantity: count,
-      img: { url: product.images[0]?.url || "/assets/imgs/placeholder.jpg" },
+      img: { url: imgUrl },
       sku: product.sku,
       variant: selectedVariant.size,
     };
@@ -189,7 +194,7 @@ export default function ProductDetailsNewUi({ id }) {
                   </li>
                 </ol>
               </nav>
-              <ProductImageSwiper images={product.images} />
+              <ProductImageSwiper images={images} />
             </div>
 
             {/* RIGHT COLUMN: Info */}

@@ -2096,3 +2096,7 @@ img {
     padding-right: 0 !important;
   }
 }
+
+.custom-pagination .swiper-pagination-bullet-active {
+  background-color: #757474 !important;
+}
