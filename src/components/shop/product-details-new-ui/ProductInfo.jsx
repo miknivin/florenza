@@ -52,7 +52,7 @@ export default function ProductInfo({
       <div className="text-muted pt-1">
         MRP{" "}
         <s>
-          ₹{" "}
+          {" "}
           {selectedVariant?.discountPrice
             ? " ₹" + (selectedVariant.price * count).toFixed(2)
             : product?.dis_price
@@ -72,7 +72,7 @@ export default function ProductInfo({
       )}
 
       {/* Short Description */}
-      <p className="woocomerce__single-discription">{shortDescription}</p>
+      <p className="woocomerce__single-discription py-4">{shortDescription}</p>
 
       {/* === PILL BUTTONS FOR VARIANTS === */}
       <div className="woocomerce__single-variations mt-3">
