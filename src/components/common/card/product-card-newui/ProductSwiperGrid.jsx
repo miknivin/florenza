@@ -19,7 +19,11 @@ const ProductSwiperGrid = ({ initialPage = 1, isProductPage = false }) => {
 
   const nonComboProducts = React.useMemo(() => {
     const all = data?.filteredProducts || [];
-    return all.filter((p) => p.category !== "Combo");
+    const filtered = all.filter((p) => p.category !== "Combo");
+    
+    // Apply variant size sorting on both homepage and shop page
+    const { sortProductsByVariantSize } = require("@/utils/productSortUtils");
+    return sortProductsByVariantSize(filtered);
   }, [data?.filteredProducts]);
 
   const firstFive = nonComboProducts.slice(0, 5);

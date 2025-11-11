@@ -48,7 +48,12 @@ const FullWidth = () => {
     return <Preloader />;
   }
 
-  const showData = data?.filteredProducts || [];
+  // Apply variant size sorting for shop page display
+  const showData = (() => {
+    const products = data?.filteredProducts || [];
+    const { sortProductsByVariantSize } = require("@/utils/productSortUtils");
+    return sortProductsByVariantSize(products);
+  })();
 
   const updateFilters = (type, value) => {
     setFilters((prev) => ({
