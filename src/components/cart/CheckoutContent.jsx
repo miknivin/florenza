@@ -45,6 +45,19 @@ export default function CheckoutContent() {
     script.src = "https://checkout.razorpay.com/v1/checkout.js";
     script.async = true;
     document.body.appendChild(script);
+    
+    // Track Facebook Pixel InitiateCheckout event
+    if (typeof window !== 'undefined' && window.fbq && cartData.length > 0) {
+      const { itemsPrice } = calculateOrderTotals(cartData, paymentMethod);
+      window.fbq('track', 'InitiateCheckout', {
+        value: itemsPrice,
+        currency: 'INR',
+        content_ids: cartData.map(item => item._id),
+        content_type: 'product',
+        num_items: cartData.reduce((total, item) => total + item.quantity, 0)
+      });
+    }
+    
     return () => {
       document.body.removeChild(script);
     };
@@ -134,6 +147,17 @@ export default function CheckoutContent() {
               }).unwrap();
 
               if (webhookResponse.success) {
+                // Track Facebook Pixel Purchase event for online payment
+                if (typeof window !== 'undefined' && window.fbq) {
+                  window.fbq('track', 'Purchase', {
+                    value: totalAmount,
+                    currency: 'INR',
+                    content_ids: cartData.map(item => item._id),
+                    content_type: 'product',
+                    num_items: cartData.reduce((total, item) => total + item.quantity, 0)
+                  });
+                }
+
                 dispatch(setOrderProduct(cartData));
                 dispatch(clearCart());
                 dispatch(clearErrors());
@@ -175,6 +199,18 @@ export default function CheckoutContent() {
       } else {
         // COD payment
         const response = await createNewOrder(orderData).unwrap();
+        
+        // Track Facebook Pixel Purchase event for COD payment
+        if (typeof window !== 'undefined' && window.fbq) {
+          window.fbq('track', 'Purchase', {
+            value: totalAmount,
+            currency: 'INR',
+            content_ids: cartData.map(item => item._id),
+            content_type: 'product',
+            num_items: cartData.reduce((total, item) => total + item.quantity, 0)
+          });
+        }
+
         dispatch(setOrderProduct(cartData));
         dispatch(clearCart());
         dispatch(clearErrors());

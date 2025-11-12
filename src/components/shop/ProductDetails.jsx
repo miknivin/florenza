@@ -201,6 +201,23 @@ export default function ProductDetails({ id }) {
       } else {
         console.warn("Vercel Analytics is not available.");
       }
+
+      // Track Facebook Pixel AddToCart event
+      if (typeof window !== 'undefined' && window.fbq) {
+        window.fbq('track', 'AddToCart', {
+          value: selectedVariant?.discountPrice || selectedVariant?.price || 0,
+          currency: 'INR',
+          content_ids: [fullData.id],
+          content_name: fullData.name,
+          content_type: 'product',
+          contents: [{
+            id: fullData.id,
+            quantity: fullData.quantity,
+            item_price: selectedVariant?.discountPrice || selectedVariant?.price || 0
+          }]
+        });
+      }
+
       dispatch(addToCart(fullData));
       successTost("Successfully added to cart");
     }
