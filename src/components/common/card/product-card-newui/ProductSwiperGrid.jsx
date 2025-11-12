@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, FreeMode } from "swiper/modules";
 import { useGetProductsQuery } from "@/store/api/productApi";
@@ -9,6 +9,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import Link from "next/link";
 import ArrowIcon from "@/components/icons/ArrowIcon";
+import { sortProductsByVariantSize } from "@/utils/productSortUtils";
 
 const ProductSwiperGrid = ({ initialPage = 1, isProductPage = false }) => {
   const perPage = 14;
@@ -17,12 +18,9 @@ const ProductSwiperGrid = ({ initialPage = 1, isProductPage = false }) => {
     resPerPage: perPage,
   });
 
-  const nonComboProducts = React.useMemo(() => {
-    const all = data?.filteredProducts || [];
+  const nonComboProducts = useMemo(() => {
+    const all = data?.filteredProducts ?? [];
     const filtered = all.filter((p) => p.category !== "Combo");
-    
-    // Apply variant size sorting on both homepage and shop page
-    const { sortProductsByVariantSize } = require("@/utils/productSortUtils");
     return sortProductsByVariantSize(filtered);
   }, [data?.filteredProducts]);
 
@@ -46,7 +44,7 @@ const ProductSwiperGrid = ({ initialPage = 1, isProductPage = false }) => {
       {!isProductPage && (
         <>
           <div className="">
-            <div className="woocomerce__feature-top d-flex justify-content-between">
+            <div className="woocomerce__feature-top d-flex justify-content-between px-2 ">
               <p className="woocomerce__feature-title font-roboto">
                 Our products
               </p>
