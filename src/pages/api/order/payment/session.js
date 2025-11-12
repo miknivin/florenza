@@ -3,6 +3,8 @@ import mongoose from "mongoose";
 import dbConnect from "@/lib/connection/connection";
 import SessionStartedOrder from "@/lib/models/SessionStartedOrder";
 import { isAuthenticatedUser } from "@/middlewares/auth";
+import User from "@/lib/models/User";
+import Product from "@/lib/models/Product";
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -12,6 +14,8 @@ export default async function handler(req, res) {
   }
 
   try {
+    User;
+    Product;
     await dbConnect();
 
     const user = await isAuthenticatedUser(req);

@@ -5,6 +5,7 @@ import { isAuthenticatedUser } from "@/middlewares/auth";
 import { createDelhiveryShipment } from "@/utils/createDelhiveryShipment";
 import Product from "@/lib/models/Product";
 import User from "@/lib/models/User";
+import { triggerAdminShipment } from "@/utils/triggerAdminShipment";
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -105,82 +106,82 @@ export default async function handler(req, res) {
     const weight = totalQuantity * 300; // 300g per bottle, adjust as needed
 
     // Prepare Delhivery shipment data
-    const shipmentData = {
-      shipments: [
-        {
-          name: shippingInfo.fullName || "Customer",
-          add: shippingInfo.address,
-          pin: shippingInfo.zipCode,
-          city: shippingInfo.city,
-          state: shippingInfo.state || "Unknown",
-          country: shippingInfo.country || "India",
-          phone: shippingInfo.phoneNo,
-          order: order._id.toString(),
-          payment_mode: paymentMethod === "COD" ? "COD" : "Prepaid",
-          return_pin: "678583", // Return address same as pickup location
-          return_city: "Thachanattukara",
-          return_phone: "9778766273",
-          return_add:
-            "Florenza Italiya Near ABS Traders Kodakkad, Opp: Rifa Medical Center Kodakkad-Palakkad Kozhikode Highway",
-          return_state: "Kerala",
-          return_country: "India",
-          products_desc: orderItems.map((item) => item.name).join(", "), // Combine perfume names
-          hsn_code: "3303", // HSN code for perfumes
-          cod_amount: paymentMethod === "COD" ? totalAmount.toString() : "0",
-          order_date: new Date().toISOString().split("T")[0], // Current date in YYYY-MM-DD
-          total_amount: totalAmount.toString(),
-          seller_add:
-            "Florenza Italiya Near ABS Traders Kodakkad, Opp: Rifa Medical Center Kodakkad-Palakkad Kozhikode Highway", // Adjust based on your business
-          seller_name: "Florenza Italiya", // Updated for perfume e-commerce
-          seller_inv: `INV${order._id.toString()}`, // Unique invoice based on order ID
-          quantity: totalQuantity.toString(),
-          waybill: "", // Delhivery will assign
-          shipment_width: "100", // 10 cm, typical for a small perfume box
-          shipment_height: "150", // 15 cm, typical for a small perfume box
-          weight: weight.toString(), // Total weight in grams
-          shipping_mode: "Surface", // Default as per sample
-          address_type: "home", // Default as per sample
-          seller_gst: process.env.GSTNO || "32AAIFO0471H1ZI",
-        },
-      ],
-      pickup_location: {
-        name: "Florenza Italiya",
-        add: "Florenza Italiya Near ABS Traders Kodakkad, Opp: Rifa Medical Center Kodakkad-Palakkad Kozhikode Highway",
-        pin: "678583",
-        city: "Thachanattukara",
-        state: "Kerala",
-        country: "India",
-        phone: "9778766273",
-        gst: process.env.GSTNO || "32AAIFO0471H1ZI",
-      },
-    };
-
+    // const shipmentData = {
+    //   shipments: [
+    //     {
+    //       name: shippingInfo.fullName || "Customer",
+    //       add: shippingInfo.address,
+    //       pin: shippingInfo.zipCode,
+    //       city: shippingInfo.city,
+    //       state: shippingInfo.state || "Unknown",
+    //       country: shippingInfo.country || "India",
+    //       phone: shippingInfo.phoneNo,
+    //       order: order._id.toString(),
+    //       payment_mode: paymentMethod === "COD" ? "COD" : "Prepaid",
+    //       return_pin: "678583", // Return address same as pickup location
+    //       return_city: "Thachanattukara",
+    //       return_phone: "9778766273",
+    //       return_add:
+    //         "Florenza Italiya Near ABS Traders Kodakkad, Opp: Rifa Medical Center Kodakkad-Palakkad Kozhikode Highway",
+    //       return_state: "Kerala",
+    //       return_country: "India",
+    //       products_desc: orderItems.map((item) => item.name).join(", "), // Combine perfume names
+    //       hsn_code: "3303", // HSN code for perfumes
+    //       cod_amount: paymentMethod === "COD" ? totalAmount.toString() : "0",
+    //       order_date: new Date().toISOString().split("T")[0], // Current date in YYYY-MM-DD
+    //       total_amount: totalAmount.toString(),
+    //       seller_add:
+    //         "Florenza Italiya Near ABS Traders Kodakkad, Opp: Rifa Medical Center Kodakkad-Palakkad Kozhikode Highway", // Adjust based on your business
+    //       seller_name: "Florenza Italiya", // Updated for perfume e-commerce
+    //       seller_inv: `INV${order._id.toString()}`, // Unique invoice based on order ID
+    //       quantity: totalQuantity.toString(),
+    //       waybill: "", // Delhivery will assign
+    //       shipment_width: "100", // 10 cm, typical for a small perfume box
+    //       shipment_height: "150", // 15 cm, typical for a small perfume box
+    //       weight: weight.toString(), // Total weight in grams
+    //       shipping_mode: "Surface", // Default as per sample
+    //       address_type: "home", // Default as per sample
+    //       seller_gst: process.env.GSTNO || "32AAIFO0471H1ZI",
+    //     },
+    //   ],
+    //   pickup_location: {
+    //     name: "Florenza Italiya",
+    //     add: "Florenza Italiya Near ABS Traders Kodakkad, Opp: Rifa Medical Center Kodakkad-Palakkad Kozhikode Highway",
+    //     pin: "678583",
+    //     city: "Thachanattukara",
+    //     state: "Kerala",
+    //     country: "India",
+    //     phone: "9778766273",
+    //     gst: process.env.GSTNO || "32AAIFO0471H1ZI",
+    //   },
+    // };
+    triggerAdminShipment(order._id.toString());
     // Call Delhivery shipment creation in a non-blocking way
-    setImmediate(async () => {
-      try {
-        const delhiveryToken = process.env.DELHIVERY_API_TOKEN; // Ensure this is set in your environment variables
-        if (!delhiveryToken) {
-          throw new Error("Delhivery API token not configured");
-        }
+    // setImmediate(async () => {
+    //   try {
+    //     const delhiveryToken = process.env.DELHIVERY_API_TOKEN; // Ensure this is set in your environment variables
+    //     if (!delhiveryToken) {
+    //       throw new Error("Delhivery API token not configured");
+    //     }
 
-        const shipmentResponse = await createDelhiveryShipment(
-          delhiveryToken,
-          shipmentData
-        );
+    //     const shipmentResponse = await createDelhiveryShipment(
+    //       delhiveryToken,
+    //       shipmentData
+    //     );
 
-        // Update order with shipment details
-        if (
-          shipmentResponse.success &&
-          shipmentResponse.packages?.[0]?.waybill
-        ) {
-          order.waybill = shipmentResponse.packages[0].waybill; // Store in the new waybill field
-          await order.save();
-        }
-      } catch (error) {
-        console.error("Error creating shipment:", error);
-        // Optionally store error in order (consider adding shipmentInfo field for errors)
-      }
-    });
+    //     // Update order with shipment details
+    //     if (
+    //       shipmentResponse.success &&
+    //       shipmentResponse.packages?.[0]?.waybill
+    //     ) {
+    //       order.waybill = shipmentResponse.packages[0].waybill; // Store in the new waybill field
+    //       await order.save();
+    //     }
+    //   } catch (error) {
+    //     console.error("Error creating shipment:", error);
+    //     // Optionally store error in order (consider adding shipmentInfo field for errors)
+    //   }
+    // });
 
     return res.status(201).json({
       success: true,
