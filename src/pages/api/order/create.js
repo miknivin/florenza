@@ -99,11 +99,11 @@ export default async function handler(req, res) {
     await order.save();
 
     // Calculate total weight (assuming ~300g per perfume bottle, including packaging)
-    const totalQuantity = orderItems.reduce(
-      (total, item) => total + item.quantity,
-      0
-    );
-    const weight = totalQuantity * 300; // 300g per bottle, adjust as needed
+    // const totalQuantity = orderItems.reduce(
+    //   (total, item) => total + item.quantity,
+    //   0
+    // );
+    // const weight = totalQuantity * 300; 
 
     // Prepare Delhivery shipment data
     // const shipmentData = {
