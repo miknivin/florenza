@@ -108,7 +108,7 @@ const Header = ({ option }) => {
   if (!allProducts)
     return (
       <div>
-        <Preloader />
+        <Preloader isDark={true} />
       </div>
     );
 

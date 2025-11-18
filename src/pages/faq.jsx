@@ -13,7 +13,7 @@ const Faq = () => {
   if (!data)
     return (
       <div>
-        <Preloader />
+        <Preloader isDark={true} />
       </div>
     );
 

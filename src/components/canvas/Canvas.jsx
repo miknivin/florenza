@@ -55,7 +55,7 @@ const Canvas = ({ ofCanvasArea }) => {
   if (!allProducts)
     return (
       <div>
-        <Preloader />
+        <Preloader isDark={true} />
       </div>
     );
 
