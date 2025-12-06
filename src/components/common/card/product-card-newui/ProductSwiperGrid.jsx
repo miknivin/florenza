@@ -95,7 +95,7 @@ const ProductSwiperGrid = ({ initialPage = 1, isProductPage = false }) => {
               pagination={{ clickable: true, el: ".spb3-1" }}
               breakpoints={{
                 0: { slidesPerView: 2.2, spaceBetween: 6 },
-                640: { slidesPerView: 3.2, spaceBetween: 12 },
+                640: { slidesPerView: 3.2, spaceBetween: 14 },
                 768: { slidesPerView: 3.5, spaceBetween: 16 },
                 1024: { slidesPerView: 4.5, spaceBetween: 18 },
               }}
@@ -110,8 +110,8 @@ const ProductSwiperGrid = ({ initialPage = 1, isProductPage = false }) => {
               }
             >
               {firstFive.map((product) => (
-                <SwiperSlide key={product._id}>
-                  <div className="d-flex justify-content-center">
+                <SwiperSlide key={product._id} style={{ height: 'auto' }}>
+                  <div className="d-flex justify-content-center align-items-stretch h-100">
                     <ProductCardNewUi product={product} />
                   </div>
                 </SwiperSlide>
@@ -145,7 +145,7 @@ const ProductSwiperGrid = ({ initialPage = 1, isProductPage = false }) => {
             <Swiper
               dir="ltr"
               slidesPerView={2.3}
-              spaceBetween={8}
+              spaceBetween={4}
               modules={[Navigation, Pagination, FreeMode]}
               freeMode={{
                 enabled: true,
@@ -160,7 +160,7 @@ const ProductSwiperGrid = ({ initialPage = 1, isProductPage = false }) => {
               pagination={{ clickable: true, el: ".spb3-2" }}
               breakpoints={{
                 0: { slidesPerView: 2.2, spaceBetween: 6 },
-                640: { slidesPerView: 3.2, spaceBetween: 10 },
+                640: { slidesPerView: 3.2, spaceBetween: 14 },
                 768: { slidesPerView: 3.5, spaceBetween: 16 },
                 1024: { slidesPerView: 4.5, spaceBetween: 18 },
               }}
@@ -175,8 +175,8 @@ const ProductSwiperGrid = ({ initialPage = 1, isProductPage = false }) => {
               }
             >
               {remainingSix.map((product) => (
-                <SwiperSlide key={product._id}>
-                  <div className="d-flex justify-content-center">
+                <SwiperSlide key={product._id} style={{ height: 'auto' }}>
+                  <div className="d-flex justify-content-center align-items-stretch h-100">
                     <ProductCardNewUi product={product} />
                   </div>
                 </SwiperSlide>

@@ -7,6 +7,15 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+  min-height: 100%;
+}
+
+.product-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 20px;
+  border-radius: 36px !important;
 }
 
 .product-image-wrapper {
@@ -33,6 +42,21 @@
   font-weight: 700;
   font-size: 1.4rem;
   box-shadow: 0 4px 15px rgba(255, 126, 46, 0.4);
+}
+
+.limited-stock-badge {
+  display: inline-block;
+  background: #ff0000 !important;
+  color: #ffffff !important;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin-bottom: 12px;
+  margin-top: 8px;
+  box-shadow: 0 2px 8px rgba(255, 0, 0, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .product-title {
@@ -95,11 +119,36 @@
     padding: 10px 20px;
   }
 
+  .limited-stock-badge {
+    font-size: 0.75rem;
+    padding: 3px 10px;
+    white-space: nowrap;
+  }
+
   .product-image {
     width: 150px;
   }
 
   .product-card {
     padding: 30px 20px;
+    min-height: 100%;
+    position: relative;
+    overflow: visible;
+  }
+
+  .product-content {
+    padding: 15px;
+    min-height: 100%;
+    padding-bottom: 45px !important;
+    border-radius: 19px !important;
+  }
+
+  .limited-stock-badge {
+    height: 30px !important;
+    bottom: 20px !important;
+  }
+
+  .limited-stock-text {
+    font-size: 12px !important;
   }
 }

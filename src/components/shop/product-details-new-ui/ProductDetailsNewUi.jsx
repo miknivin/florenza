@@ -68,17 +68,17 @@ export default function ProductDetailsNewUi({ id }) {
   useEffect(() => {
     if (product?.variants?.length) {
       setSelectedVariant(product.variants[0]);
-
+      
       // Track Facebook Pixel ViewContent event
-      if (typeof window !== "undefined" && window.fbq) {
+      if (typeof window !== 'undefined' && window.fbq) {
         const variant = product.variants[0];
-        window.fbq("track", "ViewContent", {
+        window.fbq('track', 'ViewContent', {
           value: variant?.discountPrice || variant?.price || 0,
-          currency: "INR",
+          currency: 'INR',
           content_ids: [product._id],
           content_name: product.name,
-          content_type: "product",
-          content_category: product.category || "fragrance",
+          content_type: 'product',
+          content_category: product.category || 'fragrance'
         });
       }
     }
@@ -89,10 +89,8 @@ export default function ProductDetailsNewUi({ id }) {
     return <div className="text-center py-5">Product not found.</div>;
 
   // === HELPERS ===
-  const warningTost = (msg) =>
-    toast.warn(msg, { position: "top-center", autoClose: 2000 });
-  const successTost = (msg) =>
-    toast.success(msg, { position: "top-center", autoClose: 1000 });
+  const warningTost = (msg) => toast.warn(msg, { position: "top-center" });
+  const successTost = (msg) => toast.success(msg, { position: "top-center" });
 
   const percentage = (disc, orig) =>
     Number((100 - (100 * disc) / orig).toFixed(2));
@@ -154,27 +152,24 @@ export default function ProductDetailsNewUi({ id }) {
           variant: item.variant,
           quantity: item.quantity,
           price: item.price,
-          sku: item.sku,
+          sku: item.sku
         });
         console.log("Vercel Analytics AddToCart tracked");
       }
 
       // Track Facebook Pixel AddToCart event
-      if (typeof window !== "undefined" && window.fbq) {
-        window.fbq("track", "AddToCart", {
+      if (typeof window !== 'undefined' && window.fbq) {
+        window.fbq('track', 'AddToCart', {
           value: selectedVariant?.discountPrice || selectedVariant?.price || 0,
-          currency: "INR",
+          currency: 'INR',
           content_ids: [item.id],
           content_name: item.name,
-          content_type: "product",
-          contents: [
-            {
-              id: item.id,
-              quantity: item.quantity,
-              item_price:
-                selectedVariant?.discountPrice || selectedVariant?.price || 0,
-            },
-          ],
+          content_type: 'product',
+          contents: [{
+            id: item.id,
+            quantity: item.quantity,
+            item_price: selectedVariant?.discountPrice || selectedVariant?.price || 0
+          }]
         });
       }
 
@@ -205,7 +200,7 @@ export default function ProductDetailsNewUi({ id }) {
       sku: product.sku,
       variant: selectedVariant.size,
     };
-
+    
     // Track Vercel Analytics BuyNow event
     if (track && typeof track === "function") {
       track("BuyNow", {
@@ -214,7 +209,7 @@ export default function ProductDetailsNewUi({ id }) {
         variant: item.variant,
         quantity: item.quantity,
         price: item.price,
-        sku: item.sku,
+        sku: item.sku
       });
       console.log("Vercel Analytics BuyNow tracked");
     }

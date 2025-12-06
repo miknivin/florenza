@@ -1,5 +1,6 @@
 // components/product/ProductInfo.js
 import ProductQuantity from "../product-details-components/ProductSelector";
+import Image from "next/image";
 
 export default function ProductInfo({
   name,
@@ -19,6 +20,9 @@ export default function ProductInfo({
   star,
   reviews = [],
 }) {
+  // Check if stock is limited (≤ 90)
+  const isLimitedStock = product?.stockQuantity <= 90 && product?.stockQuantity > 0;
+
   return (
     <div className="woocomerce__single-content">
       <h2 className="woocomerce__single-title font-roboto-serif">{name}</h2>
@@ -73,6 +77,28 @@ export default function ProductInfo({
 
       {/* Short Description */}
       <p className="woocomerce__single-discription py-4">{shortDescription}</p>
+
+      {/* Limited Stock Badge */}
+      {isLimitedStock && (
+        <div 
+          style={{
+            display: 'inline-block',
+            backgroundColor: '#DC2626',
+            color: '#FFFFFF',
+            padding: '6px 16px',
+            borderRadius: '16px',
+            fontFamily: 'Roboto, sans-serif',
+            fontWeight: '600',
+            fontSize: '12px',
+            textTransform: 'uppercase',
+            letterSpacing: '0.5px',
+            marginBottom: '16px',
+            boxShadow: '0 2px 8px rgba(220, 38, 38, 0.3)'
+          }}
+        >
+          Limited Stock Only !
+        </div>
+      )}
 
       {/* === PILL BUTTONS FOR VARIANTS === */}
       <div className="woocomerce__single-variations mt-3">
