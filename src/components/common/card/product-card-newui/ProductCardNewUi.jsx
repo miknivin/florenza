@@ -75,7 +75,7 @@ const ProductCardNewUi = ({ product }) => {
               margin: '0',
               display: 'flex',
               alignItems: 'center',
-              borderRadius: '0px 15px 15px',
+              borderRadius: '0px 0px 15px 15px',
               justifyContent: 'center',
               overflow: 'hidden',
               backgroundImage: "url('/assets/imgs/shape/Group 145.png')",
