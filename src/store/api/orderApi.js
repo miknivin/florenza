@@ -160,6 +160,32 @@ export const orderApi = createApi({
         { type: "Tracking", id: waybill }, // Cache tracking by waybill
       ],
     }),
+    cancelOrder: builder.mutation({
+      query: ({ orderId, reason }) => ({
+        url: `order/cancel/${orderId}`, // ← Correct path: /api/order/cancel/[orderId]
+        method: "PATCH",
+        body: { reason }, // Optional reason for cancellation
+      }),
+      invalidatesTags: (result, error, { orderId }) => [
+        { type: "Order", id: orderId }, // Refetch specific order details
+        "UserOrders", // Refresh user's order list
+        "AdminOrders", // Refresh admin order list (if visible)
+        "Tracking", // In case tracking data changes
+      ],
+    }),
+    requestReturn: builder.mutation({
+      query: ({ orderId, reason }) => ({
+        url: `order/return/${orderId}`, // matches /api/order/return/[orderId]
+        method: "PATCH",
+        body: { reason }, // optional reason
+      }),
+      invalidatesTags: (result, error, { orderId }) => [
+        { type: "Order", id: orderId }, // Refetch specific order
+        "UserOrders", // Refresh user's order list
+        "AdminOrders", // Refresh admin list (for admin review)
+        "Tracking", // Tracking may update
+      ],
+    }),
   }),
 });
 
@@ -181,4 +207,6 @@ export const {
   useUploadKidsImageMutation,
   useDeleteSessionOrderMutation,
   useTrackOrderQuery,
+  useCancelOrderMutation,
+  useRequestReturnMutation,
 } = orderApi;

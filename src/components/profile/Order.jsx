@@ -11,9 +11,11 @@ export default function Order() {
   const { data, isLoading, error } = useMyOrdersQuery();
   const orders = data?.orders || [];
   const router = useRouter();
-  const [trackingDataMap, setTrackingDataMap] = useState({});
 
-  // Fetch tracking data for all orders with waybill using Promise.all
+  const [trackingDataMap, setTrackingDataMap] = useState({});
+  const [currentStatusMap, setCurrentStatusMap] = useState({}); // ← New state for status
+
+  // Fetch tracking data for all orders with waybill
   useEffect(() => {
     const fetchTrackingData = async () => {
       const ordersWithWaybill = orders.filter((order) => order.waybill);
@@ -40,11 +42,11 @@ export default function Order() {
         );
 
         const trackingResults = await Promise.all(trackingPromises);
-
         const newTrackingDataMap = trackingResults.reduce((acc, result) => {
           acc[result.orderId] = result.trackingData || null;
           return acc;
         }, {});
+
         setTrackingDataMap(newTrackingDataMap);
       } catch (err) {
         console.error("Error fetching tracking data:", err);
@@ -56,19 +58,32 @@ export default function Order() {
     }
   }, [orders]);
 
-  // Memoize table data
+  // Update currentStatusMap whenever orders or tracking data changes
+  useEffect(() => {
+    const newStatusMap = {};
+
+    orders.forEach((order) => {
+      if (order.orderStatus === "Cancelled") {
+        newStatusMap[order._id] = "Cancelled";
+      } else {
+        const trackingData = trackingDataMap[order._id];
+        const latestScanStatus =
+          trackingData?.ShipmentData?.[0]?.Shipment?.Status?.Status;
+
+        newStatusMap[order._id] =
+          latestScanStatus || order.orderStatus || "Unknown";
+      }
+    });
+
+    setCurrentStatusMap(newStatusMap);
+  }, [orders, trackingDataMap]);
+
+  // Memoize table data using currentStatusMap
   const tableData = useMemo(() => {
     if (!orders.length) return [];
 
     return orders.map((order) => {
-      // Get tracking data for this order
-      const trackingData = trackingDataMap[order._id];
-
-      // Determine current status: ShipmentData[0].Shipment.Status.Status or fallback to orderStatus
-      const currentStatus =
-        trackingData?.ShipmentData?.[0]?.Shipment?.Status?.Status ||
-        order.orderStatus ||
-        "Unknown";
+      const currentStatus = currentStatusMap[order._id] || "Unknown";
 
       return {
         id: order._id,
@@ -82,7 +97,7 @@ export default function Order() {
           .join(", "),
         totalAmount: order.totalAmount,
         paymentMethod: order.paymentMethod,
-        orderStatus: currentStatus, // Use currentStatus for the Status column
+        orderStatus: currentStatus,
         createdAt: new Date(order.createdAt).toLocaleDateString("en-IN", {
           timeZone: "Asia/Kolkata",
         }),
@@ -91,7 +106,7 @@ export default function Order() {
           new Date().toDateString(),
       };
     });
-  }, [orders, trackingDataMap]);
+  }, [orders, currentStatusMap]);
 
   // Define table columns
   const columns = useMemo(
@@ -116,7 +131,7 @@ export default function Order() {
       },
       {
         Header: "Status",
-        accessor: "orderStatus", // Reflects currentStatus (tracking or fallback)
+        accessor: "orderStatus",
       },
       {
         Header: "Created At",
@@ -158,7 +173,6 @@ export default function Order() {
           Your Orders: {tableData?.length}
         </span>
       </div>
-
       <div>
         {isLoading ? (
           <div className="d-flex justify-content-center align-items-center">

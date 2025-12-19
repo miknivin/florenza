@@ -4,15 +4,17 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft, faDownload } from "@fortawesome/free-solid-svg-icons";
 import {
-  faArrowLeft,
-  faDownload,
-  faSpinner,
-} from "@fortawesome/free-solid-svg-icons";
-import { useOrderDetailsQuery, useTrackOrderQuery } from "@/store/api/orderApi";
+  useCancelOrderMutation,
+  useOrderDetailsQuery,
+  useRequestReturnMutation,
+  useTrackOrderQuery,
+} from "@/store/api/orderApi";
 import { Preloader } from "..";
 import axios from "axios";
-
+import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 export default function OrderDetails() {
   const router = useRouter();
   const { orderId } = router.query;
@@ -22,7 +24,7 @@ export default function OrderDetails() {
   const [orderDetails, setOrderDetails] = useState(null);
   const [activeTab, setActiveTab] = useState("Order History");
   const [isDownloading, setIsDownloading] = useState(false);
-
+  const [currentStatus, setCurrentStatus] = useState("Unknown");
   // Use trackOrderQuery only if waybill exists
   const {
     data: trackingData,
@@ -33,6 +35,10 @@ export default function OrderDetails() {
     { skip: !orderDetails?.waybill }
   );
 
+  // Cancel order mutation
+  const [cancelOrder, { isLoading: isCancelling }] = useCancelOrderMutation();
+  const [requestReturn, { isLoading: isReturning }] =
+    useRequestReturnMutation();
   const formatDate = (dateString) => {
     if (!dateString) return "N/A";
     const date = new Date(dateString);
@@ -156,11 +162,26 @@ export default function OrderDetails() {
     });
   const reversedUniqueScans = uniqueScans?.reverse();
 
-  // Determine current status from latest scan
-  const currentStatus =
-    reversedUniqueScans[0]?.ScanDetail?.Scan ||
-    orderDetails?.orderStatus ||
-    "Unknown";
+  useEffect(() => {
+    if (!orderDetails) {
+      setCurrentStatus("Unknown");
+      return;
+    }
+
+    if (orderDetails.orderStatus === "Cancelled") {
+      setCurrentStatus("Cancelled");
+      return;
+    }
+
+    if (
+      reversedUniqueScans.length > 0 &&
+      reversedUniqueScans[0]?.ScanDetail?.Scan
+    ) {
+      setCurrentStatus(reversedUniqueScans[0].ScanDetail.Scan);
+    } else {
+      setCurrentStatus(orderDetails.orderStatus || "Unknown");
+    }
+  }, [orderDetails, reversedUniqueScans]);
 
   if (isLoading) return <Preloader />;
   if (error)
@@ -179,6 +200,114 @@ export default function OrderDetails() {
       </div>
     );
   }
+
+  // Check if order was created within last 24 hours
+  const isWithin24Hours = (createdAt) => {
+    if (!createdAt) return false;
+    const created = new Date(createdAt);
+    const now = new Date();
+    return (now - created) / (1000 * 60 * 60) <= 24;
+  };
+
+  // Check if delivered less than 2 days ago
+  const isWithin2DaysOfDelivery = (deliveredAt) => {
+    if (!deliveredAt) return false;
+    const delivered = new Date(deliveredAt);
+    const now = new Date();
+    return (now - delivered) / (1000 * 60 * 60 * 24) < 2;
+  };
+
+  // Cancel button visibility
+  const canCancel =
+    orderDetails &&
+    ![
+      "Cancelled",
+      "Refunded",
+      "Delivered",
+      "Returned",
+      "Return Requested",
+      "Return Approved",
+      "Return Rejected",
+    ].includes(orderDetails.orderStatus) &&
+    (orderDetails.orderStatus === "Processing" ||
+      (orderDetails.orderStatus === "Shipped" &&
+        orderDetails.waybill &&
+        isWithin24Hours(orderDetails.createdAt)));
+
+  // Return button visibility
+  const canReturn =
+    orderDetails?.orderStatus === "Delivered" &&
+    isWithin2DaysOfDelivery(orderDetails.deliveredAt);
+
+  // Handle cancel
+  const handleCancelOrder = async () => {
+    const result = await Swal.fire({
+      title: "Cancel Order",
+      text: "Are you sure you want to cancel this order?",
+      icon: "warning",
+      input: "textarea",
+      inputLabel: "Reason for cancellation (optional)",
+      inputPlaceholder:
+        "Enter reason if you want (e.g., changed mind, wrong item)...",
+      showCancelButton: true,
+      confirmButtonText: "Yes, Cancel Order",
+      cancelButtonText: "No, Keep Order",
+      confirmButtonColor: "#d33",
+      // Reason is optional → no validation
+    });
+
+    if (!result.isConfirmed) return; // User clicked cancel or closed modal
+
+    const reason = result.value?.trim() || "No reason provided";
+
+    try {
+      await cancelOrder({
+        orderId: orderDetails._id,
+        reason,
+      }).unwrap();
+
+      toast.success(
+        orderDetails.paymentMethod === "Online"
+          ? "Order cancelled and refund initiated successfully!"
+          : "Order cancelled successfully!"
+      );
+    } catch (err) {
+      toast.error(
+        err?.data?.error || "Failed to cancel order. Please try again."
+      );
+    }
+  };
+
+  const handleRequestReturn = async () => {
+    const result = await Swal.fire({
+      title: "Request Return",
+      text: "Do you want to request a return for this order?",
+      icon: "question",
+      input: "textarea",
+      inputLabel: "Reason for return (optional)",
+      inputPlaceholder: "e.g., Wrong size, defective item...",
+      showCancelButton: true,
+      confirmButtonText: "Submit Return Request",
+      cancelButtonText: "Cancel",
+    });
+
+    if (!result.isConfirmed) return;
+
+    const reason = result.value?.trim() || "No reason provided";
+
+    try {
+      await requestReturn({
+        orderId: orderDetails._id,
+        reason,
+      }).unwrap();
+
+      toast.success(
+        "Return request submitted successfully! Admin will review it soon."
+      );
+    } catch (err) {
+      toast.error(err?.data?.error || "Failed to submit return request.");
+    }
+  };
 
   return (
     <div style={{ minHeight: "90vh" }}>
@@ -215,7 +344,26 @@ export default function OrderDetails() {
                 </div>
               </div>
             </div>
-            <div>
+            <div className="d-flex gap-2 justify-content-end align-items-start">
+              {canCancel && (
+                <button
+                  onClick={handleCancelOrder}
+                  disabled={isCancelling}
+                  className="btn btn-outline-danger"
+                >
+                  {isCancelling ? "Cancelling..." : "Cancel Order"}
+                </button>
+              )}
+
+              {canReturn && (
+                <button
+                  onClick={handleRequestReturn}
+                  disabled={isReturning}
+                  className="btn btn-outline-danger"
+                >
+                  {isReturning ? "Submitting..." : "Request Return"}
+                </button>
+              )}
               <button
                 onClick={handleDownloadInvoice}
                 className="btn btn-dark d-flex align-items-center gap-2"

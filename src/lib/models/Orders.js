@@ -112,9 +112,61 @@ const orderSchema = new mongoose.Schema(
       type: String,
       default: "Processing",
       enum: {
-        values: ["Processing", "Shipped", "Delivered"],
+        values: [
+          "Processing",
+          "Shipped",
+          "Delivered",
+          "Cancelled",
+          "Return Requested",
+          "Return Approved",
+          "Return Rejected",
+          "Returned",
+          "Refunded",
+        ],
         message: "Please select valid order status",
       },
+    },
+    delhiveryCurrentOrderStatus: { type: String, required: false },
+    // Optional: Reason for cancellation or return
+    cancelOrReturnReason: {
+      type: String,
+      required: false,
+    },
+
+    // Date when order was cancelled
+    cancelledAt: {
+      type: Date,
+      required: false,
+    },
+
+    // Date when return was requested
+    returnRequestedAt: {
+      type: Date,
+      required: false,
+    },
+
+    // Date when return was processed/completed
+    returnedAt: {
+      type: Date,
+      required: false,
+    },
+
+    // Date when refund was processed (for Online payments)
+    refundedAt: {
+      type: Date,
+      required: false,
+    },
+
+    // Refund amount (in case of partial refund)
+    refundAmount: {
+      type: Number,
+      required: false,
+    },
+
+    // Refund transaction ID (from payment gateway)
+    refundInfo: {
+      id: String,
+      status: String,
     },
     orderNotes: {
       type: String,
