@@ -1,89 +1,41 @@
 "use client";
 import { useTable } from "react-table";
-import { useMemo, useEffect, useState } from "react";
+import { useMemo } from "react";
 import { useMyOrdersQuery } from "@/store/api/orderApi";
 import { useRouter } from "next/router";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
-import axios from "axios";
 
 export default function Order() {
   const { data, isLoading, error } = useMyOrdersQuery();
   const orders = data?.orders || [];
   const router = useRouter();
 
-  const [trackingDataMap, setTrackingDataMap] = useState({});
-  const [currentStatusMap, setCurrentStatusMap] = useState({}); // ← New state for status
-
-  // Fetch tracking data for all orders with waybill
-  useEffect(() => {
-    const fetchTrackingData = async () => {
-      const ordersWithWaybill = orders.filter((order) => order.waybill);
-      if (ordersWithWaybill.length === 0) return;
-
-      try {
-        const trackingPromises = ordersWithWaybill.map((order) =>
-          axios
-            .get("/api/order/track", {
-              params: {
-                waybill: order.waybill,
-                ref_ids: order.refIds || "ORD1243244",
-              },
-            })
-            .then((response) => ({
-              orderId: order._id,
-              trackingData: response.data,
-            }))
-            .catch((err) => ({
-              orderId: order._id,
-              trackingData: null,
-              error: err.message,
-            }))
-        );
-
-        const trackingResults = await Promise.all(trackingPromises);
-        const newTrackingDataMap = trackingResults.reduce((acc, result) => {
-          acc[result.orderId] = result.trackingData || null;
-          return acc;
-        }, {});
-
-        setTrackingDataMap(newTrackingDataMap);
-      } catch (err) {
-        console.error("Error fetching tracking data:", err);
-      }
-    };
-
-    if (orders.length > 0) {
-      fetchTrackingData();
-    }
-  }, [orders]);
-
-  // Update currentStatusMap whenever orders or tracking data changes
-  useEffect(() => {
-    const newStatusMap = {};
-
-    orders.forEach((order) => {
-      if (order.orderStatus === "Cancelled") {
-        newStatusMap[order._id] = "Cancelled";
-      } else {
-        const trackingData = trackingDataMap[order._id];
-        const latestScanStatus =
-          trackingData?.ShipmentData?.[0]?.Shipment?.Status?.Status;
-
-        newStatusMap[order._id] =
-          latestScanStatus || order.orderStatus || "Unknown";
-      }
-    });
-
-    setCurrentStatusMap(newStatusMap);
-  }, [orders, trackingDataMap]);
-
-  // Memoize table data using currentStatusMap
+  // Memoize table data with correct status logic
   const tableData = useMemo(() => {
     if (!orders.length) return [];
 
+    const overrideStatuses = [
+      "Cancelled",
+      "Return Requested",
+      "Return Approved",
+      "Return Rejected",
+      "Returned",
+      "Refunded",
+    ];
+
     return orders.map((order) => {
-      const currentStatus = currentStatusMap[order._id] || "Unknown";
+      let currentStatus = order.orderStatus || "Unknown";
+
+      // If order is in cancel/return state → always show orderStatus
+      if (overrideStatuses.includes(order.orderStatus)) {
+        currentStatus = order.orderStatus;
+      }
+      // Otherwise → prefer delhiveryCurrentOrderStatus if available
+      else if (order.delhiveryCurrentOrderStatus) {
+        currentStatus = order.delhiveryCurrentOrderStatus;
+      }
+      // Else → keep orderStatus (Processing, Shipped, Delivered)
 
       return {
         id: order._id,
@@ -106,7 +58,7 @@ export default function Order() {
           new Date().toDateString(),
       };
     });
-  }, [orders, currentStatusMap]);
+  }, [orders]);
 
   // Define table columns
   const columns = useMemo(

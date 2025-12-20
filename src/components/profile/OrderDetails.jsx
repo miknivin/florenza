@@ -9,12 +9,12 @@ import {
   useCancelOrderMutation,
   useOrderDetailsQuery,
   useRequestReturnMutation,
-  useTrackOrderQuery,
 } from "@/store/api/orderApi";
 import { Preloader } from "..";
 import axios from "axios";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
+
 export default function OrderDetails() {
   const router = useRouter();
   const { orderId } = router.query;
@@ -25,20 +25,12 @@ export default function OrderDetails() {
   const [activeTab, setActiveTab] = useState("Order History");
   const [isDownloading, setIsDownloading] = useState(false);
   const [currentStatus, setCurrentStatus] = useState("Unknown");
-  // Use trackOrderQuery only if waybill exists
-  const {
-    data: trackingData,
-    isLoading: isTrackingLoading,
-    error: trackingError,
-  } = useTrackOrderQuery(
-    { waybill: orderDetails?.waybill, refIds: orderDetails?.refIds },
-    { skip: !orderDetails?.waybill }
-  );
 
   // Cancel order mutation
   const [cancelOrder, { isLoading: isCancelling }] = useCancelOrderMutation();
   const [requestReturn, { isLoading: isReturning }] =
     useRequestReturnMutation();
+
   const formatDate = (dateString) => {
     if (!dateString) return "N/A";
     const date = new Date(dateString);
@@ -124,14 +116,12 @@ export default function OrderDetails() {
 
   useEffect(() => {
     if (data?.order) {
-      // Calculate base price and tax amount for display
       const taxRate = isNaN(Number(process.env.TAX))
         ? 0.18
         : Number(process.env.TAX);
       const originalItemsPrice = Number(data.order.itemsPrice);
       const basePrice = (originalItemsPrice * 100) / (100 + taxRate * 100);
       const taxAmount = originalItemsPrice - basePrice;
-      // Create modified order details with updated itemsPrice and taxAmount
       setOrderDetails({
         ...data.order,
         itemsPrice: Number(basePrice.toFixed(2)),
@@ -144,40 +134,50 @@ export default function OrderDetails() {
     setActiveTab(tabName);
   };
 
-  // Filter unique scans based on Scan field, keeping the most recent
-  const scans = trackingData?.ShipmentData?.[0]?.Shipment?.Scans || [];
+  // Use orderTracking array from DB (same format as before)
+  const scans = orderDetails?.orderTracking || [];
   const uniqueScans = [];
   const seenScans = new Set();
   [...scans]
-    ?.sort(
-      (a, b) =>
-        new Date(b.ScanDetail.StatusDateTime) -
-        new Date(a.ScanDetail.StatusDateTime)
-    )
+    ?.sort((a, b) => new Date(b.StatusDateTime) - new Date(a.StatusDateTime))
     ?.forEach((scan) => {
-      if (!seenScans.has(scan.ScanDetail.Scan)) {
-        seenScans.add(scan.ScanDetail.Scan);
+      if (!seenScans.has(scan.Status)) {
+        seenScans.add(scan.Status);
         uniqueScans.push(scan);
       }
     });
   const reversedUniqueScans = uniqueScans?.reverse();
 
+  // Update currentStatus with proper priority
   useEffect(() => {
     if (!orderDetails) {
       setCurrentStatus("Unknown");
       return;
     }
 
-    if (orderDetails.orderStatus === "Cancelled") {
-      setCurrentStatus("Cancelled");
+    const overrideTrackingStatuses = [
+      "Cancelled",
+      "Return Requested",
+      "Return Approved",
+      "Return Rejected",
+      "Returned",
+      "Refunded",
+    ];
+
+    if (overrideTrackingStatuses.includes(orderDetails.orderStatus)) {
+      setCurrentStatus(orderDetails.orderStatus);
       return;
     }
 
-    if (
-      reversedUniqueScans.length > 0 &&
-      reversedUniqueScans[0]?.ScanDetail?.Scan
-    ) {
-      setCurrentStatus(reversedUniqueScans[0].ScanDetail.Scan);
+    // Use delhiveryCurrentOrderStatus if available (from courier sync)
+    if (orderDetails.delhiveryCurrentOrderStatus) {
+      setCurrentStatus(orderDetails.delhiveryCurrentOrderStatus);
+      return;
+    }
+
+    // Fallback to latest scan from orderTracking
+    if (reversedUniqueScans.length > 0 && reversedUniqueScans[0]?.Status) {
+      setCurrentStatus(reversedUniqueScans[0].Status);
     } else {
       setCurrentStatus(orderDetails.orderStatus || "Unknown");
     }
@@ -253,19 +253,14 @@ export default function OrderDetails() {
       confirmButtonText: "Yes, Cancel Order",
       cancelButtonText: "No, Keep Order",
       confirmButtonColor: "#d33",
-      // Reason is optional → no validation
     });
-
-    if (!result.isConfirmed) return; // User clicked cancel or closed modal
-
+    if (!result.isConfirmed) return;
     const reason = result.value?.trim() || "No reason provided";
-
     try {
       await cancelOrder({
         orderId: orderDetails._id,
         reason,
       }).unwrap();
-
       toast.success(
         orderDetails.paymentMethod === "Online"
           ? "Order cancelled and refund initiated successfully!"
@@ -285,22 +280,18 @@ export default function OrderDetails() {
       icon: "question",
       input: "textarea",
       inputLabel: "Reason for return (optional)",
-      inputPlaceholder: "e.g., Wrong size, defective item...",
+      inputPlaceholder: "e.g., Wrong item, defective item...",
       showCancelButton: true,
       confirmButtonText: "Submit Return Request",
       cancelButtonText: "Cancel",
     });
-
     if (!result.isConfirmed) return;
-
     const reason = result.value?.trim() || "No reason provided";
-
     try {
       await requestReturn({
         orderId: orderDetails._id,
         reason,
       }).unwrap();
-
       toast.success(
         "Return request submitted successfully! Admin will review it soon."
       );
@@ -354,7 +345,6 @@ export default function OrderDetails() {
                   {isCancelling ? "Cancelling..." : "Cancel Order"}
                 </button>
               )}
-
               {canReturn && (
                 <button
                   onClick={handleRequestReturn}
@@ -429,15 +419,7 @@ export default function OrderDetails() {
                 }`}
               >
                 <div className="widget-timeline">
-                  {isTrackingLoading && orderDetails?.waybill ? (
-                    <div>Loading tracking information...</div>
-                  ) : trackingError && orderDetails?.waybill ? (
-                    <div>
-                      Error loading tracking:{" "}
-                      {trackingError?.message || "Unknown error"}
-                    </div>
-                  ) : orderDetails?.waybill &&
-                    reversedUniqueScans.length > 0 ? (
+                  {orderDetails?.waybill && reversedUniqueScans.length > 0 ? (
                     <ul className="timeline">
                       {reversedUniqueScans.map((scan, index) => (
                         <li key={index}>
@@ -445,14 +427,12 @@ export default function OrderDetails() {
                           <div className="timeline-box">
                             <a className="timeline-panel" href="#">
                               <div className="text-2 text-dark fw-6">
-                                {scan.ScanDetail.Scan}
+                                {scan.Status}
                               </div>
-                              <span>
-                                {formatDate(scan.ScanDetail.StatusDateTime)}
-                              </span>
+                              <span>{formatDate(scan.StatusDateTime)}</span>
                               <p className="mt-2">
                                 <strong>Location: </strong>
-                                {scan.ScanDetail.ScannedLocation}
+                                {scan.StatusLocation || "N/A"}
                               </p>
                             </a>
                           </div>

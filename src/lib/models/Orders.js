@@ -108,6 +108,11 @@ const orderSchema = new mongoose.Schema(
       required: false,
       default: "No",
     },
+     couponAppliedRef: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Coupon",
+      required: false,
+    },
     orderStatus: {
       type: String,
       default: "Processing",
