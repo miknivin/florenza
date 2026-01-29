@@ -26,6 +26,7 @@ export default function Order() {
 
     return orders.map((order) => {
       let currentStatus = order.orderStatus || "Unknown";
+      console.log("order");
 
       // If order is in cancel/return state → always show orderStatus
       if (overrideStatuses.includes(order.orderStatus)) {
@@ -44,7 +45,7 @@ export default function Order() {
             (item) =>
               `${item.name} (x${item.quantity}${
                 item.variant ? `, ${item.variant}` : ""
-              })`
+              })`,
           )
           .join(", "),
         totalAmount: order.totalAmount,
@@ -112,7 +113,7 @@ export default function Order() {
         ),
       },
     ],
-    [router]
+    [router],
   );
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
