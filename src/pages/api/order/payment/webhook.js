@@ -51,9 +51,13 @@ export default async function handler(req, res) {
       }
     }
 
+    // --- Determine Secret Key ---
+    const isTN = shippingInfo?.state?.toLowerCase() === "tamil nadu";
+    const secretKey = isTN ? process.env.RAZORPAY_SECRET_KEY_TN : process.env.RAZORPAY_SECRET_KEY;
+
     // --- Razorpay Signature ---
     const expectedSignature = crypto
-      .createHmac("sha256", process.env.RAZORPAY_SECRET_KEY)
+      .createHmac("sha256", secretKey)
       .update(`${razorpay_order_id}|${razorpay_payment_id}`)
       .digest("hex");
 

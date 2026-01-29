@@ -69,9 +69,14 @@ export default async function handler(req, res) {
       product: new mongoose.Types.ObjectId(item.id),
     }));
 
+    // Logic to select keys based on state (Tamil Nadu)
+    const isTN = shippingInfo?.state?.toLowerCase() === "tamil nadu";
+    const key_id = isTN ? process.env.RAZORPAY_KEY_ID_TN : process.env.RAZORPAY_KEY_ID;
+    const key_secret = isTN ? process.env.RAZORPAY_SECRET_KEY_TN : process.env.RAZORPAY_SECRET_KEY;
+
     const razorpay = new Razorpay({
-      key_id: process.env.RAZORPAY_KEY_ID,
-      key_secret: process.env.RAZORPAY_SECRET_KEY,
+      key_id,
+      key_secret,
     });
 
     const options = {
@@ -101,6 +106,7 @@ export default async function handler(req, res) {
       success: true,
       message: "Razorpay order created successfully",
       orderId: order.id, // Return Razorpay order ID
+      keyId: key_id, // Return correct Key ID for the frontend
     });
   } catch (error) {
     console.error("Error creating Razorpay order:", error);

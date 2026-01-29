@@ -24,11 +24,11 @@ export const handleRazorpayPayment = async ({
       taxAmount: orderData.taxAmount,
       shippingAmount: orderData.shippingAmount,
     }).unwrap();
-    const { orderId: razorpayOrderId } = response;
+    const { orderId: razorpayOrderId, keyId: activeKeyId } = response;
 
     // Initialize Razorpay payment modal
     const options = {
-      key: process.env.NEXT_PUBLIC_RAZORPAY_KEY,
+      key: activeKeyId || process.env.NEXT_PUBLIC_RAZORPAY_KEY,
       order_id: razorpayOrderId,
       amount: orderData.totalAmount * 100, // Convert to paise
       currency: "INR",
