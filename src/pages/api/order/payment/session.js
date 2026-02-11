@@ -52,7 +52,7 @@ export default async function handler(req, res) {
     // Calculate itemsPrice
     const itemsPrice = cartItems.reduce(
       (total, item) => total + item.price * item.quantity,
-      0
+      0,
     );
 
     // Calculate totalAmount
@@ -70,9 +70,16 @@ export default async function handler(req, res) {
     }));
 
     // Logic to select keys based on state (Tamil Nadu)
-    const isTN = shippingInfo?.state?.toLowerCase() === "tamil nadu";
-    const key_id = isTN ? process.env.RAZORPAY_KEY_ID_TN : process.env.RAZORPAY_KEY_ID;
-    const key_secret = isTN ? process.env.RAZORPAY_SECRET_KEY_TN : process.env.RAZORPAY_SECRET_KEY;
+    const isTN = shippingInfo?.state?.trim().toLowerCase() === "tamil nadu";
+    const key_id = isTN
+      ? process.env.RAZORPAY_KEY_ID_TN
+      : process.env.RAZORPAY_KEY_ID;
+    const key_secret = isTN
+      ? process.env.RAZORPAY_SECRET_KEY_TN
+      : process.env.RAZORPAY_SECRET_KEY;
+    console.log(isTN, "is TN");
+    console.log(key_id);
+    console.log(key_secret);
 
     const razorpay = new Razorpay({
       key_id,
@@ -105,8 +112,8 @@ export default async function handler(req, res) {
     return res.status(201).json({
       success: true,
       message: "Razorpay order created successfully",
-      orderId: order.id, // Return Razorpay order ID
-      keyId: key_id, // Return correct Key ID for the frontend
+      orderId: order.id, 
+      keyId: key_id, 
     });
   } catch (error) {
     console.error("Error creating Razorpay order:", error);

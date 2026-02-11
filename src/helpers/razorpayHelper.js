@@ -25,10 +25,15 @@ export const handleRazorpayPayment = async ({
       shippingAmount: orderData.shippingAmount,
     }).unwrap();
     const { orderId: razorpayOrderId, keyId: activeKeyId } = response;
+    const state = shippingInfo?.state?.trim().toLowerCase();
 
+    const razorpayKey =
+      state === "tamil nadu"
+        ? process.env.NEXT_PUBLIC_RAZORPAY_KEY_TN
+        : process.env.NEXT_PUBLIC_RAZORPAY_KEY;
     // Initialize Razorpay payment modal
     const options = {
-      key: activeKeyId || process.env.NEXT_PUBLIC_RAZORPAY_KEY,
+      key: activeKeyId || razorpayKey,
       order_id: razorpayOrderId,
       amount: orderData.totalAmount * 100, // Convert to paise
       currency: "INR",
@@ -98,7 +103,7 @@ export const handleRazorpayPayment = async ({
       {
         position: "top-center",
         autoClose: 2000,
-      }
+      },
     );
     setLoading(false); // Stop loader on session creation failure
     throw err;

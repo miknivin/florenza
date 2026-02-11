@@ -33,7 +33,7 @@ export default function CheckoutContent() {
   const { cartData, totalCost } = useSelector((state) => state.cart);
   const { isAuthenticated } = useSelector((state) => state.user);
   const { isValid, errors, shippingInfo } = useSelector(
-    (state) => state.orderValidation
+    (state) => state.orderValidation,
   );
   const [createNewOrder, { isLoading, error }] = useCreateNewOrderMutation();
   const [razorpayCheckoutSession, { isLoading: sessionLoading }] =
@@ -45,19 +45,19 @@ export default function CheckoutContent() {
     script.src = "https://checkout.razorpay.com/v1/checkout.js";
     script.async = true;
     document.body.appendChild(script);
-    
+
     // Track Facebook Pixel InitiateCheckout event
-    if (typeof window !== 'undefined' && window.fbq && cartData.length > 0) {
+    if (typeof window !== "undefined" && window.fbq && cartData.length > 0) {
       const { itemsPrice } = calculateOrderTotals(cartData, paymentMethod);
-      window.fbq('track', 'InitiateCheckout', {
+      window.fbq("track", "InitiateCheckout", {
         value: itemsPrice,
-        currency: 'INR',
-        content_ids: cartData.map(item => item._id),
-        content_type: 'product',
-        num_items: cartData.reduce((total, item) => total + item.quantity, 0)
+        currency: "INR",
+        content_ids: cartData.map((item) => item._id),
+        content_type: "product",
+        num_items: cartData.reduce((total, item) => total + item.quantity, 0),
       });
     }
-    
+
     return () => {
       document.body.removeChild(script);
     };
@@ -86,9 +86,8 @@ export default function CheckoutContent() {
 
     const { itemsPrice, shippingAmount, totalAmount } = calculateOrderTotals(
       cartData,
-      paymentMethod
+      paymentMethod,
     );
-    console.log(paymentMethod);
 
     const orderData = {
       cartItems: cartData,
@@ -121,11 +120,15 @@ export default function CheckoutContent() {
       if (paymentMethod === 1) {
         // Razorpay payment
         const response = await razorpayCheckoutSession(orderData).unwrap();
-        const { orderId: razorpayOrderId } = response;
+        const { orderId: razorpayOrderId, keyId: activeKeyId } = response;
+        const state = shippingInfo?.state?.trim().toLowerCase();
 
-        // Initialize Razorpay payment modal
+        const razorpayKey =
+          state === "tamil nadu"
+            ? process.env.NEXT_PUBLIC_RAZORPAY_KEY_TN
+            : process.env.NEXT_PUBLIC_RAZORPAY_KEY;
         const options = {
-          key: process.env.NEXT_PUBLIC_RAZORPAY_KEY,
+          key: activeKeyId || razorpayKey,
           order_id: razorpayOrderId,
           amount: totalCost * 100,
           currency: "INR",
@@ -148,13 +151,16 @@ export default function CheckoutContent() {
 
               if (webhookResponse.success) {
                 // Track Facebook Pixel Purchase event for online payment
-                if (typeof window !== 'undefined' && window.fbq) {
-                  window.fbq('track', 'Purchase', {
+                if (typeof window !== "undefined" && window.fbq) {
+                  window.fbq("track", "Purchase", {
                     value: totalAmount,
-                    currency: 'INR',
-                    content_ids: cartData.map(item => item._id),
-                    content_type: 'product',
-                    num_items: cartData.reduce((total, item) => total + item.quantity, 0)
+                    currency: "INR",
+                    content_ids: cartData.map((item) => item._id),
+                    content_type: "product",
+                    num_items: cartData.reduce(
+                      (total, item) => total + item.quantity,
+                      0,
+                    ),
                   });
                 }
 
@@ -199,15 +205,18 @@ export default function CheckoutContent() {
       } else {
         // COD payment
         const response = await createNewOrder(orderData).unwrap();
-        
+
         // Track Facebook Pixel Purchase event for COD payment
-        if (typeof window !== 'undefined' && window.fbq) {
-          window.fbq('track', 'Purchase', {
+        if (typeof window !== "undefined" && window.fbq) {
+          window.fbq("track", "Purchase", {
             value: totalAmount,
-            currency: 'INR',
-            content_ids: cartData.map(item => item._id),
-            content_type: 'product',
-            num_items: cartData.reduce((total, item) => total + item.quantity, 0)
+            currency: "INR",
+            content_ids: cartData.map((item) => item._id),
+            content_type: "product",
+            num_items: cartData.reduce(
+              (total, item) => total + item.quantity,
+              0,
+            ),
           });
         }
 
@@ -231,7 +240,7 @@ export default function CheckoutContent() {
         {
           position: "top-center",
           autoClose: 2000,
-        }
+        },
       );
     }
   };
