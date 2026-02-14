@@ -58,7 +58,7 @@ const SignInForm = ({
         {
           withCredentials: true, // Send cookies
           params: { t: Date.now() }, // Prevent browser caching
-        }
+        },
       );
 
       // Process response
@@ -132,7 +132,10 @@ const SignInForm = ({
             <span className="woocomerce__signin-title">Sign in</span>
           </div>
         )}
-        <form onSubmit={handleSubmit}>
+        <form
+          onSubmit={handleSubmit}
+          style={{ maxHeight: "80vh", overflowY: "auto" }}
+        >
           <PhoneOTP
             onClearFields={handleClearFields}
             onAuthSuccess={handleAuthSuccess}
@@ -212,7 +215,7 @@ const SignInForm = ({
               <Link href={"/sign-up"}>Sign up</Link>
             )}
           </p>
-          <Link href={"/reset"}>Reset Password</Link>
+          {/* <Link href={"/reset"}>Reset Password</Link> */}
         </div>
       </div>
     </div>

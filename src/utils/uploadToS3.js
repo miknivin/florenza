@@ -13,7 +13,6 @@ export async function uploadToS3(buffer, key) {
   }
 
   try {
-    // Upload the buffer to S3 with public-read ACL
     const uploadParams = {
       Bucket: BUCKET_NAME,
       Key: key,

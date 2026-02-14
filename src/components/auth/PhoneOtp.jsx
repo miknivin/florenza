@@ -16,6 +16,8 @@ const PhoneOTP = ({ onClearFields, onAuthSuccess }) => {
   const [resendCountdown, setResendCountdown] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [confirmationResult, setConfirmationResult] = useState(null);
+  const [showPhoneEdit, setShowPhoneEdit] = useState(false); // ← NEW: toggle edit mode
+
   const recaptchaRef = useRef(null);
   const dispatch = useDispatch();
 
@@ -35,7 +37,6 @@ const PhoneOTP = ({ onClearFields, onAuthSuccess }) => {
       },
     });
 
-    // Required for invisible reCAPTCHA
     recaptchaRef.current.render().catch((err) => {
       console.error("reCAPTCHA render error:", err);
       toast.error("Failed to load reCAPTCHA", {
@@ -48,7 +49,6 @@ const PhoneOTP = ({ onClearFields, onAuthSuccess }) => {
       recaptchaRef.current.appVerificationDisabledForTesting = true;
     }
 
-    // Cleanup on unmount
     return () => {
       if (recaptchaRef.current) {
         recaptchaRef.current.clear();
@@ -67,10 +67,8 @@ const PhoneOTP = ({ onClearFields, onAuthSuccess }) => {
   const startResendTimer = () =>
     setResendCountdown(process.env.NODE_ENV === "development" ? 5 : 60);
 
-  /* ────── SEND / RESEND OTP (REUSES SAME VERIFIER) ────── */
   const handleGetOTP = async (e) => {
     if (e) e.preventDefault();
-
     if (!phoneNumber.trim()) {
       toast.error("Please enter a phone number", {
         position: "top-center",
@@ -78,7 +76,6 @@ const PhoneOTP = ({ onClearFields, onAuthSuccess }) => {
       });
       return;
     }
-
     if (!recaptchaRef.current) {
       toast.error("reCAPTCHA not ready", {
         position: "top-center",
@@ -94,17 +91,16 @@ const PhoneOTP = ({ onClearFields, onAuthSuccess }) => {
       const result = await signInWithPhoneNumber(
         auth,
         fullPhone,
-        recaptchaRef.current // ← SAME verifier every time
+        recaptchaRef.current,
       );
-
       setConfirmationResult(result);
       setIsOtpSent(true);
+      setShowPhoneEdit(false); // Ensure we're not in edit mode after sending
       startResendTimer();
       toast.success("OTP sent successfully!", {
         position: "top-center",
         autoClose: 1000,
       });
-
       if (onClearFields) onClearFields();
     } catch (error) {
       console.error("OTP send error:", error);
@@ -120,10 +116,17 @@ const PhoneOTP = ({ onClearFields, onAuthSuccess }) => {
   const handleResendOTP = async () => {
     setOtp("");
     setConfirmationResult(null);
-    await handleGetOTP(); // ← reuses same verifier
+    await handleGetOTP();
   };
 
-  /* ────── VERIFY OTP ────── */
+  // NEW: Handler to go back to edit phone number
+  const handleEditPhone = () => {
+    setOtp("");
+    setConfirmationResult(null); // Important: old confirmation is invalid now
+    setIsOtpSent(false);
+    setShowPhoneEdit(true); // Optional visual flag if you want different styling
+  };
+
   const handleVerifyOTP = async () => {
     if (!otp.trim()) {
       toast.error("Please enter the OTP", {
@@ -133,14 +136,14 @@ const PhoneOTP = ({ onClearFields, onAuthSuccess }) => {
       return;
     }
     setIsLoading(true);
+
     try {
       const credential = await confirmationResult.confirm(otp);
       const idToken = await credential.user.getIdToken();
-
       const response = await axios.put(
         `${process.env.NEXT_PUBLIC_API_URL || "/api"}/auth/otp`,
         { phone: credential.user.phoneNumber, idToken },
-        { withCredentials: true }
+        { withCredentials: true },
       );
 
       if (response.data.success) {
@@ -151,7 +154,7 @@ const PhoneOTP = ({ onClearFields, onAuthSuccess }) => {
             name: user.name || "",
             email: user.email || "",
             phone: user.phone || "",
-          })
+          }),
         );
         dispatch(setIsAuthenticated(true));
         toast.success("Successfully signed in!", {
@@ -180,14 +183,15 @@ const PhoneOTP = ({ onClearFields, onAuthSuccess }) => {
         <div id="recaptcha-container"></div>
 
         <label
-          htmlFor={isOtpSent ? "otp" : "phoneNumber"}
+          htmlFor={isOtpSent && !showPhoneEdit ? "otp" : "phoneNumber"}
           className="phone-label"
         >
-          {isOtpSent ? "Enter OTP" : "Phone number"}
+          {isOtpSent && !showPhoneEdit ? "Enter OTP" : "Phone number"}
         </label>
 
         <div className="phone-input-container">
-          {!isOtpSent ? (
+          {!isOtpSent || showPhoneEdit ? (
+            // Phone input screen (same as before, but now also shown when editing)
             <>
               <div className="country-select-wrapper">
                 <select
@@ -195,7 +199,7 @@ const PhoneOTP = ({ onClearFields, onAuthSuccess }) => {
                   value={selectedCountry.id}
                   onChange={(e) => {
                     const country = countries.find(
-                      (c) => c.id === parseInt(e.target.value)
+                      (c) => c.id === parseInt(e.target.value),
                     );
                     setSelectedCountry(country);
                   }}
@@ -225,11 +229,16 @@ const PhoneOTP = ({ onClearFields, onAuthSuccess }) => {
                   onClick={handleGetOTP}
                   disabled={isLoading}
                 >
-                  {isLoading ? "Sending..." : "Get OTP"}
+                  {isLoading
+                    ? "Sending..."
+                    : isOtpSent
+                      ? "Resend OTP"
+                      : "Get OTP"}
                 </button>
               </div>
             </>
           ) : (
+            // OTP verification screen
             <div className="d-flex flex-column w-100 align-items-start">
               <div className="phone-input-wrapper w-100">
                 <input
@@ -253,28 +262,48 @@ const PhoneOTP = ({ onClearFields, onAuthSuccess }) => {
                 </button>
               </div>
 
-              {/* RESEND + LOADER */}
-              <div className="d-flex align-items-start justify-content-start gap-3 mt-2 w-100">
-                {isLoading && (
-                  <div
-                    className="spinner-border spinner-border-sm"
-                    role="status"
+              {/* RESEND + EDIT + LOADER */}
+              <div className="d-flex flex-column align-items-start gap-2 mt-2 w-100">
+                <div className="d-flex align-items-center justify-content-between w-100">
+                  {isLoading && (
+                    <div
+                      className="spinner-border spinner-border-sm"
+                      role="status"
+                    >
+                      <span className="visually-hidden">Loading...</span>
+                    </div>
+                  )}
+
+                  <button
+                    type="button"
+                    className="btn btn-link py-1 px-0 text-black"
+                    onClick={handleResendOTP}
+                    disabled={isLoading || resendCountdown > 0}
+                    style={{ fontSize: "0.875rem" }}
                   >
-                    <span className="visually-hidden">Loading...</span>
-                  </div>
-                )}
+                    {resendCountdown > 0
+                      ? `Resend in ${resendCountdown}s`
+                      : "Resend OTP"}
+                  </button>
+                </div>
+
+                {/* NEW: Edit phone number link */}
                 <button
                   type="button"
-                  className="btn btn-link py-1 px-0 text-black"
-                  onClick={handleResendOTP}
-                  disabled={isLoading || resendCountdown > 0}
+                  className="btn btn-link py-1 px-0 text-primary"
+                  onClick={handleEditPhone}
+                  disabled={isLoading}
                   style={{ fontSize: "0.875rem" }}
                 >
-                  {resendCountdown > 0
-                    ? `Resend in ${resendCountdown}s`
-                    : "Resend OTP"}
+                  Edit phone number
                 </button>
               </div>
+
+              {/* Optional: Show the phone number user is verifying */}
+              <small className="text-muted mt-1">
+                OTP sent to +{selectedCountry.phoneCode}
+                {phoneNumber}
+              </small>
             </div>
           )}
         </div>
