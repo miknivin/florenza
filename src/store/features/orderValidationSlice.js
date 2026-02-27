@@ -99,7 +99,7 @@ const validateOrderData = (orderData, showToast = false) => {
     } else {
       const phoneDigits = shippingInfo.phoneNo.toString().replace(/\D/g, "");
       if (phoneDigits.length < 7 || phoneDigits.length > 15) {
-        errors.phoneNo = "Please enter a valid phone number (7-15 digits).";
+        errors.phoneNo = "Please enter a valid phone number.";
       }
     }
     if (!shippingInfo.zipCode) errors.zipCode = "Zip code is required";
