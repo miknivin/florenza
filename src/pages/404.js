@@ -6,7 +6,7 @@ const ErrorDefault = () => {
   return (
     <>
       <Head>
-        <title>Error - page not found.</title>
+        <title>Error - page not found</title>
         <meta name="description" content="Error Description" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
