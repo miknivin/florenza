@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector, useStore } from "react-redux";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
@@ -42,6 +42,7 @@ const ShippingAddressModal = ({
   count,
 }) => {
   const dispatch = useDispatch();
+  const store = useStore();
   const router = useRouter();
   const { cartData } = useSelector((state) => state.cart);
   const user = useSelector((state) => state.user.user) || {};
@@ -195,6 +196,10 @@ const ShippingAddressModal = ({
     const formErrors = validateShippingForm(formData);
     if (Object.keys(formErrors).length > 0) {
       setErrors(formErrors);
+      toast.error("Please fill the required fields in the form before proceeding.", {
+        position: "top-center",
+        autoClose: 2000,
+      });
       return;
     }
     setStep("payment");
@@ -260,6 +265,12 @@ const ShippingAddressModal = ({
 
     try {
       dispatch(validateOrder({ orderData, showToast: true }));
+      const updatedState = store.getState().orderValidation;
+
+      if (!updatedState.isValid || updatedState.errors) {
+        setIsLoading(false);
+        return;
+      }
 
       if (activePayment === 1) {
         // Razorpay payment

@@ -54,7 +54,7 @@ export default function Payment({
           orderNotes: shippingInfo?.msg || "",
           couponApplied: "No",
         },
-        showToast: false,
+        showToast: true, // Now showing toast when switching methods to give immediate feedback
       })
     );
   };

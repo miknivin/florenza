@@ -200,10 +200,9 @@ export default function Address() {
                       value={
                         countries.find((c) => c.name === selectedCountry)
                           ?.phoneCode
-                          ? `+${
-                              countries.find((c) => c.name === selectedCountry)
-                                .phoneCode
-                            }`
+                          ? `+${countries.find((c) => c.name === selectedCountry)
+                            .phoneCode
+                          }`
                           : ""
                       }
                       readOnly
@@ -219,7 +218,7 @@ export default function Address() {
                   )}
                   <input
                     id="phoneNo"
-                    placeholder="Phone"
+                    placeholder="Enter phone number"
                     autoComplete="tel"
                     value={shippingInfo.phoneNo}
                     onChange={(e) =>

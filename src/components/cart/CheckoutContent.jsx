@@ -102,7 +102,15 @@ export default function CheckoutContent() {
     };
 
     dispatch(validateOrder({ orderData, showToast: true }));
-    const { isValid: updatedIsValid } = store.getState().orderValidation;
+    const updatedState = store.getState().orderValidation;
+    const updatedIsValid = updatedState.isValid;
+    const validationErrors = updatedState.errors;
+
+    if (!updatedIsValid || validationErrors) {
+      // Toast already shown by validateOrder if showToast is true
+      console.log("Validation failed", validationErrors);
+      return;
+    }
 
     const isOrderValid =
       cartData.length > 0 &&
@@ -112,7 +120,8 @@ export default function CheckoutContent() {
       shippingInfo.address &&
       paymentMethod !== null;
 
-    if (!updatedIsValid || !isOrderValid) {
+    if (!isOrderValid) {
+      toast.error("Please fill in all required fields and select a payment method.");
       return;
     }
 

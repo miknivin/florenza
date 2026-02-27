@@ -9,6 +9,11 @@ export const validateShippingForm = (formData) => {
   }
   if (!formData.phoneNo) {
     newErrors.phoneNo = "Phone number is required";
+  } else {
+    const phoneDigits = formData.phoneNo.toString().replace(/\D/g, "");
+    if (phoneDigits.length < 7 || phoneDigits.length > 15) {
+      newErrors.phoneNo = "Please enter a valid phone number (7-15 digits).";
+    }
   }
   if (!formData.houseNoBuilding)
     newErrors.houseNoBuilding = "House No, Building Name is required";

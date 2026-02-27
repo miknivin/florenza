@@ -96,8 +96,11 @@ const validateOrderData = (orderData, showToast = false) => {
     if (!shippingInfo.phoneNo) {
       errors.phoneNo =
         "Please enter your phone number so we can contact you for delivery.";
-    } else if (!/^[0-9]+$/.test(shippingInfo.phoneNo)) {
-      errors.phoneNo = "Phone number should contain digits only (0-9).";
+    } else {
+      const phoneDigits = shippingInfo.phoneNo.toString().replace(/\D/g, "");
+      if (phoneDigits.length < 7 || phoneDigits.length > 15) {
+        errors.phoneNo = "Please enter a valid phone number (7-15 digits).";
+      }
     }
     if (!shippingInfo.zipCode) errors.zipCode = "Zip code is required";
     if (!shippingInfo.country) errors.country = "Country is required";
