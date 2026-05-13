@@ -47,8 +47,8 @@ export default function ProductInfo({
           {selectedVariant?.discountPrice
             ? " ₹" + (selectedVariant.price * count).toFixed(2)
             : product?.dis_price
-            ? " ₹" + (product?.price * count).toFixed(2)
-            : ""}
+              ? " ₹" + (product?.price * count).toFixed(2)
+              : ""}
         </s>
       </div>
 
@@ -67,7 +67,7 @@ export default function ProductInfo({
 
       {/* Limited Stock Badge */}
       {isLimitedStock && (
-        <div 
+        <div
           style={{
             display: 'inline-block',
             backgroundColor: '#DC2626',
@@ -97,10 +97,9 @@ export default function ProductInfo({
               className={`
                 btn btn-sm rounded-pill px-3 py-2
                 transition-all duration-200
-                ${
-                  selectedVariant?.size === v.size
-                    ? "bg-black text-white"
-                    : "bg-off-white text-gray-700 hover:bg-gray-300"
+                ${selectedVariant?.size === v.size
+                  ? "bg-black text-white"
+                  : "bg-off-white text-gray-700 hover:bg-gray-300"
                 }
               `}
             >
