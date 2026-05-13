@@ -35,20 +35,7 @@ export default function ProductInfo({
             (selectedVariant?.discountPrice || selectedVariant?.price) * count
           ).toFixed(2)}
         </span>
-        {selectedVariant?.discountPrice && (
-          <>
-            <div className="discount-badge-prod-page">
-              {selectedVariant?.discountPrice
-                ? percentage(
-                    selectedVariant.discountPrice,
-                    selectedVariant.price
-                  ) + "% OFF"
-                : product.dis_price
-                ? percentage(product.dis_price, product.price) + "% OFF"
-                : ""}
-            </div>
-          </>
-        )}
+
         <p style={{ color: "#6d6868ff", fontSize: "13px", marginTop: "4px" }}>
           Inc.TAX
         </p>
