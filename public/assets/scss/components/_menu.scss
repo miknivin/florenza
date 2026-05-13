@@ -414,7 +414,7 @@
 
             @while $i < 50 {
               &:nth-child(#{$i}) {
-                transition-delay: $i / 30 + s;
+                transition-delay: #{$i * 0.033}s;
               }
 
               $i: $i + 1;
