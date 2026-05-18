@@ -11,6 +11,7 @@ import { Provider } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import { store } from "@/store/store";
 import UserProfile from "@/components/auth/UserProfile";
+import GlobalPopup from "@/components/common/GlobalPopup";
 import { Analytics } from "@vercel/analytics/next";
 import Head from "next/head";
 import Script from "next/script";
@@ -77,6 +78,7 @@ export default function App({ Component, pageProps }) {
         theme="light"
       />
       <CartButton />
+      <GlobalPopup />
       <Analytics />
     </Provider>
   );
