@@ -39,7 +39,7 @@
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
     "mongoose": "^8.19.1",
-    "next": "15.5.7",
+    "next": "15.5.9",
     "next-rate-limit": "^0.0.3",
     "next-sitemap": "^4.2.3",
     "node-fetch": "^2.7.0",
