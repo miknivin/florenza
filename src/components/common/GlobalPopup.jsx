@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 const GlobalPopup = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     // Show popup immediately when mounted
@@ -10,6 +12,11 @@ const GlobalPopup = () => {
   }, []);
 
   if (!isOpen) return null;
+
+  const handleImageClick = () => {
+    setIsOpen(false);
+    router.push('/shop/68cbcf6e3fde9bb106ceeaae');
+  };
 
   const overlayStyle = {
     position: 'fixed',
@@ -72,7 +79,11 @@ const GlobalPopup = () => {
         <button style={closeButtonStyle} onClick={() => setIsOpen(false)}>
           &times;
         </button>
-        <div style={imageContainerStyle} className="global-popup-container">
+        <div 
+          style={{ ...imageContainerStyle, cursor: 'pointer' }} 
+          className="global-popup-container"
+          onClick={handleImageClick}
+        >
           <Image
             src="/assets/imgs/story/popup-image.jpeg"
             alt="Welcome Popup"
