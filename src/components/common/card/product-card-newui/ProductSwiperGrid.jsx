@@ -12,6 +12,7 @@ import ArrowIcon from "@/components/icons/ArrowIcon";
 import { sortProductsByVariantSize } from "@/utils/productSortUtils";
 
 const ProductSwiperGrid = ({ initialPage = 1, isProductPage = false }) => {
+  const [showProducts, setShowProducts] = useState(isProductPage);
   const perPage = 14;
   const { data, isLoading, error } = useGetProductsQuery({
     page: initialPage,
@@ -30,7 +31,7 @@ const ProductSwiperGrid = ({ initialPage = 1, isProductPage = false }) => {
   const [swiper1, setSwiper1] = useState({ isBeginning: true, isEnd: false });
   const [swiper2, setSwiper2] = useState({ isBeginning: true, isEnd: false });
 
-  if (error) {
+  if (error && (isProductPage || showProducts)) {
     return <div className="text-center py-5">Failed to load products.</div>;
   }
 
@@ -41,31 +42,51 @@ const ProductSwiperGrid = ({ initialPage = 1, isProductPage = false }) => {
       } woocomerce-padding products-swiper-wrapper`}
     >
       {/* ---------- Header ---------- */}
-      {!isProductPage && (
-        <>
-          <div className="">
-            <div className="woocomerce__feature-top d-flex justify-content-between px-2 ">
-              <p className="woocomerce__feature-title font-roboto">
-                Our products
-              </p>
-              <Link
-                className="text-white font-roboto d-flex align-items-center"
-                href="/shop/full"
+      <div className="">
+        <div className="woocomerce__feature-top d-flex justify-content-between px-2 ">
+          <p className="woocomerce__feature-title font-roboto">
+            Our products
+          </p>
+          {isProductPage ? (
+            <Link
+              className="text-white font-roboto d-flex align-items-center"
+              href="/shop/full"
+            >
+              View all
+              <ArrowIcon />
+            </Link>
+          ) : (
+            !showProducts && (
+              <button
+                type="button"
+                className="text-white font-roboto d-flex align-items-center btn-link"
+                onClick={() => setShowProducts(true)}
+                style={{ border: "none", background: "transparent", cursor: "pointer" }}
               >
-                View all
-                <ArrowIcon />
-              </Link>
-            </div>
-          </div>
-          <hr
-            style={{ borderTop: "1px solid #fff", opacity: 0.7 }}
-            className="border-top-white"
-          />
-        </>
+                View more products
+                <ArrowIcon
+                  style={{
+                    transition: "transform 0.2s ease",
+                    transform: "rotate(0deg)",
+                    marginLeft: "4px",
+                  }}
+                />
+              </button>
+            )
+          )}
+        </div>
+      </div>
+      {!isProductPage && (
+        <hr
+          style={{ borderTop: "1px solid #fff", opacity: 0.7 }}
+          className="border-top-white"
+        />
       )}
 
-      {/* ---------- FIRST SWIPER ---------- */}
-      <div className="mb-8 ps-2 mt-md-5">
+      {(isProductPage || showProducts) && (
+        <>
+          {/* ---------- FIRST SWIPER ---------- */}
+          <div className="mb-8 ps-2 mt-md-5">
         <div className="wrap-carousel position-relative">
           <div
             className={`
@@ -201,6 +222,8 @@ const ProductSwiperGrid = ({ initialPage = 1, isProductPage = false }) => {
             <span className="visually-hidden">Loading...</span>
           </div>
         </div>
+      )}
+      </>
       )}
     </div>
   );
