@@ -25,6 +25,9 @@ import HeaderSearchNewUi from "../search/HeaderSearchNewUi";
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 const Header = ({ option }) => {
+  const isBlackHeader = option === "black";
+  const isTransparentDarkHeader = option === "transparent-dark";
+  const hasDarkHeaderAssets = isBlackHeader || isTransparentDarkHeader;
   const cartData = useSelector((state) => state.cart.cartData);
   const { isAuthenticated } = useSelector((state) => state.user); // Get isAuthenticated from Redux store
   const [showModal, setShowModal] = useState(false);
@@ -101,7 +104,7 @@ const Header = ({ option }) => {
 
   const { data: allProducts, error } = useSWR(
     "../assets/json/allProducts.json",
-    fetcher
+    fetcher,
   );
 
   if (error) return <div>Failed to load</div>;
@@ -118,11 +121,15 @@ const Header = ({ option }) => {
     <>
       <header
         className={`${
-          option === "black"
+          isBlackHeader
             ? "woocomerce__header"
             : "woocomerce__header absolute-header "
         } woocomerce-padding`}
-        style={{ position: "relative", zIndex: 99 }}
+        style={{
+          position: "relative",
+          zIndex: 99,
+          ...(isTransparentDarkHeader ? { background: "transparent" } : {}),
+        }}
       >
         <div className="woocomerce__header-inner shopfull">
           <div className="woocomerce__header-center">
@@ -130,10 +137,10 @@ const Header = ({ option }) => {
               <Link href={"/"}>
                 <Image
                   priority
-                  width={option === "black" ? 110 : 110}
-                  height={option === "black" ? 48 : 48}
+                  width={hasDarkHeaderAssets ? 110 : 110}
+                  height={hasDarkHeaderAssets ? 48 : 48}
                   style={{ height: "auto" }}
-                  src={option === "black" ? LogoBlack : Logo}
+                  src={hasDarkHeaderAssets ? LogoBlack : Logo}
                   alt="Logo"
                 />
               </Link>
@@ -231,10 +238,12 @@ const Header = ({ option }) => {
             <div className="woocomerce__header-cart">
               <div className="woocomerce__header-cartwrapper">
                 <Link className="font-roboto position-relative" href={"/cart"}>
-                  <CartIcon />
+                  <CartIcon color={hasDarkHeaderAssets ? "#000" : "#fff"} />
                   <span
                     className={`cart-badge-1 ${
-                      option === "black" ? "bg-white" : "bg-black"
+                      hasDarkHeaderAssets
+                        ? "bg-white text-dark"
+                        : "bg-black text-white"
                     }`}
                     style={{ paddingLeft: "3px" }}
                   >
@@ -247,7 +256,7 @@ const Header = ({ option }) => {
                   onClick={handleUserIconClick}
                   style={{ cursor: "pointer" }}
                 >
-                  <UserIcon color={option === "black" ? "#000" : "#fff"} />
+                  <UserIcon color={hasDarkHeaderAssets ? "#000" : "#fff"} />
                 </button>
               </div>
               {/* <div className="woocomerce__header-search">
@@ -256,7 +265,7 @@ const Header = ({ option }) => {
               <div onClick={openCanvas} className="woocomerce__header-search">
                 <HamburgerIcon
                   size={45}
-                  color={option === "black" ? "#000" : "#fff"}
+                  color={hasDarkHeaderAssets ? "#000" : "#fff"}
                 />
               </div>
             </div>

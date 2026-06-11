@@ -16,6 +16,7 @@ import {
   // Testimonial,
   // Brand,        // ← Kept imported but commented if you want to re-enable later
   Instagram,
+  HeaderTransparent,
   // Footer,
 } from "@/components";
 import FooterLinks from "@/components/footer/FooterNewUi/FooterLinks";
@@ -27,31 +28,58 @@ import { useRef } from "react";
 // Hardcoded advertising data — no fetch needed anymore
 const advertisingData = {
   hero_advertising: [
+    // {
+    //   id: "101",
+    //   title: "Express your natural beauty",
+    //   description:
+    //     "View the full case study of our recent featured and awesome global branding agency that powers",
+    //   sub_title: "Starts from",
+    //   img: "woocomerce/exclusive/img1.webp",
+    //   price: "65.89",
+    // },
+    // {
+    //   id: "103",
+    //   title: "Express your natural beauty",
+    //   description:
+    //     "View the full case study of our recent featured and awesome global branding agency that powers",
+    //   sub_title: "Starts from",
+    //   img: "woocomerce/exclusive/img2.webp",
+    //   price: "65.89",
+    // },
+    // {
+    //   id: "102",
+    //   title: "Express your natural beauty",
+    //   description:
+    //     "View the full case study of our recent featured and awesome global branding agency that powers",
+    //   sub_title: "Starts from",
+    //   img: "woocomerce/exclusive/img3.webp",
+    //   price: "65.89",
+    // },
     {
-      id: "101",
+      id: "104",
       title: "Express your natural beauty",
       description:
         "View the full case study of our recent featured and awesome global branding agency that powers",
       sub_title: "Starts from",
-      img: "woocomerce/exclusive/img1.webp",
+      img: "woocomerce/exclusive/img7.webp",
       price: "65.89",
     },
     {
-      id: "103",
+      id: "105",
       title: "Express your natural beauty",
       description:
         "View the full case study of our recent featured and awesome global branding agency that powers",
       sub_title: "Starts from",
-      img: "woocomerce/exclusive/img2.webp",
+      img: "woocomerce/exclusive/img8.webp",
       price: "65.89",
     },
     {
-      id: "102",
+      id: "105",
       title: "Express your natural beauty",
       description:
         "View the full case study of our recent featured and awesome global branding agency that powers",
       sub_title: "Starts from",
-      img: "woocomerce/exclusive/img3.webp",
+      img: "woocomerce/exclusive/img9.webp",
       price: "65.89",
     },
   ],
@@ -143,7 +171,7 @@ const Index = () => {
 
           <div id="smooth-wrapper" className="woocomerce__main">
             <div id="smooth-content">
-              <Header />
+              <Header option="transparent-dark" />
               <Hero advertising={heroAdd} />
 
               {/* <Feature

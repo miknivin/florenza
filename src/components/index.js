@@ -11,6 +11,7 @@ export { default as ScrollSmootherComponents } from "./common/ScrollSmootherComp
 
 // Home Page
 export { default as Header } from "./header/Header";
+export { default as HeaderTransparent } from "./header/HeaderTransparent";
 export { default as Hero } from "./hero/Hero";
 export { default as Feature } from "./feature/Feature";
 export { default as AllWithFilter } from "./feature/AllWithFilter";
